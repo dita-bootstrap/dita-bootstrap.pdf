@@ -9,7 +9,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "lint-staged": "lint-staged --no-stash",
-    "prepare": "husky",
+    "prepare": "lefthook install",
     "check": "npm run prettier-check",
     "fmt": "npm run format",
     "format": "prettier --write \"**/*.{dita*,json,md,xml,xsl,yml}\"",
@@ -18,13 +18,9 @@
     "prettier": "prettier --write \"**/*.{dita*,json,md,xml,xsl,yml}\"",
     "prettier-check": "prettier --check \"**/*.{dita*,json,md,xml,xsl,yml}\""
   },
-  "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
-  },
   "devDependencies": {
+    "lefthook": "^2.1.6",
     "@prettier/plugin-xml": "3.4.2",
-    "husky": "^9.0.11",
-    "lint-staged": "16.4.0",
     "prettier": "3.8.3"
   }
 }

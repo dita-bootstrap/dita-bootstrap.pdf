@@ -1,0 +1,13 @@
+# Manage Git hooks with Lefthook
+#
+#   Refer for explanation to following link:
+#   https://lefthook.dev/configuration/
+#
+
+pre-commit:
+  parallel: true
+  commands:
+    prettier:
+      glob: '*.{css,dita*,json,md,xml,xsl,yml}'
+      run: prettier --write {staged_files}
+      stage_fixed: true
