@@ -34,13 +34,18 @@
           contains(@class, ' topic/note ') or 
           contains(@class, ' topic/xref ') or
           @color or
-          exists(tokenize(@outputclass, ' ')[starts-with(., 'btn') or starts-with(., 'alert') or starts-with(., 'badge') or starts-with(., 'link-')])
+          exists(tokenize(@outputclass, ' ')[starts-with(., 'btn') or starts-with(., 'alert') or starts-with(., 'badge') or starts-with(., 'link-') or starts-with(., 'theme-')])
         ][1]"
       />
       
       <xsl:variable name="theme">
         <xsl:choose>
           <xsl:when test="$theme-container/@color"><xsl:value-of select="$theme-container/@color"/></xsl:when>
+          <xsl:when test="exists(tokenize($theme-container/@outputclass, ' ')[starts-with(., 'theme-')])">
+             <xsl:value-of
+              select="substring-after(tokenize($theme-container/@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-')"
+            />
+          </xsl:when>
           <xsl:when
             test="exists(tokenize($theme-container/@outputclass, ' ')[starts-with(., 'btn-') and not(. = ('btn-lg', 'btn-sm', 'btn-toolbar', 'btn-group'))])"
           >

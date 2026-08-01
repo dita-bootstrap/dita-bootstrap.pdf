@@ -15,6 +15,9 @@
       <xsl:variable name="theme">
         <xsl:choose>
           <xsl:when test="@color"><xsl:value-of select="@color"/></xsl:when>
+          <xsl:when test="exists(tokenize(@outputclass, ' ')[starts-with(., 'theme-')])">
+            <xsl:value-of select="substring-after(tokenize(@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-')"/>
+          </xsl:when>
           <xsl:when test="exists(tokenize(@outputclass, ' ')[starts-with(., 'alert-')])">
             <xsl:value-of select="substring-after(tokenize(@outputclass, ' ')[starts-with(., 'alert-')][1], 'alert-')"/>
           </xsl:when>

@@ -35,7 +35,7 @@
     <xsl:variable
       name="hasDecoration"
       select="@color or @padding or @width or @margin or @shadow or 
-                                               exists(tokenize(@outputclass, ' ')[starts-with(., 'table-') or starts-with(., 'w-') or starts-with(., 'p-') or starts-with(., 'm-') or . = 'shadow-sm' or . = 'shadow' or . = 'shadow-lg' or . = 'shadow-none'])"
+                                               exists(tokenize(@outputclass, ' ')[starts-with(., 'theme-') or starts-with(., 'table-') or starts-with(., 'w-') or starts-with(., 'p-') or starts-with(., 'm-') or . = 'shadow-sm' or . = 'shadow' or . = 'shadow-lg' or . = 'shadow-none'])"
     />
     <xsl:choose>
       <xsl:when test="$hasDecoration">
@@ -77,7 +77,9 @@
       <xsl:variable name="thead" select="parent::*"/>
       <xsl:variable
         name="theme"
-        select="(@color, $thead/@color, substring-after(tokenize($thead/@outputclass, ' ')[starts-with(., 'table-')][1], 'table-'))[1]"
+        select="(@color, $thead/@color, 
+                 substring-after(tokenize($thead/@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-'),
+                 substring-after(tokenize($thead/@outputclass, ' ')[starts-with(., 'table-')][1], 'table-'))[1]"
       />
       
       <xsl:call-template name="bootstrap.decoration">
@@ -105,7 +107,9 @@
       <!-- Inherit theme from tbody if not set on row -->
       <xsl:variable
         name="rowTheme"
-        select="(@color, substring-after(tokenize($tbody/@outputclass, ' ')[starts-with(., 'table-')][1], 'table-'))[1]"
+        select="(@color, 
+                 substring-after(tokenize($tbody/@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-'),
+                 substring-after(tokenize($tbody/@outputclass, ' ')[starts-with(., 'table-')][1], 'table-'))[1]"
       />
       
       <xsl:variable name="rowIndex" select="count(preceding-sibling::*[contains(@class, ' topic/row ')]) + 1"/>
@@ -142,7 +146,9 @@
       <xsl:variable name="tfoot" select="parent::*"/>
       <xsl:variable
         name="theme"
-        select="(@color, $tfoot/@color, substring-after(tokenize($tfoot/@outputclass, ' ')[starts-with(., 'table-')][1], 'table-'))[1]"
+        select="(@color, $tfoot/@color, 
+                 substring-after(tokenize($tfoot/@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-'),
+                 substring-after(tokenize($tfoot/@outputclass, ' ')[starts-with(., 'table-')][1], 'table-'))[1]"
       />
 
       <xsl:call-template name="bootstrap.decoration">

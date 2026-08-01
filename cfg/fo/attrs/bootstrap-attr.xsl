@@ -28,11 +28,11 @@
   <xsl:attribute-set name="__color__info">
     <xsl:attribute name="color"><xsl:value-of select="$bootstrap-info"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__color__light">
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-light"/></xsl:attribute>
+  <xsl:attribute-set name="__color__accent">
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-accent"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__color__dark">
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-dark"/></xsl:attribute>
+  <xsl:attribute-set name="__color__inverse">
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-inverse"/></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="common.link">
     <xsl:attribute name="color">
@@ -189,13 +189,13 @@
     <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-info"/></xsl:attribute>
     <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-info-color"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__bg__light">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-light"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-light-color"/></xsl:attribute>
+  <xsl:attribute-set name="__bg__accent">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-accent"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-accent-color"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__bg__dark">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-dark"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-dark-color"/></xsl:attribute>
+  <xsl:attribute-set name="__bg__inverse">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-inverse"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-inverse-color"/></xsl:attribute>
   </xsl:attribute-set>
   <!-- Subtle Background Colors (for Alerts, Callouts, etc.) -->
   <xsl:attribute-set name="__bg__primary-subtle">
@@ -222,13 +222,13 @@
     <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-info-subtle"/></xsl:attribute>
     <xsl:attribute name="color"><xsl:value-of select="$bootstrap-info-subtle-text"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__bg__light-subtle">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-light-subtle"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-light-subtle-text"/></xsl:attribute>
+  <xsl:attribute-set name="__bg__accent-subtle">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-accent-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-accent-subtle-text"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__bg__dark-subtle">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-dark-subtle"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-dark-subtle-text"/></xsl:attribute>
+  <xsl:attribute-set name="__bg__inverse-subtle">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-inverse-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-inverse-subtle-text"/></xsl:attribute>
   </xsl:attribute-set>
 
   <!-- Component-Specific Backgrounds: Tables -->
@@ -256,13 +256,13 @@
     <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-table-danger-bg"/></xsl:attribute>
     <xsl:attribute name="color"><xsl:value-of select="$bootstrap-table-danger-color"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__table__light">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-table-light-bg"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-table-light-color"/></xsl:attribute>
+  <xsl:attribute-set name="__table__accent">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-table-accent-bg"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-table-accent-color"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__table__dark">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-table-dark-bg"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-table-dark-color"/></xsl:attribute>
+  <xsl:attribute-set name="__table__inverse">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-table-inverse-bg"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-table-inverse-color"/></xsl:attribute>
   </xsl:attribute-set>
 
   <!-- Component-Specific Backgrounds: Buttons -->
@@ -296,15 +296,15 @@
     <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-danger-color"/></xsl:attribute>
     <xsl:attribute name="border-color"><xsl:value-of select="$bootstrap-btn-danger-bg"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__btn__light">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-btn-light-bg"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-light-color"/></xsl:attribute>
-    <xsl:attribute name="border-color"><xsl:value-of select="$bootstrap-btn-light-bg"/></xsl:attribute>
+  <xsl:attribute-set name="__btn__accent">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-btn-accent-bg"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-accent-color"/></xsl:attribute>
+    <xsl:attribute name="border-color"><xsl:value-of select="$bootstrap-btn-accent-bg"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__btn__dark">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-btn-dark-bg"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-dark-color"/></xsl:attribute>
-    <xsl:attribute name="border-color"><xsl:value-of select="$bootstrap-btn-dark-bg"/></xsl:attribute>
+  <xsl:attribute-set name="__btn__inverse">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-btn-inverse-bg"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-inverse-color"/></xsl:attribute>
+    <xsl:attribute name="border-color"><xsl:value-of select="$bootstrap-btn-inverse-bg"/></xsl:attribute>
   </xsl:attribute-set>
 
   <!-- Component-Specific Backgrounds: Badges -->
@@ -332,13 +332,13 @@
     <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-badge-danger-bg"/></xsl:attribute>
     <xsl:attribute name="color"><xsl:value-of select="$bootstrap-badge-danger-color"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__badge__light">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-badge-light-bg"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-badge-light-color"/></xsl:attribute>
+  <xsl:attribute-set name="__badge__accent">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-badge-accent-bg"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-badge-accent-color"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__badge__dark">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-badge-dark-bg"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-badge-dark-color"/></xsl:attribute>
+  <xsl:attribute-set name="__badge__inverse">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-badge-inverse-bg"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-badge-inverse-color"/></xsl:attribute>
   </xsl:attribute-set>
 
   <!-- Standard Bootstrap Spacing (Padding) -->
@@ -732,11 +732,11 @@
   <xsl:attribute-set name="border-info"><xsl:attribute name="border-color"><xsl:value-of
         select="$bootstrap-info"
       /></xsl:attribute></xsl:attribute-set>
-  <xsl:attribute-set name="border-light"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-light"
+  <xsl:attribute-set name="border-accent"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-accent"
       /></xsl:attribute></xsl:attribute-set>
-  <xsl:attribute-set name="border-dark"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-dark"
+  <xsl:attribute-set name="border-inverse"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-inverse"
       /></xsl:attribute></xsl:attribute-set>
   <!-- Border Thickness -->
   <xsl:attribute-set name="border-1"><xsl:attribute name="border-width">1pt</xsl:attribute></xsl:attribute-set>
@@ -763,11 +763,11 @@
   <xsl:attribute-set name="border-info-subtle"><xsl:attribute name="border-color"><xsl:value-of
         select="$bootstrap-info-subtle"
       /></xsl:attribute></xsl:attribute-set>
-  <xsl:attribute-set name="border-light-subtle"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-light-subtle"
+  <xsl:attribute-set name="border-accent-subtle"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-accent-subtle"
       /></xsl:attribute></xsl:attribute-set>
-  <xsl:attribute-set name="border-dark-subtle"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-dark-subtle"
+  <xsl:attribute-set name="border-inverse-subtle"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-inverse-subtle"
       /></xsl:attribute></xsl:attribute-set>
 
   <!-- Rounded Corners (Approximate Bootstrap values) -->

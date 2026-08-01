@@ -8,7 +8,7 @@
 
   <!-- Matches accordion specialized elements or bodydiv with accordion outputclass -->
   <xsl:template
-    match="*[contains(@class, ' bootstrap-d/accordion ') or (contains(@class, ' topic/bodydiv ') and tokenize(@outputclass, ' ') = 'accordion')]"
+    match="*[contains(@class, ' bootstrap-d/accordion ') or (contains(@class, ' topic/bodydiv ') and (tokenize(@outputclass, ' ') = ('accordion', 'accordion-flush') or contains(@outputclass, 'accordion')))]"
     priority="5"
   >
     <fo:block>
@@ -44,7 +44,10 @@
 
   <!-- Matches accordion items -->
   <xsl:template match="*[contains(@class, ' topic/section ')]" mode="accordion">
-    <xsl:variable name="parent-color" select="../@color"/>
+    <xsl:variable
+      name="parent-color"
+      select="(../@color, substring-after(tokenize(../@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-'))[1]"
+    />
     
     <fo:table table-layout="fixed" width="100%">
       <xsl:attribute name="border-bottom">
@@ -66,13 +69,13 @@
             <xsl:choose>
                <xsl:when test="$parent-color">
                   <xsl:call-template name="processBootstrapAttrSetReflection">
-                     <xsl:with-param name="attrSet" select="concat('__bg__', $parent-color)"/>
+                     <xsl:with-param name="attrSet" select="concat('__bg__', $parent-color, '-subtle')"/>
                   </xsl:call-template>
                </xsl:when>
                 <xsl:otherwise>
-                  <!-- Default background matches Bootstrap 5 primary-subtle -->
+                  <!-- Default background is grey (secondary-subtle) -->
                   <xsl:call-template name="processBootstrapAttrSetReflection">
-                    <xsl:with-param name="attrSet" select="'__bg__primary-subtle'"/>
+                    <xsl:with-param name="attrSet" select="'__bg__secondary-subtle'"/>
                   </xsl:call-template>
                 </xsl:otherwise>
             </xsl:choose>
@@ -86,11 +89,6 @@
         <fo:table-row>
           <fo:table-cell padding="10pt 15pt">
             <xsl:call-template name="processBootstrapDirection"/>
-            <xsl:if test="$parent-color">
-               <xsl:call-template name="processBootstrapAttrSetReflection">
-                  <xsl:with-param name="attrSet" select="concat('__bg__', $parent-color, '-subtle')"/>
-               </xsl:call-template>
-            </xsl:if>
             <fo:block>
                <xsl:apply-templates select="node() except *[contains(@class, ' topic/title ')]"/>
             </fo:block>

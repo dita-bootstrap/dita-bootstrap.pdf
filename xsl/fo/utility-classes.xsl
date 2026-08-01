@@ -347,7 +347,6 @@
     <xsl:variable name="resolvedTheme">
         <xsl:choose>
             <xsl:when test="$theme != ''"><xsl:value-of select="$theme"/></xsl:when>
-            <xsl:when test="$color != ''"><xsl:value-of select="$color"/></xsl:when>
             <xsl:when test="exists(tokenize($outputclass, ' ')[starts-with(., 'text-bg-')])">
                 <xsl:value-of
             select="substring-after(tokenize($outputclass, ' ')[starts-with(., 'text-bg-')][1], 'text-bg-')"
@@ -548,7 +547,7 @@
 
   <!-- Titles within colored components -->
   <xsl:template
-    match="*[contains(@class, ' topic/title ')][ancestor::*[contains(@class, ' topic/note ')] or ancestor::*[contains(@class, ' bootstrap-d/alert ')] or ancestor::*[contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')][@color]]"
+    match="*[contains(@class, ' topic/title ')][ancestor::*[contains(@class, ' topic/note ')] or ancestor::*[contains(@class, ' bootstrap-d/alert ')]]"
     priority="6"
   >
       <xsl:variable name="theme">
@@ -563,11 +562,6 @@
           </xsl:when>
           <xsl:when test="ancestor::*[contains(@class, ' bootstrap-d/alert ')]"><xsl:value-of
             select="(ancestor::*[contains(@class, ' bootstrap-d/alert ')]/@color, 'secondary')[1]"
-          /></xsl:when>
-          <xsl:when
-          test="ancestor::*[contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')]"
-        ><xsl:value-of
-            select="ancestor::*[contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')][1]/@color"
           /></xsl:when>
         </xsl:choose>
       </xsl:variable>
@@ -654,7 +648,9 @@
       
       <xsl:variable
         name="theme"
-        select="(@color, substring-after(tokenize(@outputclass, ' ')[starts-with(., 'bg-')][1], 'bg-'))[1]"
+        select="(@color, 
+                 substring-after(tokenize(@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-'),
+                 substring-after(tokenize(@outputclass, ' ')[starts-with(., 'bg-')][1], 'bg-'))[1]"
       />
       <xsl:if test="not(@outputclass) and not($theme)">
         <xsl:attribute name="font-size">15pt</xsl:attribute>

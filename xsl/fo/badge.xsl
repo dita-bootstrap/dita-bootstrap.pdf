@@ -17,6 +17,7 @@
       <xsl:variable
         name="theme"
         select="(@color, 
+          substring-after(tokenize(@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-'),
           substring-after(tokenize(@outputclass, ' ')[starts-with(., 'badge-')][1], 'badge-'),
           substring-after(tokenize(@outputclass, ' ')[starts-with(., 'bg-')][1], 'bg-'),
           substring-after(tokenize(@outputclass, ' ')[starts-with(., 'text-bg-')][1], 'text-bg-'),

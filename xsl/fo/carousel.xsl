@@ -74,8 +74,12 @@
                   
                   <!-- Border color logic: carousel/@color or default grey -->
                   <xsl:variable
+                    name="carousel"
+                    select="ancestor::*[contains(@class, ' bootstrap-d/carousel ') or contains(@outputclass, 'carousel')][1]"
+                  />
+                  <xsl:variable
                     name="theme"
-                    select="ancestor::*[contains(@class, ' bootstrap-d/carousel ')][1]/@color"
+                    select="($carousel/@color, substring-after(tokenize($carousel/@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-'))[1]"
                   />
                   <xsl:choose>
                     <xsl:when test="$theme">

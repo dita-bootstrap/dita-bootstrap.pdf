@@ -51,8 +51,14 @@
     priority="5"
   >
     <fo:table-row>
-      <xsl:variable name="theme" select="../@color"/>
-      <xsl:variable name="itemTheme" select="tokenize(@outputclass, ' ')[starts-with(., 'list-group-item-')]"/>
+      <xsl:variable
+        name="theme"
+        select="(../@color, substring-after(tokenize(../@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-'))[1]"
+      />
+      <xsl:variable
+        name="itemTheme"
+        select="(tokenize(@outputclass, ' ')[starts-with(., 'list-group-item-') or starts-with(., 'theme-')])[1]"
+      />
       
       <!-- Apply text color from parent @color if present -->
       <xsl:if test="$theme">
@@ -67,7 +73,10 @@
         </xsl:attribute>
         <!-- Apply text color from item specific class if present -->
         <xsl:if test="exists($itemTheme)">
-             <xsl:variable name="colorName" select="substring-after($itemTheme[1], 'list-group-item-')"/>
+             <xsl:variable
+            name="colorName"
+            select="if (starts-with($itemTheme, 'theme-')) then substring-after($itemTheme, 'theme-') else substring-after($itemTheme, 'list-group-item-')"
+          />
              <xsl:if test="$colorName != '' and $colorName != 'action'">
                  <xsl:call-template name="processBootstrapAttrSetReflection">
                     <xsl:with-param name="attrSet" select="concat('__color__', $colorName)"/>

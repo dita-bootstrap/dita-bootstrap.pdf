@@ -8,7 +8,7 @@
 
   <!-- Alert Support -->
   <xsl:template
-    match="*[contains(@class, ' bootstrap-d/alert ') or (exists(tokenize(@outputclass, ' ')[starts-with(., 'alert-')]) and (contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')))]"
+    match="*[contains(@class, ' bootstrap-d/alert ') or (exists(tokenize(@outputclass, ' ')[starts-with(., 'alert-') or starts-with(., 'theme-')]) and (contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')) and not(tokenize(@outputclass, ' ') = ('accordion', 'accordion-flush', 'card', 'carousel', 'drawer', 'offcanvas')))]"
     priority="5"
   >
     <fo:block xsl:use-attribute-sets="section">
@@ -17,6 +17,9 @@
       <xsl:variable name="theme">
         <xsl:choose>
           <xsl:when test="@color"><xsl:value-of select="@color"/></xsl:when>
+          <xsl:when test="exists(tokenize(@outputclass, ' ')[starts-with(., 'theme-')])">
+            <xsl:value-of select="substring-after(tokenize(@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-')"/>
+          </xsl:when>
           <xsl:when test="exists(tokenize(@outputclass, ' ')[starts-with(., 'alert-')])">
             <xsl:value-of select="substring-after(tokenize(@outputclass, ' ')[starts-with(., 'alert-')][1], 'alert-')"/>
           </xsl:when>
@@ -50,13 +53,18 @@
   </xsl:template>
 
   <xsl:template
-    match="*[contains(@class, ' bootstrap-d/alert ') or exists(tokenize(@outputclass, ' ')[starts-with(., 'alert-')]) or tokenize(@outputclass, ' ') = 'alert']/*[contains(@class, ' topic/title ')]"
+    match="*[contains(@class, ' bootstrap-d/alert ') or (exists(tokenize(@outputclass, ' ')[starts-with(., 'alert-') or starts-with(., 'theme-')]) and not(tokenize(@outputclass, ' ') = ('accordion', 'accordion-flush', 'card', 'carousel', 'drawer', 'offcanvas'))) or tokenize(@outputclass, ' ') = 'alert']/*[contains(@class, ' topic/title ')]"
     priority="10"
   >
     <xsl:variable name="ctx" select=".."/>
     <xsl:variable name="theme">
       <xsl:choose>
         <xsl:when test="$ctx/@color"><xsl:value-of select="$ctx/@color"/></xsl:when>
+        <xsl:when test="exists(tokenize($ctx/@outputclass, ' ')[starts-with(., 'theme-')])">
+          <xsl:value-of
+            select="substring-after(tokenize($ctx/@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-')"
+          />
+        </xsl:when>
         <xsl:when test="exists(tokenize($ctx/@outputclass, ' ')[starts-with(., 'alert-')])">
           <xsl:value-of
             select="substring-after(tokenize($ctx/@outputclass, ' ')[starts-with(., 'alert-')][1], 'alert-')"

@@ -13,8 +13,8 @@
     <entry name="bootstrap-danger"><xsl:value-of select="$bootstrap-danger"/></entry>
     <entry name="bootstrap-warning"><xsl:value-of select="$bootstrap-warning"/></entry>
     <entry name="bootstrap-info"><xsl:value-of select="$bootstrap-info"/></entry>
-    <entry name="bootstrap-light"><xsl:value-of select="$bootstrap-light"/></entry>
-    <entry name="bootstrap-dark"><xsl:value-of select="$bootstrap-dark"/></entry>
+    <entry name="bootstrap-accent"><xsl:value-of select="$bootstrap-accent"/></entry>
+    <entry name="bootstrap-inverse"><xsl:value-of select="$bootstrap-inverse"/></entry>
     <entry name="bootstrap-link"><xsl:value-of select="$bootstrap-link"/></entry>
 
     <entry name="bootstrap-primary-subtle"><xsl:value-of select="$bootstrap-primary-subtle"/></entry>
@@ -29,10 +29,10 @@
     <entry name="bootstrap-warning-subtle-text"><xsl:value-of select="$bootstrap-warning-subtle-text"/></entry>
     <entry name="bootstrap-info-subtle"><xsl:value-of select="$bootstrap-info-subtle"/></entry>
     <entry name="bootstrap-info-subtle-text"><xsl:value-of select="$bootstrap-info-subtle-text"/></entry>
-    <entry name="bootstrap-light-subtle"><xsl:value-of select="$bootstrap-light-subtle"/></entry>
-    <entry name="bootstrap-light-subtle-text"><xsl:value-of select="$bootstrap-light-subtle-text"/></entry>
-    <entry name="bootstrap-dark-subtle"><xsl:value-of select="$bootstrap-dark-subtle"/></entry>
-    <entry name="bootstrap-dark-subtle-text"><xsl:value-of select="$bootstrap-dark-subtle-text"/></entry>
+    <entry name="bootstrap-accent-subtle"><xsl:value-of select="$bootstrap-accent-subtle"/></entry>
+    <entry name="bootstrap-accent-subtle-text"><xsl:value-of select="$bootstrap-accent-subtle-text"/></entry>
+    <entry name="bootstrap-inverse-subtle"><xsl:value-of select="$bootstrap-inverse-subtle"/></entry>
+    <entry name="bootstrap-inverse-subtle-text"><xsl:value-of select="$bootstrap-inverse-subtle-text"/></entry>
 
     <!-- Component-specific: Tables -->
     <entry name="bootstrap-table-primary-bg"><xsl:value-of select="$bootstrap-table-primary-bg"/></entry>
@@ -47,10 +47,10 @@
     <entry name="bootstrap-table-warning-color"><xsl:value-of select="$bootstrap-table-warning-color"/></entry>
     <entry name="bootstrap-table-danger-bg"><xsl:value-of select="$bootstrap-table-danger-bg"/></entry>
     <entry name="bootstrap-table-danger-color"><xsl:value-of select="$bootstrap-table-danger-color"/></entry>
-    <entry name="bootstrap-table-light-bg"><xsl:value-of select="$bootstrap-table-light-bg"/></entry>
-    <entry name="bootstrap-table-light-color"><xsl:value-of select="$bootstrap-table-light-color"/></entry>
-    <entry name="bootstrap-table-dark-bg"><xsl:value-of select="$bootstrap-table-dark-bg"/></entry>
-    <entry name="bootstrap-table-dark-color"><xsl:value-of select="$bootstrap-table-dark-color"/></entry>
+    <entry name="bootstrap-table-accent-bg"><xsl:value-of select="$bootstrap-table-accent-bg"/></entry>
+    <entry name="bootstrap-table-accent-color"><xsl:value-of select="$bootstrap-table-accent-color"/></entry>
+    <entry name="bootstrap-table-inverse-bg"><xsl:value-of select="$bootstrap-table-inverse-bg"/></entry>
+    <entry name="bootstrap-table-inverse-color"><xsl:value-of select="$bootstrap-table-inverse-color"/></entry>
 
     <!-- Component-specific: Buttons -->
     <entry name="bootstrap-btn-primary-bg"><xsl:value-of select="$bootstrap-btn-primary-bg"/></entry>
@@ -65,10 +65,10 @@
     <entry name="bootstrap-btn-warning-color"><xsl:value-of select="$bootstrap-btn-warning-color"/></entry>
     <entry name="bootstrap-btn-danger-bg"><xsl:value-of select="$bootstrap-btn-danger-bg"/></entry>
     <entry name="bootstrap-btn-danger-color"><xsl:value-of select="$bootstrap-btn-danger-color"/></entry>
-    <entry name="bootstrap-btn-light-bg"><xsl:value-of select="$bootstrap-btn-light-bg"/></entry>
-    <entry name="bootstrap-btn-light-color"><xsl:value-of select="$bootstrap-btn-light-color"/></entry>
-    <entry name="bootstrap-btn-dark-bg"><xsl:value-of select="$bootstrap-btn-dark-bg"/></entry>
-    <entry name="bootstrap-btn-dark-color"><xsl:value-of select="$bootstrap-btn-dark-color"/></entry>
+    <entry name="bootstrap-btn-accent-bg"><xsl:value-of select="$bootstrap-btn-accent-bg"/></entry>
+    <entry name="bootstrap-btn-accent-color"><xsl:value-of select="$bootstrap-btn-accent-color"/></entry>
+    <entry name="bootstrap-btn-inverse-bg"><xsl:value-of select="$bootstrap-btn-inverse-bg"/></entry>
+    <entry name="bootstrap-btn-inverse-color"><xsl:value-of select="$bootstrap-btn-inverse-color"/></entry>
 
     <!-- Component-specific: Badges -->
     <entry name="bootstrap-badge-primary-bg"><xsl:value-of select="$bootstrap-badge-primary-bg"/></entry>
@@ -83,10 +83,10 @@
     <entry name="bootstrap-badge-warning-color"><xsl:value-of select="$bootstrap-badge-warning-color"/></entry>
     <entry name="bootstrap-badge-danger-bg"><xsl:value-of select="$bootstrap-badge-danger-bg"/></entry>
     <entry name="bootstrap-badge-danger-color"><xsl:value-of select="$bootstrap-badge-danger-color"/></entry>
-    <entry name="bootstrap-badge-light-bg"><xsl:value-of select="$bootstrap-badge-light-bg"/></entry>
-    <entry name="bootstrap-badge-light-color"><xsl:value-of select="$bootstrap-badge-light-color"/></entry>
-    <entry name="bootstrap-badge-dark-bg"><xsl:value-of select="$bootstrap-badge-dark-bg"/></entry>
-    <entry name="bootstrap-badge-dark-color"><xsl:value-of select="$bootstrap-badge-dark-color"/></entry>
+    <entry name="bootstrap-badge-accent-bg"><xsl:value-of select="$bootstrap-badge-accent-bg"/></entry>
+    <entry name="bootstrap-badge-accent-color"><xsl:value-of select="$bootstrap-badge-accent-color"/></entry>
+    <entry name="bootstrap-badge-inverse-bg"><xsl:value-of select="$bootstrap-badge-inverse-bg"/></entry>
+    <entry name="bootstrap-badge-inverse-color"><xsl:value-of select="$bootstrap-badge-inverse-color"/></entry>
 
     <entry name="bootstrap-spacing-0"><xsl:value-of select="$bootstrap-spacing-0"/></entry>
     <entry name="bootstrap-spacing-1"><xsl:value-of select="$bootstrap-spacing-1"/></entry>
