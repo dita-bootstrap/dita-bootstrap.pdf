@@ -19,7 +19,7 @@
     "prettier-check": "prettier --check \"**/*.{dita*,json,md,xml,xsl,yml}\""
   },
   "devDependencies": {
-    "lefthook": "^2.1.6",
+    "lefthook": "^2.1.10",
     "@prettier/plugin-xml": "3.4.2",
     "prettier": "3.9.6"
   }
