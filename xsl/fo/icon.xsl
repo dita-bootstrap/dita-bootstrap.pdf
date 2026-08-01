@@ -166,11 +166,16 @@
              <xsl:variable name="has-preceding" select="preceding-sibling::node()[normalize-space() != '']"/>
              <xsl:variable name="has-following" select="following-sibling::node()[normalize-space() != '']"/>
              <xsl:choose>
+                <xsl:when test="parent::*[contains(@outputclass, 'btn-icon')] or contains(@outputclass, 'btn-icon')">
+                  <!-- btn-icon: No padding -->    
+                </xsl:when>
                 <xsl:when test="@padding"><xsl:value-of select="@padding"/></xsl:when>
                 <xsl:when test="$has-preceding and $has-following">x2</xsl:when>
                 <xsl:when test="$has-following">e2</xsl:when>
                 <xsl:when test="$has-preceding">s2</xsl:when>
-                <xsl:otherwise><!-- Solo icon: No padding --></xsl:otherwise>
+                <xsl:otherwise>
+                  <!-- Solo icon: No padding -->    
+                </xsl:otherwise>
              </xsl:choose>
           </xsl:with-param>
           <xsl:with-param name="prefix" select="'p'"/>
