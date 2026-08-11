@@ -25,7 +25,13 @@
       <xsl:call-template name="processBootstrapWidth">
         <xsl:with-param name="attrValue" select="@width"/>
       </xsl:call-template>
-      <xsl:variable name="colCount" select="if (@cols) then xs:integer(@cols) else 3"/>
+      <xsl:variable
+        name="colCount"
+        select="
+          if (@cols) then xs:integer(@cols)
+          else if (contains(@otherprops, 'cols(')) then xs:integer(substring-before(substring-after(@otherprops, 'cols('), ')'))
+          else 3"
+      />
 
       <!-- Identify all item-level content to be flattened into the grid -->
       <xsl:variable
