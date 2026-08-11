@@ -957,7 +957,7 @@
   <!-- Remove borders -->
   <xsl:template name="bootstrapBorderless">
     <xsl:if
-      test="not(@outline = 'yes' or @border or @bordercolor or contains(@outputclass, 'border') or contains(@class, ' bootstrap-d/card '))"
+      test="not(@style = 'outline' or @border or @bordercolor or contains(@outputclass, 'border') or contains(@class, ' bootstrap-d/card '))"
     >
       <xsl:attribute name="border-width">0pt</xsl:attribute>
       <xsl:attribute name="border-style">none</xsl:attribute>

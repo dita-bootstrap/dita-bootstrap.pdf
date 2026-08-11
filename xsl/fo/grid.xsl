@@ -81,6 +81,15 @@
       <xsl:attribute name="padding-right">12pt</xsl:attribute>
       <fo:block start-indent="0pt">
         <xsl:call-template name="processBootstrapDirection"/>
+        <!-- @padding/@margin (e.g. p-3, mb-2) stack on top of the structural column gutter above -->
+        <xsl:call-template name="processBootstrapSpacing">
+          <xsl:with-param name="attrValue" select="@padding"/>
+          <xsl:with-param name="prefix" select="'p'"/>
+        </xsl:call-template>
+        <xsl:call-template name="processBootstrapSpacing">
+          <xsl:with-param name="attrValue" select="@margin"/>
+          <xsl:with-param name="prefix" select="'m'"/>
+        </xsl:call-template>
         <xsl:apply-templates/>
       </fo:block>
     </fo:table-cell>
