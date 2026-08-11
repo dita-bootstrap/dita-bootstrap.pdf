@@ -104,19 +104,15 @@
     />
     <xsl:variable name="element" select="if ($is-vertical) then 'fo:block' else 'fo:inline'"/>
 
-    <fo:basic-link xsl:use-attribute-sets="xref">
-      <!-- Link Destination -->
-      <xsl:choose>
-        <xsl:when test="(@scope = 'external') or not(empty(@format) or @format = 'dita')">
-          <xsl:attribute name="external-destination">url('<xsl:value-of select="@href"/>')</xsl:attribute>
-        </xsl:when>
-        <xsl:when test="@href">
-          <xsl:attribute name="internal-destination">
-             <xsl:value-of select="opentopic-func:getDestinationId(@href)"/>
-          </xsl:attribute>
-        </xsl:when>
-      </xsl:choose>
+    <!-- A plain outputclass-driven "btn" element (e.g. <ph outputclass="btn">) may carry
+         no @href at all; only wrap in fo:basic-link when a real destination exists,
+         otherwise fo:basic-link is emitted with no destination attribute, which FOP rejects. -->
+    <xsl:variable
+      name="has-destination"
+      select="boolean(@href) or (@scope = 'external') or not(empty(@format) or @format = 'dita')"
+    />
 
+    <xsl:variable name="button-content" as="node()*">
       <xsl:element name="{$element}">
         <xsl:call-template name="commonattributes"/>
         
@@ -359,7 +355,29 @@
           </xsl:choose>
         </fo:inline>
       </xsl:element>
-    </fo:basic-link>
+    </xsl:variable>
+
+    <xsl:choose>
+      <xsl:when test="$has-destination">
+        <fo:basic-link xsl:use-attribute-sets="xref">
+          <!-- Link Destination -->
+          <xsl:choose>
+            <xsl:when test="(@scope = 'external') or not(empty(@format) or @format = 'dita')">
+              <xsl:attribute name="external-destination">url('<xsl:value-of select="@href"/>')</xsl:attribute>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:attribute name="internal-destination">
+                 <xsl:value-of select="opentopic-func:getDestinationId(@href)"/>
+              </xsl:attribute>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:sequence select="$button-content"/>
+        </fo:basic-link>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="$button-content"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <!-- Support for Bootstrap link utility classes (e.g., link-primary) or @color -->
