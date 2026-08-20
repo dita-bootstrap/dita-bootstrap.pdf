@@ -256,7 +256,8 @@
         <xsl:choose>
           <xsl:when test="$icon-color-is-white">
             <xsl:call-template name="getBootstrapAttrValue">
-              <xsl:with-param name="attrSet" select="concat('__bg__', $theme, '-subtle')"/>
+              <xsl:with-param name="attrSet" select="concat('__bg__', $theme)"/>
+              <xsl:with-param name="attrName" select="'background-color'"/>
             </xsl:call-template>
           </xsl:when>
           <xsl:otherwise>

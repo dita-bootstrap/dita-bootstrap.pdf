@@ -727,18 +727,12 @@
               <xsl:with-param name="name" select="'prismjs.text.color'"/>
           </xsl:call-template>
       </xsl:variable>
-      <xsl:variable name="bgColor">
-          <xsl:call-template name="getBootstrapSetting">
-              <xsl:with-param name="name" select="'prismjs.background.color'"/>
-          </xsl:call-template>
-      </xsl:variable>
       <xsl:variable name="borderWidth">
           <xsl:call-template name="getBootstrapSetting">
               <xsl:with-param name="name" select="'prismjs.border.width'"/>
           </xsl:call-template>
       </xsl:variable>
       <xsl:if test="$textColor != ''"><xsl:attribute name="color" select="$textColor"/></xsl:if>
-      <xsl:if test="$bgColor != ''"><xsl:attribute name="background-color" select="$bgColor"/></xsl:if>
       <xsl:if test="$borderWidth != ''">
           <xsl:attribute name="border-width" select="$borderWidth"/>
           <xsl:if test="normalize-space($borderWidth) != ('0', '0pt', '0px', '0in', '0mm', '0cm', '0.0pt', '0.0px')">
@@ -1108,22 +1102,29 @@
     priority="10"
   />
 
-  <!-- Intercept block-level code elements to force a new LTR reference area for FOP -->
-  <xsl:template match="*[contains(@class, ' pr-d/codeblock ')]" priority="1000">
-    <xsl:choose>
-      <xsl:when test="$writing-mode = 'rl' and not(@dir)">
-        <fo:block-container writing-mode="lr-tb">
-          <!-- Force indent to 0 on the container so we don't double-inherit the RTL right-indent -->
-          <xsl:attribute name="start-indent">0pt</xsl:attribute>
-          <xsl:attribute name="end-indent">0pt</xsl:attribute>
+  <!-- Wrap every codeblock in a card  -->
+  <xsl:template match="*[contains(@class, ' pr-d/codeblock ')]" priority="10">
+    <fo:block>
+      <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-secondary-subtle"/></xsl:attribute>
+      <xsl:apply-templates select="." mode="prismDecoration"/>
+      <xsl:choose>
+        <xsl:when test="$writing-mode = 'rl' and not(@dir)">
+          <fo:block-container writing-mode="lr-tb">
+            <!-- Force indent to 0 on the container so we don't double-inherit the RTL right-indent -->
+            <xsl:attribute name="start-indent">0pt</xsl:attribute>
+            <xsl:attribute name="end-indent">0pt</xsl:attribute>
+            <xsl:next-match/>
+          </fo:block-container>
+        </xsl:when>
+        <xsl:otherwise>
           <xsl:next-match/>
-        </fo:block-container>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:next-match/>
-      </xsl:otherwise>
-    </xsl:choose>
+        </xsl:otherwise>
+      </xsl:choose>
+    </fo:block>
   </xsl:template>
+
+  <!-- Overrides standard prism processing -->
+  <xsl:template name="prismjs.border"/>
 
   <!-- Override commonattributes to ensure codeblocks, codeph, and PrismJS tokens are rendered LTR in RTL documents -->
   <xsl:template
