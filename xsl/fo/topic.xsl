@@ -173,8 +173,13 @@
     </fo:block>
   </xsl:template>
 
-  <!-- Inline Ph Support (Explicitly excludes syntax tokens to allow PrismJS overrides) -->
-  <xsl:template match="*[contains(@class, ' topic/ph ') and not(contains(@outputclass, 'token'))]">
+  <!-- Inline Ph Support (Explicitly excludes syntax tokens to allow PrismJS overrides).  -->
+  <xsl:template
+    match="*[contains(@class, ' topic/ph ')
+             and not(contains(@outputclass, 'token'))
+             and not(contains(@class, ' pr-d/codeph '))
+             and not(contains(@class, ' hi-d/'))]"
+  >
     <fo:inline>
       <xsl:call-template name="commonattributes"/>
       <xsl:call-template name="bootstrap.decoration"/>
@@ -285,7 +290,7 @@
         <xsl:choose>
           <xsl:when test="$icon-color-is-white">
             <xsl:call-template name="getBootstrapAttrValue">
-              <xsl:with-param name="attrSet" select="concat('__bg__', $theme)"/>
+              <xsl:with-param name="attrSet" select="concat('__bg__', $theme, '-subtle')"/>
               <xsl:with-param name="attrName" select="'background-color'"/>
             </xsl:call-template>
           </xsl:when>
