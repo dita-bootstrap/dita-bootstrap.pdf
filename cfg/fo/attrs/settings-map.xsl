@@ -127,14 +127,17 @@
     <entry name="bootstrap-h6-margin-top"><xsl:value-of select="$bootstrap-h6-margin-top"/></entry>
     <entry name="bootstrap-h6-margin-bottom"><xsl:value-of select="$bootstrap-h6-margin-bottom"/></entry>
 
-    <entry name="bootstrap-display-1-font-size"><xsl:value-of select="$bootstrap-display-1-font-size"/></entry>
-    <entry name="bootstrap-display-2-font-size"><xsl:value-of select="$bootstrap-display-2-font-size"/></entry>
-    <entry name="bootstrap-display-3-font-size"><xsl:value-of select="$bootstrap-display-3-font-size"/></entry>
-    <entry name="bootstrap-display-4-font-size"><xsl:value-of select="$bootstrap-display-4-font-size"/></entry>
-    <entry name="bootstrap-display-5-font-size"><xsl:value-of select="$bootstrap-display-5-font-size"/></entry>
-    <entry name="bootstrap-display-6-font-size"><xsl:value-of select="$bootstrap-display-6-font-size"/></entry>
-    <entry name="bootstrap-display-font-weight"><xsl:value-of select="$bootstrap-display-font-weight"/></entry>
-    <entry name="bootstrap-display-line-height"><xsl:value-of select="$bootstrap-display-line-height"/></entry>
+    <entry name="bootstrap-fs-xs"><xsl:value-of select="$bootstrap-fs-xs"/></entry>
+    <entry name="bootstrap-fs-sm"><xsl:value-of select="$bootstrap-fs-sm"/></entry>
+    <entry name="bootstrap-fs-base"><xsl:value-of select="$bootstrap-fs-base"/></entry>
+    <entry name="bootstrap-fs-md"><xsl:value-of select="$bootstrap-fs-md"/></entry>
+    <entry name="bootstrap-fs-lg"><xsl:value-of select="$bootstrap-fs-lg"/></entry>
+    <entry name="bootstrap-fs-xl"><xsl:value-of select="$bootstrap-fs-xl"/></entry>
+    <entry name="bootstrap-fs-2xl"><xsl:value-of select="$bootstrap-fs-2xl"/></entry>
+    <entry name="bootstrap-fs-3xl"><xsl:value-of select="$bootstrap-fs-3xl"/></entry>
+    <entry name="bootstrap-fs-4xl"><xsl:value-of select="$bootstrap-fs-4xl"/></entry>
+    <entry name="bootstrap-fs-5xl"><xsl:value-of select="$bootstrap-fs-5xl"/></entry>
+    <entry name="bootstrap-fs-6xl"><xsl:value-of select="$bootstrap-fs-6xl"/></entry>
 
     <entry name="bootstrap-table-striped-color"><xsl:value-of select="$bootstrap-table-striped-color"/></entry>
     <entry name="bootstrap-lead-font-size"><xsl:value-of select="$bootstrap-lead-font-size"/></entry>

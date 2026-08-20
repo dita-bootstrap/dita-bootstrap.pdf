@@ -104,6 +104,7 @@
 
   <xsl:variable name="bootstrap-border-color">#dee2e6</xsl:variable>
   <xsl:variable name="bootstrap-border-width">1pt</xsl:variable>
+  <xsl:variable name="bootstrap-blockquote-border-width">3pt</xsl:variable>
 
   <xsl:variable name="bootstrap-rounded">6pt</xsl:variable>
   <xsl:variable name="bootstrap-rounded-0">0</xsl:variable>
@@ -139,14 +140,17 @@
   <xsl:variable name="bootstrap-h6-margin-top">6pt</xsl:variable>
   <xsl:variable name="bootstrap-h6-margin-bottom">3pt</xsl:variable>
 
-  <xsl:variable name="bootstrap-display-1-font-size">60pt</xsl:variable>
-  <xsl:variable name="bootstrap-display-2-font-size">52pt</xsl:variable>
-  <xsl:variable name="bootstrap-display-3-font-size">44pt</xsl:variable>
-  <xsl:variable name="bootstrap-display-4-font-size">36pt</xsl:variable>
-  <xsl:variable name="bootstrap-display-5-font-size">28pt</xsl:variable>
-  <xsl:variable name="bootstrap-display-6-font-size">24pt</xsl:variable>
-  <xsl:variable name="bootstrap-display-font-weight">300</xsl:variable>
-  <xsl:variable name="bootstrap-display-line-height">1.2</xsl:variable>
+  <xsl:variable name="bootstrap-fs-xs">9pt</xsl:variable>
+  <xsl:variable name="bootstrap-fs-sm">10.5pt</xsl:variable>
+  <xsl:variable name="bootstrap-fs-base">12pt</xsl:variable>
+  <xsl:variable name="bootstrap-fs-md" select="$bootstrap-fs-base"/>
+  <xsl:variable name="bootstrap-fs-lg">15pt</xsl:variable>
+  <xsl:variable name="bootstrap-fs-xl">20.4pt</xsl:variable>
+  <xsl:variable name="bootstrap-fs-2xl">24pt</xsl:variable>
+  <xsl:variable name="bootstrap-fs-3xl">30pt</xsl:variable>
+  <xsl:variable name="bootstrap-fs-4xl">36pt</xsl:variable>
+  <xsl:variable name="bootstrap-fs-5xl">48pt</xsl:variable>
+  <xsl:variable name="bootstrap-fs-6xl">60pt</xsl:variable>
 
   <xsl:variable name="bootstrap-body-color">#212529</xsl:variable>
   <xsl:variable name="bootstrap-body-bg">#ffffff</xsl:variable>

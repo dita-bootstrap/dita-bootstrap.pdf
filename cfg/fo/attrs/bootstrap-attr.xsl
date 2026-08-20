@@ -9,10 +9,6 @@
   <xsl:import href="default-values.xsl"/>
   <xsl:import href="settings-map.xsl"/>
 
-  <!-- Resolve the base Bootstrap color driving link color/decoration from theme
-       context: the nearest note, alert, card, or generic decoration ancestor's
-       @theme (or 'alert-' outputclass fallback), stripped of any -subtle/-border/
-       etc. suffix. Returns '' when no themed ancestor is found. -->
   <xsl:template name="get-context-theme-color">
     <xsl:variable name="rawTheme">
       <xsl:choose>
@@ -882,49 +878,53 @@
   </xsl:attribute-set>
 
 
-  <!-- Display utilities (display-1 to display-6) -->
-  <xsl:attribute-set name="display-1"><xsl:attribute name="font-size"><xsl:value-of
-        select="$bootstrap-display-1-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
-        select="$bootstrap-display-font-weight"
-      /></xsl:attribute><xsl:attribute name="line-height"><xsl:value-of
-        select="$bootstrap-display-line-height"
+  <!-- Font-size utilities (fs-*): a size on its own, combined with fw-* for
+       weight - e.g. outputclass="fw-light fs-6xl" (replaces the old single
+       outputclass="display-1" token). -->
+  <xsl:attribute-set name="fs-xs"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-xs"
       /></xsl:attribute></xsl:attribute-set>
-  <xsl:attribute-set name="display-2"><xsl:attribute name="font-size"><xsl:value-of
-        select="$bootstrap-display-2-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
-        select="$bootstrap-display-font-weight"
-      /></xsl:attribute><xsl:attribute name="line-height"><xsl:value-of
-        select="$bootstrap-display-line-height"
+  <xsl:attribute-set name="fs-sm"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-sm"
       /></xsl:attribute></xsl:attribute-set>
-  <xsl:attribute-set name="display-3"><xsl:attribute name="font-size"><xsl:value-of
-        select="$bootstrap-display-3-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
-        select="$bootstrap-display-font-weight"
-      /></xsl:attribute><xsl:attribute name="line-height"><xsl:value-of
-        select="$bootstrap-display-line-height"
+  <xsl:attribute-set name="fs-base"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-base"
       /></xsl:attribute></xsl:attribute-set>
-  <xsl:attribute-set name="display-4"><xsl:attribute name="font-size"><xsl:value-of
-        select="$bootstrap-display-4-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
-        select="$bootstrap-display-font-weight"
-      /></xsl:attribute><xsl:attribute name="line-height"><xsl:value-of
-        select="$bootstrap-display-line-height"
+  <xsl:attribute-set name="fs-md"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-md"
       /></xsl:attribute></xsl:attribute-set>
-  <xsl:attribute-set name="display-5"><xsl:attribute name="font-size"><xsl:value-of
-        select="$bootstrap-display-5-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
-        select="$bootstrap-display-font-weight"
-      /></xsl:attribute><xsl:attribute name="line-height"><xsl:value-of
-        select="$bootstrap-display-line-height"
+  <xsl:attribute-set name="fs-lg"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-lg"
       /></xsl:attribute></xsl:attribute-set>
-  <xsl:attribute-set name="display-6"><xsl:attribute name="font-size"><xsl:value-of
-        select="$bootstrap-display-6-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
-        select="$bootstrap-display-font-weight"
-      /></xsl:attribute><xsl:attribute name="line-height"><xsl:value-of
-        select="$bootstrap-display-line-height"
+  <xsl:attribute-set name="fs-xl"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-xl"
       /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fs-2xl"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-2xl"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fs-3xl"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-3xl"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fs-4xl"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-4xl"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fs-5xl"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-5xl"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fs-6xl"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-6xl"
+      /></xsl:attribute></xsl:attribute-set>
+
+  <!-- Font-weight utilities (fw-*): weight on its own, combined with fs-* for
+       size. 'lighter'/'bolder' are relative XSL-FO keywords (resolved against
+       the inherited weight), matching CSS font-weight: lighter/bolder. -->
+  <xsl:attribute-set name="fw-lighter"><xsl:attribute name="font-weight">lighter</xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fw-light"><xsl:attribute name="font-weight">300</xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fw-normal"><xsl:attribute name="font-weight">400</xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fw-medium"><xsl:attribute name="font-weight">500</xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fw-semibold"><xsl:attribute name="font-weight">600</xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fw-bold"><xsl:attribute name="font-weight">700</xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fw-bolder"><xsl:attribute name="font-weight">bolder</xsl:attribute></xsl:attribute-set>
 
   <!-- Table Striping -->
   <xsl:attribute-set name="table-striped">
