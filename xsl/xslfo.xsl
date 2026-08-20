@@ -25,6 +25,7 @@
   <xsl:include href="fo/grid.xsl"/>
   <xsl:include href="fo/icon.xsl"/>
   <xsl:include href="fo/list-group.xsl"/>
+  <xsl:include href="fo/pagination.xsl"/>
   <xsl:include href="fo/note.xsl"/>
   <xsl:include href="fo/tables.xsl"/>
   <xsl:include href="fo/topic.xsl"/>
