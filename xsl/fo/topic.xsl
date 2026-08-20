@@ -320,6 +320,24 @@
         <xsl:attribute name="margin-bottom">10pt</xsl:attribute>
       </xsl:if>
 
+      <!-- 4. Ancestor Indent Compensation -->
+      <xsl:variable name="ancestorStartPad">
+        <xsl:call-template name="get-ancestor-padding-indent">
+          <xsl:with-param name="side" select="'start'"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="ancestorEndPad">
+        <xsl:call-template name="get-ancestor-padding-indent">
+          <xsl:with-param name="side" select="'end'"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:if test="number($ancestorStartPad) > 0">
+        <xsl:attribute name="start-indent" select="concat($ancestorStartPad, 'pt + from-parent(start-indent)')"/>
+      </xsl:if>
+      <xsl:if test="number($ancestorEndPad) > 0">
+        <xsl:attribute name="end-indent" select="concat($ancestorEndPad, 'pt + from-parent(end-indent)')"/>
+      </xsl:if>
+
       <!-- Ensure the note stays on one page -->
       <xsl:attribute name="keep-together.within-page">always</xsl:attribute>
 

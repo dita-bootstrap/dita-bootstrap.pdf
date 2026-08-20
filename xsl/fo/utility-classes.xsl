@@ -571,6 +571,67 @@
     </xsl:if>
   </xsl:template>
 
+  <!-- Resolve the padding a single container applies to its own content -->
+  <xsl:template name="get-container-side-padding">
+    <xsl:param name="node"/>
+    <xsl:param name="side" select="'start'"/>
+    <xsl:variable name="attrName" select="if ($side = 'start') then 'padding-left' else 'padding-right'"/>
+    <xsl:variable name="rtf">
+      <tmp>
+        <xsl:call-template name="processBootstrapSpacing">
+          <xsl:with-param name="node" select="$node"/>
+          <xsl:with-param name="prefix" select="'p'"/>
+        </xsl:call-template>
+        <xsl:if
+          test="$side = 'start'
+                and contains($node/@class, ' topic/lq ')
+                and not($node/@padding)
+                and not(exists(tokenize($node/@outputclass, ' ')[starts-with(., 'p-')]))"
+        >
+          <xsl:attribute name="{$attrName}"><xsl:value-of select="$bootstrap-spacing-3"/></xsl:attribute>
+        </xsl:if>
+      </tmp>
+    </xsl:variable>
+    <xsl:variable name="resolved" select="($rtf/tmp/@*[local-name() = $attrName], $rtf/tmp/@padding)[1]"/>
+    <xsl:value-of select="if ($resolved) then $resolved else '0'"/>
+  </xsl:template>
+
+  <!-- Sum the padding contributed by every ancestor of $node on the given side
+       ('start' or 'end'). Works around a FOP layout bug: a block that has its own
+       border + background + padding (e.g. <note>, via bootstrap.decoration) does
+       not inherit an ancestor's *padding*-based inset when FOP paints that block's
+       border/background box - only the FO start-indent/end-indent properties are
+       correctly propagated. Bootstrap grid columns are excluded because they are
+       rendered as fo:table-cell, whose width FOP already constrains natively. -->
+  <xsl:template name="get-ancestor-padding-indent">
+    <xsl:param name="node" select="."/>
+    <xsl:param name="side" select="'start'"/>
+    <xsl:variable
+      name="containers"
+      select="
+        $node/ancestor::*[
+          (@padding or
+           exists(tokenize(@outputclass, ' ')[starts-with(., 'p-') or starts-with(., 'ps-') or starts-with(., 'pe-') or starts-with(., 'px-')]) or
+           contains(@class, ' topic/lq '))
+          and not(contains(@class, ' bootstrap-d/grid-col '))
+          and not(exists(tokenize(@outputclass, ' ')[starts-with(., 'col') or contains(., ':col')]))
+        ]"
+    />
+    <xsl:variable name="values" as="xs:double*">
+      <xsl:for-each select="$containers">
+        <xsl:variable name="raw">
+          <xsl:call-template name="get-container-side-padding">
+            <xsl:with-param name="node" select="."/>
+            <xsl:with-param name="side" select="$side"/>
+          </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="num" select="number(replace(normalize-space($raw), '[^0-9.\-].*$', ''))"/>
+        <xsl:sequence select="if ($num != $num) then 0 else $num"/>
+      </xsl:for-each>
+    </xsl:variable>
+    <xsl:value-of select="format-number(sum(($values, 0)), '0.######')"/>
+  </xsl:template>
+
   <!-- Process @outputclass attribute for Bootstrap classes -->
   <xsl:template name="processBootstrapOutputClass">
     <xsl:param name="attrValue"/>
