@@ -38,6 +38,73 @@
     </xsl:choose>
   </xsl:template>
 
+  <!-- The 8 Bootstrap theme color names (bootstrap-color-values in the shared DTD). -->
+  <xsl:variable
+    name="bootstrap-theme-color-names"
+    select="('primary', 'secondary', 'success', 'danger', 'warning', 'info', 'accent', 'inverse')"
+    as="xs:string*"
+  />
+
+  <xsl:template name="get-outputclass-theme-color">
+    <xsl:param name="outputclass" select="''"/>
+    <xsl:variable
+      name="match"
+      select="
+        (for $t in tokenize($outputclass, ' ')[starts-with(., 'theme-')]
+         return substring-after($t, 'theme-'))[. = $bootstrap-theme-color-names][1]"
+    />
+    <xsl:value-of select="$match"/>
+  </xsl:template>
+
+  <xsl:template name="get-outputclass-theme-suffix">
+    <xsl:param name="outputclass" select="''"/>
+    <xsl:variable
+      name="modifiers"
+      select="
+        (for $t in tokenize($outputclass, ' ')[starts-with(., 'theme-')]
+         return substring-after($t, 'theme-'))[. = ('contrast', 'subtle', 'muted', 'border')]"
+    />
+    <xsl:value-of
+      select="
+        if (exists($modifiers[. = 'subtle']) and exists($modifiers[. = 'border'])) then 'subtle-border'
+        else if (exists($modifiers[. = 'subtle'])) then 'subtle'
+        else if (exists($modifiers[. = 'border'])) then 'border'
+        else if (exists($modifiers[. = 'muted'])) then 'muted'
+        else if (exists($modifiers[. = 'contrast'])) then 'contrast'
+        else ''"
+    />
+  </xsl:template>
+
+  <xsl:template name="get-theme-color">
+    <xsl:param name="node" select="."/>
+    <xsl:choose>
+      <xsl:when test="$node/@theme">
+        <xsl:value-of
+          select="if (contains($node/@theme, '-')) then substring-before($node/@theme, '-') else $node/@theme"
+        />
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:call-template name="get-outputclass-theme-color">
+          <xsl:with-param name="outputclass" select="$node/@outputclass"/>
+        </xsl:call-template>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template name="get-theme-suffix">
+    <xsl:param name="node" select="."/>
+    <xsl:choose>
+      <xsl:when test="$node/@theme">
+        <xsl:value-of select="if (contains($node/@theme, '-')) then substring-after($node/@theme, '-') else ''"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:call-template name="get-outputclass-theme-suffix">
+          <xsl:with-param name="outputclass" select="$node/@outputclass"/>
+        </xsl:call-template>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
   <!-- Retrieve the computed value of a specific attribute from an attribute-set -->
   <xsl:template name="getBootstrapAttrValue">
     <xsl:param name="attrSet"/>
@@ -218,7 +285,7 @@
     </xsl:if>
   </xsl:template>
 
-  <!-- Process @bordercolor attribute -->
+  <!-- Apply a border color from an explicit color name (e.g. a '-border' @theme suffix) -->
   <xsl:template name="processBootstrapBorderColor">
     <xsl:param name="attrValue"/>
     <xsl:param name="theme" select="''"/>
@@ -334,7 +401,6 @@
 
   <xsl:template name="processBootstrapBackground">
     <xsl:param name="node" select="."/>
-    <xsl:param name="color" select="$node/@color"/>
     <xsl:param name="outputclass" select="$node/@outputclass"/>
     <xsl:param name="variant" select="''"/> <!-- e.g. 'subtle' -->
     <xsl:param name="theme" select="''"/>
@@ -552,17 +618,26 @@
   >
       <xsl:variable name="theme">
         <xsl:choose>
-          <xsl:when test="ancestor::*[contains(@class, ' topic/note ')]/@color"><xsl:value-of
-            select="ancestor::*[contains(@class, ' topic/note ')]/@color"
-          /></xsl:when>
+          <xsl:when test="ancestor::*[contains(@class, ' topic/note ')]/@theme">
+            <xsl:variable name="noteTheme" select="ancestor::*[contains(@class, ' topic/note ')]/@theme"/>
+            <xsl:value-of
+            select="if (contains($noteTheme, '-')) then substring-before($noteTheme, '-') else $noteTheme"
+          />
+          </xsl:when>
           <xsl:when test="ancestor::*[contains(@class, ' topic/note ')]">
             <xsl:call-template name="getNoteTheme">
                <xsl:with-param name="type" select="(ancestor::*[contains(@class, ' topic/note ')]/@type, 'note')[1]"/>
             </xsl:call-template>
           </xsl:when>
-          <xsl:when test="ancestor::*[contains(@class, ' bootstrap-d/alert ')]"><xsl:value-of
-            select="(ancestor::*[contains(@class, ' bootstrap-d/alert ')]/@color, 'secondary')[1]"
-          /></xsl:when>
+          <xsl:when test="ancestor::*[contains(@class, ' bootstrap-d/alert ')]">
+            <xsl:variable
+            name="alertTheme"
+            select="(ancestor::*[contains(@class, ' bootstrap-d/alert ')]/@theme, 'secondary')[1]"
+          />
+            <xsl:value-of
+            select="if (contains($alertTheme, '-')) then substring-before($alertTheme, '-') else $alertTheme"
+          />
+          </xsl:when>
         </xsl:choose>
       </xsl:variable>
 
@@ -648,7 +723,7 @@
       
       <xsl:variable
         name="theme"
-        select="(@color, 
+        select="(@theme,
                  substring-after(tokenize(@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-'),
                  substring-after(tokenize(@outputclass, ' ')[starts-with(., 'bg-')][1], 'bg-'))[1]"
       />
@@ -778,7 +853,7 @@
       </xsl:choose>
     </xsl:variable>
 
-    <xsl:variable name="theme" select="@color"/>
+    <xsl:variable name="theme" select="if (contains(@theme, '-')) then substring-before(@theme, '-') else @theme"/>
     <xsl:choose>
       <xsl:when test="@placement = 'break'">
         <fo:block margin-top="{$bootstrap-spacing-3}" margin-bottom="{$bootstrap-spacing-3}" text-align="center">
@@ -896,11 +971,14 @@
       <xsl:param name="theme" select="''"/>
       <xsl:param name="prefix" select="''"/>
       <xsl:param name="defaultRounded" select="false()"/>
+      <!-- Set when a caller resolved a '-border'-only theme (border color, no background) -->
+      <xsl:param name="skipBackground" select="false()"/>
       <xsl:apply-templates select="$node" mode="bootstrapDecoration">
           <xsl:with-param name="variant" select="$variant"/>
           <xsl:with-param name="theme" select="$theme"/>
           <xsl:with-param name="prefix" select="$prefix"/>
           <xsl:with-param name="defaultRounded" select="$defaultRounded"/>
+          <xsl:with-param name="skipBackground" select="$skipBackground"/>
       </xsl:apply-templates>
   </xsl:template>
 
@@ -909,12 +987,66 @@
       <xsl:param name="theme" select="''"/>
       <xsl:param name="prefix" select="''"/>
       <xsl:param name="defaultRounded" select="false()"/>
-      <xsl:call-template name="processBootstrapBackground">
-          <xsl:with-param name="node" select="."/>
-          <xsl:with-param name="variant" select="$variant"/>
-          <xsl:with-param name="theme" select="$theme"/>
-          <xsl:with-param name="prefix" select="$prefix"/>
-      </xsl:call-template>
+      <xsl:param name="skipBackground" select="false()"/>
+
+      <!-- When no caller has already resolved a theme (alert/note/badge/button do this
+           themselves), fall back to this node's own @theme (a single hyphenated compound)
+           or its 'theme-*' outputclass tokens (color and suffix spelled separately - see
+           get-theme-color/get-theme-suffix). The value is a color plus an optional
+           -contrast/-muted/-subtle/-border/-subtle-border suffix (see bootstrap-theme-values
+           in the shared DTD). Table cells only ever carry a bare color (bootstrap-color-values
+           has no suffix option) and are always themed; elsewhere a bare 'theme-{color}'
+           outputclass token with no -contrast/-subtle/-muted modifier does nothing on its
+           own, matching the HTML plugin (the color-only class just exposes CSS custom
+           properties for a modifier class to consume). -->
+      <xsl:variable
+      name="isTableContext"
+      select="contains(@class, ' topic/table ') or contains(@class, ' topic/row ') or contains(@class, ' topic/entry ')"
+    />
+      <xsl:variable name="ownColor">
+        <xsl:if test="$theme = ''">
+          <xsl:call-template name="get-theme-color"/>
+        </xsl:if>
+      </xsl:variable>
+      <xsl:variable name="ownSuffixParts">
+        <xsl:if test="$theme = '' and $ownColor != ''">
+          <xsl:call-template name="get-theme-suffix"/>
+        </xsl:if>
+      </xsl:variable>
+      <xsl:variable
+      name="ownSuffixTokens"
+      select="if ($ownSuffixParts != '') then tokenize($ownSuffixParts, '-') else ()"
+    />
+      <xsl:variable name="ownIsMuted" select="$ownSuffixTokens = 'muted'"/>
+      <xsl:variable name="ownIsSubtle" select="$ownSuffixTokens = 'subtle'"/>
+      <xsl:variable name="ownIsBorder" select="$ownSuffixTokens = 'border'"/>
+      <xsl:variable name="ownIsBare" select="$ownColor != '' and $ownSuffixParts = '' and not($isTableContext)"/>
+      <!-- '-border' on its own ('subtle-border' is handled by ownIsSubtle above) sets only
+           a border color, per the shared DTD's bootstrap-theme-values enum - no background. -->
+      <xsl:variable name="ownIsBorderOnly" select="$ownSuffixParts = 'border'"/>
+
+      <xsl:if test="not($skipBackground)">
+        <xsl:choose>
+          <xsl:when test="$theme = '' and $ownIsMuted and $ownColor != ''">
+            <xsl:call-template name="processBootstrapAttrSetReflection">
+              <xsl:with-param name="attrSet" select="concat('__muted__', $ownColor)"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="$theme = '' and ($ownIsBare or $ownIsBorderOnly)"/>
+          <xsl:otherwise>
+            <xsl:call-template name="processBootstrapBackground">
+                <xsl:with-param name="node" select="."/>
+                <xsl:with-param
+              name="variant"
+              select="if ($theme != '') then $variant else (if ($ownIsSubtle) then 'subtle' else '')"
+            />
+                <xsl:with-param name="theme" select="if ($theme != '') then $theme else $ownColor"/>
+                <xsl:with-param name="prefix" select="$prefix"/>
+            </xsl:call-template>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:if>
+
       <xsl:call-template name="processBootstrapSpacing">
           <xsl:with-param name="node" select="."/>
           <xsl:with-param name="prefix" select="'p'"/>
@@ -930,17 +1062,16 @@
           <xsl:with-param name="attrValue" select="@border"/>
       </xsl:call-template>
       <xsl:variable
-      name="isTableContext"
-      select="contains(@class, ' topic/table ') or contains(@class, ' topic/row ') or contains(@class, ' topic/entry ')"
-    />
-      <xsl:variable
       name="hasExplicitBorder"
-      select="@border or @bordercolor or exists(tokenize(@outputclass, ' ')[starts-with(., 'border-')])"
+      select="@border or $ownIsBorder or exists(tokenize(@outputclass, ' ')[starts-with(., 'border-')])"
     />
 
       <xsl:if test="not($isTableContext) or $hasExplicitBorder">
         <xsl:call-template name="processBootstrapBorderColor">
-            <xsl:with-param name="attrValue" select="@bordercolor"/>
+            <xsl:with-param
+          name="attrValue"
+          select="if ($theme = '' and $ownIsBorder and $ownColor != '') then (if ($ownIsSubtle) then concat($ownColor, '-subtle') else $ownColor) else ()"
+        />
             <xsl:with-param name="theme" select="$theme"/>
         </xsl:call-template>
       </xsl:if>

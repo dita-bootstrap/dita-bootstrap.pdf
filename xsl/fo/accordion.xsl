@@ -44,10 +44,11 @@
 
   <!-- Matches accordion items -->
   <xsl:template match="*[contains(@class, ' topic/section ')]" mode="accordion">
-    <xsl:variable
-      name="parent-color"
-      select="(../@color, substring-after(tokenize(../@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-'))[1]"
-    />
+    <xsl:variable name="parent-color">
+      <xsl:call-template name="get-theme-color">
+        <xsl:with-param name="node" select=".."/>
+      </xsl:call-template>
+    </xsl:variable>
     
     <fo:table table-layout="fixed" width="100%">
       <xsl:attribute name="border-bottom">

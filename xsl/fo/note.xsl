@@ -10,14 +10,17 @@
   <xsl:template match="*[contains(@class, ' topic/note ')]" priority="5">
     <fo:block xsl:use-attribute-sets="section">
       <xsl:call-template name="commonattributes"/>
-      
-      <!-- Map DITA Note Type or @color to Bootstrap Theme -->
+      <xsl:variable name="explicitThemeColor">
+        <xsl:call-template name="get-theme-color"/>
+      </xsl:variable>
+      <xsl:variable name="themeSuffix">
+        <xsl:if test="$explicitThemeColor != ''">
+          <xsl:call-template name="get-theme-suffix"/>
+        </xsl:if>
+      </xsl:variable>
       <xsl:variable name="theme">
         <xsl:choose>
-          <xsl:when test="@color"><xsl:value-of select="@color"/></xsl:when>
-          <xsl:when test="exists(tokenize(@outputclass, ' ')[starts-with(., 'theme-')])">
-            <xsl:value-of select="substring-after(tokenize(@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-')"/>
-          </xsl:when>
+          <xsl:when test="$explicitThemeColor != ''"><xsl:value-of select="$explicitThemeColor"/></xsl:when>
           <xsl:when test="exists(tokenize(@outputclass, ' ')[starts-with(., 'alert-')])">
             <xsl:value-of select="substring-after(tokenize(@outputclass, ' ')[starts-with(., 'alert-')][1], 'alert-')"/>
           </xsl:when>
@@ -28,20 +31,65 @@
           </xsl:otherwise>
         </xsl:choose>
       </xsl:variable>
-      
-      <!-- Determine text color for the icon and border from the theme-subtle attribute set -->
-      <xsl:variable name="icon-color">
+      <xsl:variable name="suffixTokens" select="if ($themeSuffix != '') then tokenize($themeSuffix, '-') else ()"/>
+      <xsl:variable name="isMuted" select="$suffixTokens = 'muted'"/>
+      <xsl:variable name="isSubtle" select="$themeSuffix = '' or $suffixTokens = 'subtle'"/>
+      <xsl:variable name="isBorderOnly" select="$themeSuffix = 'border'"/>
+      <xsl:variable
+        name="attrSetName"
+        select="
+        if ($isMuted) then concat('__muted__', $theme)
+        else if ($isBorderOnly) then concat('border-', $theme)
+        else if ($isSubtle) then concat('__bg__', $theme, '-subtle')
+        else concat('__bg__', $theme)"
+      />
+      <xsl:variable name="icon-color-raw">
         <xsl:call-template name="getBootstrapAttrValue">
-          <xsl:with-param name="attrSet" select="concat('__bg__', $theme, '-subtle')"/>
+          <xsl:with-param name="attrSet" select="$attrSetName"/>
+          <xsl:with-param name="attrName" select="if ($isBorderOnly) then 'border-color' else 'color'"/>
         </xsl:call-template>
       </xsl:variable>
+      <xsl:variable
+        name="icon-color-is-white"
+        select="normalize-space(lower-case($icon-color-raw)) = ('#fff', '#ffffff', 'white')"
+      />
+      <xsl:variable name="icon-color">
+        <xsl:choose>
+          <xsl:when test="$icon-color-is-white">
+            <xsl:call-template name="getBootstrapAttrValue">
+              <xsl:with-param name="attrSet" select="concat('__bg__', $theme, '-subtle')"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="$icon-color-raw"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
 
-      <!-- 1. Unified Decoration (subtle variant) -->
-      <xsl:call-template name="bootstrap.decoration">
-          <xsl:with-param name="variant" select="'subtle'"/>
-          <xsl:with-param name="theme" select="$theme"/>
-          <xsl:with-param name="defaultRounded" select="true()"/>
-      </xsl:call-template>
+      <!-- 1. Unified Decoration -->
+      <xsl:choose>
+        <xsl:when test="$isMuted">
+          <xsl:call-template name="bootstrap.decoration">
+              <xsl:with-param name="theme" select="$theme"/>
+              <xsl:with-param name="prefix" select="'__muted__'"/>
+              <xsl:with-param name="defaultRounded" select="true()"/>
+          </xsl:call-template>
+        </xsl:when>
+        <xsl:when test="$isBorderOnly">
+          <xsl:call-template name="bootstrap.decoration">
+              <xsl:with-param name="theme" select="$theme"/>
+              <xsl:with-param name="skipBackground" select="true()"/>
+              <xsl:with-param name="defaultRounded" select="true()"/>
+          </xsl:call-template>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:call-template name="bootstrap.decoration">
+              <xsl:with-param name="variant" select="if ($isSubtle) then 'subtle' else ''"/>
+              <xsl:with-param name="theme" select="$theme"/>
+              <xsl:with-param name="defaultRounded" select="true()"/>
+          </xsl:call-template>
+        </xsl:otherwise>
+      </xsl:choose>
 
       <xsl:variable name="direction">
         <xsl:choose>

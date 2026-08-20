@@ -103,10 +103,6 @@
       select="ancestor::*[contains(@class, ' bootstrap-d/button-group ') or tokenize(@outputclass, ' ') = 'btn-group'][1]/@vertical = 'yes'"
     />
     <xsl:variable name="element" select="if ($is-vertical) then 'fo:block' else 'fo:inline'"/>
-
-    <!-- A plain outputclass-driven "btn" element (e.g. <ph outputclass="btn">) may carry
-         no @href at all; only wrap in fo:basic-link when a real destination exists,
-         otherwise fo:basic-link is emitted with no destination attribute, which FOP rejects. -->
     <xsl:variable
       name="has-destination"
       select="boolean(@href) or (@scope = 'external') or not(empty(@format) or @format = 'dita')"
@@ -115,12 +111,10 @@
     <xsl:variable name="button-content" as="node()*">
       <xsl:element name="{$element}">
         <xsl:call-template name="commonattributes"/>
-        
-        <!-- Specialized Bootstrap Styling -->
-        <xsl:variable name="theme">
+        <xsl:variable name="rawTheme">
           <xsl:choose>
             <xsl:when test="@style = 'none'"/>
-            <xsl:when test="@color"><xsl:value-of select="@color"/></xsl:when>
+            <xsl:when test="@theme"><xsl:value-of select="@theme"/></xsl:when>
             <xsl:when test="exists(tokenize(@outputclass, ' ')[starts-with(., 'theme-')])">
               <xsl:value-of
                 select="substring-after(tokenize(@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-')"
@@ -141,6 +135,15 @@
           </xsl:choose>
         </xsl:variable>
 
+        <xsl:variable
+          name="theme"
+          select="if (contains($rawTheme, '-')) then substring-before($rawTheme, '-') else $rawTheme"
+        />
+        <xsl:variable
+          name="themeSuffix"
+          select="if (contains($rawTheme, '-')) then substring-after($rawTheme, '-') else ''"
+        />
+
         <xsl:variable name="size">
           <xsl:choose>
             <xsl:when test="@size"><xsl:value-of select="@size"/></xsl:when>
@@ -154,13 +157,16 @@
         <!-- Style variant: none | solid (default) | outline | subtle | text. -->
         <xsl:variable
           name="is-outline"
-          select="@style = 'outline' or exists(tokenize(@outputclass, ' ')[. = 'btn-outline' or starts-with(., 'btn-outline-')])"
+          select="@style = 'outline' or $themeSuffix = 'outline' or $themeSuffix = 'outline-styled' or exists(tokenize(@outputclass, ' ')[. = 'btn-outline' or starts-with(., 'btn-outline-')])"
         />
         <xsl:variable
           name="is-subtle"
-          select="@style = 'subtle' or exists(tokenize(@outputclass, ' ')[. = 'btn-subtle'])"
+          select="@style = 'subtle' or $themeSuffix = 'subtle' or $themeSuffix = 'subtle-styled' or exists(tokenize(@outputclass, ' ')[. = 'btn-subtle'])"
         />
-        <xsl:variable name="is-text" select="@style = 'text' or exists(tokenize(@outputclass, ' ')[. = 'btn-text'])"/>
+        <xsl:variable
+          name="is-text"
+          select="@style = 'text' or $themeSuffix = 'text' or exists(tokenize(@outputclass, ' ')[. = 'btn-text'])"
+        />
         <xsl:variable name="is-none" select="@style = 'none'"/>
 
         <!-- Background & Text Colors -->
@@ -199,11 +205,6 @@
           <xsl:if test="$theme != ''">
             <xsl:call-template name="processBootstrapBorderColor">
               <xsl:with-param name="attrValue" select="$theme"/>
-            </xsl:call-template>
-          </xsl:if>
-          <xsl:if test="@bordercolor">
-            <xsl:call-template name="processBootstrapBorderColor">
-              <xsl:with-param name="attrValue" select="@bordercolor"/>
             </xsl:call-template>
           </xsl:if>
         </xsl:if>
@@ -258,7 +259,7 @@
           <xsl:with-param name="attrValue" select="@outputclass"/>
         </xsl:call-template>
 
-        <xsl:call-template name="bootstrap.decoration"/>
+        <xsl:call-template name="processBootstrapDirection"/>
 
         <!-- Button Group Position Awareness  -->
         <xsl:variable
@@ -380,14 +381,15 @@
     </xsl:choose>
   </xsl:template>
 
-  <!-- Support for Bootstrap link utility classes (e.g., link-primary) or @color -->
   <xsl:template
-    match="*[contains(@class, ' topic/xref ') and (@color or exists(tokenize(@outputclass, ' ')[starts-with(., 'link-') or . = 'link-underline']))]"
+    match="*[contains(@class, ' topic/xref ') and (@theme or exists(tokenize(@outputclass, ' ')[starts-with(., 'link-') or . = 'link-underline']))]"
     priority="10"
   >
     <xsl:variable name="theme">
       <xsl:choose>
-        <xsl:when test="@color"><xsl:value-of select="@color"/></xsl:when>
+        <xsl:when test="@theme">
+          <xsl:value-of select="if (contains(@theme, '-')) then substring-before(@theme, '-') else @theme"/>
+        </xsl:when>
         <xsl:when test="exists(tokenize(@outputclass, ' ')[starts-with(., 'link-') and not(. = 'link-underline')])">
            <xsl:value-of
             select="substring-after(tokenize(@outputclass, ' ')[starts-with(., 'link-') and not(. = 'link-underline')][1], 'link-')"

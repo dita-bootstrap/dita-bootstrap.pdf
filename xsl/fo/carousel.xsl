@@ -10,7 +10,6 @@
   version="2.0"
 >
 
-  <!-- Matches carousel specialized elements or bodydiv/ol with carousel outputclass -->
   <xsl:template
     match="*[contains(@class, ' bootstrap-d/carousel ') or (contains(@class, ' topic/ol ') and (tokenize(@outputclass, ' ') = 'carousel' or tokenize(@outputclass, ' ') = 'carousel-fade'))]"
     priority="5"
@@ -78,15 +77,16 @@
                     </xsl:choose>
                   </xsl:attribute>
                   
-                  <!-- Border color logic: carousel/@color or default grey -->
+                  <!-- Border color logic: carousel/@theme or default grey -->
                   <xsl:variable
                     name="carousel"
                     select="ancestor::*[contains(@class, ' bootstrap-d/carousel ') or contains(@outputclass, 'carousel')][1]"
                   />
-                  <xsl:variable
-                    name="theme"
-                    select="($carousel/@color, substring-after(tokenize($carousel/@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-'))[1]"
-                  />
+                  <xsl:variable name="theme">
+                    <xsl:call-template name="get-theme-color">
+                      <xsl:with-param name="node" select="$carousel"/>
+                    </xsl:call-template>
+                  </xsl:variable>
                   <xsl:choose>
                     <xsl:when test="$theme">
                        <xsl:call-template name="processBootstrapBorderColor">

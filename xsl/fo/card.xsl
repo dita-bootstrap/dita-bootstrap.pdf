@@ -10,8 +10,6 @@
   version="2.0"
 >
 
-  <!-- Match both specialized card elements and sections/divs with @outputclass='card' -->
-  <!-- Aggressive priority="100" to override any other plugin or base templates. -->
   <xsl:template
     match="*[self::card or contains(@class, ' bootstrap-d/card ') or (tokenize(@outputclass, ' ') = 'card' and (contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')))]"
     priority="5"
@@ -38,8 +36,6 @@
       </xsl:variable>
       <xsl:variable name="gap-pct" select="100 - number($card-pct)"/>
 
-      <!-- Positioning Table Wrapper: Using Natural FO Flow -->
-      <!-- The table writing-mode matches the component's direction, forcing Column 1 to the correct side. -->
       <fo:table table-layout="fixed" width="100%" space-before="10pt" space-after="10pt">
         <xsl:call-template name="processBootstrapDirection"/>
         
@@ -98,14 +94,13 @@
         <xsl:attribute name="start-indent">0pt</xsl:attribute>
         <xsl:attribute name="end-indent">0pt</xsl:attribute>
         
-        <!-- Frame Border: Uses @color theme if present, falls back to light gray -->
+        <!-- Frame Border: Uses @theme if present, falls back to light gray -->
         <xsl:attribute name="border">
           <xsl:value-of select="concat($bootstrap-border-width, ' solid')"/>
         </xsl:attribute>
-        <xsl:variable
-        name="theme"
-        select="(@color, substring-after(tokenize(@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-'))[1]"
-      />
+        <xsl:variable name="theme">
+          <xsl:call-template name="get-theme-color"/>
+        </xsl:variable>
         <xsl:choose>
           <xsl:when test="$theme">
             <xsl:call-template name="processBootstrapBorderColor">

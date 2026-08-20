@@ -12,13 +12,13 @@
     Table Support for Bootstrap Print
     
     Theming Hierarchy: Entry > Row > thead > Table
-    
-    When <table color="primary"> is set:
+
+    When <table theme="primary"> is set:
     - thead row takes primary color (like badge)
     - tbody rows take primary-subtle color (like alert)
     - borders (if present) also take primary color
     
-    When <thead color="xxx"> is set:
+    When <thead theme="xxx"> is set:
     - thead row takes the specified color, overriding table color.
     
     When <table striped="yes"> is set:
@@ -34,7 +34,7 @@
   <xsl:template match="*[contains(@class, ' topic/table ')]" priority="5">
     <xsl:variable
       name="hasDecoration"
-      select="@color or @padding or @width or @margin or @shadow or 
+      select="@theme or @padding or @width or @margin or @shadow or
                                                exists(tokenize(@outputclass, ' ')[starts-with(., 'theme-') or starts-with(., 'table-') or starts-with(., 'w-') or starts-with(., 'p-') or starts-with(., 'm-') or . = 'shadow-sm' or . = 'shadow' or . = 'shadow-lg' or . = 'shadow-none'])"
     />
     <xsl:choose>
@@ -77,7 +77,7 @@
       <xsl:variable name="thead" select="parent::*"/>
       <xsl:variable
         name="theme"
-        select="(@color, $thead/@color, 
+        select="(@theme, $thead/@theme,
                  substring-after(tokenize($thead/@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-'),
                  substring-after(tokenize($thead/@outputclass, ' ')[starts-with(., 'table-')][1], 'table-'))[1]"
       />
@@ -98,16 +98,16 @@
       <xsl:variable name="tbody" select="parent::*"/>
       <xsl:variable name="table" select="ancestor::*[contains(@class, ' topic/table ')][1]"/>
       
-      <xsl:variable name="tableTheme" select="$table/@color"/>
+      <xsl:variable name="tableTheme" select="$table/@theme"/>
       <xsl:variable
         name="striped"
         select="$table/@striped = 'yes' or tokenize($table/@outputclass, ' ') = 'table-striped'"
       />
-      
+
       <!-- Inherit theme from tbody if not set on row -->
       <xsl:variable
         name="rowTheme"
-        select="(@color, 
+        select="(@theme,
                  substring-after(tokenize($tbody/@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-'),
                  substring-after(tokenize($tbody/@outputclass, ' ')[starts-with(., 'table-')][1], 'table-'))[1]"
       />
@@ -146,7 +146,7 @@
       <xsl:variable name="tfoot" select="parent::*"/>
       <xsl:variable
         name="theme"
-        select="(@color, $tfoot/@color, 
+        select="(@theme, $tfoot/@theme,
                  substring-after(tokenize($tfoot/@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-'),
                  substring-after(tokenize($tfoot/@outputclass, ' ')[starts-with(., 'table-')][1], 'table-'))[1]"
       />
@@ -170,7 +170,7 @@
       select="parent::*[contains(@class, ' topic/row ')]/parent::*[contains(@class, ' topic/tfoot ')]"
     />
     <xsl:variable name="table" select="ancestor::*[contains(@class, ' topic/table ')][1]"/>
-    <xsl:variable name="tableTheme" select="$table/@color"/>
+    <xsl:variable name="tableTheme" select="$table/@theme"/>
     <xsl:variable
       name="stripedCols"
       select="$table/@striped-columns = 'yes' or tokenize($table/@outputclass, ' ') = 'table-striped-columns'"
@@ -233,7 +233,7 @@
       <!-- Entry-specific background overrides -->
       <xsl:choose>
         <!-- Column Striping (applied if cell has no theme color) -->
-        <xsl:when test="$isColoredCol and not(@color)">
+        <xsl:when test="$isColoredCol and not(@theme)">
            <xsl:choose>
             <xsl:when test="$tableTheme">
               <xsl:call-template name="processBootstrapAttrSetReflection">

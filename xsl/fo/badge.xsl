@@ -13,10 +13,20 @@
     <fo:inline>
       <xsl:call-template name="commonattributes"/>
 
+      <!-- @theme may carry a style suffix (e.g. 'primary-outline', 'primary-subtle') since
+           badge has no separate @style attribute in the schema. -->
+      <xsl:variable
+        name="themeValue"
+        select="(@theme, substring-after(tokenize(@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-'))[1]"
+      />
+
       <!-- Style variant: none | solid (default) | outline | subtle -->
       <xsl:variable
         name="style"
         select="(@style,
+          if (ends-with($themeValue, '-outline')) then 'outline'
+          else if (ends-with($themeValue, '-subtle')) then 'subtle'
+          else (),
           if (exists(tokenize(@outputclass, ' ')[. = 'badge-outline'])) then 'outline'
           else if (exists(tokenize(@outputclass, ' ')[. = 'badge-subtle'])) then 'subtle'
           else (),
@@ -26,8 +36,8 @@
       <!-- Specialized Bootstrap Styling -->
       <xsl:variable
         name="theme"
-        select="if ($style = 'none') then '' else (@color,
-          substring-after(tokenize(@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-'),
+        select="if ($style = 'none') then '' else (
+          if ($themeValue != '') then (if (contains($themeValue, '-')) then substring-before($themeValue, '-') else $themeValue) else (),
           substring-after(tokenize(@outputclass, ' ')[starts-with(., 'bg-')][1], 'bg-'),
           substring-after(tokenize(@outputclass, ' ')[starts-with(., 'text-bg-')][1], 'text-bg-'),
           'primary')[1]"

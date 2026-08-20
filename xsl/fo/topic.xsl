@@ -18,8 +18,12 @@
         <fo:block xsl:use-attribute-sets="section.title">
           <xsl:attribute name="color">
             <xsl:choose>
-              <xsl:when test="@color">
-                <xsl:value-of select="$bootstrap-settings/entry[@name = concat('bootstrap-', @color)]"/>
+              <xsl:when test="@theme">
+                <xsl:variable
+                  name="themeColor"
+                  select="if (contains(@theme, '-')) then substring-before(@theme, '-') else @theme"
+                />
+                <xsl:value-of select="$bootstrap-settings/entry[@name = concat('bootstrap-', $themeColor)]"/>
               </xsl:when>
               <xsl:otherwise>
                 <xsl:value-of select="$bootstrap-body-color"/>

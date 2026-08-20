@@ -9,6 +9,53 @@
   <xsl:import href="default-values.xsl"/>
   <xsl:import href="settings-map.xsl"/>
 
+  <!-- Resolve the base Bootstrap color driving link color/decoration from theme
+       context: the nearest note, alert, card, or generic decoration ancestor's
+       @theme (or 'alert-' outputclass fallback), stripped of any -subtle/-border/
+       etc. suffix. Returns '' when no themed ancestor is found. -->
+  <xsl:template name="get-context-theme-color">
+    <xsl:variable name="rawTheme">
+      <xsl:choose>
+        <xsl:when test="ancestor::*[contains(@class, ' topic/note ')]/@theme">
+          <xsl:value-of select="ancestor::*[contains(@class, ' topic/note ')][1]/@theme"/>
+        </xsl:when>
+        <xsl:when test="ancestor::*[contains(@class, ' topic/note ')]">
+          <xsl:variable name="type" select="(ancestor::*[contains(@class, ' topic/note ')][1]/@type, 'note')[1]"/>
+          <xsl:choose>
+            <xsl:when test="$type = 'note' or $type = 'notice' or $type = 'remember'">info</xsl:when>
+            <xsl:when test="$type = 'tip' or $type = 'fastpath'">success</xsl:when>
+            <xsl:when test="$type = 'important'">primary</xsl:when>
+            <xsl:when
+              test="$type = 'warning' or $type = 'caution' or $type = 'restriction' or $type = 'trouble'"
+            >warning</xsl:when>
+            <xsl:when test="$type = 'danger'">danger</xsl:when>
+            <xsl:otherwise>secondary</xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
+        <xsl:when test="ancestor::*[contains(@class, ' bootstrap-d/alert ') or tokenize(@outputclass, ' ') = 'alert']">
+          <xsl:variable
+            name="node"
+            select="ancestor::*[contains(@class, ' bootstrap-d/alert ') or tokenize(@outputclass, ' ') = 'alert'][1]"
+          />
+          <xsl:value-of
+            select="($node/@theme, substring-after(tokenize($node/@outputclass, ' ')[starts-with(., 'alert-')][1], 'alert-'), 'secondary')[1]"
+          />
+        </xsl:when>
+        <xsl:when
+          test="ancestor::*[contains(@class, ' bootstrap-d/card ') or tokenize(@outputclass, ' ') = 'card']"
+        ><xsl:value-of
+            select="ancestor::*[contains(@class, ' bootstrap-d/card ') or tokenize(@outputclass, ' ') = 'card'][1]/@theme"
+          /></xsl:when>
+        <xsl:when
+          test="ancestor::*[contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')]"
+        ><xsl:value-of
+            select="ancestor::*[contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')][1]/@theme"
+          /></xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:value-of select="if (contains($rawTheme, '-')) then substring-before($rawTheme, '-') else $rawTheme"/>
+  </xsl:template>
+
   <!-- Standard Bootstrap Text Colors -->
   <xsl:attribute-set name="__color__primary">
     <xsl:attribute name="color"><xsl:value-of select="$bootstrap-primary"/></xsl:attribute>
@@ -37,116 +84,40 @@
   <xsl:attribute-set name="common.link">
     <xsl:attribute name="color">
       <xsl:choose>
-        <xsl:when test="@color and local-name() = 'xref'">
-          <xsl:variable name="explicitVar" select="concat('bootstrap-', @color)"/>
+        <xsl:when test="@theme and local-name() = 'xref'">
+          <xsl:variable
+            name="baseColor"
+            select="if (contains(@theme, '-')) then substring-before(@theme, '-') else @theme"
+          />
+          <xsl:variable name="explicitVar" select="concat('bootstrap-', $baseColor)"/>
           <xsl:choose>
             <xsl:when test="$bootstrap-settings/entry[@name = $explicitVar]">
               <xsl:value-of select="$bootstrap-settings/entry[@name = $explicitVar]"/>
             </xsl:when>
-            <xsl:otherwise><xsl:value-of select="@color"/></xsl:otherwise>
+            <xsl:otherwise><xsl:value-of select="$baseColor"/></xsl:otherwise>
           </xsl:choose>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:variable name="theme">
-        <xsl:choose>
-          <xsl:when test="ancestor::*[contains(@class, ' topic/note ')]/@color"><xsl:value-of
-                  select="ancestor::*[contains(@class, ' topic/note ')]/@color"
-                /></xsl:when>
-          <xsl:when test="ancestor::*[contains(@class, ' topic/note ')]">
-            <xsl:variable name="type" select="(ancestor::*[contains(@class, ' topic/note ')]/@type, 'note')[1]"/>
-            <xsl:choose>
-              <xsl:when test="$type = 'note' or $type = 'notice' or $type = 'remember'">info</xsl:when>
-              <xsl:when test="$type = 'tip' or $type = 'fastpath'">success</xsl:when>
-              <xsl:when test="$type = 'important'">primary</xsl:when>
-              <xsl:when
-                    test="$type = 'warning' or $type = 'caution' or $type = 'restriction' or $type = 'trouble'"
-                  >warning</xsl:when>
-              <xsl:when test="$type = 'danger'">danger</xsl:when>
-              <xsl:otherwise>secondary</xsl:otherwise>
-            </xsl:choose>
-          </xsl:when>
-          <xsl:when
-                test="ancestor::*[contains(@class, ' bootstrap-d/alert ') or tokenize(@outputclass, ' ') = 'alert']"
-              >
-            <xsl:variable
-                  name="node"
-                  select="ancestor::*[contains(@class, ' bootstrap-d/alert ') or tokenize(@outputclass, ' ') = 'alert'][1]"
-                />
-            <xsl:value-of
-                  select="($node/@color, substring-after(tokenize($node/@outputclass, ' ')[starts-with(., 'alert-')][1], 'alert-'), 'secondary')[1]"
-                />
-          </xsl:when>
-          <xsl:when
-                test="ancestor::*[contains(@class, ' bootstrap-d/card ') or tokenize(@outputclass, ' ') = 'card']"
-              ><xsl:value-of
-                  select="ancestor::*[contains(@class, ' bootstrap-d/card ') or tokenize(@outputclass, ' ') = 'card']/@color"
-                /></xsl:when>
-          <xsl:when
-                test="ancestor::*[contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')]"
-              ><xsl:value-of
-                  select="ancestor::*[contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')][1]/@color"
-                /></xsl:when>
-        </xsl:choose>
-      </xsl:variable>
-      <xsl:choose>
-        <xsl:when test="$theme != ''">
-          <xsl:variable name="subtleVar" select="concat('bootstrap-', $theme, '-subtle-text')"/>
-          <xsl:value-of select="$bootstrap-settings/entry[@name = $subtleVar]"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="$bootstrap-link"/>
-        </xsl:otherwise>
-      </xsl:choose>
+          <xsl:variable name="theme"><xsl:call-template name="get-context-theme-color"/></xsl:variable>
+          <xsl:choose>
+            <xsl:when test="$theme != ''">
+              <xsl:variable name="subtleVar" select="concat('bootstrap-', $theme, '-subtle-text')"/>
+              <xsl:value-of select="$bootstrap-settings/entry[@name = $subtleVar]"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$bootstrap-link"/>
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:attribute>
     <xsl:attribute name="text-decoration">
       <xsl:choose>
-        <xsl:when test="@color and local-name() = 'xref'"><xsl:value-of
+        <xsl:when test="@theme and local-name() = 'xref'"><xsl:value-of
             select="$bootstrap-alert-link-text-decoration"
           /></xsl:when>
         <xsl:otherwise>
-          <xsl:variable name="theme">
-            <xsl:choose>
-              <xsl:when test="ancestor::*[contains(@class, ' topic/note ')]/@color"><xsl:value-of
-                  select="ancestor::*[contains(@class, ' topic/note ')]/@color"
-                /></xsl:when>
-              <xsl:when test="ancestor::*[contains(@class, ' topic/note ')]">
-                <xsl:variable name="type" select="(ancestor::*[contains(@class, ' topic/note ')]/@type, 'note')[1]"/>
-                <xsl:choose>
-                  <xsl:when test="$type = 'note' or $type = 'notice' or $type = 'remember'">info</xsl:when>
-                  <xsl:when test="$type = 'tip' or $type = 'fastpath'">success</xsl:when>
-                  <xsl:when test="$type = 'important'">primary</xsl:when>
-                  <xsl:when
-                    test="$type = 'warning' or $type = 'caution' or $type = 'restriction' or $type = 'trouble'"
-                  >warning</xsl:when>
-                  <xsl:when test="$type = 'danger'">danger</xsl:when>
-                  <xsl:otherwise>secondary</xsl:otherwise>
-                </xsl:choose>
-              </xsl:when>
-              <xsl:when
-                test="ancestor::*[contains(@class, ' bootstrap-d/alert ') or tokenize(@outputclass, ' ') = 'alert']"
-              >
-                <xsl:variable
-                  name="node"
-                  select="ancestor::*[contains(@class, ' bootstrap-d/alert ') or tokenize(@outputclass, ' ') = 'alert'][1]"
-                />
-                <xsl:value-of
-                  select="($node/@color, substring-after(tokenize($node/@outputclass, ' ')[starts-with(., 'alert-')][1], 'alert-'), 'secondary')[1]"
-                />
-              </xsl:when>
-              <xsl:when
-                test="ancestor::*[contains(@class, ' bootstrap-d/card ') or tokenize(@outputclass, ' ') = 'card']"
-              ><xsl:value-of
-                  select="ancestor::*[contains(@class, ' bootstrap-d/card ') or tokenize(@outputclass, ' ') = 'card']/@color"
-                /></xsl:when>
-              <xsl:when
-                test="ancestor::*[contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')]"
-              ><xsl:value-of
-                  select="ancestor::*[contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')][1]/@color"
-                /></xsl:when>
-            </xsl:choose>
-          </xsl:variable>
+          <xsl:variable name="theme"><xsl:call-template name="get-context-theme-color"/></xsl:variable>
           <xsl:choose>
             <xsl:when test="$theme != ''"><xsl:value-of select="$bootstrap-alert-link-text-decoration"/></xsl:when>
             <xsl:otherwise><xsl:value-of select="$bootstrap-link-text-decoration"/></xsl:otherwise>
@@ -229,6 +200,42 @@
   <xsl:attribute-set name="__bg__inverse-subtle">
     <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-inverse-subtle"/></xsl:attribute>
     <xsl:attribute name="color"><xsl:value-of select="$bootstrap-inverse-subtle-text"/></xsl:attribute>
+  </xsl:attribute-set>
+
+  <!-- Muted Background Colors: the same subtle background as -subtle, paired with the
+       plain (non-subtle) theme color as a de-emphasized foreground, since PDF has no
+       separate muted color tokens of its own. -->
+  <xsl:attribute-set name="__muted__primary">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-primary-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-primary"/></xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="__muted__secondary">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-secondary-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-secondary"/></xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="__muted__success">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-success-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-success"/></xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="__muted__danger">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-danger-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-danger"/></xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="__muted__warning">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-warning-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-warning"/></xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="__muted__info">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-info-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-info"/></xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="__muted__accent">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-accent-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-accent"/></xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="__muted__inverse">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-inverse-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-inverse"/></xsl:attribute>
   </xsl:attribute-set>
 
   <!-- Component-Specific Backgrounds: Tables -->
