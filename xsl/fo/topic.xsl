@@ -137,6 +137,38 @@
       </xsl:if>
       <xsl:call-template name="commonattributes"/>
       <xsl:call-template name="bootstrap.decoration"/>
+
+      <xsl:variable name="ancestorStartPad">
+        <xsl:call-template name="get-ancestor-padding-indent">
+          <xsl:with-param name="side" select="'start'"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="ancestorEndPad">
+        <xsl:call-template name="get-ancestor-padding-indent">
+          <xsl:with-param name="side" select="'end'"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:if test="number($ancestorStartPad) > 0">
+        <xsl:attribute name="start-indent" select="concat($ancestorStartPad, 'pt + from-parent(start-indent)')"/>
+      </xsl:if>
+      <xsl:if test="number($ancestorEndPad) > 0">
+        <xsl:attribute name="end-indent" select="concat($ancestorEndPad, 'pt + from-parent(end-indent)')"/>
+      </xsl:if>
+
+      <xsl:variable name="widthVal">
+        <xsl:choose>
+          <xsl:when test="@width != ''"><xsl:value-of select="@width"/></xsl:when>
+          <xsl:when test="exists(tokenize(@outputclass, ' ')[starts-with(., 'w-')])">
+            <xsl:value-of select="substring-after(tokenize(@outputclass, ' ')[starts-with(., 'w-')][1], 'w-')"/>
+          </xsl:when>
+        </xsl:choose>
+      </xsl:variable>
+      <xsl:variable name="totalPad" select="number($ancestorStartPad) + number($ancestorEndPad)"/>
+      <xsl:if test="$widthVal = ('25', '50', '75', '100') and $totalPad > 0">
+        <xsl:attribute name="width" select="concat($widthVal, '% - ', $totalPad, 'pt')"/>
+        <xsl:attribute name="inline-progression-dimension" select="concat($widthVal, '% - ', $totalPad, 'pt')"/>
+      </xsl:if>
+
       <xsl:apply-templates/>
     </fo:block>
   </xsl:template>
@@ -159,10 +191,7 @@
     </fo:block>
   </xsl:template>
 
-  <!-- Blockquote (lq) Support. Matches the HTML reference: full block width (no
-       side indent), an inline-start border + padding (neutral gray by default,
-       themed via @theme/outputclass like other components), and body-size text -
-       Bootstrap's own .blockquote never enlarges the font. -->
+  <!-- Blockquote (lq) Support. -->
   <xsl:template match="*[contains(@class, ' topic/lq ')]">
     <fo:block margin-bottom="{$bootstrap-spacing-3}">
       <xsl:call-template name="get-attributes">
@@ -194,7 +223,7 @@
     </fo:block>
   </xsl:template>
 
-  <!-- Pre Support (Explicitly excludes syntax highlighting to allow PrismJS overrides) -->
+  <!-- Pre Support -->
   <xsl:template
     match="*[contains(@class, ' topic/pre ') and not(contains(@outputclass, 'language-') or contains(@class, ' pr-d/codeblock '))]"
   >
