@@ -926,17 +926,37 @@
     </xsl:if>
   </xsl:template>
 
+  <xsl:template name="get-effective-shadow-value">
+    <xsl:param name="node" select="."/>
+    <xsl:variable
+      name="ocToken"
+      select="tokenize($node/@outputclass, ' ')[. = 'shadow' or starts-with(., 'shadow-')][1]"
+    />
+    <xsl:choose>
+      <xsl:when test="$node/@shadow"><xsl:value-of select="$node/@shadow"/></xsl:when>
+      <xsl:when test="$ocToken = 'shadow'">yes</xsl:when>
+      <xsl:when test="$ocToken != ''"><xsl:value-of select="substring-after($ocToken, 'shadow-')"/></xsl:when>
+    </xsl:choose>
+  </xsl:template>
+
   <!-- Global Shadow Wrapper for shadow styling -->
   <xsl:template
-    match="*[@shadow][not(@shadow = 'none') and not(@shadow = 'no')][not(contains(@class, ' bootstrap-d/card ') or tokenize(@outputclass, ' ') = 'card')]"
+    match="
+      *[(@shadow and @shadow != 'none' and @shadow != 'no') or
+        exists(tokenize(@outputclass, ' ')[(. = 'shadow' or starts-with(., 'shadow-')) and . != 'shadow-none'])]
+       [not(contains(@class, ' bootstrap-d/card ') or tokenize(@outputclass, ' ') = 'card')]"
     priority="10"
   >
     <xsl:variable name="inner">
       <xsl:next-match/>
     </xsl:variable>
+    <xsl:variable name="shadow-val">
+      <xsl:call-template name="get-effective-shadow-value"/>
+    </xsl:variable>
 
     <xsl:call-template name="apply-shadow-wrapper">
       <xsl:with-param name="inner" select="$inner"/>
+      <xsl:with-param name="shadow-val" select="$shadow-val"/>
     </xsl:call-template>
   </xsl:template>
 

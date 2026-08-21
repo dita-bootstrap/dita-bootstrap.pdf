@@ -749,28 +749,28 @@
   <xsl:attribute-set name="border-5"><xsl:attribute name="border-width">5pt</xsl:attribute></xsl:attribute-set>
 
   <xsl:attribute-set name="border-primary-subtle"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-primary-subtle"
+        select="$bootstrap-primary-subtle-text"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="border-secondary-subtle"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-secondary-subtle"
+        select="$bootstrap-secondary-subtle-text"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="border-success-subtle"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-success-subtle"
+        select="$bootstrap-success-subtle-text"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="border-danger-subtle"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-danger-subtle"
+        select="$bootstrap-danger-subtle-text"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="border-warning-subtle"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-warning-subtle"
+        select="$bootstrap-warning-subtle-text"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="border-info-subtle"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-info-subtle"
+        select="$bootstrap-info-subtle-text"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="border-accent-subtle"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-accent-subtle"
+        select="$bootstrap-accent-subtle-text"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="border-inverse-subtle"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-inverse-subtle"
+        select="$bootstrap-inverse-subtle-text"
       /></xsl:attribute></xsl:attribute-set>
 
   <!-- Rounded Corners (Approximate Bootstrap values) -->

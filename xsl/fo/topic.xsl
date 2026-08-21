@@ -3,7 +3,8 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  exclude-result-prefixes="xs"
+  xmlns:opentopic-func="http://www.idiominc.com/opentopic/exsl/function"
+  exclude-result-prefixes="xs opentopic-func"
   version="2.0"
 >
 
@@ -456,6 +457,16 @@
     <xsl:next-match>
       <xsl:with-param name="bootstrap-suppress-id" select="true()" tunnel="yes"/>
     </xsl:next-match>
+  </xsl:template>
+
+  <xsl:template
+    match="*[contains(@class, ' topic/xref ')][@href][not(@scope = 'external')][empty(@format) or @format = 'dita'][opentopic-func:getDestinationId(@href) = '']"
+    priority="25"
+  >
+    <fo:inline>
+      <xsl:call-template name="commonattributes"/>
+      <xsl:apply-templates select="*[not(contains(@class, ' topic/desc '))] | text()"/>
+    </fo:inline>
   </xsl:template>
 
 </xsl:stylesheet>

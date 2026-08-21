@@ -56,14 +56,19 @@
              <!-- Column 1: Always contains the Card content -->
              <!-- In RTL, Column 1 is on the Right. In LTR, Column 1 is on the Left. -->
              <fo:table-cell>
+                <xsl:variable name="effective-shadow">
+                   <xsl:call-template name="get-effective-shadow-value"/>
+                </xsl:variable>
                 <xsl:choose>
-                   <xsl:when test="@shadow and @shadow != 'none'">
+                   <xsl:when
+                  test="$effective-shadow != '' and $effective-shadow != 'none' and $effective-shadow != 'no'"
+                >
                       <xsl:variable name="card-content">
                          <xsl:call-template name="renderCardInternal"/>
                       </xsl:variable>
                       <xsl:call-template name="apply-shadow-wrapper">
                          <xsl:with-param name="inner" select="$card-content"/>
-                         <xsl:with-param name="shadow-val" select="@shadow"/>
+                         <xsl:with-param name="shadow-val" select="$effective-shadow"/>
                          <xsl:with-param name="margin-val" select="''"/>
                          <xsl:with-param name="reset-indent" select="true()"/>
                       </xsl:call-template>
@@ -102,17 +107,25 @@
           <xsl:call-template name="get-theme-color"/>
         </xsl:variable>
         <xsl:choose>
-          <xsl:when test="$theme">
+          <xsl:when test="$theme != ''">
             <xsl:call-template name="processBootstrapBorderColor">
               <xsl:with-param name="attrValue" select="$theme"/>
             </xsl:call-template>
           </xsl:when>
           <xsl:otherwise>
+            <xsl:attribute name="border-style">solid</xsl:attribute>
+            <xsl:attribute name="border-width"><xsl:value-of select="$bootstrap-border-width"/></xsl:attribute>
             <xsl:attribute name="border-color"><xsl:value-of select="$bootstrap-border-color"/></xsl:attribute>
           </xsl:otherwise>
         </xsl:choose>
         <!-- Ensure the entire card stays on one page -->
         <xsl:attribute name="keep-together.within-page">always</xsl:attribute>
+        <xsl:variable name="effective-shadow">
+          <xsl:call-template name="get-effective-shadow-value"/>
+        </xsl:variable>
+        <xsl:if test="$effective-shadow != '' and $effective-shadow != 'none' and $effective-shadow != 'no'">
+          <xsl:attribute name="background-color">white</xsl:attribute>
+        </xsl:if>
         <xsl:call-template name="bootstrap.decoration"/>
 
         <fo:table-column column-width="proportional-column-width(1)"/>
@@ -139,7 +152,7 @@
             <fo:table-row>
               <fo:table-cell padding="8pt 15pt">
                  <xsl:choose>
-                    <xsl:when test="$theme">
+                    <xsl:when test="$theme != ''">
                        <xsl:call-template name="processBootstrapAttrSetReflection">
                           <xsl:with-param name="attrSet" select="concat('__bg__', $theme)"/>
                        </xsl:call-template>
@@ -218,7 +231,7 @@
             <fo:table-row>
               <fo:table-cell padding="8pt 15pt">
                  <xsl:choose>
-                    <xsl:when test="$theme">
+                    <xsl:when test="$theme != ''">
                        <xsl:call-template name="processBootstrapAttrSetReflection">
                           <xsl:with-param name="attrSet" select="concat('__bg__', $theme, '-subtle')"/>
                        </xsl:call-template>

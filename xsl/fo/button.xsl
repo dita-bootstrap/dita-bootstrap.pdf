@@ -104,9 +104,14 @@
     />
     <xsl:variable name="element" select="if ($is-vertical) then 'fo:block' else 'fo:inline'"/>
     <xsl:variable
-      name="has-destination"
-      select="boolean(@href) or (@scope = 'external') or not(empty(@format) or @format = 'dita')"
+      name="is-external"
+      select="boolean(@href) and ((@scope = 'external') or not(empty(@format) or @format = 'dita'))"
     />
+    <xsl:variable
+      name="internal-dest-id"
+      select="if (@href and not($is-external)) then opentopic-func:getDestinationId(@href) else ''"
+    />
+    <xsl:variable name="has-destination" select="$is-external or ($internal-dest-id != '')"/>
 
     <xsl:variable name="button-content" as="node()*">
       <xsl:element name="{$element}">
@@ -363,13 +368,11 @@
         <fo:basic-link xsl:use-attribute-sets="xref">
           <!-- Link Destination -->
           <xsl:choose>
-            <xsl:when test="(@scope = 'external') or not(empty(@format) or @format = 'dita')">
+            <xsl:when test="$is-external">
               <xsl:attribute name="external-destination">url('<xsl:value-of select="@href"/>')</xsl:attribute>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:attribute name="internal-destination">
-                 <xsl:value-of select="opentopic-func:getDestinationId(@href)"/>
-              </xsl:attribute>
+              <xsl:attribute name="internal-destination" select="$internal-dest-id"/>
             </xsl:otherwise>
           </xsl:choose>
           <xsl:sequence select="$button-content"/>
@@ -409,26 +412,36 @@
        </xsl:choose>
     </xsl:variable>
 
-    <fo:basic-link xsl:use-attribute-sets="xref">
+    <xsl:variable
+      name="is-external"
+      select="boolean(@href) and ((@scope = 'external') or not(empty(@format) or @format = 'dita'))"
+    />
+    <xsl:variable
+      name="internal-dest-id"
+      select="if (@href and not($is-external)) then opentopic-func:getDestinationId(@href) else ''"
+    />
+    <xsl:variable name="has-destination" select="$is-external or ($internal-dest-id != '')"/>
+
+    <xsl:element name="{if ($has-destination) then 'fo:basic-link' else 'fo:inline'}" use-attribute-sets="xref">
       <xsl:call-template name="commonattributes"/>
       <xsl:if test="$color != ''">
          <xsl:attribute name="color"><xsl:value-of select="$color"/></xsl:attribute>
       </xsl:if>
-      
+
       <xsl:if test="tokenize(@outputclass, ' ') = 'link-underline'">
          <xsl:attribute name="text-decoration">underline</xsl:attribute>
       </xsl:if>
 
-      <xsl:choose>
-        <xsl:when test="(@scope = 'external') or not(empty(@format) or @format = 'dita')">
-          <xsl:attribute name="external-destination">url('<xsl:value-of select="@href"/>')</xsl:attribute>
-        </xsl:when>
-        <xsl:when test="@href">
-          <xsl:attribute name="internal-destination">
-             <xsl:value-of select="opentopic-func:getDestinationId(@href)"/>
-          </xsl:attribute>
-        </xsl:when>
-      </xsl:choose>
+      <xsl:if test="$has-destination">
+        <xsl:choose>
+          <xsl:when test="$is-external">
+            <xsl:attribute name="external-destination">url('<xsl:value-of select="@href"/>')</xsl:attribute>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:attribute name="internal-destination" select="$internal-dest-id"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:if>
 
       <xsl:choose>
         <!-- If link has explicit child text or icons, use those, but suppress metadata -->
@@ -440,7 +453,7 @@
           <xsl:apply-templates select="." mode="insert-text"/>
         </xsl:otherwise>
       </xsl:choose>
-    </fo:basic-link>
+    </xsl:element>
   </xsl:template>
 
 </xsl:stylesheet>
