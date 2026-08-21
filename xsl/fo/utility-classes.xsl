@@ -297,7 +297,7 @@
     </xsl:if>
   </xsl:template>
 
-  <!-- Process @frame attribute for Figures -->
+  <!-- Process @frame attribute for Figures (and codeblocks) -->
   <xsl:template name="processBootstrapFrame">
     <xsl:param name="attrValue"/>
     <xsl:if test="$attrValue">
@@ -314,11 +314,71 @@
         <xsl:call-template name="processBootstrapBorder">
           <xsl:with-param name="attrValue" select="$processedValue"/>
         </xsl:call-template>
-        <!-- Effectively an additional padded border - using p-3 / 12pt -->
-        <xsl:attribute name="padding"><xsl:value-of select="$bootstrap-spacing-3"/></xsl:attribute>
+        <xsl:variable name="padAttrSets">
+          <xsl:choose>
+            <xsl:when test="$attrValue = 'all'">p-3</xsl:when>
+            <xsl:when test="$attrValue = 'sides'">ps-3 pe-3</xsl:when>
+            <xsl:when test="$attrValue = 'top'">pt-3</xsl:when>
+            <xsl:when test="$attrValue = 'bottom'">pb-3</xsl:when>
+            <xsl:when test="$attrValue = 'topbot'">pt-3 pb-3</xsl:when>
+          </xsl:choose>
+        </xsl:variable>
+        <xsl:for-each select="tokenize($padAttrSets, ' ')">
+          <xsl:call-template name="processBootstrapAttrSetReflection">
+            <xsl:with-param name="attrSet">
+              <xsl:choose>
+                <xsl:when test="$writing-mode = 'rl' and starts-with(., 'ps-')"><xsl:value-of
+                    select="concat('pe-', substring-after(., '-'))"
+                  /></xsl:when>
+                <xsl:when test="$writing-mode = 'rl' and starts-with(., 'pe-')"><xsl:value-of
+                    select="concat('ps-', substring-after(., '-'))"
+                  /></xsl:when>
+                <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
+              </xsl:choose>
+            </xsl:with-param>
+          </xsl:call-template>
+        </xsl:for-each>
       </xsl:if>
     </xsl:if>
   </xsl:template>
+
+  <xsl:template name="setFrame" as="attribute()*">
+    <xsl:if test="not(contains(@class, ' pr-d/codeblock '))">
+      <xsl:variable name="container" as="element()*">
+        <xsl:choose>
+          <xsl:when test="@frame = 'top'">
+            <element xsl:use-attribute-sets="__border__top"/>
+          </xsl:when>
+          <xsl:when test="@frame = 'bot'">
+            <element xsl:use-attribute-sets="__border__bot"/>
+          </xsl:when>
+          <xsl:when test="@frame = 'topbot'">
+            <element xsl:use-attribute-sets="__border__topbot"/>
+          </xsl:when>
+          <xsl:when test="@frame = 'sides'">
+            <element xsl:use-attribute-sets="__border__sides"/>
+          </xsl:when>
+          <xsl:when test="@frame = 'all'">
+            <element xsl:use-attribute-sets="__border__all"/>
+          </xsl:when>
+        </xsl:choose>
+      </xsl:variable>
+      <xsl:sequence select="$container/@*"/>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:attribute-set name="common.border__top">
+    <xsl:attribute name="border-before-color" select="$bootstrap-border-color"/>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="common.border__bottom">
+    <xsl:attribute name="border-after-color" select="$bootstrap-border-color"/>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="common.border__right">
+    <xsl:attribute name="border-end-color" select="$bootstrap-border-color"/>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="common.border__left">
+    <xsl:attribute name="border-start-color" select="$bootstrap-border-color"/>
+  </xsl:attribute-set>
 
   <!-- Apply a border color from an explicit color name (e.g. a '-border' @theme suffix) -->
   <xsl:template name="processBootstrapBorderColor">
@@ -718,13 +778,15 @@
       <xsl:call-template name="processBootstrapAttrSetReflection">
           <xsl:with-param name="attrSet" select="'__bg__secondary-subtle'"/>
       </xsl:call-template>
-      <xsl:call-template name="processBootstrapBorderColor">
-          <xsl:with-param name="attrValue" select="'secondary'"/>
-      </xsl:call-template>
       <!-- Overrides from settings-map if present -->
       <xsl:variable name="textColor">
           <xsl:call-template name="getBootstrapSetting">
               <xsl:with-param name="name" select="'prismjs.text.color'"/>
+          </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="borderColor">
+          <xsl:call-template name="getBootstrapSetting">
+              <xsl:with-param name="name" select="'prismjs.border.color'"/>
           </xsl:call-template>
       </xsl:variable>
       <xsl:variable name="borderWidth">
@@ -733,6 +795,7 @@
           </xsl:call-template>
       </xsl:variable>
       <xsl:if test="$textColor != ''"><xsl:attribute name="color" select="$textColor"/></xsl:if>
+      <xsl:if test="$borderColor != ''"><xsl:attribute name="border-color" select="$borderColor"/></xsl:if>
       <xsl:if test="$borderWidth != ''">
           <xsl:attribute name="border-width" select="$borderWidth"/>
           <xsl:if test="normalize-space($borderWidth) != ('0', '0pt', '0px', '0in', '0mm', '0cm', '0.0pt', '0.0px')">
@@ -1102,25 +1165,75 @@
     priority="10"
   />
 
-  <!-- Wrap every codeblock in a card  -->
   <xsl:template match="*[contains(@class, ' pr-d/codeblock ')]" priority="10">
-    <fo:block>
-      <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-secondary-subtle"/></xsl:attribute>
-      <xsl:apply-templates select="." mode="prismDecoration"/>
-      <xsl:choose>
-        <xsl:when test="$writing-mode = 'rl' and not(@dir)">
-          <fo:block-container writing-mode="lr-tb">
-            <!-- Force indent to 0 on the container so we don't double-inherit the RTL right-indent -->
-            <xsl:attribute name="start-indent">0pt</xsl:attribute>
-            <xsl:attribute name="end-indent">0pt</xsl:attribute>
-            <xsl:next-match/>
-          </fo:block-container>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:next-match/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </fo:block>
+    <xsl:variable name="ancestorStartPad">
+      <xsl:call-template name="get-ancestor-padding-indent">
+        <xsl:with-param name="side" select="'start'"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="ancestorEndPad">
+      <xsl:call-template name="get-ancestor-padding-indent">
+        <xsl:with-param name="side" select="'end'"/>
+      </xsl:call-template>
+    </xsl:variable>
+
+    <xsl:choose>
+      <xsl:when test="@frame">
+        <fo:block>
+          <xsl:call-template name="processBootstrapFrame">
+            <xsl:with-param name="attrValue" select="@frame"/>
+          </xsl:call-template>
+          <xsl:if test="number($ancestorStartPad) > 0">
+            <xsl:attribute name="start-indent" select="concat($ancestorStartPad, 'pt + from-parent(start-indent)')"/>
+          </xsl:if>
+          <xsl:if test="number($ancestorEndPad) > 0">
+            <xsl:attribute name="end-indent" select="concat($ancestorEndPad, 'pt + from-parent(end-indent)')"/>
+          </xsl:if>
+          <fo:block>
+            <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-secondary-subtle"/></xsl:attribute>
+            <xsl:apply-templates select="." mode="prismDecoration"/>
+            <xsl:choose>
+              <xsl:when test="$writing-mode = 'rl' and not(@dir)">
+                <fo:block-container writing-mode="lr-tb">
+                  <!-- Force indent to 0 on the container so we don't double-inherit the RTL right-indent -->
+                  <xsl:attribute name="start-indent">0pt</xsl:attribute>
+                  <xsl:attribute name="end-indent">0pt</xsl:attribute>
+                  <xsl:next-match/>
+                </fo:block-container>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:next-match/>
+              </xsl:otherwise>
+            </xsl:choose>
+          </fo:block>
+        </fo:block>
+      </xsl:when>
+      <xsl:otherwise>
+        <fo:block>
+          <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-secondary-subtle"/></xsl:attribute>
+          <xsl:apply-templates select="." mode="prismDecoration"/>
+          <xsl:if test="number($ancestorStartPad) > 0">
+            <xsl:attribute name="start-indent" select="concat($ancestorStartPad, 'pt + from-parent(start-indent)')"/>
+          </xsl:if>
+          <xsl:if test="number($ancestorEndPad) > 0">
+            <xsl:attribute name="end-indent" select="concat($ancestorEndPad, 'pt + from-parent(end-indent)')"/>
+          </xsl:if>
+          <xsl:choose>
+            <xsl:when test="$writing-mode = 'rl' and not(@dir)">
+              <fo:block-container writing-mode="lr-tb">
+                <!-- Force indent to 0 on the container so we don't double-inherit the RTL right-indent -->
+                <xsl:attribute name="start-indent">0pt</xsl:attribute>
+                <xsl:attribute name="end-indent">0pt</xsl:attribute>
+                <xsl:next-match/>
+              </fo:block-container>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:next-match/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </fo:block>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <!-- Overrides standard prism processing -->

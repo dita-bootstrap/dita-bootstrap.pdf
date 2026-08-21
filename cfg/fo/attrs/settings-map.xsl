@@ -146,6 +146,7 @@
     <!-- PrismJS Decorator -->
     <entry name="prismjs.text.color"><xsl:value-of select="$prismjs.text.color"/></entry>
     <entry name="prismjs.background.color"><xsl:value-of select="$prismjs.background.color"/></entry>
+    <entry name="prismjs.border.color"><xsl:value-of select="$prismjs.border.color"/></entry>
     <entry name="prismjs.border.width"><xsl:value-of select="$prismjs.border.width"/></entry>
   </xsl:variable>
 
