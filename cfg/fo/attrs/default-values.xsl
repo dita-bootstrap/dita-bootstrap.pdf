@@ -104,6 +104,7 @@
 
   <xsl:variable name="bootstrap-border-color">#dee2e6</xsl:variable>
   <xsl:variable name="bootstrap-card-border-color" select="$bootstrap-border-color"/>
+  <xsl:variable name="bootstrap-card-background-color" select="$bootstrap-secondary-subtle"/>
   <xsl:variable name="bootstrap-border-width">1pt</xsl:variable>
   <xsl:variable name="bootstrap-blockquote-border-width">3pt</xsl:variable>
 
@@ -161,7 +162,7 @@
 
   <!-- PrismJS Decorator defaults -->
   <xsl:variable name="prismjs.text.color" select="$bootstrap-body-color"/>
-  <xsl:variable name="prismjs.background.color" select="$bootstrap-secondary-subtle"/>
+  <xsl:variable name="prismjs.background.color">transparent</xsl:variable>
   <xsl:variable name="prismjs.border.color" select="$bootstrap-card-border-color"/>
   <xsl:variable name="prismjs.border.width" select="$bootstrap-border-width"/>
 

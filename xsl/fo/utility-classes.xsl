@@ -775,9 +775,6 @@
   />
 
   <xsl:template match="*" mode="prismDecoration">
-      <xsl:call-template name="processBootstrapAttrSetReflection">
-          <xsl:with-param name="attrSet" select="'__bg__secondary-subtle'"/>
-      </xsl:call-template>
       <!-- Overrides from settings-map if present -->
       <xsl:variable name="textColor">
           <xsl:call-template name="getBootstrapSetting">
@@ -1190,7 +1187,9 @@
             <xsl:attribute name="end-indent" select="concat($ancestorEndPad, 'pt + from-parent(end-indent)')"/>
           </xsl:if>
           <fo:block>
-            <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-secondary-subtle"/></xsl:attribute>
+            <xsl:attribute name="background-color"><xsl:value-of
+                select="$bootstrap-card-background-color"
+              /></xsl:attribute>
             <xsl:apply-templates select="." mode="prismDecoration"/>
             <xsl:choose>
               <xsl:when test="$writing-mode = 'rl' and not(@dir)">
@@ -1210,7 +1209,9 @@
       </xsl:when>
       <xsl:otherwise>
         <fo:block>
-          <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-secondary-subtle"/></xsl:attribute>
+          <xsl:attribute name="background-color"><xsl:value-of
+              select="$bootstrap-card-background-color"
+            /></xsl:attribute>
           <xsl:apply-templates select="." mode="prismDecoration"/>
           <xsl:if test="number($ancestorStartPad) > 0">
             <xsl:attribute name="start-indent" select="concat($ancestorStartPad, 'pt + from-parent(start-indent)')"/>
