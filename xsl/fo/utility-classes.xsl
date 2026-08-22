@@ -1208,7 +1208,7 @@
           </xsl:if>
           <fo:block>
             <xsl:attribute name="background-color"><xsl:value-of
-                select="$bootstrap-card-background-color"
+                select="$prismjs.card.background.color"
               /></xsl:attribute>
             <xsl:apply-templates select="." mode="prismDecoration"/>
             <xsl:choose>
@@ -1229,9 +1229,7 @@
       </xsl:when>
       <xsl:otherwise>
         <fo:block>
-          <xsl:attribute name="background-color"><xsl:value-of
-              select="$bootstrap-card-background-color"
-            /></xsl:attribute>
+          <xsl:attribute name="background-color"><xsl:value-of select="$prismjs.card.background.color"/></xsl:attribute>
           <xsl:apply-templates select="." mode="prismDecoration"/>
           <xsl:if test="number($ancestorStartPad) > 0">
             <xsl:attribute name="start-indent" select="concat($ancestorStartPad, 'pt + from-parent(start-indent)')"/>

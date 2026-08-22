@@ -165,5 +165,6 @@
   <xsl:variable name="prismjs.background.color">transparent</xsl:variable>
   <xsl:variable name="prismjs.border.color" select="$bootstrap-card-border-color"/>
   <xsl:variable name="prismjs.border.width" select="$bootstrap-border-width"/>
+  <xsl:variable name="prismjs.card.background.color" select="$bootstrap-card-background-color"/>
 
 </xsl:stylesheet>
