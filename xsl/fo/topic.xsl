@@ -460,7 +460,7 @@
   </xsl:template>
 
   <xsl:template
-    match="*[contains(@class, ' topic/xref ')][@href][not(@scope = 'external')][empty(@format) or @format = 'dita'][opentopic-func:getDestinationId(@href) = '']"
+    match="*[contains(@class, ' topic/xref ')][@href][not(@scope = 'external')][empty(@format) or @format = 'dita'][opentopic-func:getDestinationId(@href) = ''][not(contains(@class, ' bootstrap-d/button ') or exists(tokenize(@outputclass, ' ')[starts-with(., 'btn')]) or @theme or exists(tokenize(@outputclass, ' ')[starts-with(., 'link-') or . = 'link-underline']))]"
     priority="25"
   >
     <fo:inline>
