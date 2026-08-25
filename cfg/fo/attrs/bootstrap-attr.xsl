@@ -805,6 +805,14 @@
         select="$bootstrap-rounded-pill"
       /></xsl:attribute></xsl:attribute-set>
 
+  <xsl:attribute-set name="section.title">
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-heading-color"/></xsl:attribute>
+  </xsl:attribute-set>
+
+  <xsl:attribute-set name="example.title">
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-heading-color"/></xsl:attribute>
+  </xsl:attribute-set>
+
   <!-- Heading utilities (h1-h6 aliases) -->
   <xsl:attribute-set name="h1"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h1-font-size"
