@@ -15,6 +15,7 @@
   <xsl:variable name="bootstrap-accent">#7740ff</xsl:variable>
   <xsl:variable name="bootstrap-inverse">#2c2f32</xsl:variable>
   <xsl:variable name="bootstrap-link">#0d6efd</xsl:variable>
+  <xsl:variable name="bootstrap-heading-color" select="$bootstrap-body-color"/>
 
   <!-- Subtle Colors -->
   <xsl:variable name="bootstrap-primary-subtle">#dfe5ff</xsl:variable>

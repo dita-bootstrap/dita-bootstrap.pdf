@@ -16,6 +16,7 @@
     <entry name="bootstrap-accent"><xsl:value-of select="$bootstrap-accent"/></entry>
     <entry name="bootstrap-inverse"><xsl:value-of select="$bootstrap-inverse"/></entry>
     <entry name="bootstrap-link"><xsl:value-of select="$bootstrap-link"/></entry>
+    <entry name="bootstrap-heading-color"><xsl:value-of select="$bootstrap-heading-color"/></entry>
 
     <entry name="bootstrap-primary-subtle"><xsl:value-of select="$bootstrap-primary-subtle"/></entry>
     <entry name="bootstrap-primary-subtle-text"><xsl:value-of select="$bootstrap-primary-subtle-text"/></entry>

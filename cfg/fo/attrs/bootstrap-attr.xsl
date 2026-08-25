@@ -808,44 +808,56 @@
   <!-- Heading utilities (h1-h6 aliases) -->
   <xsl:attribute-set name="h1"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h1-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute
-      name="margin-top"
-    ><xsl:value-of select="$bootstrap-h1-margin-top"/></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute name="color"><xsl:value-of
+        select="$bootstrap-heading-color"
+      /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-h1-margin-top"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
         select="$bootstrap-h1-margin-bottom"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h2"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h2-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute
-      name="margin-top"
-    ><xsl:value-of select="$bootstrap-h2-margin-top"/></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute name="color"><xsl:value-of
+        select="$bootstrap-heading-color"
+      /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-h2-margin-top"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
         select="$bootstrap-h2-margin-bottom"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h3"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h3-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute
-      name="margin-top"
-    ><xsl:value-of select="$bootstrap-h3-margin-top"/></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute name="color"><xsl:value-of
+        select="$bootstrap-heading-color"
+      /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-h3-margin-top"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
         select="$bootstrap-h3-margin-bottom"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h4"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h4-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute
-      name="margin-top"
-    ><xsl:value-of select="$bootstrap-h4-margin-top"/></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute name="color"><xsl:value-of
+        select="$bootstrap-heading-color"
+      /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-h4-margin-top"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
         select="$bootstrap-h4-margin-bottom"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h5"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h5-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute
-      name="margin-top"
-    ><xsl:value-of select="$bootstrap-h5-margin-top"/></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute name="color"><xsl:value-of
+        select="$bootstrap-heading-color"
+      /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-h5-margin-top"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
         select="$bootstrap-h5-margin-bottom"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h6"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h6-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute
-      name="margin-top"
-    ><xsl:value-of select="$bootstrap-h6-margin-top"/></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute name="color"><xsl:value-of
+        select="$bootstrap-heading-color"
+      /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-h6-margin-top"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
         select="$bootstrap-h6-margin-bottom"
       /></xsl:attribute></xsl:attribute-set>
 
