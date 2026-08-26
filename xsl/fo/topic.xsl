@@ -41,9 +41,40 @@
       </xsl:when>
 
       <xsl:otherwise>
+        <!-- Match the color the section itself resolves for its own @theme background -->
+        <xsl:variable name="themeColor">
+          <xsl:call-template name="get-theme-color">
+            <xsl:with-param name="node" select=".."/>
+          </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="themeSuffix">
+          <xsl:if test="$themeColor != ''">
+            <xsl:call-template name="get-theme-suffix">
+              <xsl:with-param name="node" select=".."/>
+            </xsl:call-template>
+          </xsl:if>
+        </xsl:variable>
+        <xsl:variable
+          name="attrSetName"
+          select="
+            if ($themeColor = '' or contains($themeSuffix, 'border')) then ''
+            else if (contains($themeSuffix, 'subtle')) then concat('__bg__', $themeColor, '-subtle')
+            else if (contains($themeSuffix, 'muted')) then concat('__muted__', $themeColor)
+            else concat('__bg__', $themeColor)"
+        />
+        <xsl:variable name="titleColor">
+          <xsl:if test="$attrSetName != ''">
+            <xsl:call-template name="getBootstrapAttrValue">
+              <xsl:with-param name="attrSet" select="$attrSetName"/>
+            </xsl:call-template>
+          </xsl:if>
+        </xsl:variable>
         <fo:block xsl:use-attribute-sets="section.title">
           <xsl:attribute name="font-size"><xsl:value-of select="$bootstrap-h6-font-size"/></xsl:attribute>
           <xsl:attribute name="keep-with-next.within-column">always</xsl:attribute>
+          <xsl:if test="$titleColor != ''">
+            <xsl:attribute name="color"><xsl:value-of select="$titleColor"/></xsl:attribute>
+          </xsl:if>
           <xsl:call-template name="commonattributes"/>
           <xsl:apply-templates/>
         </fo:block>
