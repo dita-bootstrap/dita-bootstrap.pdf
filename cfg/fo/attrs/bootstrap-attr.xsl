@@ -48,12 +48,30 @@
           /></xsl:when>
         <xsl:when
           test="ancestor::*[contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')]"
-        ><xsl:value-of
-            select="ancestor::*[contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')][1]/@theme"
-          /></xsl:when>
+        >
+          <xsl:variable
+            name="contextNode"
+            select="ancestor::*[contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')][1]"
+          />
+          <xsl:variable name="contextColor">
+            <xsl:call-template name="get-theme-color">
+              <xsl:with-param name="node" select="$contextNode"/>
+            </xsl:call-template>
+          </xsl:variable>
+          <xsl:if test="$contextColor != ''">
+            <xsl:variable name="contextSuffix">
+              <xsl:call-template name="get-theme-suffix">
+                <xsl:with-param name="node" select="$contextNode"/>
+              </xsl:call-template>
+            </xsl:variable>
+            <xsl:value-of
+              select="concat($contextColor, if ($contextSuffix != '') then concat('-', $contextSuffix) else '')"
+            />
+          </xsl:if>
+        </xsl:when>
       </xsl:choose>
     </xsl:variable>
-    <xsl:value-of select="if (contains($rawTheme, '-')) then substring-before($rawTheme, '-') else $rawTheme"/>
+    <xsl:value-of select="$rawTheme"/>
   </xsl:template>
 
   <!-- Standard Bootstrap Text Colors -->
@@ -98,14 +116,33 @@
           </xsl:choose>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:variable name="theme"><xsl:call-template name="get-context-theme-color"/></xsl:variable>
+          <xsl:variable name="contextTheme"><xsl:call-template name="get-context-theme-color"/></xsl:variable>
+          <xsl:variable
+            name="contextColor"
+            select="if (contains($contextTheme, '-')) then substring-before($contextTheme, '-') else $contextTheme"
+          />
+          <xsl:variable
+            name="contextSuffix"
+            select="if (contains($contextTheme, '-')) then substring-after($contextTheme, '-') else ''"
+          />
           <xsl:choose>
-            <xsl:when test="$theme != ''">
-              <xsl:variable name="subtleVar" select="concat('bootstrap-', $theme, '-subtle-text')"/>
+            <xsl:when test="$contextColor = '' or contains($contextSuffix, 'border')">
+              <xsl:value-of select="$bootstrap-link"/>
+            </xsl:when>
+            <xsl:when test="contains($contextSuffix, 'subtle')">
+              <xsl:variable name="subtleVar" select="concat('bootstrap-', $contextColor, '-subtle-text')"/>
               <xsl:value-of select="$bootstrap-settings/entry[@name = $subtleVar]"/>
             </xsl:when>
+            <xsl:when test="contains($contextSuffix, 'muted')">
+              <xsl:call-template name="getBootstrapAttrValue">
+                <xsl:with-param name="attrSet" select="concat('__muted__', $contextColor)"/>
+              </xsl:call-template>
+            </xsl:when>
             <xsl:otherwise>
-              <xsl:value-of select="$bootstrap-link"/>
+              <!-- No suffix, or -contrast: solid background, so use its contrast text color -->
+              <xsl:call-template name="getBootstrapAttrValue">
+                <xsl:with-param name="attrSet" select="concat('__bg__', $contextColor)"/>
+              </xsl:call-template>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:otherwise>
