@@ -39,12 +39,15 @@
 
       <!-- Specialized Bootstrap Styling -->
       <xsl:variable
-        name="theme"
-        select="if ($style = 'none') then '' else (
+        name="explicitTheme"
+        select="(
           if ($themeValue != '') then (if (contains($themeValue, '-')) then substring-before($themeValue, '-') else $themeValue) else (),
           substring-after(tokenize(@outputclass, ' ')[starts-with(., 'bg-')][1], 'bg-'),
-          substring-after(tokenize(@outputclass, ' ')[starts-with(., 'text-bg-')][1], 'text-bg-'),
-          'primary')[1]"
+          substring-after(tokenize(@outputclass, ' ')[starts-with(., 'text-bg-')][1], 'text-bg-'))[1]"
+      />
+      <xsl:variable
+        name="theme"
+        select="if ($style = 'none') then '' else if ($explicitTheme != '') then $explicitTheme else 'primary'"
       />
 
       <!-- 1. Background, border & Spacing via Unified Hub -->
@@ -63,6 +66,9 @@
               <xsl:with-param name="theme" select="concat($theme, '-subtle')"/>
               <xsl:with-param name="prefix" select="'__bg__'"/>
           </xsl:call-template>
+        </xsl:when>
+        <xsl:when test="$explicitTheme = ''">
+          <xsl:attribute name="background-color" select="$bootstrap-badge-default-bg"/>
         </xsl:when>
         <xsl:otherwise>
           <xsl:call-template name="bootstrap.decoration">
