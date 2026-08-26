@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-	This file is part of the DITA-OT Bootstrap Print Plug-in project.
+	This file is part of the DITA Bootstrap PDF plug-in for DITA Open Toolkit.
 	See the accompanying LICENSE file for applicable licenses.
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
@@ -16,10 +16,13 @@
   <xsl:variable name="bootstrap-inverse">#2c2f32</xsl:variable>
   <xsl:variable name="bootstrap-link">#0d6efd</xsl:variable>
   <xsl:variable name="bootstrap-heading-color" select="$bootstrap-body-color"/>
+  <xsl:variable name="bootstrap-heading-font-weight">bold</xsl:variable>
 
   <!-- Subtle Colors -->
   <xsl:variable name="bootstrap-primary-subtle">#dfe5ff</xsl:variable>
   <xsl:variable name="bootstrap-primary-subtle-text">#21457c</xsl:variable>
+  <xsl:variable name="bootstrap-accordion-active-bg" select="$bootstrap-primary-subtle"/>
+  <xsl:variable name="bootstrap-accordion-active-color" select="$bootstrap-primary-subtle-text"/>
   <xsl:variable name="bootstrap-secondary-subtle">#f1f2f3</xsl:variable>
   <xsl:variable name="bootstrap-secondary-subtle-text">#3e4347</xsl:variable>
   <xsl:variable name="bootstrap-success-subtle">#d8f0dd</xsl:variable>

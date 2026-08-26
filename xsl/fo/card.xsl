@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This file is part of the DITA Bootstrap PDF plug-in for DITA Open Toolkit.
+	See the accompanying LICENSE file for applicable licenses.
+-->
 <xsl:stylesheet
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
@@ -155,7 +159,7 @@
         <fo:block-container><xsl:call-template name="bootstrap.decoration"/></fo:block-container>
       </xsl:variable>
       <xsl:variable name="card-radius-raw" select="normalize-space($radius-probe/*/@fox:border-radius)"/>
-      <xsl:variable name="card-radius" select="if (ends-with($card-radius-raw, 'pt')) then $card-radius-raw else ''"/>
+      <xsl:variable name="card-radius" select="$card-radius-raw"/>
 
       <fo:block-container xsl:use-attribute-sets="section" position="relative">
         <xsl:call-template name="commonattributes"/>
@@ -189,7 +193,7 @@
           <xsl:call-template name="get-effective-shadow-value"/>
         </xsl:variable>
         <xsl:if test="$effective-shadow != '' and $effective-shadow != 'none' and $effective-shadow != 'no'">
-          <xsl:attribute name="background-color">white</xsl:attribute>
+          <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-body-bg"/></xsl:attribute>
         </xsl:if>
         <xsl:attribute name="overflow">hidden</xsl:attribute>
         <xsl:call-template name="bootstrap.decoration"/>
@@ -389,7 +393,12 @@
     match="*[self::card or contains(@class, ' bootstrap-d/card ') or (tokenize(@outputclass, ' ') = 'card' and (contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')))]/*[self::title or contains(@class, ' topic/title ')]"
     priority="5"
   >
-    <fo:block font-size="14pt" font-weight="bold" margin-bottom="8pt">
+    <fo:block
+      font-size="14pt"
+      font-weight="{$bootstrap-heading-font-weight}"
+      color="{$bootstrap-heading-color}"
+      margin-bottom="8pt"
+    >
        <xsl:call-template name="processBootstrapDirection"/>
        <xsl:apply-templates/>
     </fo:block>
@@ -433,7 +442,7 @@
     match="*[self::card-header or self::card-footer or contains(@class, ' bootstrap-d/card-header ') or contains(@class, ' bootstrap-d/card-footer ') or contains(@outputclass, 'card-header') or contains(@outputclass, 'card-footer')]"
     priority="5"
   >
-     <fo:block font-weight="bold">
+     <fo:block font-weight="{$bootstrap-heading-font-weight}">
         <xsl:call-template name="processBootstrapDirection"/>
         <xsl:apply-templates/>
      </fo:block>

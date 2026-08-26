@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-	This file is part of the DITA-OT Bootstrap Print Plug-in project.
+	This file is part of the DITA Bootstrap PDF plug-in for DITA Open Toolkit.
 	See the accompanying LICENSE file for applicable licenses.
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
@@ -17,6 +17,7 @@
     <entry name="bootstrap-inverse"><xsl:value-of select="$bootstrap-inverse"/></entry>
     <entry name="bootstrap-link"><xsl:value-of select="$bootstrap-link"/></entry>
     <entry name="bootstrap-heading-color"><xsl:value-of select="$bootstrap-heading-color"/></entry>
+    <entry name="bootstrap-heading-font-weight"><xsl:value-of select="$bootstrap-heading-font-weight"/></entry>
 
     <entry name="bootstrap-primary-subtle"><xsl:value-of select="$bootstrap-primary-subtle"/></entry>
     <entry name="bootstrap-primary-subtle-text"><xsl:value-of select="$bootstrap-primary-subtle-text"/></entry>

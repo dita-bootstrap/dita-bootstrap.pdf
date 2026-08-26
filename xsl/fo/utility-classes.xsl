@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This file is part of the DITA Bootstrap PDF plug-in for DITA Open Toolkit.
+	See the accompanying LICENSE file for applicable licenses.
+-->
 <xsl:stylesheet
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
@@ -656,13 +660,7 @@
     <xsl:value-of select="if ($resolved) then $resolved else '0'"/>
   </xsl:template>
 
-  <!-- Sum the padding contributed by every ancestor of $node on the given side
-       ('start' or 'end'). Works around a FOP layout bug: a block that has its own
-       border + background + padding (e.g. <note>, via bootstrap.decoration) does
-       not inherit an ancestor's *padding*-based inset when FOP paints that block's
-       border/background box - only the FO start-indent/end-indent properties are
-       correctly propagated. Bootstrap grid columns are excluded because they are
-       rendered as fo:table-cell, whose width FOP already constrains natively. -->
+  <!-- Sum ancestor padding on the given side; grid columns excluded since FOP constrains their width natively -->
   <xsl:template name="get-ancestor-padding-indent">
     <xsl:param name="node" select="."/>
     <xsl:param name="side" select="'start'"/>

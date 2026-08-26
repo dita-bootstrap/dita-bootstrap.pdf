@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This file is part of the DITA Bootstrap PDF plug-in for DITA Open Toolkit.
+	See the accompanying LICENSE file for applicable licenses.
+-->
 <xsl:stylesheet
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
@@ -198,9 +202,7 @@
     <xsl:attribute name="color"><xsl:value-of select="$bootstrap-inverse-subtle-text"/></xsl:attribute>
   </xsl:attribute-set>
 
-  <!-- Muted Background Colors: the same subtle background as -subtle, paired with the
-       plain (non-subtle) theme color as a de-emphasized foreground, since PDF has no
-       separate muted color tokens of its own. -->
+  <!-- Muted: subtle background paired with the plain theme color, since PDF has no muted tokens of its own -->
   <xsl:attribute-set name="__muted__primary">
     <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-primary-subtle"/></xsl:attribute>
     <xsl:attribute name="color"><xsl:value-of select="$bootstrap-primary"/></xsl:attribute>
@@ -816,7 +818,9 @@
   <!-- Heading utilities (h1-h6 aliases) -->
   <xsl:attribute-set name="h1"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h1-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute name="color"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
+        select="$bootstrap-heading-font-weight"
+      /></xsl:attribute><xsl:attribute name="color"><xsl:value-of
         select="$bootstrap-heading-color"
       /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
         select="$bootstrap-h1-margin-top"
@@ -825,7 +829,9 @@
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h2"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h2-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute name="color"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
+        select="$bootstrap-heading-font-weight"
+      /></xsl:attribute><xsl:attribute name="color"><xsl:value-of
         select="$bootstrap-heading-color"
       /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
         select="$bootstrap-h2-margin-top"
@@ -834,7 +840,9 @@
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h3"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h3-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute name="color"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
+        select="$bootstrap-heading-font-weight"
+      /></xsl:attribute><xsl:attribute name="color"><xsl:value-of
         select="$bootstrap-heading-color"
       /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
         select="$bootstrap-h3-margin-top"
@@ -843,7 +851,9 @@
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h4"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h4-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute name="color"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
+        select="$bootstrap-heading-font-weight"
+      /></xsl:attribute><xsl:attribute name="color"><xsl:value-of
         select="$bootstrap-heading-color"
       /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
         select="$bootstrap-h4-margin-top"
@@ -852,7 +862,9 @@
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h5"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h5-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute name="color"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
+        select="$bootstrap-heading-font-weight"
+      /></xsl:attribute><xsl:attribute name="color"><xsl:value-of
         select="$bootstrap-heading-color"
       /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
         select="$bootstrap-h5-margin-top"
@@ -861,7 +873,9 @@
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h6"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h6-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute name="color"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
+        select="$bootstrap-heading-font-weight"
+      /></xsl:attribute><xsl:attribute name="color"><xsl:value-of
         select="$bootstrap-heading-color"
       /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
         select="$bootstrap-h6-margin-top"
@@ -898,9 +912,7 @@
   </xsl:attribute-set>
 
 
-  <!-- Font-size utilities (fs-*): a size on its own, combined with fw-* for
-       weight - e.g. outputclass="fw-light fs-6xl" (replaces the old single
-       outputclass="display-1" token). -->
+  <!-- Font-size utilities (fs-*), combined with fw-* for weight, e.g. outputclass="fw-light fs-6xl" -->
   <xsl:attribute-set name="fs-xs"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-fs-xs"
       /></xsl:attribute></xsl:attribute-set>
@@ -935,9 +947,7 @@
         select="$bootstrap-fs-6xl"
       /></xsl:attribute></xsl:attribute-set>
 
-  <!-- Font-weight utilities (fw-*): weight on its own, combined with fs-* for
-       size. 'lighter'/'bolder' are relative XSL-FO keywords (resolved against
-       the inherited weight), matching CSS font-weight: lighter/bolder. -->
+  <!-- Font-weight utilities (fw-*); lighter/bolder are relative XSL-FO keywords, matching CSS -->
   <xsl:attribute-set name="fw-lighter"><xsl:attribute name="font-weight">lighter</xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="fw-light"><xsl:attribute name="font-weight">300</xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="fw-normal"><xsl:attribute name="font-weight">400</xsl:attribute></xsl:attribute-set>
