@@ -59,6 +59,16 @@
                      </xsl:if>
 
                      <xsl:apply-templates select="*[contains(@class, ' topic/section ')]" mode="accordion"/>
+                     <xsl:if test="not($is-flush) and $accordion-radius != ''">
+                        <xsl:call-template name="corner-mask">
+                           <xsl:with-param name="corner" select="'tl'"/>
+                           <xsl:with-param name="radius" select="$accordion-radius"/>
+                        </xsl:call-template>
+                        <xsl:call-template name="corner-mask">
+                           <xsl:with-param name="corner" select="'tr'"/>
+                           <xsl:with-param name="radius" select="$accordion-radius"/>
+                        </xsl:call-template>
+                     </xsl:if>
                   </fo:block-container>
                </fo:table-cell>
             </fo:table-row>
