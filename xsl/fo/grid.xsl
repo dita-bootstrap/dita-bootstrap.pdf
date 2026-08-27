@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This file is part of the DITA Bootstrap PDF plug-in for DITA Open Toolkit.
+	See the accompanying LICENSE file for applicable licenses.
+-->
 <xsl:stylesheet
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
@@ -45,7 +49,7 @@
   <!-- Grid Column Handling -->
   <xsl:template
     match="*[contains(@class, ' bootstrap-d/grid-col ') or 
-           (exists(tokenize(@outputclass, ' ')[starts-with(., 'col')]) and (contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')))]"
+           (exists(tokenize(@outputclass, ' ')[starts-with(., 'col') or contains(., ':col')]) and (contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')))]"
     priority="5"
     mode="grid-row-children"
   >
@@ -53,15 +57,22 @@
       <xsl:call-template name="commonattributes"/>
       <xsl:call-template name="processBootstrapDirection"/>
       
-      <!-- Spanning logic: Use @colspan if defined, else assign equally among siblings -->
+      <!-- Spanning logic: Use @colspan if defined, else parse from outputclass, else assign equally among siblings -->
       <xsl:variable
         name="col-count"
-        select="count(../*[contains(@class, ' bootstrap-d/grid-col ') or exists(tokenize(@outputclass, ' ')[starts-with(., 'col')])])"
+        select="count(../*[contains(@class, ' bootstrap-d/grid-col ') or exists(tokenize(@outputclass, ' ')[starts-with(., 'col') or contains(., ':col')])])"
+      />
+      <xsl:variable
+        name="parsed-span"
+        select="(for $t in tokenize(@outputclass, '\s+') return if (matches($t, '^(.*:)?col(-[a-z]+)?-[0-9]+$')) then replace($t, '^.*col(?:-[a-z]+)?-([0-9]+)$', '$1') else ())[1]"
       />
       <xsl:attribute name="number-columns-spanned">
         <xsl:choose>
           <xsl:when test="@colspan">
             <xsl:value-of select="@colspan"/>
+          </xsl:when>
+          <xsl:when test="normalize-space($parsed-span)">
+            <xsl:value-of select="$parsed-span"/>
           </xsl:when>
           <xsl:otherwise>
             <xsl:value-of select="12 idiv $col-count"/>
@@ -74,6 +85,15 @@
       <xsl:attribute name="padding-right">12pt</xsl:attribute>
       <fo:block start-indent="0pt">
         <xsl:call-template name="processBootstrapDirection"/>
+        <!-- @padding/@margin (e.g. p-3, mb-2) stack on top of the structural column gutter above -->
+        <xsl:call-template name="processBootstrapSpacing">
+          <xsl:with-param name="attrValue" select="@padding"/>
+          <xsl:with-param name="prefix" select="'p'"/>
+        </xsl:call-template>
+        <xsl:call-template name="processBootstrapSpacing">
+          <xsl:with-param name="attrValue" select="@margin"/>
+          <xsl:with-param name="prefix" select="'m'"/>
+        </xsl:call-template>
         <xsl:apply-templates/>
       </fo:block>
     </fo:table-cell>

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This file is part of the DITA Bootstrap PDF plug-in for DITA Open Toolkit.
+	See the accompanying LICENSE file for applicable licenses.
+-->
 <xsl:stylesheet
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
@@ -51,10 +55,17 @@
     priority="5"
   >
     <fo:table-row>
-      <xsl:variable name="theme" select="../@color"/>
-      <xsl:variable name="itemTheme" select="tokenize(@outputclass, ' ')[starts-with(., 'list-group-item-')]"/>
+      <xsl:variable name="theme">
+        <xsl:call-template name="get-theme-color">
+          <xsl:with-param name="node" select=".."/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable
+        name="itemTheme"
+        select="(tokenize(@outputclass, ' ')[starts-with(., 'list-group-item-') or starts-with(., 'theme-')])[1]"
+      />
       
-      <!-- Apply text color from parent @color if present -->
+      <!-- Apply text color from parent @theme if present -->
       <xsl:if test="$theme">
          <xsl:call-template name="processBootstrapAttrSetReflection">
             <xsl:with-param name="attrSet" select="concat('__color__', $theme)"/>
@@ -67,7 +78,10 @@
         </xsl:attribute>
         <!-- Apply text color from item specific class if present -->
         <xsl:if test="exists($itemTheme)">
-             <xsl:variable name="colorName" select="substring-after($itemTheme[1], 'list-group-item-')"/>
+             <xsl:variable
+            name="colorName"
+            select="if (starts-with($itemTheme, 'theme-')) then substring-after($itemTheme, 'theme-') else substring-after($itemTheme, 'list-group-item-')"
+          />
              <xsl:if test="$colorName != '' and $colorName != 'action'">
                  <xsl:call-template name="processBootstrapAttrSetReflection">
                     <xsl:with-param name="attrSet" select="concat('__color__', $colorName)"/>

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This file is part of the DITA Bootstrap PDF plug-in for DITA Open Toolkit.
+	See the accompanying LICENSE file for applicable licenses.
+-->
 <xsl:stylesheet
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
@@ -8,6 +12,67 @@
 
   <xsl:import href="default-values.xsl"/>
   <xsl:import href="settings-map.xsl"/>
+
+  <xsl:template name="get-context-theme-color">
+    <xsl:variable name="rawTheme">
+      <xsl:choose>
+        <xsl:when test="ancestor::*[contains(@class, ' topic/note ')]/@theme">
+          <xsl:value-of select="ancestor::*[contains(@class, ' topic/note ')][1]/@theme"/>
+        </xsl:when>
+        <xsl:when test="ancestor::*[contains(@class, ' topic/note ')]">
+          <xsl:variable name="type" select="(ancestor::*[contains(@class, ' topic/note ')][1]/@type, 'note')[1]"/>
+          <xsl:choose>
+            <xsl:when test="$type = 'note' or $type = 'notice' or $type = 'remember'">info</xsl:when>
+            <xsl:when test="$type = 'tip' or $type = 'fastpath'">success</xsl:when>
+            <xsl:when test="$type = 'important'">primary</xsl:when>
+            <xsl:when
+              test="$type = 'warning' or $type = 'caution' or $type = 'restriction' or $type = 'trouble'"
+            >warning</xsl:when>
+            <xsl:when test="$type = 'danger'">danger</xsl:when>
+            <xsl:otherwise>secondary</xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
+        <xsl:when test="ancestor::*[contains(@class, ' bootstrap-d/alert ') or tokenize(@outputclass, ' ') = 'alert']">
+          <xsl:variable
+            name="node"
+            select="ancestor::*[contains(@class, ' bootstrap-d/alert ') or tokenize(@outputclass, ' ') = 'alert'][1]"
+          />
+          <xsl:value-of
+            select="($node/@theme, substring-after(tokenize($node/@outputclass, ' ')[starts-with(., 'alert-')][1], 'alert-'), 'secondary')[1]"
+          />
+        </xsl:when>
+        <xsl:when
+          test="ancestor::*[contains(@class, ' bootstrap-d/card ') or tokenize(@outputclass, ' ') = 'card']"
+        ><xsl:value-of
+            select="ancestor::*[contains(@class, ' bootstrap-d/card ') or tokenize(@outputclass, ' ') = 'card'][1]/@theme"
+          /></xsl:when>
+        <xsl:when
+          test="ancestor::*[contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')]"
+        >
+          <xsl:variable
+            name="contextNode"
+            select="ancestor::*[contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')][1]"
+          />
+          <xsl:variable name="contextColor">
+            <xsl:call-template name="get-theme-color">
+              <xsl:with-param name="node" select="$contextNode"/>
+            </xsl:call-template>
+          </xsl:variable>
+          <xsl:if test="$contextColor != ''">
+            <xsl:variable name="contextSuffix">
+              <xsl:call-template name="get-theme-suffix">
+                <xsl:with-param name="node" select="$contextNode"/>
+              </xsl:call-template>
+            </xsl:variable>
+            <xsl:value-of
+              select="concat($contextColor, if ($contextSuffix != '') then concat('-', $contextSuffix) else '')"
+            />
+          </xsl:if>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:value-of select="$rawTheme"/>
+  </xsl:template>
 
   <!-- Standard Bootstrap Text Colors -->
   <xsl:attribute-set name="__color__primary">
@@ -28,125 +93,68 @@
   <xsl:attribute-set name="__color__info">
     <xsl:attribute name="color"><xsl:value-of select="$bootstrap-info"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__color__light">
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-light"/></xsl:attribute>
+  <xsl:attribute-set name="__color__accent">
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-accent"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__color__dark">
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-dark"/></xsl:attribute>
+  <xsl:attribute-set name="__color__inverse">
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-inverse"/></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="common.link">
     <xsl:attribute name="color">
       <xsl:choose>
-        <xsl:when test="@color and local-name() = 'xref'">
-          <xsl:variable name="explicitVar" select="concat('bootstrap-', @color)"/>
+        <xsl:when test="@theme and local-name() = 'xref'">
+          <xsl:variable
+            name="baseColor"
+            select="if (contains(@theme, '-')) then substring-before(@theme, '-') else @theme"
+          />
+          <xsl:variable name="explicitVar" select="concat('bootstrap-', $baseColor)"/>
           <xsl:choose>
             <xsl:when test="$bootstrap-settings/entry[@name = $explicitVar]">
               <xsl:value-of select="$bootstrap-settings/entry[@name = $explicitVar]"/>
             </xsl:when>
-            <xsl:otherwise><xsl:value-of select="@color"/></xsl:otherwise>
+            <xsl:otherwise><xsl:value-of select="$baseColor"/></xsl:otherwise>
           </xsl:choose>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:variable name="theme">
-        <xsl:choose>
-          <xsl:when test="ancestor::*[contains(@class, ' topic/note ')]/@color"><xsl:value-of
-                  select="ancestor::*[contains(@class, ' topic/note ')]/@color"
-                /></xsl:when>
-          <xsl:when test="ancestor::*[contains(@class, ' topic/note ')]">
-            <xsl:variable name="type" select="(ancestor::*[contains(@class, ' topic/note ')]/@type, 'note')[1]"/>
-            <xsl:choose>
-              <xsl:when test="$type = 'note' or $type = 'notice' or $type = 'remember'">info</xsl:when>
-              <xsl:when test="$type = 'tip' or $type = 'fastpath'">success</xsl:when>
-              <xsl:when test="$type = 'important'">primary</xsl:when>
-              <xsl:when
-                    test="$type = 'warning' or $type = 'caution' or $type = 'restriction' or $type = 'trouble'"
-                  >warning</xsl:when>
-              <xsl:when test="$type = 'danger'">danger</xsl:when>
-              <xsl:otherwise>secondary</xsl:otherwise>
-            </xsl:choose>
-          </xsl:when>
-          <xsl:when
-                test="ancestor::*[contains(@class, ' bootstrap-d/alert ') or tokenize(@outputclass, ' ') = 'alert']"
-              >
-            <xsl:variable
-                  name="node"
-                  select="ancestor::*[contains(@class, ' bootstrap-d/alert ') or tokenize(@outputclass, ' ') = 'alert'][1]"
-                />
-            <xsl:value-of
-                  select="($node/@color, substring-after(tokenize($node/@outputclass, ' ')[starts-with(., 'alert-')][1], 'alert-'), 'secondary')[1]"
-                />
-          </xsl:when>
-          <xsl:when
-                test="ancestor::*[contains(@class, ' bootstrap-d/card ') or tokenize(@outputclass, ' ') = 'card']"
-              ><xsl:value-of
-                  select="ancestor::*[contains(@class, ' bootstrap-d/card ') or tokenize(@outputclass, ' ') = 'card']/@color"
-                /></xsl:when>
-          <xsl:when
-                test="ancestor::*[contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')]"
-              ><xsl:value-of
-                  select="ancestor::*[contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')][1]/@color"
-                /></xsl:when>
-        </xsl:choose>
-      </xsl:variable>
-      <xsl:choose>
-        <xsl:when test="$theme != ''">
-          <xsl:variable name="subtleVar" select="concat('bootstrap-', $theme, '-subtle-text')"/>
-          <xsl:value-of select="$bootstrap-settings/entry[@name = $subtleVar]"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="$bootstrap-link"/>
-        </xsl:otherwise>
-      </xsl:choose>
+          <xsl:variable name="contextTheme"><xsl:call-template name="get-context-theme-color"/></xsl:variable>
+          <xsl:variable
+            name="contextColor"
+            select="if (contains($contextTheme, '-')) then substring-before($contextTheme, '-') else $contextTheme"
+          />
+          <xsl:variable
+            name="contextSuffix"
+            select="if (contains($contextTheme, '-')) then substring-after($contextTheme, '-') else ''"
+          />
+          <xsl:choose>
+            <xsl:when test="$contextColor = '' or contains($contextSuffix, 'border')">
+              <xsl:value-of select="$bootstrap-link"/>
+            </xsl:when>
+            <xsl:when test="contains($contextSuffix, 'subtle')">
+              <xsl:variable name="subtleVar" select="concat('bootstrap-', $contextColor, '-subtle-text')"/>
+              <xsl:value-of select="$bootstrap-settings/entry[@name = $subtleVar]"/>
+            </xsl:when>
+            <xsl:when test="contains($contextSuffix, 'muted')">
+              <xsl:call-template name="getBootstrapAttrValue">
+                <xsl:with-param name="attrSet" select="concat('__muted__', $contextColor)"/>
+              </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+              <!-- No suffix, or -contrast: solid background, so use its contrast text color -->
+              <xsl:call-template name="getBootstrapAttrValue">
+                <xsl:with-param name="attrSet" select="concat('__bg__', $contextColor)"/>
+              </xsl:call-template>
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:attribute>
     <xsl:attribute name="text-decoration">
       <xsl:choose>
-        <xsl:when test="@color and local-name() = 'xref'"><xsl:value-of
+        <xsl:when test="@theme and local-name() = 'xref'"><xsl:value-of
             select="$bootstrap-alert-link-text-decoration"
           /></xsl:when>
         <xsl:otherwise>
-          <xsl:variable name="theme">
-            <xsl:choose>
-              <xsl:when test="ancestor::*[contains(@class, ' topic/note ')]/@color"><xsl:value-of
-                  select="ancestor::*[contains(@class, ' topic/note ')]/@color"
-                /></xsl:when>
-              <xsl:when test="ancestor::*[contains(@class, ' topic/note ')]">
-                <xsl:variable name="type" select="(ancestor::*[contains(@class, ' topic/note ')]/@type, 'note')[1]"/>
-                <xsl:choose>
-                  <xsl:when test="$type = 'note' or $type = 'notice' or $type = 'remember'">info</xsl:when>
-                  <xsl:when test="$type = 'tip' or $type = 'fastpath'">success</xsl:when>
-                  <xsl:when test="$type = 'important'">primary</xsl:when>
-                  <xsl:when
-                    test="$type = 'warning' or $type = 'caution' or $type = 'restriction' or $type = 'trouble'"
-                  >warning</xsl:when>
-                  <xsl:when test="$type = 'danger'">danger</xsl:when>
-                  <xsl:otherwise>secondary</xsl:otherwise>
-                </xsl:choose>
-              </xsl:when>
-              <xsl:when
-                test="ancestor::*[contains(@class, ' bootstrap-d/alert ') or tokenize(@outputclass, ' ') = 'alert']"
-              >
-                <xsl:variable
-                  name="node"
-                  select="ancestor::*[contains(@class, ' bootstrap-d/alert ') or tokenize(@outputclass, ' ') = 'alert'][1]"
-                />
-                <xsl:value-of
-                  select="($node/@color, substring-after(tokenize($node/@outputclass, ' ')[starts-with(., 'alert-')][1], 'alert-'), 'secondary')[1]"
-                />
-              </xsl:when>
-              <xsl:when
-                test="ancestor::*[contains(@class, ' bootstrap-d/card ') or tokenize(@outputclass, ' ') = 'card']"
-              ><xsl:value-of
-                  select="ancestor::*[contains(@class, ' bootstrap-d/card ') or tokenize(@outputclass, ' ') = 'card']/@color"
-                /></xsl:when>
-              <xsl:when
-                test="ancestor::*[contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')]"
-              ><xsl:value-of
-                  select="ancestor::*[contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')][1]/@color"
-                /></xsl:when>
-            </xsl:choose>
-          </xsl:variable>
+          <xsl:variable name="theme"><xsl:call-template name="get-context-theme-color"/></xsl:variable>
           <xsl:choose>
             <xsl:when test="$theme != ''"><xsl:value-of select="$bootstrap-alert-link-text-decoration"/></xsl:when>
             <xsl:otherwise><xsl:value-of select="$bootstrap-link-text-decoration"/></xsl:otherwise>
@@ -189,13 +197,13 @@
     <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-info"/></xsl:attribute>
     <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-info-color"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__bg__light">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-light"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-light-color"/></xsl:attribute>
+  <xsl:attribute-set name="__bg__accent">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-accent"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-accent-color"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__bg__dark">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-dark"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-dark-color"/></xsl:attribute>
+  <xsl:attribute-set name="__bg__inverse">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-inverse"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-inverse-color"/></xsl:attribute>
   </xsl:attribute-set>
   <!-- Subtle Background Colors (for Alerts, Callouts, etc.) -->
   <xsl:attribute-set name="__bg__primary-subtle">
@@ -222,13 +230,47 @@
     <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-info-subtle"/></xsl:attribute>
     <xsl:attribute name="color"><xsl:value-of select="$bootstrap-info-subtle-text"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__bg__light-subtle">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-light-subtle"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-light-subtle-text"/></xsl:attribute>
+  <xsl:attribute-set name="__bg__accent-subtle">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-accent-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-accent-subtle-text"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__bg__dark-subtle">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-dark-subtle"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-dark-subtle-text"/></xsl:attribute>
+  <xsl:attribute-set name="__bg__inverse-subtle">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-inverse-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-inverse-subtle-text"/></xsl:attribute>
+  </xsl:attribute-set>
+
+  <!-- Muted: subtle background paired with the plain theme color, since PDF has no muted tokens of its own -->
+  <xsl:attribute-set name="__muted__primary">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-primary-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-primary"/></xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="__muted__secondary">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-secondary-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-secondary"/></xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="__muted__success">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-success-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-success"/></xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="__muted__danger">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-danger-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-danger"/></xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="__muted__warning">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-warning-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-warning"/></xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="__muted__info">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-info-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-info"/></xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="__muted__accent">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-accent-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-accent"/></xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="__muted__inverse">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-inverse-subtle"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-inverse"/></xsl:attribute>
   </xsl:attribute-set>
 
   <!-- Component-Specific Backgrounds: Tables -->
@@ -256,13 +298,13 @@
     <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-table-danger-bg"/></xsl:attribute>
     <xsl:attribute name="color"><xsl:value-of select="$bootstrap-table-danger-color"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__table__light">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-table-light-bg"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-table-light-color"/></xsl:attribute>
+  <xsl:attribute-set name="__table__accent">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-table-accent-bg"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-table-accent-color"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__table__dark">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-table-dark-bg"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-table-dark-color"/></xsl:attribute>
+  <xsl:attribute-set name="__table__inverse">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-table-inverse-bg"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-table-inverse-color"/></xsl:attribute>
   </xsl:attribute-set>
 
   <!-- Component-Specific Backgrounds: Buttons -->
@@ -296,15 +338,15 @@
     <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-danger-color"/></xsl:attribute>
     <xsl:attribute name="border-color"><xsl:value-of select="$bootstrap-btn-danger-bg"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__btn__light">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-btn-light-bg"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-light-color"/></xsl:attribute>
-    <xsl:attribute name="border-color"><xsl:value-of select="$bootstrap-btn-light-bg"/></xsl:attribute>
+  <xsl:attribute-set name="__btn__accent">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-btn-accent-bg"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-accent-color"/></xsl:attribute>
+    <xsl:attribute name="border-color"><xsl:value-of select="$bootstrap-btn-accent-bg"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__btn__dark">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-btn-dark-bg"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-dark-color"/></xsl:attribute>
-    <xsl:attribute name="border-color"><xsl:value-of select="$bootstrap-btn-dark-bg"/></xsl:attribute>
+  <xsl:attribute-set name="__btn__inverse">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-btn-inverse-bg"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-inverse-color"/></xsl:attribute>
+    <xsl:attribute name="border-color"><xsl:value-of select="$bootstrap-btn-inverse-bg"/></xsl:attribute>
   </xsl:attribute-set>
 
   <!-- Component-Specific Backgrounds: Badges -->
@@ -332,13 +374,13 @@
     <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-badge-danger-bg"/></xsl:attribute>
     <xsl:attribute name="color"><xsl:value-of select="$bootstrap-badge-danger-color"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__badge__light">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-badge-light-bg"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-badge-light-color"/></xsl:attribute>
+  <xsl:attribute-set name="__badge__accent">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-badge-accent-bg"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-badge-accent-color"/></xsl:attribute>
   </xsl:attribute-set>
-  <xsl:attribute-set name="__badge__dark">
-    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-badge-dark-bg"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-badge-dark-color"/></xsl:attribute>
+  <xsl:attribute-set name="__badge__inverse">
+    <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-badge-inverse-bg"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-badge-inverse-color"/></xsl:attribute>
   </xsl:attribute-set>
 
   <!-- Standard Bootstrap Spacing (Padding) -->
@@ -732,11 +774,11 @@
   <xsl:attribute-set name="border-info"><xsl:attribute name="border-color"><xsl:value-of
         select="$bootstrap-info"
       /></xsl:attribute></xsl:attribute-set>
-  <xsl:attribute-set name="border-light"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-light"
+  <xsl:attribute-set name="border-accent"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-accent"
       /></xsl:attribute></xsl:attribute-set>
-  <xsl:attribute-set name="border-dark"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-dark"
+  <xsl:attribute-set name="border-inverse"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-inverse"
       /></xsl:attribute></xsl:attribute-set>
   <!-- Border Thickness -->
   <xsl:attribute-set name="border-1"><xsl:attribute name="border-width">1pt</xsl:attribute></xsl:attribute-set>
@@ -746,28 +788,28 @@
   <xsl:attribute-set name="border-5"><xsl:attribute name="border-width">5pt</xsl:attribute></xsl:attribute-set>
 
   <xsl:attribute-set name="border-primary-subtle"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-primary-subtle"
+        select="$bootstrap-primary-subtle-text"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="border-secondary-subtle"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-secondary-subtle"
+        select="$bootstrap-secondary-subtle-text"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="border-success-subtle"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-success-subtle"
+        select="$bootstrap-success-subtle-text"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="border-danger-subtle"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-danger-subtle"
+        select="$bootstrap-danger-subtle-text"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="border-warning-subtle"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-warning-subtle"
+        select="$bootstrap-warning-subtle-text"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="border-info-subtle"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-info-subtle"
+        select="$bootstrap-info-subtle-text"
       /></xsl:attribute></xsl:attribute-set>
-  <xsl:attribute-set name="border-light-subtle"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-light-subtle"
+  <xsl:attribute-set name="border-accent-subtle"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-accent-subtle-text"
       /></xsl:attribute></xsl:attribute-set>
-  <xsl:attribute-set name="border-dark-subtle"><xsl:attribute name="border-color"><xsl:value-of
-        select="$bootstrap-dark-subtle"
+  <xsl:attribute-set name="border-inverse-subtle"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-inverse-subtle-text"
       /></xsl:attribute></xsl:attribute-set>
 
   <!-- Rounded Corners (Approximate Bootstrap values) -->
@@ -802,47 +844,79 @@
         select="$bootstrap-rounded-pill"
       /></xsl:attribute></xsl:attribute-set>
 
+  <xsl:attribute-set name="section.title">
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-heading-color"/></xsl:attribute>
+  </xsl:attribute-set>
+
+  <xsl:attribute-set name="example.title">
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-heading-color"/></xsl:attribute>
+  </xsl:attribute-set>
+
   <!-- Heading utilities (h1-h6 aliases) -->
   <xsl:attribute-set name="h1"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h1-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute
-      name="margin-top"
-    ><xsl:value-of select="$bootstrap-h1-margin-top"/></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
+        select="$bootstrap-heading-font-weight"
+      /></xsl:attribute><xsl:attribute name="color"><xsl:value-of
+        select="$bootstrap-heading-color"
+      /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-h1-margin-top"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
         select="$bootstrap-h1-margin-bottom"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h2"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h2-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute
-      name="margin-top"
-    ><xsl:value-of select="$bootstrap-h2-margin-top"/></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
+        select="$bootstrap-heading-font-weight"
+      /></xsl:attribute><xsl:attribute name="color"><xsl:value-of
+        select="$bootstrap-heading-color"
+      /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-h2-margin-top"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
         select="$bootstrap-h2-margin-bottom"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h3"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h3-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute
-      name="margin-top"
-    ><xsl:value-of select="$bootstrap-h3-margin-top"/></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
+        select="$bootstrap-heading-font-weight"
+      /></xsl:attribute><xsl:attribute name="color"><xsl:value-of
+        select="$bootstrap-heading-color"
+      /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-h3-margin-top"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
         select="$bootstrap-h3-margin-bottom"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h4"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h4-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute
-      name="margin-top"
-    ><xsl:value-of select="$bootstrap-h4-margin-top"/></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
+        select="$bootstrap-heading-font-weight"
+      /></xsl:attribute><xsl:attribute name="color"><xsl:value-of
+        select="$bootstrap-heading-color"
+      /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-h4-margin-top"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
         select="$bootstrap-h4-margin-bottom"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h5"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h5-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute
-      name="margin-top"
-    ><xsl:value-of select="$bootstrap-h5-margin-top"/></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
+        select="$bootstrap-heading-font-weight"
+      /></xsl:attribute><xsl:attribute name="color"><xsl:value-of
+        select="$bootstrap-heading-color"
+      /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-h5-margin-top"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
         select="$bootstrap-h5-margin-bottom"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h6"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h6-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute
-      name="margin-top"
-    ><xsl:value-of select="$bootstrap-h6-margin-top"/></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
+        select="$bootstrap-heading-font-weight"
+      /></xsl:attribute><xsl:attribute name="color"><xsl:value-of
+        select="$bootstrap-heading-color"
+      /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-h6-margin-top"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
         select="$bootstrap-h6-margin-bottom"
       /></xsl:attribute></xsl:attribute-set>
 
@@ -875,49 +949,49 @@
   </xsl:attribute-set>
 
 
-  <!-- Display utilities (display-1 to display-6) -->
-  <xsl:attribute-set name="display-1"><xsl:attribute name="font-size"><xsl:value-of
-        select="$bootstrap-display-1-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
-        select="$bootstrap-display-font-weight"
-      /></xsl:attribute><xsl:attribute name="line-height"><xsl:value-of
-        select="$bootstrap-display-line-height"
+  <!-- Font-size utilities (fs-*), combined with fw-* for weight, e.g. outputclass="fw-light fs-6xl" -->
+  <xsl:attribute-set name="fs-xs"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-xs"
       /></xsl:attribute></xsl:attribute-set>
-  <xsl:attribute-set name="display-2"><xsl:attribute name="font-size"><xsl:value-of
-        select="$bootstrap-display-2-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
-        select="$bootstrap-display-font-weight"
-      /></xsl:attribute><xsl:attribute name="line-height"><xsl:value-of
-        select="$bootstrap-display-line-height"
+  <xsl:attribute-set name="fs-sm"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-sm"
       /></xsl:attribute></xsl:attribute-set>
-  <xsl:attribute-set name="display-3"><xsl:attribute name="font-size"><xsl:value-of
-        select="$bootstrap-display-3-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
-        select="$bootstrap-display-font-weight"
-      /></xsl:attribute><xsl:attribute name="line-height"><xsl:value-of
-        select="$bootstrap-display-line-height"
+  <xsl:attribute-set name="fs-base"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-base"
       /></xsl:attribute></xsl:attribute-set>
-  <xsl:attribute-set name="display-4"><xsl:attribute name="font-size"><xsl:value-of
-        select="$bootstrap-display-4-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
-        select="$bootstrap-display-font-weight"
-      /></xsl:attribute><xsl:attribute name="line-height"><xsl:value-of
-        select="$bootstrap-display-line-height"
+  <xsl:attribute-set name="fs-md"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-md"
       /></xsl:attribute></xsl:attribute-set>
-  <xsl:attribute-set name="display-5"><xsl:attribute name="font-size"><xsl:value-of
-        select="$bootstrap-display-5-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
-        select="$bootstrap-display-font-weight"
-      /></xsl:attribute><xsl:attribute name="line-height"><xsl:value-of
-        select="$bootstrap-display-line-height"
+  <xsl:attribute-set name="fs-lg"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-lg"
       /></xsl:attribute></xsl:attribute-set>
-  <xsl:attribute-set name="display-6"><xsl:attribute name="font-size"><xsl:value-of
-        select="$bootstrap-display-6-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
-        select="$bootstrap-display-font-weight"
-      /></xsl:attribute><xsl:attribute name="line-height"><xsl:value-of
-        select="$bootstrap-display-line-height"
+  <xsl:attribute-set name="fs-xl"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-xl"
       /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fs-2xl"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-2xl"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fs-3xl"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-3xl"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fs-4xl"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-4xl"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fs-5xl"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-5xl"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fs-6xl"><xsl:attribute name="font-size"><xsl:value-of
+        select="$bootstrap-fs-6xl"
+      /></xsl:attribute></xsl:attribute-set>
+
+  <!-- Font-weight utilities (fw-*); lighter/bolder are relative XSL-FO keywords, matching CSS -->
+  <xsl:attribute-set name="fw-lighter"><xsl:attribute name="font-weight">lighter</xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fw-light"><xsl:attribute name="font-weight">300</xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fw-normal"><xsl:attribute name="font-weight">400</xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fw-medium"><xsl:attribute name="font-weight">500</xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fw-semibold"><xsl:attribute name="font-weight">600</xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fw-bold"><xsl:attribute name="font-weight">700</xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="fw-bolder"><xsl:attribute name="font-weight">bolder</xsl:attribute></xsl:attribute-set>
 
   <!-- Table Striping -->
   <xsl:attribute-set name="table-striped">

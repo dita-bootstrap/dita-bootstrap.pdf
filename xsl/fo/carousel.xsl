@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This file is part of the DITA Bootstrap PDF plug-in for DITA Open Toolkit.
+	See the accompanying LICENSE file for applicable licenses.
+-->
 <xsl:stylesheet
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
@@ -10,7 +14,6 @@
   version="2.0"
 >
 
-  <!-- Matches carousel specialized elements or bodydiv/ol with carousel outputclass -->
   <xsl:template
     match="*[contains(@class, ' bootstrap-d/carousel ') or (contains(@class, ' topic/ol ') and (tokenize(@outputclass, ' ') = 'carousel' or tokenize(@outputclass, ' ') = 'carousel-fade'))]"
     priority="5"
@@ -25,7 +28,13 @@
       <xsl:call-template name="processBootstrapWidth">
         <xsl:with-param name="attrValue" select="@width"/>
       </xsl:call-template>
-      <xsl:variable name="colCount" select="if (@cols) then xs:integer(@cols) else 3"/>
+      <xsl:variable
+        name="colCount"
+        select="
+          if (@cols) then xs:integer(@cols)
+          else if (contains(@otherprops, 'cols(')) then xs:integer(substring-before(substring-after(@otherprops, 'cols('), ')'))
+          else 3"
+      />
 
       <!-- Identify all item-level content to be flattened into the grid -->
       <xsl:variable
@@ -72,11 +81,16 @@
                     </xsl:choose>
                   </xsl:attribute>
                   
-                  <!-- Border color logic: carousel/@color or default grey -->
+                  <!-- Border color logic: carousel/@theme or default grey -->
                   <xsl:variable
-                    name="theme"
-                    select="ancestor::*[contains(@class, ' bootstrap-d/carousel ')][1]/@color"
+                    name="carousel"
+                    select="ancestor::*[contains(@class, ' bootstrap-d/carousel ') or contains(@outputclass, 'carousel')][1]"
                   />
+                  <xsl:variable name="theme">
+                    <xsl:call-template name="get-theme-color">
+                      <xsl:with-param name="node" select="$carousel"/>
+                    </xsl:call-template>
+                  </xsl:variable>
                   <xsl:choose>
                     <xsl:when test="$theme">
                        <xsl:call-template name="processBootstrapBorderColor">
