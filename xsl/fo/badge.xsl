@@ -12,7 +12,7 @@
   <!-- Badge Support -->
   <xsl:template
     match="*[contains(@class, ' bootstrap-d/badge ') or (contains(@class,' topic/ph ') and contains(@outputclass, 'badge'))]"
-    priority="100"
+    priority="5"
   >
     <fo:inline>
       <xsl:call-template name="commonattributes"/>
