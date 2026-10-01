@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This file is part of the DITA Bootstrap PDF plug-in for DITA Open Toolkit.
+	See the accompanying LICENSE file for applicable licenses.
+-->
 <xsl:stylesheet
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
@@ -103,33 +107,34 @@
       select="ancestor::*[contains(@class, ' bootstrap-d/button-group ') or tokenize(@outputclass, ' ') = 'btn-group'][1]/@vertical = 'yes'"
     />
     <xsl:variable name="element" select="if ($is-vertical) then 'fo:block' else 'fo:inline'"/>
+    <xsl:variable
+      name="is-external"
+      select="boolean(@href) and ((@scope = 'external') or not(empty(@format) or @format = 'dita'))"
+    />
+    <xsl:variable
+      name="internal-dest-id"
+      select="if (@href and not($is-external)) then opentopic-func:getDestinationId(@href) else ''"
+    />
+    <xsl:variable name="has-destination" select="$is-external or ($internal-dest-id != '')"/>
 
-    <fo:basic-link xsl:use-attribute-sets="xref">
-      <!-- Link Destination -->
-      <xsl:choose>
-        <xsl:when test="(@scope = 'external') or not(empty(@format) or @format = 'dita')">
-          <xsl:attribute name="external-destination">url('<xsl:value-of select="@href"/>')</xsl:attribute>
-        </xsl:when>
-        <xsl:when test="@href">
-          <xsl:attribute name="internal-destination">
-             <xsl:value-of select="opentopic-func:getDestinationId(@href)"/>
-          </xsl:attribute>
-        </xsl:when>
-      </xsl:choose>
-
+    <xsl:variable name="button-content" as="node()*">
       <xsl:element name="{$element}">
         <xsl:call-template name="commonattributes"/>
-        
-        <!-- Specialized Bootstrap Styling -->
-        <xsl:variable name="theme">
+        <xsl:variable name="rawTheme">
           <xsl:choose>
-            <xsl:when test="@color"><xsl:value-of select="@color"/></xsl:when>
+            <xsl:when test="@style = 'none'"/>
+            <xsl:when test="@theme"><xsl:value-of select="@theme"/></xsl:when>
+            <xsl:when test="exists(tokenize(@outputclass, ' ')[starts-with(., 'theme-')])">
+              <xsl:value-of
+                select="substring-after(tokenize(@outputclass, ' ')[starts-with(., 'theme-')][1], 'theme-')"
+              />
+            </xsl:when>
             <xsl:when
-              test="exists(tokenize(@outputclass, ' ')[starts-with(., 'btn-') and not(. = ('btn-lg', 'btn-sm', 'btn-toolbar', 'btn-group'))])"
+              test="exists(tokenize(@outputclass, ' ')[starts-with(., 'btn-') and not(. = ('btn-lg', 'btn-sm', 'btn-xs', 'btn-toolbar', 'btn-group', 'btn-solid', 'btn-outline', 'btn-subtle', 'btn-text', 'btn-link', 'btn-styled'))])"
             >
               <xsl:variable
                 name="token"
-                select="tokenize(@outputclass, ' ')[starts-with(., 'btn-') and not(. = ('btn-lg', 'btn-sm', 'btn-toolbar', 'btn-group'))][1]"
+                select="tokenize(@outputclass, ' ')[starts-with(., 'btn-') and not(. = ('btn-lg', 'btn-sm', 'btn-xs', 'btn-toolbar', 'btn-group', 'btn-solid', 'btn-outline', 'btn-subtle', 'btn-text', 'btn-link', 'btn-styled'))][1]"
               />
               <xsl:value-of
                 select="substring-after($token, if (contains($token, 'outline-')) then 'btn-outline-' else 'btn-')"
@@ -139,23 +144,50 @@
           </xsl:choose>
         </xsl:variable>
 
+        <xsl:variable
+          name="theme"
+          select="if (contains($rawTheme, '-')) then substring-before($rawTheme, '-') else $rawTheme"
+        />
+        <xsl:variable
+          name="themeSuffix"
+          select="if (contains($rawTheme, '-')) then substring-after($rawTheme, '-') else ''"
+        />
+
         <xsl:variable name="size">
           <xsl:choose>
             <xsl:when test="@size"><xsl:value-of select="@size"/></xsl:when>
             <xsl:when test="tokenize(@outputclass, ' ') = 'btn-lg'">large</xsl:when>
             <xsl:when test="tokenize(@outputclass, ' ') = 'btn-sm'">small</xsl:when>
+            <xsl:when test="tokenize(@outputclass, ' ') = 'btn-xs'">xs</xsl:when>
             <xsl:otherwise>default</xsl:otherwise>
           </xsl:choose>
         </xsl:variable>
 
+        <!-- Style variant: none | solid (default) | outline | subtle | text. -->
         <xsl:variable
           name="is-outline"
-          select="@outline = 'yes' or exists(tokenize(@outputclass, ' ')[starts-with(., 'btn-outline-')])"
+          select="@style = 'outline' or $themeSuffix = 'outline' or $themeSuffix = 'outline-styled' or exists(tokenize(@outputclass, ' ')[. = 'btn-outline' or starts-with(., 'btn-outline-')])"
         />
+        <xsl:variable
+          name="is-subtle"
+          select="@style = 'subtle' or $themeSuffix = 'subtle' or $themeSuffix = 'subtle-styled' or exists(tokenize(@outputclass, ' ')[. = 'btn-subtle'])"
+        />
+        <xsl:variable
+          name="is-text"
+          select="@style = 'text' or $themeSuffix = 'text' or exists(tokenize(@outputclass, ' ')[. = 'btn-text'])"
+        />
+        <xsl:variable name="is-none" select="@style = 'none'"/>
 
         <!-- Background & Text Colors -->
         <xsl:choose>
-          <xsl:when test="$is-outline">
+          <xsl:when test="$is-none or $theme = ''"/>
+          <xsl:when test="$is-subtle">
+            <xsl:call-template name="bootstrap.decoration">
+                <xsl:with-param name="theme" select="concat($theme, '-subtle')"/>
+                <xsl:with-param name="prefix" select="'__bg__'"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="$is-outline or $is-text">
             <xsl:call-template name="processBootstrapAttrSetReflection">
               <xsl:with-param name="attrSet" select="concat('__color__', $theme)"/>
             </xsl:call-template>
@@ -166,29 +198,32 @@
             </xsl:call-template>
           </xsl:otherwise>
         </xsl:choose>
-        
-        <!-- Borders -->
-        <xsl:attribute name="border-style">solid</xsl:attribute>
-        <xsl:attribute name="border-width">
-           <xsl:choose>
-             <!-- Outline buttons require a border to be visible; enforce 1pt if theme globally suppresses borders -->
-             <xsl:when
-              test="$is-outline and normalize-space($bootstrap-border-width) = ('0', '0pt', '0px', 'none', '')"
-            >1pt</xsl:when>
-             <xsl:otherwise><xsl:value-of select="$bootstrap-border-width"/></xsl:otherwise>
-           </xsl:choose>
-        </xsl:attribute>
-        <xsl:call-template name="processBootstrapBorderColor">
-          <xsl:with-param name="attrValue" select="$theme"/>
-        </xsl:call-template>
-        <xsl:if test="@bordercolor">
-          <xsl:call-template name="processBootstrapBorderColor">
-            <xsl:with-param name="attrValue" select="@bordercolor"/>
-          </xsl:call-template>
+
+        <!-- Borders: text, subtle, and bare ("none") buttons have no border, matching the HTML look -->
+        <xsl:if test="not($is-text or $is-subtle or $is-none)">
+          <xsl:attribute name="border-style">solid</xsl:attribute>
+          <xsl:attribute name="border-width">
+             <xsl:choose>
+               <!-- Outline buttons require a border to be visible; enforce 1pt if theme globally suppresses borders -->
+               <xsl:when
+                test="$is-outline and normalize-space($bootstrap-border-width) = ('0', '0pt', '0px', 'none', '')"
+              >1pt</xsl:when>
+               <xsl:otherwise><xsl:value-of select="$bootstrap-border-width"/></xsl:otherwise>
+             </xsl:choose>
+          </xsl:attribute>
+          <xsl:if test="$theme != ''">
+            <xsl:call-template name="processBootstrapBorderColor">
+              <xsl:with-param name="attrValue" select="$theme"/>
+            </xsl:call-template>
+          </xsl:if>
         </xsl:if>
         
         <!-- Size-dependent Padding & Font Size -->
         <xsl:choose>
+          <xsl:when test="$size = 'xs'">
+            <xsl:attribute name="font-size">7.5pt</xsl:attribute>
+            <xsl:attribute name="padding">1pt 3pt</xsl:attribute>
+          </xsl:when>
           <xsl:when test="$size = 'small'">
             <xsl:attribute name="font-size">9pt</xsl:attribute>
             <xsl:attribute name="padding">1.5pt 4pt</xsl:attribute>
@@ -200,8 +235,8 @@
           <xsl:otherwise>
             <xsl:attribute name="font-size">11pt</xsl:attribute>
             <xsl:choose>
-               <xsl:when test="contains(@outputclass, 'btn-floating')">
-                  <xsl:attribute name="padding">6pt</xsl:attribute>
+               <xsl:when test="contains(@outputclass, 'btn-icon')">
+                  <xsl:attribute name="padding">7.5pt 4pt 4.5pt 2pt</xsl:attribute>
                </xsl:when>
                <xsl:otherwise>
                   <xsl:attribute name="padding">3pt 8pt</xsl:attribute>
@@ -220,7 +255,7 @@
         
         <!-- Rounding (Default to '2' (4pt) instead of 'yes' (6pt)) -->
         <xsl:call-template name="processBootstrapRounded">
-          <xsl:with-param name="attrValue" select="(@rounded, if ($size = 'small') then '1' else '2')[1]"/>
+          <xsl:with-param name="attrValue" select="(@rounded, if ($size = ('xs', 'small')) then '1' else '2')[1]"/>
         </xsl:call-template>
         
         <!-- Legacy / Spacing utility support -->
@@ -233,7 +268,7 @@
           <xsl:with-param name="attrValue" select="@outputclass"/>
         </xsl:call-template>
 
-        <xsl:call-template name="bootstrap.decoration"/>
+        <xsl:call-template name="processBootstrapDirection"/>
 
         <!-- Button Group Position Awareness  -->
         <xsl:variable
@@ -330,17 +365,38 @@
           </xsl:choose>
         </fo:inline>
       </xsl:element>
-    </fo:basic-link>
+    </xsl:variable>
+
+    <xsl:choose>
+      <xsl:when test="$has-destination">
+        <fo:basic-link xsl:use-attribute-sets="xref">
+          <!-- Link Destination -->
+          <xsl:choose>
+            <xsl:when test="$is-external">
+              <xsl:attribute name="external-destination">url('<xsl:value-of select="@href"/>')</xsl:attribute>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:attribute name="internal-destination" select="$internal-dest-id"/>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:sequence select="$button-content"/>
+        </fo:basic-link>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="$button-content"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
-  <!-- Support for Bootstrap link utility classes (e.g., link-primary) or @color -->
   <xsl:template
-    match="*[contains(@class, ' topic/xref ') and (@color or exists(tokenize(@outputclass, ' ')[starts-with(., 'link-') or . = 'link-underline']))]"
+    match="*[contains(@class, ' topic/xref ') and (@theme or exists(tokenize(@outputclass, ' ')[starts-with(., 'link-') or . = 'link-underline']))]"
     priority="10"
   >
     <xsl:variable name="theme">
       <xsl:choose>
-        <xsl:when test="@color"><xsl:value-of select="@color"/></xsl:when>
+        <xsl:when test="@theme">
+          <xsl:value-of select="if (contains(@theme, '-')) then substring-before(@theme, '-') else @theme"/>
+        </xsl:when>
         <xsl:when test="exists(tokenize(@outputclass, ' ')[starts-with(., 'link-') and not(. = 'link-underline')])">
            <xsl:value-of
             select="substring-after(tokenize(@outputclass, ' ')[starts-with(., 'link-') and not(. = 'link-underline')][1], 'link-')"
@@ -360,26 +416,36 @@
        </xsl:choose>
     </xsl:variable>
 
-    <fo:basic-link xsl:use-attribute-sets="xref">
+    <xsl:variable
+      name="is-external"
+      select="boolean(@href) and ((@scope = 'external') or not(empty(@format) or @format = 'dita'))"
+    />
+    <xsl:variable
+      name="internal-dest-id"
+      select="if (@href and not($is-external)) then opentopic-func:getDestinationId(@href) else ''"
+    />
+    <xsl:variable name="has-destination" select="$is-external or ($internal-dest-id != '')"/>
+
+    <xsl:element name="{if ($has-destination) then 'fo:basic-link' else 'fo:inline'}" use-attribute-sets="xref">
       <xsl:call-template name="commonattributes"/>
       <xsl:if test="$color != ''">
          <xsl:attribute name="color"><xsl:value-of select="$color"/></xsl:attribute>
       </xsl:if>
-      
+
       <xsl:if test="tokenize(@outputclass, ' ') = 'link-underline'">
          <xsl:attribute name="text-decoration">underline</xsl:attribute>
       </xsl:if>
 
-      <xsl:choose>
-        <xsl:when test="(@scope = 'external') or not(empty(@format) or @format = 'dita')">
-          <xsl:attribute name="external-destination">url('<xsl:value-of select="@href"/>')</xsl:attribute>
-        </xsl:when>
-        <xsl:when test="@href">
-          <xsl:attribute name="internal-destination">
-             <xsl:value-of select="opentopic-func:getDestinationId(@href)"/>
-          </xsl:attribute>
-        </xsl:when>
-      </xsl:choose>
+      <xsl:if test="$has-destination">
+        <xsl:choose>
+          <xsl:when test="$is-external">
+            <xsl:attribute name="external-destination">url('<xsl:value-of select="@href"/>')</xsl:attribute>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:attribute name="internal-destination" select="$internal-dest-id"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:if>
 
       <xsl:choose>
         <!-- If link has explicit child text or icons, use those, but suppress metadata -->
@@ -391,7 +457,7 @@
           <xsl:apply-templates select="." mode="insert-text"/>
         </xsl:otherwise>
       </xsl:choose>
-    </fo:basic-link>
+    </xsl:element>
   </xsl:template>
 
 </xsl:stylesheet>

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This file is part of the DITA Bootstrap PDF plug-in for DITA Open Toolkit.
+	See the accompanying LICENSE file for applicable licenses.
+-->
 <xsl:stylesheet
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
@@ -33,14 +37,22 @@
           contains(@class, ' bootstrap-d/alert ') or 
           contains(@class, ' topic/note ') or 
           contains(@class, ' topic/xref ') or
-          @color or
-          exists(tokenize(@outputclass, ' ')[starts-with(., 'btn') or starts-with(., 'alert') or starts-with(., 'badge') or starts-with(., 'link-')])
+          @theme or
+          exists(tokenize(@outputclass, ' ')[starts-with(., 'btn') or starts-with(., 'alert') or starts-with(., 'badge') or starts-with(., 'link-') or starts-with(., 'theme-')])
         ][1]"
       />
-      
+
+      <xsl:variable name="theme-container-color">
+        <xsl:call-template name="get-theme-color">
+          <xsl:with-param name="node" select="$theme-container"/>
+        </xsl:call-template>
+      </xsl:variable>
+
       <xsl:variable name="theme">
         <xsl:choose>
-          <xsl:when test="$theme-container/@color"><xsl:value-of select="$theme-container/@color"/></xsl:when>
+          <xsl:when test="$theme-container-color != ''">
+            <xsl:value-of select="$theme-container-color"/>
+          </xsl:when>
           <xsl:when
             test="exists(tokenize($theme-container/@outputclass, ' ')[starts-with(., 'btn-') and not(. = ('btn-lg', 'btn-sm', 'btn-toolbar', 'btn-group'))])"
           >
@@ -161,11 +173,16 @@
              <xsl:variable name="has-preceding" select="preceding-sibling::node()[normalize-space() != '']"/>
              <xsl:variable name="has-following" select="following-sibling::node()[normalize-space() != '']"/>
              <xsl:choose>
+                <xsl:when test="parent::*[contains(@outputclass, 'btn-icon')] or contains(@outputclass, 'btn-icon')">
+                  <!-- btn-icon: No padding -->    
+                </xsl:when>
                 <xsl:when test="@padding"><xsl:value-of select="@padding"/></xsl:when>
                 <xsl:when test="$has-preceding and $has-following">x2</xsl:when>
                 <xsl:when test="$has-following">e2</xsl:when>
                 <xsl:when test="$has-preceding">s2</xsl:when>
-                <xsl:otherwise><!-- Solo icon: No padding --></xsl:otherwise>
+                <xsl:otherwise>
+                  <!-- Solo icon: No padding -->    
+                </xsl:otherwise>
              </xsl:choose>
           </xsl:with-param>
           <xsl:with-param name="prefix" select="'p'"/>
