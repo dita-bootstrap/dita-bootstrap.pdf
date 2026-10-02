@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
+<topic id="shadows">
+  <title>Shadows</title>
+  <shortdesc>Add or remove shadows to elements with box-shadow utilities. The <xmlatt
+    >shadow</xmlatt> attribute enables standard Bootstrap shadow effects on a wide variety of DITA components.</shortdesc>
+  <prolog>
+    <metadata>
+      <keywords>
+        <indexterm>Shadows</indexterm>
+        <indexterm>Depth</indexterm>
+        <indexterm>CSS
+          <indexterm><xmlatt>outputclass</xmlatt></indexterm>
+        </indexterm>
+        <indexterm><xmlatt>shadow</xmlatt></indexterm>
+      </keywords>
+    </metadata>
+  </prolog>
+  <body outputclass="language-markup">
+    <section>
+      <title>Shadow Utilities</title>
+      <p>Bootstrap provides utilities for adding depth with text-bg colors and box-shadows. The <xmlatt>shadow</xmlatt>
+        attribute can be set to <codeph>yes</codeph>, <codeph>sm</codeph>, <codeph>lg</codeph> or
+        <codeph>none</codeph>.</p>
+      <p>Note that when a shadow is applied without an explicit margin, a default margin of <codeph>3</codeph> is
+        automatically added to prevent the shadow from being clipped by the parent container.</p>
+    </section>
+
+    <fig>
+      <title>Shadow Utilities</title>
+      <image href="src/shadows-1.png" scalefit="yes"/>
+    </fig>
+
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/shadows/shadow-utilities.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/shadows/shadow-utilities.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+
+    <section>
+      <title>Bootstap Components with Shadows</title>
+      <p>Shadows can be applied to complex elements as follow:</p>
+    </section>
+
+    <fig>
+      <title>Card with Shadow</title>
+      <image href="src/shadows-2.png" scalefit="yes"/>
+    </fig>
+
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/shadows/applied-shadow.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/shadows/applied-shadow.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+  </body>
+</topic>

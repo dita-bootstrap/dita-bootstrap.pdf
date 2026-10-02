@@ -1,0 +1,18 @@
+<button outputclass="btn-floating m-1" href="#">
+  <icon outputclass="bi-arrow-down-square-fill"/>
+</button>
+<button outputclass="btn-floating m-1" href="#">
+  <icon outputclass="bi-chat-left-quote-fill"/>
+</button>
+<button outputclass="btn-floating m-1" href="#">
+  <icon outputclass="bi-speedometer"/>
+</button>
+<button outputclass="btn-floating m-1" href="#">
+  <icon outputclass="bi-camera-fill"/>
+</button>
+<button outputclass="btn-floating m-1" href="#">
+  <icon outputclass="bi-link"/>
+</button>
+<button outputclass="btn-floating m-1" href="#">
+  <icon outputclass="bi-share-fill"/>
+</button>

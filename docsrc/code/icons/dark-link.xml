@@ -1,0 +1,24 @@
+<xref color="primary" href="#">
+  <icon outputclass="bi-link"/> Primary link
+</xref>
+<xref color="secondary" href="#">
+  <icon outputclass="bi-link"/> Secondary link
+</xref>
+<xref color="success" href="#">
+  <icon outputclass="bi-link"/> Success link
+</xref>
+<xref color="danger" href="#">
+  <icon outputclass="bi-link"/> Danger link
+</xref>
+<xref color="warning" href="#">
+  <icon outputclass="bi-link"/> Warning link
+</xref>
+<xref color="info" href="#">
+  <icon outputclass="bi-link"/> Info link
+</xref>
+<xref color="light" href="#">
+  <icon outputclass="bi-link"/> Light link
+</xref>
+<xref color="dark" href="#">
+  <icon outputclass="bi-link"/> Dark link
+</xref>

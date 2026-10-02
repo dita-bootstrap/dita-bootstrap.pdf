@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Within the sample documentation, where necessary, the texts describing the usage of each component have been copied
+  directly from the official Bootstrap 5.3 documentation (found at https://getbootstrap.com/docs/5.3), however DITA
+  markup is used throughout the examples describing how to implement these components correctly using outputclass.
+
+  This work is a derivative of "Bootstrap 5.3 docs" by Twitter, Inc. and the Bootstrap Authors,
+  and used under CC BY 3.0. See the accompanying LICENSE file for applicable licenses.
+-->
+<!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
+<topic id="list-group">
+  <title>List Group</title>
+  <shortdesc>List groups are a flexible and powerful component for displaying a series of content. Modify and extend
+    them to support just about any content within.</shortdesc>
+  <prolog>
+    <metadata>
+      <keywords>
+        <indexterm>List Group</indexterm>
+        <indexterm>CSS
+          <indexterm><xmlatt>outputclass</xmlatt></indexterm>
+        </indexterm>
+        <indexterm><xmlelement>ul</xmlelement></indexterm>
+        <indexterm><xmlelement>ol</xmlelement></indexterm>
+        <indexterm><xmlatt>compact</xmlatt></indexterm>
+      </keywords>
+    </metadata>
+  </prolog>
+  <body outputclass="language-markup">
+    <section>
+      <title>Basic example</title>
+      <p>The most basic list group is an unordered list with list items and the proper classes. Build upon it with the
+        options that follow, or with your own CSS as needed.</p>
+    </section>
+    <fig>
+      <title>List Group</title>
+      <image href="src/list-group-1.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/list-group/basic-example.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/list-group/basic-example.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section>
+      <title>Compacted list group</title>
+      <p>Add <xmlatt>compact="yes"</xmlatt> to reduce the padding of list items</p>
+    </section>
+    <fig>
+      <title>Compacted list group</title>
+      <image href="src/list-group-2.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/list-group/compacted-list-group.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/list-group/compacted-list-group.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section>
+      <title>Expanded list group</title>
+      <p>Add <xmlatt>compact="no"</xmlatt> to increase the padding of list items</p>
+    </section>
+    <fig>
+      <title>Expanded list group</title>
+      <image href="src/list-group-3.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/list-group/expanded-list-group.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/list-group/expanded-list-group.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section>
+      <title>Flush</title>
+      <p>Add a <xmlatt>flush="yes"</xmlatt> to remove some borders and
+        rounded corners to render list group items edge-to-edge in a parent container (e.g., cards).</p>
+    </section>
+    <fig>
+      <title>Flush List Group</title>
+      <image href="src/list-group-4.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/list-group/flush.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/list-group/flush.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+  </body>
+</topic>

@@ -1,0 +1,84 @@
+<!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
+<topic id="icons">
+  <title>Icons</title>
+  <shortdesc>When enabled, DITA Bootstrap includes Bootstrap Icons by default. Additional icon libraries such as
+    <xref href="https://fontawesome.com/" format="html" scope="external">Font Awesome</xref>
+    <xref href="https://feathericons.com/" format="html" scope="external">Feather</xref> and
+    <xref href="https://octicons.github.com/" format="html" scope="external">Octicons</xref> can also be added using
+    command line parameters.</shortdesc>
+  <prolog>
+    <metadata>
+      <keywords>
+        <indexterm>Icons</indexterm>
+        <indexterm>CSS
+          <indexterm><xmlatt>outputclass</xmlatt></indexterm>
+        </indexterm>
+        <indexterm><xmlatt>style</xmlatt></indexterm>
+        <indexterm><xmlelement>othermeta</xmlelement></indexterm>
+      </keywords>
+    </metadata>
+  </prolog>
+  <body outputclass="language-markup">
+    <section>
+      <title>Bootstrap Icons</title>
+      <p>
+        <xref href="https://icons.getbootstrap.com/" format="html" scope="external">Bootstrap Icons</xref> is a growing
+        library of SVG icons that are designed by @mdo and maintained by the Bootstrap Team. They are open source and
+        licensed under MIT, just like Bootstrap so the icon set is freely available to everyone. A <xmlelement
+        >Link</xmlelement> to the default Bootstrap Icons CDN set is included by default. </p>
+    </section>
+
+    <section>
+      <title>Example</title>
+      <p>Icon fonts with classes for every icon are included in Bootstrap Icons. Include the icon web fonts in your page
+        via CSS, then reference the class names as needed in your DITA (e.g., <xmlelement>icon
+          outputclass="bi-alarm"/</xmlelement>).</p>
+      <p>Use a <xmlatt>style</xmlatt> attribute and alter the CSS font-size and color to change the icon
+        appearance.</p>
+    </section>
+    <fig>
+      <title>Icons</title>
+      <image href="src/icons-1.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/icons/example.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/icons/example.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+  <p>Icons placed within an <xmlelement>xref</xmlelement> element are colorized appropriately:</p>
+  <fig>
+    <title>Links with Icons</title>
+    <image href="src/icons-2.png" scalefit="yes"/>
+  </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/icons/dark-link.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/icons/dark-link.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <p>Icons can also be placed within buttons as shown:</p>
+    <fig>
+      <title>Buttons with Icons</title>
+      <image href="src/icons-3.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/icons/icons-in-buttons.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/icons/icons-in-buttons.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+  </body>
+</topic>

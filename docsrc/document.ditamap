@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<map>
+  <title>DITA Bootstrap PDF</title>
+
+  <topicref>
+    <topicmeta>
+      <navtitle>Getting Started</navtitle>
+      <othermeta name="icon" content="bi-file-pdf"/>
+      <othermeta name="icon-style" content="color: var(--bs-red)"/>
+    </topicmeta>
+    <topicref navtitle="Introduction" href="getting-started.dita" locktitle="yes"/>
+  </topicref>
+  <topicref>
+    <topicmeta>
+      <navtitle>Content</navtitle>
+      <othermeta name="icon" content="bi-file-earmark-richtext"/>
+      <othermeta name="icon-style" content="color: var(--bs-gray)"/>
+    </topicmeta>
+    <topicref href="typography.dita"/>
+    <topicref href="images.dita"/>
+    <topicref href="tables.dita"/>
+    <topicref href="figures.dita"/>
+  </topicref>
+  <topicref>
+    <topicmeta>
+      <navtitle>Components</navtitle>
+      <othermeta name="icon" content="bi-menu-button-wide-fill"/>
+      <othermeta name="icon-style" content="color: var(--bs-cyan)"/>
+    </topicmeta>
+    <topicref href="accordion.dita"/>
+    <topicref href="alerts.dita"/>
+    <topicref href="badge.dita"/>
+    <topicref href="buttons.dita"/>
+    <topicref href="button-group.dita"/>
+    <topicref href="card.dita"/>
+    <topicref href="carousel.dita"/>
+    <topicref href="list-group.dita"/>
+  </topicref>
+  <topicref>
+    <topicmeta>
+      <navtitle>Utilities</navtitle>
+      <othermeta name="icon" content="bi-braces-asterisk"/>
+      <othermeta name="icon-style" content="color: var(--bs-pink)"/>
+    </topicmeta>
+    <topicref href="borders.dita"/>
+    <topicref href="color.dita"/>
+    <topicref href="shadows.dita"/>
+    <topicref href="spacing.dita"/>
+  </topicref>
+  <topicref>
+    <topicmeta>
+      <navtitle>Extend</navtitle>
+      <othermeta name="icon" content="bi-tools"/>
+      <othermeta name="icon-style" content="color: var(--bs-blue)"/>
+    </topicmeta>
+    <topicref navtitle="Icons" href="icons.dita">
+      <topicmeta>
+        <othermeta name="icon" content="bi-images"/>
+      </topicmeta>
+    </topicref>
+  </topicref>
+</map>
