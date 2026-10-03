@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
+<topic id="color">
+  <title>Color</title>
+  <shortdesc>Convey meaning through <codeph>color</codeph> with a handful of color utility classes. Includes support for
+    styling text and background colors via the semantic <xmlatt>color</xmlatt> attribute.</shortdesc>
+  <prolog>
+    <metadata>
+      <keywords>
+        <indexterm>Color</indexterm>
+        <indexterm>Background</indexterm>
+        <indexterm>CSS
+          <indexterm><xmlatt>outputclass</xmlatt></indexterm>
+        </indexterm>
+        <indexterm><xmlatt>color</xmlatt></indexterm>
+      </keywords>
+    </metadata>
+  </prolog>
+  <body outputclass="language-markup">
+    <section>
+      <title>Colors</title>
+      <p>Colorize text and backgrounds with color utilities. The <xmlatt
+        >color</xmlatt> attribute provides a semantic way to apply standard Bootstrap color themes.</p>
+    </section>
+
+    <fig>
+      <title>Colors</title>
+      <image href="src/color-1.png" scalefit="yes"/>
+    </fig>
+
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/color/colors.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/color/colors.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+
+    <section>
+      <title>Base DITA Elements</title>
+      <p
+      >Decoration attributes can be applied to many base DITA elements to add background color and contrasting text.</p>
+    </section>
+
+    <fig>
+      <title>DITA Elements</title>
+      <image href="src/color-2.png" scalefit="yes"/>
+    </fig>
+
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/color/section-decoration.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/color/section-decoration.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+
+    <section>
+      <title>Bootstrap Components</title>
+      <p>Many specialized components also support the <xmlatt>color</xmlatt> attribute for consistent theming.</p>
+    </section>
+
+    <fig>
+      <title>Bootstrap Components</title>
+      <image href="src/color-3.png" scalefit="yes"/>
+    </fig>
+
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/color/specialized-elements.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/color/specialized-elements.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+
+    <section>
+      <title>Text Color</title>
+      <p>For text-only colorization, the <xmlatt>outputclass</xmlatt> attribute remains the primary method.</p>
+    </section>
+
+    <fig>
+      <title>Text Color</title>
+      <image href="src/color-4.png" scalefit="yes"/>
+    </fig>
+
+    <codeblock>&lt;p outputclass="text-primary"&gt;.text-primary&lt;/p&gt;
+&lt;p outputclass="text-secondary"&gt;.text-secondary&lt;/p&gt;
+&lt;p outputclass="text-success"&gt;.text-success&lt;/p&gt;
+&lt;p outputclass="text-danger"&gt;.text-danger&lt;/p&gt;
+&lt;p outputclass="text-warning bg-dark"&gt;.text-warning&lt;/p&gt;
+&lt;p outputclass="text-info bg-dark"&gt;.text-info&lt;/p&gt;</codeblock>
+  </body>
+</topic>

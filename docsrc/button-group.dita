@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Within the sample documentation, where necessary, the texts describing the usage of each component have been copied
+  directly from the official Bootstrap 5.3 documentation (found at https://getbootstrap.com/docs/5.3), however DITA
+  markup is used throughout the examples describing how to implement these components correctly using outputclass.
+
+  This work is a derivative of "Bootstrap 5.3 docs" by Twitter, Inc. and the Bootstrap Authors,
+  and used under CC BY 3.0. See the accompanying LICENSE file for applicable licenses.
+-->
+<!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
+<topic id="button-group">
+  <title>Button group</title>
+  <shortdesc>Group a series of buttons together on a single line or stack them in a vertical column.</shortdesc>
+  <prolog>
+    <metadata>
+      <keywords>
+        <indexterm>Button Group</indexterm>
+        <indexterm>CSS
+          <indexterm><xmlatt>outputclass</xmlatt></indexterm>
+        </indexterm>
+        <indexterm><xmlelement>div</xmlelement></indexterm>
+      </keywords>
+    </metadata>
+  </prolog>
+  <body outputclass="language-markup">
+    <section>
+      <title>Basic example</title>
+      <p>Wrap a series of buttons with <xmlelement>xref outputclass="btn-*"</xmlelement> in a <xmlelement>div
+          outputclass="btn-group"</xmlelement>
+      </p>
+    </section>
+    <fig>
+      <title>Button Group</title>
+      <image href="src/button-group-1.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/button-group/basic-example.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/button-group/basic-example.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section>
+      <title>Mixed styles</title>
+    </section>
+    <fig>
+      <title>Mixed styles</title>
+      <image href="src/button-group-2.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/button-group/mixed-styles.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/button-group/mixed-styles.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <!--section>
+      <title>Outlined styles</title>
+    </section>
+    <fig>
+      <title>Outlined styles</title>
+      <image href="src/button-group-3.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/button-group/outlined-styles.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/button-group/outlined-styles.xml"/></codeblock>
+      </section>
+    </tabbed-dialog-->
+    <section>
+      <title>Button toolbar</title>
+      <p>Combine sets of button groups into button toolbars for more complex components.</p>
+    </section>
+    <fig>
+      <title>Button toolbar</title>
+      <image href="src/button-group-4.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/button-group/button-toolbar.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/button-group/button-toolbar.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <!--section>
+      <title>Vertical variation</title>
+      <p>Make a set of buttons appear vertically stacked rather than horizontally.</p>
+    </section>
+    <fig>
+      <title>Vertical variation</title>
+      <image href="src/button-group-5.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/button-group/vertical-variation.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/button-group/vertical-variation.xml"/></codeblock>
+      </section>
+    </tabbed-dialog-->
+  </body>
+</topic>
