@@ -121,12 +121,5 @@
         <codeblock><coderef href="code/html/carousel/slides-with-titles.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <section id="crossfade">
-      <title>Crossfade</title>
-      <p> Add <xmlatt>fade="yes"</xmlatt> to your carousel to animate slides with a fade transition
-        instead of a slide. Depending on your carousel content (e.g., text only slides), you may want to add
-          <xmlelement>div outputclass="bg-body"</xmlelement> or some custom CSS to the carousel items for proper
-        crossfading.</p>
-    </section>
   </body>
 </topic>
