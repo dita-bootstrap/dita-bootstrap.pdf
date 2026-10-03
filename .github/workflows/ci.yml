@@ -4,11 +4,13 @@ name: CI
     branches:
       - master
       - develop
+      - v5
+      - v6
   workflow_dispatch:
 
 jobs:
   build-dita:
-    name: Build DITA
+    name: Build PDF Sample
     runs-on: ubuntu-latest
     steps:
       - name: Git checkout
@@ -45,7 +47,7 @@ jobs:
           path: out/pdf
 
   build-html:
-    name: Build HTML
+    name: Build HTML Documentation
     runs-on: ubuntu-latest
     steps:
       - name: Git checkout
@@ -55,14 +57,14 @@ jobs:
         uses: actions/checkout@v7
         with:
           repository: dita-bootstrap/dita-bootstrap.specialization
-          ref: develop
+          ref: ${{ github.ref_name }}
           path: specialization
 
       - name: Git checkout HTML
         uses: actions/checkout@v7
         with:
           repository: dita-bootstrap/dita-bootstrap.html
-          ref: develop
+          ref: ${{ github.ref_name }}
           path: html
 
       - name: Copy code examples
@@ -93,12 +95,24 @@ jobs:
             https://github.com/dita-bootstrap/dita-bootstrap.theme-switcher/archive/develop.zip
           project: .github/dita-ot/html.xml
 
+      - name: Determine target folder
+        id: set-target
+        run: |
+          if [ "${{ github.ref_name }}" = "master" ] || [ "${{ github.ref_name }}" = "develop" ]; then
+            echo "target_dir=" >> $GITHUB_OUTPUT
+            printf 'clean_exclude<<EOF\nv5\nv6\nEOF\n' >> $GITHUB_OUTPUT
+          else
+            echo "target_dir=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+          fi
+
       - name: Deploy HTML 🚀
         uses: JamesIves/github-pages-deploy-action@v4.9.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           folder: out/html
+          target-folder: ${{ steps.set-target.outputs.target_dir }}
           commit-message: '🚀 Deploy ${{ steps.short-sha.outputs.sha }} to GitHub Pages'
           git-config-name: 'GitHub Action'
           git-config-email: 'action@github.com'
+          clean-exclude: ${{ steps.set-target.outputs.clean_exclude }}
