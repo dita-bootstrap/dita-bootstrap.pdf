@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Within the sample documentation, where necessary, the texts describing the usage of each component have been copied
+  directly from the official Bootstrap 5.3 documentation (found at https://getbootstrap.com/docs/5.3), however DITA
+  markup is used throughout the examples describing how to implement these components correctly using outputclass.
+
+  This work is a derivative of "Bootstrap 5.3 docs" by Twitter, Inc. and the Bootstrap Authors,
+  and used under CC BY 3.0. See the accompanying LICENSE file for applicable licenses.
+-->
+<!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
+<topic id="carousel">
+  <title>Carousel</title>
+  <shortdesc>A slideshow component for cycling through elements—images or slides of text—like a carousel.</shortdesc>
+  <prolog>
+    <metadata>
+      <keywords>
+        <indexterm>Carousel</indexterm>
+        <indexterm>CSS
+          <indexterm><xmlatt>outputclass</xmlatt></indexterm>
+        </indexterm>
+        <indexterm><xmlelement>carousel</xmlelement></indexterm>
+        <indexterm><xmlelement>carousel-item</xmlelement></indexterm>
+        <indexterm><xmlelement>fig</xmlelement></indexterm>
+        <indexterm><xmlelement>image</xmlelement></indexterm>
+      </keywords>
+    </metadata>
+  </prolog>
+  <body outputclass="language-markup">
+    <section id="example">
+      <title>Example</title>
+      <p>Carousels are displayed as a series of cells</p>
+    </section>
+    <fig>
+      <title>Carousel</title>
+      <image href="src/carousel-1.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/carousel/example.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/carousel/example.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="with-captions">
+      <title>With captions</title>
+      <p>Add captions by using <xmlelement>fig</xmlelement> elements</p>
+    </section>
+    <fig>
+      <title>With captions</title>
+      <image href="src/carousel-3.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/carousel/captions.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/carousel/captions.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="with-non-image-elements">
+      <title>With non-image elements</title>
+      <p>Place additional DITA elements within a <xmlelement
+        >grid-row</xmlelement> element to add them within a carousel.
+        Additional structure and spacing can be added by using the <xmlelement>grid-col</xmlelement> element.</p>
+    </section>
+    <fig>
+      <title>With non-image elements</title>
+      <image href="src/carousel-4.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/carousel/non-image-elements.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/carousel/non-image-elements.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="multiple-slides">
+      <title>Multiple slides side-by-side</title>
+      <p>Add multiple <xmlelement>image</xmlelement> elements within each <xmlelement>carousel-item</xmlelement></p>
+    </section>
+    <fig>
+      <title>Multiple slides side-by-side</title>
+      <image href="src/carousel-5.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/carousel/side-by-side.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/carousel/side-by-side.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+
+    <section id="multiple-slides-with-titles">
+      <title>Multiple slides with titles</title>
+      <p>Add multiple <xmlelement>image</xmlelement> elements within each <xmlelement
+        >carousel-item</xmlelement> and include a
+          <xmlelement>grid-row</xmlelement> element for title texts.</p>
+    </section>
+    <fig>
+      <title>Multiple slides with titles</title>
+      <image href="src/carousel-6.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/carousel/slides-with-titles.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/carousel/slides-with-titles.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+  </body>
+</topic>
