@@ -1,0 +1,614 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="copyright" content="(C) Copyright 2026"><meta name="generator" content="DITA-OT"><meta name="description" content="Two plug-ins for DITA Open Toolkit that extend the default PDF output with a Bootstrap 5.3 templating and components."><meta property="og:type" content="website"><meta property="og:url" content="https://dita-bootstrap.github.io/dita-bootstrap.pdf//index.html"><meta property="og:title" content="DITA Bootstrap PDF"><meta property="og:description" content="Two plug-ins for DITA Open Toolkit that extend the default PDF output with a Bootstrap 5.3 templating and components."><meta property="og:image" content="https://dita-bootstrap.github.io/dita-bootstrap.pdf//open-graph.svg"><meta name="twitter:title" content="DITA Bootstrap PDF"><meta name="twitter:description" content="Two plug-ins for DITA Open Toolkit that extend the default PDF output with a Bootstrap 5.3 templating and components."><meta property="twitter:url" content="https://dita-bootstrap.github.io/dita-bootstrap.pdf//index.html"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://dita-bootstrap.github.io/dita-bootstrap.pdf//open-graph.svg"><title>DITA Bootstrap PDF</title><script src="./js/lunr-client.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><link rel="shortcut icon" href="./favicon/favicon.svg">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<script>
+(function() {
+  var validThemes = ["https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/brite/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/cerulean/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/cosmo/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/cyborg/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/darkly/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/flatly/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/journal/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/litera/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/lumen/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/lux/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/materia/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/minty/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/morph/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/pulse/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/quartz/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/sandstone/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/simplex/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/sketchy/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/slate/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/solar/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/spacelab/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/superhero/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/united/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/vapor/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/yeti/bootstrap.min.css","https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/zephyr/bootstrap.min.css"];
+  var css = localStorage.getItem('css-theme');
+  if (css) {
+    if (validThemes.indexOf(css) !== -1) {
+      var link = Array.prototype.find.call(document.querySelectorAll('link'), function(l) {
+        return /\.min\.css$/.test(l.href);
+      });
+      if (link) {
+        if (link.href !== css) {
+          link.removeAttribute('integrity');
+          link.href = css;
+        }
+      }
+    }
+  }
+})();
+</script><script language="javascript" src="./js/css-theme-switcher.js"></script><link rel="stylesheet" type="text/css" href="css/commonltr.css">
+<link rel="stylesheet" type="text/css" href="./css/common-extended.css"><link rel="stylesheet" type="text/css" href="css/theme.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" integrity="sha384-CK2SzKma4jA5H/MXDUU7i1TqZlCFaD4T01vtyDFvPlD97JQyS+IsSh1nI2EFbpyk" crossorigin="anonymous"></head><body id="index" class="d-flex flex-column min-vh-100"><div class="visually-hidden-focusable overflow-hidden p-2 bg-body-tertiary"><div class="container-xl"><a class="d-inline-flex m-1 btn btn-outline-primary btn-sm" href="#ariaid-title1">Skip to main content</a><a href="#bs-sidebar-nav" class="d-none d-md-inline-flex m-1 btn btn-outline-primary btn-sm">Skip to docs navigation</a></div></div><header role="banner" class="sticky-top"><nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <!-- Modify -xxl to change container size -->
+  <div class="container-xxl">
+    <!-- This shows the menu on mobile -->
+    <div class="bd-navbar-toggle">
+      <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar" aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+        <i class="bi bi-list"></i>
+      </button>
+    </div>
+    <a class="navbar-brand d-flex align-items-center gap-2" href="https://dita-bootstrap.github.io">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-badge-ci-fill" viewBox="0 0 16 16" width="32" height="32">
+        <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm3.027 4.002c-.83 0-1.319.642-1.319 1.753v.743c0 1.107.48 1.727 1.319 1.727.69 0 1.138-.435 1.186-1.05H7.36v.114c-.057 1.147-1.028 1.938-2.342 1.938-1.613 0-2.518-1.028-2.518-2.729v-.747C2.5 6.051 3.414 5 5.018 5c1.318 0 2.29.813 2.342 2v.11H6.213c-.048-.638-.505-1.108-1.186-1.108m6.14 -1h1.2v6h-1.2z"/>
+      </svg>
+      <span>DITA Bootstrap</span>
+      <span class="badge bg-dark small m-0">Latest</span>
+    </a>
+    <button class="navbar-toggler p-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="bi bi-three-dots"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPlugin" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Plugins
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownPlugin">
+            <li><a class="dropdown-item" href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.html">HTML Plugin</a></li>
+            <li><a class="dropdown-item" href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.pdf">PDF Plugin</a></li>
+            <li><a class="dropdown-item" href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.pdf.theme">Bootswatch PDF Themes</a></li>
+            <li><a class="dropdown-item" href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.specialization">DITA Specialization for Bootstrap</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.extension">Bootstrap Extension Plugin</a></li>
+        <li><a class="dropdown-item" href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.extension.specialization">DITA Specialization for Bootstrap Extension</a></li>
+        <li><a class="dropdown-item" href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.sass">Bootstrap Sass Plugin</a></li>
+        <li><a class="dropdown-item" href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.table">Bootstrap Table Plugin</a></li>
+        <li><a class="dropdown-item" href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.lunr">Lunr Search Plugin</a></li>
+        <li><a class="dropdown-item" href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.watermark">Watermark Plugin</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSource" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Source
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownSource">
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.html">dita-bootstrap.html</a></li>
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.pdf">dita-bootstrap.pdf</a></li>
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.pdf.theme">dita-bootstrap.pdf.theme</a></li>
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.specialization">dita-bootstrap.specialization</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.extension">dita-bootstrap.extension</a></li>
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.extension.specialization">dita-bootstrap.extension.specialization</a></li>
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.lunr">dita-bootstrap.lunr</a></li>
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.table">dita-bootstrap.table</a></li>
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.sass">dita-bootstrap.sass</a></li>
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.watermark">dita-bootstrap.watermark</a></li>
+            <li><hr class="dropdown-divider"></li>
+             <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/com.example.bootstrap-component">com.example.bootstrap-component</a></li>
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/com.example.bootstrap-offline">com.example.bootstrap-offline</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownReleases" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Releases
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownReleases">
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.html/releases">dita-bootstrap.html</a></li>
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.pdf/releases">dita-bootstrap.pdf</a></li>
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.pdf.theme/releases">dita-bootstrap.pdf.theme</a></li>
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.specialization/releases">dita-bootstrap.specialization</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.extension/releases">dita-bootstrap.extension</a></li>
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.extension.specialization/releases">dita-bootstrap.extension.specialization</a></li>
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.lunr/releases">dita-bootstrap.lunr</a></li>
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.sass/releases">dita-bootstrap.sass</a></li>
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.table/releases">dita-bootstrap.table</a></li>
+            <li><a class="dropdown-item" href="https://github.com/dita-bootstrap/dita-bootstrap.watermark/releases">dita-bootstrap.watermark</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://getbootstrap.com/docs/5.3">Bootstrap Docs</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <!--
+          This is a lunr.js search box
+          It requires JavaScript to function.
+        -->
+        <li class="nav-item d-flex align-items-center">
+          <span class="nav-link pe-2">
+            <i class="bi bi-search"></i>
+          </span>
+          <form class="position-relative me-auto search-box rounded">
+            <input type="search" class="form-control" placeholder="Search…" aria-label="Search for…" dir="auto">
+          </form>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-0 me-1">
+        <!--
+          This is a dark/light color theme toggler.
+          It requires JavaScript to function.
+        -->
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-color-mode" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
+            <span class="d-light">
+              <i class="bi bi-brightness-high-fill"></i>
+            </span>
+            <span class="d-dark">
+              <i class="bi bi-moon-stars-fill"></i>
+            </span>
+            <span class="d-auto">
+              <i class="bi bi-circle-half"></i>
+            </span>
+            <span class="d-lg-none ms-2">Toggle color mode</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-color-mode" style="--bs-dropdown-min-width: 6rem;" data-bs-popper="static">
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
+                <i class="bi bi-brightness-high-fill"></i>
+                <span class="ms-2">Light</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
+                <i class="bi bi-moon-stars-fill"></i>
+                <span class="ms-2">Dark</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto">
+                <i class="bi bi-circle-half"></i>
+                <span class="ms-2">Auto</span>
+              </button>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-0 me-1">
+        <!--
+          This is a css bootstrap theme toggler.
+          It requires JavaScript to function.
+        -->
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-css-theme" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
+            <i class="bi bi-filetype-css"></i>
+            <span class="d-lg-none ms-2">Toggle theme</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end css-themes-list overflow-y-auto" aria-labelledby="bd-css-theme" style="--bs-dropdown-min-width: 6rem;" data-bs-popper="static">
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+                Default
+              </button>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/brite/bootstrap.min.css">
+                Brite
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/cerulean/bootstrap.min.css">
+                Cerulean
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/cosmo/bootstrap.min.css">
+                Cosmo
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/cyborg/bootstrap.min.css">
+                Cyborg
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/darkly/bootstrap.min.css">
+                Darkly
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/flatly/bootstrap.min.css">
+                Flatly
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/journal/bootstrap.min.css">
+                Journal
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/litera/bootstrap.min.css">
+                Litera
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/lumen/bootstrap.min.css">
+                Lumen
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/lux/bootstrap.min.css">
+                Lux
+              </button>
+            </li>
+          <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/materia/bootstrap.min.css">
+                Materia
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/minty/bootstrap.min.css">
+                Minty
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/morph/bootstrap.min.css">
+                Morph
+              </button>
+            </li>
+
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/pulse/bootstrap.min.css">
+                Pulse
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/quartz/bootstrap.min.css">
+                Quartz
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/sandstone/bootstrap.min.css">
+                Sandstone
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/simplex/bootstrap.min.css">
+                Simplex
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/sketchy/bootstrap.min.css">
+                Sketchy
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/slate/bootstrap.min.css">
+                Slate
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/solar/bootstrap.min.css">
+                Solar
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/spacelab/bootstrap.min.css">
+                SpaceLab
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/superhero/bootstrap.min.css">
+                Superhero
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/united/bootstrap.min.css">
+                United
+              </button>
+            </li>
+          <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/vapor/bootstrap.min.css">
+                Vapor
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/yeti/bootstrap.min.css">
+                Yeti
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/zephyr/bootstrap.min.css">
+                Zephyr
+              </button>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav></header><div class="bs-container container-xxl bd-gutter mt-3 my-md-4" id="content"><div class="overflow-y-auto bs-sidebar"><div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar" aria-labelledby="bdSidebarOffcanvasLabel" aria-modal="true" role="dialog"><div class="offcanvas-header border-bottom"><h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">DITA Bootstrap PDF</h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebar"></button></div><div class="offcanvas-body flex-column h-100"><nav class="d-flex flex-align-start flex-column h-100 overflow-y-auto" role="navigation" id="bs-sidebar-nav"><div class="overflow-y-auto bs-fixed-sidetoc"><div class="flex-column bd-links"><ul class="list-unstyled mb-0 py-3 pt-md-1"><li><div class="d-flex flex-row ps-0"><button data-bs-toggle="collapse" class="btn d-inline-flex align-items-center p-0 border-0 active" data-bs-target="#menu-collapse-d49058e11" aria-expanded="true" aria-current="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 14l6-6-6-6"/></svg></button><span data-bs-toggle="collapse" class="d-inline-flex align-items-center flex-shrink-1 ps-2 active" data-bs-target="#menu-collapse-d49058e11" aria-expanded="true" aria-current="true"><i class="me-2 bi-file-pdf" style="color: var(--bs-red)"></i>Getting Started</span></div><div id="menu-collapse-d49058e11" class="ps-2 collapse show"><ul class="list-unstyled fw-normal ps-4"><li><div class="d-flex flex-row ps-0"><a class="d-inline-flex align-items-center flex-shrink-1  active" href="index.html">Introduction</a></div></li></ul></div></li><li><div class="d-flex flex-row ps-0"><button data-bs-toggle="collapse" class="btn d-inline-flex align-items-center p-0 border-0" data-bs-target="#menu-collapse-d49058e31"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 14l6-6-6-6"/></svg></button><span data-bs-toggle="collapse" class="d-inline-flex align-items-center flex-shrink-1 ps-2" data-bs-target="#menu-collapse-d49058e31"><i class="me-2 bi-file-earmark-richtext" style="color: var(--bs-gray)"></i>Content</span></div><div id="menu-collapse-d49058e31" class="ps-2 collapse "><ul class="list-unstyled fw-normal ps-4"><li><div class="d-flex flex-row ps-0"><a class="d-inline-flex align-items-center flex-shrink-1 " href="typography.html">Typography</a></div></li><li><div class="d-flex flex-row ps-0"><a class="d-inline-flex align-items-center flex-shrink-1 " href="images.html">Images</a></div></li><li><div class="d-flex flex-row ps-0"><a class="d-inline-flex align-items-center flex-shrink-1 " href="tables.html">Tables</a></div></li><li><div class="d-flex flex-row ps-0"><a class="d-inline-flex align-items-center flex-shrink-1 " href="figures.html">Figures</a></div></li></ul></div></li><li><div class="d-flex flex-row ps-0"><button data-bs-toggle="collapse" class="btn d-inline-flex align-items-center p-0 border-0" data-bs-target="#menu-collapse-d49058e77"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 14l6-6-6-6"/></svg></button><span data-bs-toggle="collapse" class="d-inline-flex align-items-center flex-shrink-1 ps-2" data-bs-target="#menu-collapse-d49058e77"><i class="me-2 bi-menu-button-wide-fill" style="color: var(--bs-cyan)"></i>Components</span></div><div id="menu-collapse-d49058e77" class="ps-2 collapse "><ul class="list-unstyled fw-normal ps-4"><li><div class="d-flex flex-row ps-0"><a class="d-inline-flex align-items-center flex-shrink-1 " href="accordion.html">Accordion</a></div></li><li><div class="d-flex flex-row ps-0"><a class="d-inline-flex align-items-center flex-shrink-1 " href="alerts.html">Alerts</a></div></li><li><div class="d-flex flex-row ps-0"><a class="d-inline-flex align-items-center flex-shrink-1 " href="badge.html">Badges</a></div></li><li><div class="d-flex flex-row ps-0"><a class="d-inline-flex align-items-center flex-shrink-1 " href="buttons.html">Buttons</a></div></li><li><div class="d-flex flex-row ps-0"><a class="d-inline-flex align-items-center flex-shrink-1 " href="button-group.html">Button group</a></div></li><li><div class="d-flex flex-row ps-0"><a class="d-inline-flex align-items-center flex-shrink-1 " href="card.html">Cards</a></div></li><li><div class="d-flex flex-row ps-0"><a class="d-inline-flex align-items-center flex-shrink-1 " href="carousel.html">Carousel</a></div></li><li><div class="d-flex flex-row ps-0"><a class="d-inline-flex align-items-center flex-shrink-1 " href="list-group.html">List Group</a></div></li></ul></div></li><li><div class="d-flex flex-row ps-0"><button data-bs-toggle="collapse" class="btn d-inline-flex align-items-center p-0 border-0" data-bs-target="#menu-collapse-d49058e163"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 14l6-6-6-6"/></svg></button><span data-bs-toggle="collapse" class="d-inline-flex align-items-center flex-shrink-1 ps-2" data-bs-target="#menu-collapse-d49058e163"><i class="me-2 bi-braces-asterisk" style="color: var(--bs-pink)"></i>Utilities</span></div><div id="menu-collapse-d49058e163" class="ps-2 collapse "><ul class="list-unstyled fw-normal ps-4"><li><div class="d-flex flex-row ps-0"><a class="d-inline-flex align-items-center flex-shrink-1 " href="borders.html">Borders</a></div></li><li><div class="d-flex flex-row ps-0"><a class="d-inline-flex align-items-center flex-shrink-1 " href="color.html">Color</a></div></li><li><div class="d-flex flex-row ps-0"><a class="d-inline-flex align-items-center flex-shrink-1 " href="shadows.html">Shadows</a></div></li><li><div class="d-flex flex-row ps-0"><a class="d-inline-flex align-items-center flex-shrink-1 " href="spacing.html">Spacing</a></div></li></ul></div></li><li><div class="d-flex flex-row ps-0"><button data-bs-toggle="collapse" class="btn d-inline-flex align-items-center p-0 border-0" data-bs-target="#menu-collapse-d49058e224"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 14l6-6-6-6"/></svg></button><span data-bs-toggle="collapse" class="d-inline-flex align-items-center flex-shrink-1 ps-2" data-bs-target="#menu-collapse-d49058e224"><i class="me-2 bi-tools" style="color: var(--bs-blue)"></i>Extend</span></div><div id="menu-collapse-d49058e224" class="ps-2 collapse "><ul class="list-unstyled fw-normal ps-4"><li><div class="d-flex flex-row ps-0"><a class="d-inline-flex align-items-center flex-shrink-1 " href="icons.html"><i class="me-2 bi-images" style=""></i>Icons</a></div></li></ul></div></li></ul></div></div><div class="bs-fixed-footer"><div class="mt-4 bg-secondary-subtle justify-content-center p-2">
+  <div class="align-self-center">
+    <p class="text-center mb-0">
+      <span class="badge bg-dark small m-0">PDF</span>
+    </p>
+  </div>
+</div></div></nav></div></div></div><main role="main" class="bs-main me-3"><article role="article" class="bs-content" aria-labelledby="ariaid-title1">
+  <h1 class="title" id="ariaid-title1">DITA Bootstrap PDF</h1>
+  
+  
+  <div class="body"><p class="shortdesc text-body-secondary lead">Two plug-ins for
+    <a class="xref" href="http://www.dita-ot.org" target="_blank" rel="external noopener">DITA Open Toolkit</a> that extend the default
+    PDF output with a
+    <a class="xref" href="https://getbootstrap.com/docs/5.3" target="_blank" rel="external noopener">Bootstrap 5.3</a> templating and components.
+  </p>
+    <section class="section"><h2 class="title h4">Installing</h2>
+      
+      <p class="p">Use the <span class="keyword cmdname">dita</span> command to add the plug-ins to your DITA Open Toolkit installation:</p>
+    </section>
+     <div id="index__accordion__1" class="bodydiv accordion">
+        <div class="accordion-item"><h2 type="accordion-header" id="heading_index__accordion-item__1"><button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="true" data-bs-target="#collapse_index__accordion-item__1" aria-controls="collapse_index__accordion-item__1">DITA-OT 3.5 and newer</button></h2><div class="accordion-collapse collapse show" id="collapse_index__accordion-item__1" aria-labelledby="heading_index__accordion-item__1" data-bs-parent="#index__accordion__1"><div class="accordion-body">
+        
+          <ol class="ol">  
+            <li class="li">
+              <p class="p"><strong class="ph b">Optional:</strong> install the specialization plug-in to add support for new DITA elements that
+               generate Bootstrap components:
+              </p>
+              <pre class="pre codeblock alert alert-secondary language-bash"><code><span class="keyword cmdname">dita</span> <span class="keyword parmname"><span class="ph token function">install</span></span> org.dita-bootstrap.specialization</code></pre>
+            </li>
+            <li class="li">
+              <p class="p">For PDF generation, install the PDF plug-in, and the PDF theme plug-in as shown:
+              </p>
+              <pre class="pre codeblock alert alert-secondary language-bash"><code><span class="keyword cmdname">dita</span> <span class="keyword parmname"><span class="ph token function">install</span></span> org.dita-bootstrap.pdf
+<span class="keyword cmdname">dita</span> <span class="keyword parmname"><span class="ph token function">install</span></span> org.dita-bootstrap.pdf.theme</code></pre>
+            </li>
+            <li class="li">
+              <p class="p">To add syntax highlighting using the Bootstrap color scheme, install the Prism.js plug-in if required:
+              </p>
+              <pre class="pre codeblock alert alert-secondary language-bash"><code><span class="keyword cmdname">dita</span> <span class="keyword parmname"><span class="ph token function">install</span></span> fox.jason.prismjs</code></pre>
+            </li>
+          </ol>
+      </div></div></div>
+      <div class="accordion-item"><h2 type="accordion-header" id="heading_index__accordion-item__2"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#collapse_index__accordion-item__2" aria-controls="collapse_index__accordion-item__2">DITA-OT 3.3 and newer</button></h2><div class="accordion-collapse collapse" id="collapse_index__accordion-item__2" aria-labelledby="heading_index__accordion-item__2" data-bs-parent="#index__accordion__1"><div class="accordion-body">
+        
+          <ol class="ol">  
+            <li class="li">
+              <p class="p"><strong class="ph b">Optional:</strong> install the specialization plug-in to add support for new DITA elements that
+               generate Bootstrap components:
+              </p>
+              <pre class="pre codeblock alert alert-secondary language-bash"><code><span class="keyword cmdname">dita</span> <span class="keyword parmname">--install</span> org.dita-bootstrap.specialization</code></pre>
+          </li>
+          <li class="li">
+          <p class="p">For PDF generation, install the PDF plug-in, and add the PDF theme plug-in as shown:
+          </p>
+          <pre class="pre codeblock alert alert-secondary language-bash"><code><span class="keyword cmdname">dita</span> <span class="keyword parmname">--install</span> org.dita-bootstrap.pdf
+<span class="keyword cmdname">dita</span> <span class="keyword parmname">--install</span> org.dita-bootstrap.pdf.theme</code></pre>
+            </li>
+            <li class="li">
+              <p class="p">To add syntax highlighting using the bootstrap color scheme, install the Prism.js plug-in if required:
+              </p>
+              <pre class="pre codeblock alert alert-secondary language-bash"><code><span class="keyword cmdname">dita</span> <span class="keyword parmname">--install</span> fox.jason.prismjs</code></pre>
+            </li>
+          </ol>
+      </div></div></div>
+      <div class="accordion-item"><h2 type="accordion-header" id="heading_index__accordion-item__3"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#collapse_index__accordion-item__3" aria-controls="collapse_index__accordion-item__3">DITA-OT 3.2 and older</button></h2><div class="accordion-collapse collapse" id="collapse_index__accordion-item__3" aria-labelledby="heading_index__accordion-item__3" data-bs-parent="#index__accordion__1"><div class="accordion-body">
+        
+          <ol class="ol">  
+            <li class="li">
+              <p class="p"><strong class="ph b">Optional:</strong> install the specialization plug-in to add support for new DITA elements that
+               generate Bootstrap components:
+              </p>
+              <pre class="pre codeblock alert alert-secondary language-bash"><code><span class="keyword cmdname">dita</span> <span class="keyword parmname">--install</span> https://github.com/dita-bootstrap/dita-bootstrap.specialization/archive/master.zip</code></pre>
+            </li>
+            <li class="li">
+              <p class="p">For PDF generation, install the PDF plug-in, and add the PDF theme plug-in as shown:
+              </p>
+              <pre class="pre codeblock alert alert-secondary language-bash"><code><span class="keyword cmdname">dita</span> <span class="keyword parmname">--install</span> https://github.com/dita-bootstrap/dita-bootstrap.pdf/archive/master.zip
+<span class="keyword cmdname">dita</span> <span class="keyword parmname">--install</span> https://github.com/dita-bootstrap/dita-bootstrap.pdf.theme/archive/master.zip</code></pre>
+            </li>
+            <li class="li">
+              <p class="p">To add syntax highlighting using the bootstrap color scheme, install the Prism.js plug-in if required:
+              </p>
+              <pre class="pre codeblock alert alert-secondary language-bash"><code><span class="keyword cmdname">dita</span> <span class="keyword parmname">--install</span> https://github.com/jason-fox/fox.jason.prismjs/archive/master.zip</code></pre>
+            </li>
+          </ol>   
+      </div></div></div>
+    </div>
+    <section class="section"><h2 class="title h4">Using</h2>
+      
+      <p class="p">Specify the <span class="keyword option">pdf-bootstrap</span> format when building output with the <span class="keyword cmdname">dita</span>
+        command:</p>
+      <pre class="pre codeblock alert alert-secondary language-bash"><code><span class="keyword cmdname">dita</span> <span class="keyword parmname">--input</span><span class="ph token operator">=</span>path/to/your.ditamap <span class="keyword parmname">--format</span><span class="ph token operator">=</span>pdf-bootstrap</code></pre>
+
+       <p class="p">If using DITA-Bootstrap specialization, ensure that the <code class="ph codeph">*.dita</code> files are using the following <code class="ph codeph">DOCTYPE</code> declaration:</p>
+       <pre class="pre codeblock alert alert-secondary language-xml"><code><span class="ph token doctype"><span class="ph token punctuation">&lt;!</span><span class="ph token doctype-tag">DOCTYPE</span> <span class="ph token name">topic</span> <span class="ph token name">PUBLIC</span> <span class="ph token string">"-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN"</span> <span class="ph token string">"bootstrap-topic.dtd"</span><span class="ph token punctuation">&gt;</span></span></code></pre>
+        
+    </section>
+    <section class="section"><h2 class="title h4">Bootswatch themes</h2>
+      
+      
+      <p class="p">PDFs can be generated to align with the themes Bootstrap themes available at
+        <a class="xref" href="https://bootswatch.com/" target="_blank" rel="external noopener">Bootswatch</a>.
+        To override the default appearance with a Bootswatch theme, pass a theme name to the <span class="keyword cmdname">dita</span> command via the <span class="keyword parmname">--bootstrap.theme</span> parameter:
+      </p>
+
+      <pre class="pre codeblock alert alert-secondary language-bash"><code><span class="keyword cmdname">dita</span> <span class="keyword parmname">--input</span><span class="ph token operator">=</span><span class="ph filepath">path/to/your.ditamap</span> <span class="ph token punctuation">\</span>
+     <span class="keyword parmname">--format</span><span class="ph token operator">=</span><span class="keyword option">pdf-bootstrap</span> <span class="ph token punctuation">\</span>
+     <span class="keyword parmname">--bootstrap.theme</span><span class="ph token operator">=</span><span class="keyword option"><span class="ph token operator">&lt;</span>theme-name<span class="ph token operator">&gt;</span></span></code></pre>
+     <p class="p"><strong class="ph b h4">Parameters</strong></p>
+     <dl class="dl parml row">
+        
+          <dt class="dt pt col-lg-4 text-truncate dlterm">
+            <span class="keyword parmname text-wrap">--bootstrap.theme</span>
+          </dt>
+          <dd class="dd pd col-lg-8">
+            Defines the style of the PDF  - <span class="keyword option">default</span> applies default Bootstrap styling.
+          </dd>
+        
+      </dl>
+
+      <div data-bs-ride="carousel" id="carousel_index__carousel__1" class="ul carousel mt-2 slide"><div class="carousel-indicators"><button type="button" class="btn btn-primary bg-primary btn-sm active" aria-current="true" data-bs-target="#carousel_index__carousel__1" data-bs-slide-to="0"></button><button type="button" class="btn btn-primary bg-primary btn-sm" data-bs-target="#carousel_index__carousel__1" data-bs-slide-to="1"></button><button type="button" class="btn btn-primary bg-primary btn-sm" data-bs-target="#carousel_index__carousel__1" data-bs-slide-to="2"></button><button type="button" class="btn btn-primary bg-primary btn-sm" data-bs-target="#carousel_index__carousel__1" data-bs-slide-to="3"></button><button type="button" class="btn btn-primary bg-primary btn-sm" data-bs-target="#carousel_index__carousel__1" data-bs-slide-to="4"></button><button type="button" class="btn btn-primary bg-primary btn-sm" data-bs-target="#carousel_index__carousel__1" data-bs-slide-to="5"></button><button type="button" class="btn btn-primary bg-primary btn-sm" data-bs-target="#carousel_index__carousel__1" data-bs-slide-to="6"></button><button type="button" class="btn btn-primary bg-primary btn-sm" data-bs-target="#carousel_index__carousel__1" data-bs-slide-to="7"></button><button type="button" class="btn btn-primary bg-primary btn-sm" data-bs-target="#carousel_index__carousel__1" data-bs-slide-to="8"></button></div><div class="carousel-inner pb-1">
+        <div class="li carousel-item active"><div class="container mx-0"><div class="bodydiv grid-row row">
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/brite/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/brite/" target="_blank" rel="external noopener"><span class="keyword option">brite</span></a>
+                </p></div></div>
+            </div>
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/cerulean/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/cerulean/" target="_blank" rel="external noopener"><span class="keyword option">cerulean</span></a>
+                </p></div></div>
+            </div>
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/cosmo/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/cosmo/" target="_blank" rel="external noopener"><span class="keyword option">cosmo</span></a>
+                </p></div></div>
+            </div>
+          </div><div class="row py-3"></div></div></div>
+        <div class="li carousel-item"><div class="container mx-0"><div class="bodydiv grid-row row">
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/cyborg/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/cyborg/" target="_blank" rel="external noopener"><span class="keyword option">cyborg</span></a>
+                </p></div></div>
+            </div>
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/darkly/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/darkly/" target="_blank" rel="external noopener"><span class="keyword option">darkly</span></a>
+                </p></div></div>
+            </div>
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/flatly/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/flatly/" target="_blank" rel="external noopener"><span class="keyword option">flatly</span></a>
+                </p></div></div>
+            </div>
+          </div><div class="row py-3"></div></div></div>
+        <div class="li carousel-item"><div class="container mx-0"><div class="bodydiv grid-row row">
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/journal/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/journal/" target="_blank" rel="external noopener"><span class="keyword option">journal</span></a>
+                </p></div></div>
+            </div>
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/litera/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/litera/" target="_blank" rel="external noopener"><span class="keyword option">litera</span></a>
+                </p></div></div>
+            </div>
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/lumen/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/lumen/" target="_blank" rel="external noopener"><span class="keyword option">lumen</span></a>
+                </p></div></div>
+            </div>
+          </div><div class="row py-3"></div></div></div>
+        <div class="li carousel-item"><div class="container mx-0"><div class="bodydiv grid-row row">
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/lux/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/lux/" target="_blank" rel="external noopener"><span class="keyword option">lux</span></a>
+                </p></div></div>
+            </div>
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/materia/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/materia/" target="_blank" rel="external noopener"><span class="keyword option">materia</span></a>
+                </p></div></div>
+            </div>
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/minty/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/minty/" target="_blank" rel="external noopener"><span class="keyword option">minty</span></a>
+                </p></div></div>
+            </div>
+          </div><div class="row py-3"></div></div></div>
+        <div class="li carousel-item"><div class="container mx-0"><div class="bodydiv grid-row row">
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/morph/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/morph/" target="_blank" rel="external noopener"><span class="keyword option">morph</span></a>
+                </p></div></div>
+            </div>
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/pulse/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/pulse/" target="_blank" rel="external noopener"><span class="keyword option">pulse</span></a>
+                </p></div></div>
+            </div>
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/quartz/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/quartz/" target="_blank" rel="external noopener"><span class="keyword option">quartz</span></a>
+                </p></div></div>
+            </div>
+          </div><div class="row py-3"></div></div></div>
+        <div class="li carousel-item"><div class="container mx-0"><div class="bodydiv grid-row row">
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/sandstone/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/sandstone/" target="_blank" rel="external noopener"><span class="keyword option">sandstone</span></a>
+                </p></div></div>
+            </div>
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/simplex/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/simplex/" target="_blank" rel="external noopener"><span class="keyword option">simplex</span></a>
+                </p></div></div>
+            </div>
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/sketchy/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/sketchy/" target="_blank" rel="external noopener"><span class="keyword option">sketchy</span></a>
+                </p></div></div>
+            </div>
+          </div><div class="row py-3"></div></div></div>
+        <div class="li carousel-item"><div class="container mx-0"><div class="bodydiv grid-row row">
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/slate/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/slate/" target="_blank" rel="external noopener"><span class="keyword option">slate</span></a>
+                </p></div></div>
+            </div>
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/solar/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/solar/" target="_blank" rel="external noopener"><span class="keyword option">solar</span></a>
+                </p></div></div>
+            </div>
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/spacelab/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/spacelab/" target="_blank" rel="external noopener"><span class="keyword option">spacelab</span></a>
+                </p></div></div>
+            </div>
+          </div><div class="row py-3"></div></div></div>
+        <div class="li carousel-item"><div class="container mx-0"><div class="bodydiv grid-row row">
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/superhero/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/superhero/" target="_blank" rel="external noopener"><span class="keyword option">superhero</span></a>
+                </p></div></div>
+            </div>
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/united/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/united/" target="_blank" rel="external noopener"><span class="keyword option">united</span></a>
+                </p></div></div>
+            </div>
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/vapor/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/vapor/" target="_blank" rel="external noopener"><span class="keyword option">vapor</span></a>
+                </p></div></div>
+            </div>
+          </div><div class="row py-3"></div></div></div>
+        <div class="li carousel-item"><div class="container mx-0"><div class="bodydiv grid-row row">
+            <div class="bodydiv grid-col col-4 col">
+              <div class="section card w-100"><img class="image card-img-top" src="https://bootswatch.com/yeti/thumbnail.png"><div class="card-body"><p class="p text-center">
+                  <a class="xref link stretched-link link-underline link-underline-opacity-0" href="https://bootswatch.com/yeti/" target="_blank" rel="external noopener"><span class="keyword option">yeti</span></a>
+                </p></div></div>
+            </div>
+          </div><div class="row py-3"></div></div></div>
+      </div><a class="carousel-control-prev" role="button" data-bs-slide="prev" data-bs-target="#carousel_index__carousel__1"><span class="btn btn-primary btn-sm p-0"><span aria-hidden="true" class="carousel-control-prev-icon align-middle"></span></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" role="button" data-bs-slide="next" data-bs-target="#carousel_index__carousel__1"><span class="btn btn-primary btn-sm p-0"><span aria-hidden="true" class="carousel-control-next-icon align-middle"></span></span><span class="visually-hidden">Next</span></a></div>
+    </section>
+  </div>
+</article></main></div><script language="javascript" src="./js/popovers.js"></script><script language="javascript" src="./js/dark-mode-toggler.js"></script><footer role="contentinfo" class="mt-auto border-top bg-primary-subtle"><!-- Footer --><div class="container text-center">
+  <div class="row">
+    <div class="col">
+      <!-- Social media -->
+      <p class="pt-3">
+        <!-- GitHub -->
+        <a class="btn m-1" href="https://github.com/dita-bootstrap/dita-bootstrap.pdf" role="button" style="background-color: #333333;">
+          <i class="bi bi-github text-white"></i>
+        </a>
+        <!-- LinkedIn -->
+        <a class="btn m-1" href="https://www.linkedin.com/in/infotexture/" role="button" style="background-color: #0082ca;">
+          <i class="bi bi-linkedin text-white"></i>
+        </a>
+        <!-- Mastodon -->
+        <a class="btn m-1" href="https://indieweb.social/@infotexture" role="button" style="background-color: #563acc;">
+          <i class="bi bi-mastodon text-white"></i>
+        </a>
+        <!-- Bluesky -->
+        <a class="btn m-1" href="https://bsky.app/profile/infotexture.net" role="button" style="background-color: #0085ff;">
+          <i class="bi bi-bluesky text-white"></i>
+        </a>
+      </p>
+      <p>
+        <small>
+          © 2017–2026
+          <a href="https://infotexture.net/">infotexture</a>
+        </small>
+      </p>
+    </div>
+  </div>
+</div><!-- Footer --></footer></body></html>
