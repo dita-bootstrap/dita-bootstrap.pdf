@@ -1,6 +1,7 @@
 <div class="mt-4 bg-secondary-subtle justify-content-center p-2">
   <div class="align-self-center">
     <p class="text-center mb-0">
+      <i class="bi bi-filetype-pdf text-danger fs-4 me-1 align-middle"/>
       <span class="badge bg-dark small m-0">PDF</span>
     </p>
   </div>
