@@ -1,0 +1,604 @@
+
+/*!
+ *  This file is part of the DITA Bootstrap plug-in for DITA Open Toolkit.
+ *  See the accompanying LICENSE file for applicable licenses.
+ */
+
+:root {
+  --dita-prussian-blue: var(--bs-primary-fg-emphasis);
+  --dita-maroon: var(--bs-danger-fg-emphasis);
+  --dita-violet: var(--bs-purple-400);
+  --bs-code-color: rgb(from var(--bs-danger-base) r g calc(b + 63));
+}
+
+/*!
+ *  This file is part of the DITA Bootstrap plug-in for DITA Open Toolkit.
+ *  See the accompanying LICENSE file for applicable licenses.
+ */
+
+.list-group-item.active,
+.nav-link.active,
+[data-bs-theme='dark'] {
+  --dita-violet: color-mix(in oklch, var(--bs-purple-400), var(--bs-white) 30%);
+}
+
+.list-group-item {
+  border-radius: 0;
+}
+
+.tab-pane pre[class*='language-'] {
+  margin: 0;
+}
+
+.d-dark,
+.d-light {
+  display: none;
+}
+
+[data-bs-theme='light'] .d-light {
+  display: inherit;
+}
+
+[data-bs-theme='light'] .d-auto {
+  display: none;
+}
+
+[data-bs-theme='dark'] .d-dark {
+  display: inherit;
+}
+
+[data-bs-theme='dark'] .d-auto {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --dita-violet: color-mix(in oklch, var(--bs-purple-400), var(--bs-white) 30%);
+  }
+
+  [data-bs-theme='light'] {
+    --dita-violet: var(--bs-purple-400);
+  }
+}
+
+.syntaxdiagram {
+  color: var(--dita-maroon);
+}
+
+.numcharref,
+.parameterentity,
+.textentity,
+.xmlatt,
+.xmlelement,
+.xmlnsname,
+.xmlpi {
+  font-family: var(--bs-font-mono);
+  color: var(--dita-violet);
+  overflow-wrap: break-word;
+}
+
+.cmdname,
+.codeph,
+.filepath,
+.option,
+.parmname {
+  font-family: var(--bs-font-mono);
+  color: var(--bs-code-color);
+  overflow-wrap: break-word;
+}
+
+.cmdname,
+.parmname {
+  font-weight: 700;
+  color: var(--dita-prussian-blue);
+}
+
+.nav-pills .active .cmdname,
+.nav-pills .active .codeph,
+.nav-pills .active .filepath,
+.nav-pills .active .option,
+.nav-pills .active .parmname,
+.nav-pills .active .numcharref,
+.nav-pills .active .parameterentity,
+.nav-pills .active .textentity,
+.nav-pills .active .xmlatt,
+.nav-pills .active .xmlelement,
+.nav-pills .active .xmlnsname,
+.nav-pills .active .xmlpi {
+  color: var(--bs-nav-pills-link-active-color);
+}
+
+.boolean {
+  color: var(--bs-green-400);
+}
+
+.state {
+  color: var(--bs-red-400);
+}
+
+.navbar-brand > svg {
+  margin: 4px 6px;
+  vertical-align: text-top;
+}
+
+.bs-container {
+  margin: 1rem auto;
+}
+
+#bs-sidebar-nav .navbar-brand {
+  color: var(--bs-fg-body);
+}
+
+#bs-sidebar-nav a {
+  color: var(--bs-fg-body);
+}
+
+#bs-sidebar-nav .nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: var(--bs-theme-fg-contrast, var(--bs-nav-pills-link-active-color));
+  background-color: var(--bs-theme-base, var(--bs-nav-pills-link-active-bg));
+}
+
+#bs-sidebar-nav .list-group-item.active {
+  color: var(--bs-list-group-active-color);
+  background-color: var(--bs-theme-fg-emphasis, var(--bs-list-group-active-bg));
+  border-color: var(--bs-theme-base, var(--bs-list-group-active-border-color));
+}
+
+[type='search']::placeholder {
+  color: color-mix(in oklch, var(--bs-fg-body) 35%, transparent);
+}
+
+.note {
+  border-left: 6px solid;
+  border-left-color: var(--bs-alert-border-color, transparent);
+}
+
+[dir='rtl'] .note {
+  border-right: 6px solid;
+  border-right-color: var(--bs-alert-border-color, transparent);
+  border-left: 0;
+}
+
+.navbar .menu {
+  --bs-theme-fg: initial;
+  --bs-theme-base: initial;
+  --bs-theme-bg: initial;
+  --bs-theme-bg-subtle: initial;
+  --bs-theme-bg-muted: initial;
+  --bs-theme-border: initial;
+  --bs-theme-contrast: initial;
+}
+
+.card .card-body pre {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: scroll;
+}
+
+/*!
+ *  This file is part of the DITA Bootstrap plug-in for DITA Open Toolkit.
+ *  See the accompanying LICENSE file for applicable licenses.
+ */
+
+/*! These values define the relative width of the
+ *  main content window compared with the sidebar-nav
+ */
+
+.bs-container {
+  display: grid;
+  grid-template-areas: 'sidebar main';
+  grid-template-columns: minmax(260px, 1fr) minmax(0, 5fr);
+  gap: 1.5rem;
+}
+
+.bs-sidebar {
+  grid-area: sidebar;
+}
+
+.bs-sidebar .nav-pills .nav-link {
+  justify-content: flex-start;
+  font-size: 0.875rem;
+  text-align: left;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.bs-main {
+  grid-area: main;
+}
+
+.bs-content {
+  grid-area: content;
+  min-width: 1px;
+}
+
+.bs-fixed-sidetoc {
+  height: calc(100vh - 10rem);
+}
+.bs-fixed-footer {
+  height: auto;
+  padding-top: 0.25rem;
+}
+
+@media (max-width: 1023.98px) {
+  .bs-main {
+    margin-inline: auto;
+  }
+  .bs-fixed-sidetoc {
+    height: calc(100vh);
+  }
+}
+
+@media (min-width: 768px) {
+  .bs-main {
+    display: grid;
+    grid-template-areas: 'content';
+    grid-template-rows: auto auto 1fr;
+    gap: inherit;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bs-main {
+    grid-template-areas: 'content';
+    grid-template-rows: auto 1fr;
+  }
+
+  .codeblock {
+    min-width: 100%;
+    max-width: calc(80vw - 2rem);
+  }
+
+  .bs-sidebar {
+    --bs-sidebar-top: calc(var(--bs-navbar-min-height, 3.5rem) + 1.5rem);
+    position: sticky;
+    top: var(--bs-sidebar-top);
+    display: block !important;
+    height: calc(100vh - var(--bs-sidebar-top) - 1rem);
+    padding-left: 0.25rem;
+    margin-left: -0.25rem;
+  }
+}
+
+@media (max-width: 1023.98px) {
+  .bd-navbar .bd-navbar-toggle {
+    width: 4.25rem;
+  }
+
+  .bs-container {
+    grid-template-columns: 0fr 1fr;
+  }
+
+  .codeblock,
+  .table,
+  .tablist,
+  .note,
+  .carousel,
+  .section,
+  .shortdesc,
+  .topic {
+    max-width: calc(100vw - 4rem);
+  }
+
+  /* stylelint-disable-next-line selector-class-pattern */
+  .bs-sidebar .lg\:drawer {
+    border-right-color: var(--bs-border-color);
+  }
+}
+
+.nested0 {
+  margin-top: 0;
+}
+
+.nested1 {
+  margin-top: 1em;
+}
+
+.nested0,
+article h1 {
+  scroll-margin-top: 7.25rem;
+}
+
+.nested1,
+article h2,
+article h3,
+article h4,
+article [tabindex='0'] {
+  scroll-margin-top: 5.25rem;
+}
+
+/*!
+ *  This file is part of the DITA Bootstrap plug-in for DITA Open Toolkit.
+ *  See the accompanying LICENSE file for applicable licenses.
+ */
+
+/*! These values define the relative width of the
+ *  main content window compared with the sidebar-nav
+ */
+
+.bd-links {
+  padding-left: 0;
+  overflow: auto;
+  font-weight: 600;
+}
+
+.bd-links a {
+  padding: 0.1875rem 0.5rem;
+  margin-top: 0.125rem;
+  color: var(--bs-fg-body);
+  text-decoration: none;
+}
+
+.bd-links a:hover {
+  color: var(--bs-theme-fg-emphasis, var(--bs-link-hover-color)) !important;
+}
+
+.bd-links a:focus-visible {
+  outline: var(--bs-focus-ring);
+}
+
+.bd-links span {
+  color: var(--bs-fg-body);
+}
+
+.bd-links span:not(.bd-divider):hover {
+  color: var(--bs-theme-fg-emphasis, var(--bs-link-hover-color)) !important;
+}
+
+@media (min-width: 768px) {
+  .bd-links {
+    position: sticky;
+    display: block !important;
+    padding: 0 0.25rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .bd-links > ul {
+    padding: 1.5rem 0.75rem;
+    background-color: var(--bs-bg-body);
+  }
+}
+
+.bd-links li li a {
+  font-size: 0.875em;
+}
+
+.bd-divider {
+  font-size: 0.875em;
+  font-weight: 600;
+}
+
+.bd-links .btn {
+  padding: 0.25rem !important;
+  font-weight: 600;
+  color: var(--bs-fg-body);
+  background-color: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.bd-links svg:hover {
+  color: var(--bs-theme-fg-emphasis, var(--bs-link-hover-color)) !important;
+}
+
+.bd-links .ps-2 {
+  padding-left: 0.5rem !important;
+}
+
+[dir='rtl'] .bd-links .ps-2 {
+  padding-right: 0.5rem !important;
+  padding-left: 0 !important;
+}
+
+.bd-links .ps-3 {
+  padding-left: 0.75rem !important;
+}
+
+[dir='rtl'] .bd-links .ps-3 {
+  padding-right: 0.75rem !important;
+  padding-left: 0 !important;
+}
+
+.bd-links .ps-4 {
+  padding-left: 1rem !important;
+}
+
+[dir='rtl'] .bd-links .ps-4 {
+  padding-right: 1rem !important;
+  padding-left: 0 !important;
+}
+
+[dir='rtl'] .bd-links svg {
+  transform: rotate(180deg);
+}
+
+.bd-links .btn[aria-expanded='true'] svg {
+  transform: rotate(90deg);
+}
+
+.bd-links .active {
+  font-weight: 600;
+  color: var(--bs-fg-body);
+}
+
+html:root {
+  --prism-background: transparent;
+  --prism-maintext: light-dark(var(--bs-gray-900), var(--bs-white));
+  --prism-text: light-dark(var(--bs-gray-600), var(--bs-gray-400));
+  --prism-punctuation: light-dark(var(--bs-gray-600), var(--bs-gray-400));
+  --prism-namespace: var(--prism-text);
+  --prism-keywords: light-dark(var(--bs-blue-600), var(--bs-blue-400));
+  --prism-strings: light-dark(var(--bs-green-600), var(--bs-green-400));
+  --prism-symbol: light-dark(var(--bs-pink-600), var(--bs-pink-400));
+  --prism-type: light-dark(var(--bs-red-600), var(--bs-red-400));
+  --prism-regex: light-dark(var(--bs-orange-600), var(--bs-orange-400));
+  --prism-deleted: light-dark(var(--bs-red-600), var(--bs-red-400));
+  --prism-url: light-dark(var(--bs-yellow-600), var(--bs-yellow-400));
+}
+
+/**
+ * Use css variables in themes with a fallback to the prism.js default theme
+ * Based on https://github.com/PrismJS/prism/issues/2603
+ * @author Richard Werkman
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: var(--prism-maintext, #ccc);
+	background: none;
+	font-family: var(--bs-font-monospace, Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace);
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+/* :not(pre) > code[class*="language-"],*/
+pre[class*="language-"] {
+	background: var(--prism-background, #2d2d2d);
+}
+
+/* Inline code */
+:not(pre)>code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+pre[class*="language-"].show-line-numbers {
+	position: relative;
+	padding-left: 3.8em;
+	counter-reset: linenumber;
+}
+
+
+pre[class*="language-"].show-line-numbers>code {
+	position: relative;
+	white-space: inherit;
+}
+
+.show-line-numbers .line-numbers-rows {
+	position: absolute;
+	pointer-events: none;
+	font-size: 100%;
+	left: -3em;
+	width: 2em;
+	/* works for line-numbers below 1000 lines */
+	letter-spacing: -1px;
+	border-right: 1px solid;
+	border-right-color: var(--prism-text, #999);
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+}
+
+span.line-numbers-rows {
+	display: inline;
+	counter-increment: linenumber;
+}
+
+span.line-numbers-rows:before {
+	content: counter(linenumber);
+	color: var(--prism-text, #999);
+	display: inline;
+	padding-right: 0.8em;
+	text-align: right;
+}
+
+.token.comment,
+.token.block-comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: var(--prism-text, #999);
+}
+
+.token.punctuation {
+	color: var(--prism-punctuation, #ccc);
+}
+
+.token.namespace {
+	color: var(--prism-namespace, #999);
+	opacity: .7;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: var(--prism-keywords, #cc99cd);
+}
+
+.token.attr-name,
+.token.builtin,
+.token.char,
+.token.inserted,
+.token.selector,
+.token.string,
+.token.variable {
+	color: var(--prism-strings, #7ec699);
+}
+
+.token.boolean,
+.token.constant,
+.token.number,
+.token.property,
+.token.symbol,
+.token.tag {
+	color: var(--prism-symbol, #f8c555);
+}
+
+.token.class-name,
+.token.function {
+	color: var(--prism-type, #dd4a68);
+}
+
+.token.important,
+.token.regex {
+	color: var(--prism-regex, #e90);
+}
+
+.token.deleted {
+	color: var(--prism-deleted, red);
+}
+
+.token.operator,
+.token.entity,
+.token.url {
+	color: var(--prism-url, #67cdcc);
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
