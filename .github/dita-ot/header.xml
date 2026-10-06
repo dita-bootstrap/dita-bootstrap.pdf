@@ -21,7 +21,7 @@
           />
     </svg>
       DITA Bootstrap <span
-          class="ms-1 badge bg-subtle-primary fg-primary"
+          class="ms-1 badge badge-outline theme-inverse"
         >v6</span>
     </a>
     <div class="nav-overflow" data-bs-toggle="nav-overflow">
