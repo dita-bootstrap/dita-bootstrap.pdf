@@ -27,26 +27,15 @@
   />
 
   <xsl:template
-    match="*[contains(@class, ' topic/ol ')][parent::*[contains(@class, ' bootstrap-d/pagination ')] or tokenize(@outputclass, ' ') = 'pagination']"
+    match="*[contains(@class, ' topic/ol ')][parent::*[contains(@class, ' bootstrap-d/pagination ')] or tokenize((@outputclass, parent::*[contains(@class, ' topic/section ')]/@outputclass), ' ') = 'pagination']"
     priority="5"
   >
     <xsl:variable name="pagContainer" select="parent::*[contains(@class, ' bootstrap-d/pagination ')]"/>
-    
-    <xsl:variable name="parentTheme" select="$pagContainer/@theme"/>
-    <xsl:variable name="themeColor">
-      <xsl:choose>
-        <xsl:when test="$parentTheme">
-          <xsl:value-of
-            select="if (contains($parentTheme, '-')) then substring-before($parentTheme, '-') else $parentTheme"
-          />
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:call-template name="get-theme-color"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
 
-    <xsl:variable name="alignOutputclass" select="(@outputclass, $pagContainer/@outputclass)[1]"/>
+    <xsl:variable
+      name="alignOutputclass"
+      select="string-join((@outputclass, $pagContainer/@outputclass, parent::*[contains(@class, ' topic/section ')]/@outputclass), ' ')"
+    />
     <xsl:variable
       name="textAlign"
       select="
@@ -59,8 +48,8 @@
       name="size"
       select="
         ($pagContainer/@size,
-         if (tokenize(@outputclass, ' ') = 'pagination-lg') then 'large'
-         else if (tokenize(@outputclass, ' ') = 'pagination-sm') then 'small'
+         if (tokenize($alignOutputclass, ' ') = 'pagination-lg') then 'large'
+         else if (tokenize($alignOutputclass, ' ') = 'pagination-sm') then 'small'
          else ())[1]"
     />
 
@@ -68,7 +57,6 @@
       <xsl:call-template name="commonattributes"/>
       <xsl:for-each select="*[contains(@class, ' topic/li ')]">
         <xsl:call-template name="renderPaginationItem">
-          <xsl:with-param name="themeColor" select="$themeColor"/>
           <xsl:with-param name="size" select="$size"/>
           <xsl:with-param name="isFirst" select="position() = 1"/>
           <xsl:with-param name="isLast" select="position() = last()"/>
@@ -79,25 +67,11 @@
 
   <!-- One page-item/page-link segment. -->
   <xsl:template name="renderPaginationItem">
-    <xsl:param name="themeColor" select="''"/>
     <xsl:param name="size" select="''"/>
     <xsl:param name="isFirst" select="false()"/>
     <xsl:param name="isLast" select="false()"/>
 
     <xsl:variable name="xref" select="*[contains(@class, ' topic/xref ')][1]"/>
-
-    <!-- Link-colored text (themed or the default link color), matching the
-         HTML reference: theming only recolors the text, not the border. -->
-    <xsl:variable name="color">
-      <xsl:choose>
-        <xsl:when test="$themeColor != ''">
-          <xsl:call-template name="getBootstrapAttrValue">
-            <xsl:with-param name="attrSet" select="concat('__color__', $themeColor)"/>
-          </xsl:call-template>
-        </xsl:when>
-        <xsl:otherwise><xsl:value-of select="$bootstrap-link"/></xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
 
     <xsl:variable name="padding">
       <xsl:choose>
@@ -138,7 +112,7 @@
       <xsl:attribute name="border-style">solid</xsl:attribute>
       <xsl:attribute name="border-width"><xsl:value-of select="$bootstrap-border-width"/></xsl:attribute>
       <xsl:attribute name="border-color"><xsl:value-of select="$bootstrap-border-color"/></xsl:attribute>
-      <xsl:attribute name="color"><xsl:value-of select="$color"/></xsl:attribute>
+      <xsl:attribute name="color"><xsl:value-of select="$bootstrap-link"/></xsl:attribute>
       <xsl:if test="$size = 'small'">
         <xsl:attribute name="font-size">10.5pt</xsl:attribute>
       </xsl:if>
