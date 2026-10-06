@@ -31,7 +31,7 @@
     </section>
     <fig>
       <title>Headings</title>
-      <image href="src/typography-1.png" scalefit="yes"/>
+      <image href="src/typography/headings.png" scalefit="yes"/>
     </fig>
     <codeblock>&lt;title outputclass="h1"&gt;h1. Bootstrap heading&lt;/title&gt;
 &lt;title outputclass="h2"&gt;h2. Bootstrap heading&lt;/title&gt;
@@ -46,7 +46,7 @@
     </section>
     <fig>
       <title>Customizing headings</title>
-      <image href="src/typography-2.png" scalefit="yes"/>
+      <image href="src/typography/customizing-headings.png" scalefit="yes"/>
     </fig>
     <codeblock
     >&lt;title&gt;Fancy display heading &lt;ph outputclass="small text-body-secondary"&gt;with faded secondary text&lt;/ph&gt;&lt;/title&gt;</codeblock-->
@@ -57,7 +57,7 @@
     </section>
     <fig>
       <title>Display headings</title>
-      <image href="src/typography-3.png" scalefit="yes"/>
+      <image href="src/typography/display-headings.png" scalefit="yes"/>
     </fig>
     <codeblock>&lt;title outputclass="display-1"&gt;Display 1&lt;/title&gt;
 &lt;title outputclass="display-2"&gt;Display 2&lt;/title&gt;
@@ -72,7 +72,7 @@
     </section>
     <fig>
       <title>Lead</title>
-      <image href="src/typography-4.png" scalefit="yes"/>
+      <image href="src/typography/lead.png" scalefit="yes"/>
     </fig>
     <codeblock>&lt;p outputclass="lead"&gt;
   This is a lead paragraph. It stands out from regular paragraphs.
@@ -83,7 +83,7 @@
     </section>
     <fig>
       <title>Inline text elements</title>
-      <image href="src/typography-5.png" scalefit="yes"/>
+      <image href="src/typography/inline-text-elements.png" scalefit="yes"/>
     </fig>
     <codeblock
     >&lt;p&gt;You can use &lt;xmlatt&gt;outputclass="mark"&lt;/xmlatt&gt; to &lt;ph outputclass="mark"&gt;highlight&lt;/ph&gt; text.&lt;/p&gt;
@@ -106,7 +106,7 @@
     </section>
     <fig>
       <title>Blockquotes</title>
-      <image href="src/typography-7.png" scalefit="yes"/>
+      <image href="src/typography/blockquotes.png" scalefit="yes"/>
     </fig>
     <codeblock>&lt;lq&gt;
   &lt;p&gt;A well-known quote, contained in a blockquote element.&lt;/p&gt;
@@ -121,7 +121,7 @@
     </section>
     <fig>
       <title>Naming a source</title>
-      <image href="src/typography-8.png" scalefit="yes"/>
+      <image href="src/typography/naming-a-source.png" scalefit="yes"/>
     </fig>
     <codeblock>&lt;fig&gt;
   &lt;title&gt;Someone famous in &lt;cite&gt;Source Title&lt;/cite&gt;&lt;/title&gt;
@@ -136,7 +136,7 @@
     </section>
     <fig>
       <title>Center Aligned Title</title>
-      <image href="src/typography-9.png" scalefit="yes"/>
+      <image href="src/typography/center-aligned-title.png" scalefit="yes"/>
     </fig>
     <codeblock>&lt;fig outputclass="text-center"&gt;
   &lt;title&gt;Someone famous in &lt;cite&gt;Source Title&lt;/cite&gt;&lt;/title&gt;
@@ -146,7 +146,7 @@
 &lt;/fig&gt;</codeblock>
     <fig>
       <title>Right Aligned Title</title>
-      <image href="src/typography-10.png" scalefit="yes"/>
+      <image href="src/typography/right-aligned-title.png" scalefit="yes"/>
     </fig>
     <codeblock>&lt;fig outputclass="text-end"&gt;
   &lt;title&gt;Someone famous in &lt;cite&gt;Source Title&lt;/cite&gt;&lt;/title&gt;
@@ -166,7 +166,7 @@
     </section>
     <fig>
       <title>List Styling</title>
-      <image href="src/typography-11.png" scalefit="yes"/>
+      <image href="src/typography/list-styling.png" scalefit="yes"/>
     </fig>
     <codeblock>&lt;ul outputclass="list-unstyled"&gt;
   &lt;li&gt;This is a list.&lt;/li&gt;
@@ -190,7 +190,7 @@
     </section>
     <fig>
       <title>Inline Lists</title>
-      <image href="src/typography-12.png" scalefit="yes"/>
+      <image href="src/typography/inline-lists.png" scalefit="yes"/>
     </fig>
     <codeblock>&lt;ul outputclass="list-inline"&gt;
   &lt;li&gt;This is a list item.&lt;/li&gt;
@@ -204,7 +204,7 @@
     </section>
     <fig>
       <title>Description Lists</title>
-      <image href="src/typography-13.png" scalefit="yes"/>
+      <image href="src/typography/description-lists.png" scalefit="yes"/>
     </fig>
         <codeblock>&lt;dl&gt;
   &lt;dlentry&gt;
@@ -248,7 +248,7 @@
     </section>
     <fig>
       <title>Description List Alignment</title>
-      <image href="src/typography-14.png" scalefit="yes"/>
+      <image href="src/typography/alignment.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>

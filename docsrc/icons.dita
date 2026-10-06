@@ -38,7 +38,7 @@
     </section>
     <fig>
       <title>Icons</title>
-      <image href="src/icons-1.png" scalefit="yes"/>
+      <image href="src/icons/example.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -53,7 +53,7 @@
   <p>Icons placed within an <xmlelement>xref</xmlelement> element are colorized appropriately:</p>
   <fig>
     <title>Links with Icons</title>
-    <image href="src/icons-2.png" scalefit="yes"/>
+    <image href="src/icons/dark-link.png" scalefit="yes"/>
   </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -68,7 +68,7 @@
     <p>Icons can also be placed within buttons as shown:</p>
     <fig>
       <title>Buttons with Icons</title>
-      <image href="src/icons-3.png" scalefit="yes"/>
+      <image href="src/icons/icons-in-buttons.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>

@@ -31,7 +31,7 @@
     </section>
     <fig>
       <title>Button Group</title>
-      <image href="src/button-group-1.png" scalefit="yes"/>
+      <image href="src/button-group/basic-example.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -48,7 +48,7 @@
     </section>
     <fig>
       <title>Mixed styles</title>
-      <image href="src/button-group-2.png" scalefit="yes"/>
+      <image href="src/button-group/mixed-styles.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -65,7 +65,7 @@
     </section>
     <fig>
       <title>Outlined styles</title>
-      <image href="src/button-group-3.png" scalefit="yes"/>
+      <image href="src/button-group/outlined-styles.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -83,7 +83,7 @@
     </section>
     <fig>
       <title>Button toolbar</title>
-      <image href="src/button-group-4.png" scalefit="yes"/>
+      <image href="src/button-group/button-toolbar.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -101,7 +101,7 @@
     </section>
     <fig>
       <title>Vertical variation</title>
-      <image href="src/button-group-5.png" scalefit="yes"/>
+      <image href="src/button-group/vertical-variation.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>

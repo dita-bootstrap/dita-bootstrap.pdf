@@ -32,7 +32,7 @@
     </section>
     <fig>
       <title>Carousel</title>
-      <image href="src/carousel-1.png" scalefit="yes"/>
+      <image href="src/carousel/example.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -50,7 +50,7 @@
     </section>
     <fig>
       <title>With captions</title>
-      <image href="src/carousel-3.png" scalefit="yes"/>
+      <image href="src/carousel/captions.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -70,7 +70,7 @@
     </section>
     <fig>
       <title>With non-image elements</title>
-      <image href="src/carousel-4.png" scalefit="yes"/>
+      <image href="src/carousel/non-image-elements.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -88,7 +88,7 @@
     </section>
     <fig>
       <title>Multiple slides side-by-side</title>
-      <image href="src/carousel-5.png" scalefit="yes"/>
+      <image href="src/carousel/side-by-side.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -109,7 +109,7 @@
     </section>
     <fig>
       <title>Multiple slides with titles</title>
-      <image href="src/carousel-6.png" scalefit="yes"/>
+      <image href="src/carousel/slides-with-titles.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>

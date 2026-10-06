@@ -34,7 +34,7 @@
     </section>
     <fig>
       <title>Borders</title>
-      <image href="src/borders-1.png" scalefit="yes"/>
+      <image href="src/borders/borders.png" scalefit="yes"/>
     </fig>
     <codeblock>&lt;ph outputclass="border"&gt;...&lt;/ph&gt;
 &lt;ph outputclass="border-top"&gt;...&lt;/ph&gt;
@@ -50,7 +50,7 @@
 
     <fig>
       <title>Border Specialization</title>
-      <image href="src/borders-2.png" scalefit="yes"/>
+      <image href="src/borders/bordered-section.png" scalefit="yes"/>
     </fig>
 
     <tabbed-dialog style="pills" margin="t3">
@@ -73,7 +73,7 @@
 
     <fig>
       <title>Border Width</title>
-      <image href="src/borders-3.png" scalefit="yes"/>
+      <image href="src/borders/border-styling.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog margin="t3" style="pills">
       <section>
@@ -88,7 +88,7 @@
 
     <fig>
       <title>Border Color</title>
-      <image href="src/borders-4.png" scalefit="yes"/>
+      <image href="src/borders/border-colors.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog margin="t3" style="pills">
       <section>
@@ -103,7 +103,7 @@
 
     <fig>
       <title>Rounded Borders</title>
-      <image href="src/borders-5.png" scalefit="yes"/>
+      <image href="src/borders/border-rounding.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog margin="t3" style="pills">
       <section>
@@ -118,7 +118,7 @@
 
     <fig>
       <title>Border Circle and Pill</title>
-      <image href="src/borders-6.png" scalefit="yes"/>
+      <image href="src/borders/border-circle.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog margin="t3" style="pills">
       <section>
@@ -138,7 +138,7 @@
     </section>
     <fig>
       <title>Frame attribute support</title>
-      <image href="src/borders-7.png" scalefit="yes"/>
+      <image href="src/borders/frame-attribute-support.png" scalefit="yes"/>
     </fig>
     <codeblock>&lt;codeblock frame="sides"&gt;...&lt;/codeblock&gt;
 &lt;lines frame="topbot" 

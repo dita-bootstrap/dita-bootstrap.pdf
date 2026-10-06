@@ -33,7 +33,7 @@
     </section>
     <fig>
       <title>List Group</title>
-      <image href="src/list-group-1.png" scalefit="yes"/>
+      <image href="src/list-group/basic-example.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -51,7 +51,7 @@
     </section>
     <fig>
       <title>Compacted list group</title>
-      <image href="src/list-group-2.png" scalefit="yes"/>
+      <image href="src/list-group/compacted-list-group.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -69,7 +69,7 @@
     </section>
     <fig>
       <title>Expanded list group</title>
-      <image href="src/list-group-3.png" scalefit="yes"/>
+      <image href="src/list-group/expanded-list-group.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -88,7 +88,7 @@
     </section>
     <fig>
       <title>Flush List Group</title>
-      <image href="src/list-group-4.png" scalefit="yes"/>
+      <image href="src/list-group/flush.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>

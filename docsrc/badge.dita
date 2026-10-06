@@ -30,7 +30,7 @@
     </section>
     <fig>
       <title>Badges</title>
-      <image href="src/badge-1.png" scalefit="yes"/>
+      <image href="src/badge/example.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -51,7 +51,7 @@
     </section>
     <fig>
       <title>Background colors</title>
-      <image href="src/badge-2.png" scalefit="yes"/>
+      <image href="src/badge/background-colors.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>

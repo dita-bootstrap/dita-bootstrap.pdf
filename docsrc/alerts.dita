@@ -34,7 +34,7 @@
     </section>
     <fig>
       <title>Alerts</title>
-      <image href="src/alerts-1.png" scalefit="yes"/>
+      <image href="src/alerts/basic.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -53,7 +53,7 @@
     </section>
     <fig>
       <title>Additional content</title>
-      <image href="src/alerts-2.png" scalefit="yes"/>
+      <image href="src/alerts/additional-content.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -74,7 +74,7 @@
     </section>
     <fig>
       <title>Notes</title>
-      <image href="src/alerts-3.png" scalefit="yes"/>
+      <image href="src/alerts/notes.png" scalefit="yes"/>
     </fig>
     <codeblock>&lt;note type="note"&gt;
   This is just a note.
@@ -113,7 +113,7 @@
       >outputclass</xmlatt>.</p>
     <fig>
       <title>Colored Notes</title>
-      <image href="src/alerts-4.png" scalefit="yes"/>
+      <image href="src/alerts/note-colors.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -129,7 +129,7 @@
     <p>Use an additional <xmlatt>icon</xmlatt> attribute or <xmlatt>otherprops</xmlatt> to alter the default icon.</p>
     <fig>
       <title>Notes with altered icons</title>
-      <image href="src/alerts-5.png" scalefit="yes"/>
+      <image href="src/alerts/note-icons.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>

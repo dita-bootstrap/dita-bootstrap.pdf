@@ -28,7 +28,7 @@
 
     <fig>
       <title>Shadow Utilities</title>
-      <image href="src/shadows-1.png" scalefit="yes"/>
+      <image href="src/shadows/shadow-utilities.png" scalefit="yes"/>
     </fig>
 
     <tabbed-dialog style="pills" margin="t3">
@@ -49,7 +49,7 @@
 
     <fig>
       <title>Card with Shadow</title>
-      <image href="src/shadows-2.png" scalefit="yes"/>
+      <image href="src/shadows/applied-shadow.png" scalefit="yes"/>
     </fig>
 
     <tabbed-dialog style="pills" margin="t3">

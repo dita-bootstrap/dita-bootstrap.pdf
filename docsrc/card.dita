@@ -49,7 +49,7 @@
     </section>
     <fig>
       <title>Card</title>
-      <image href="src/card-1.png" scalefit="yes"/>
+      <image href="src/card/example.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -69,7 +69,7 @@
     </section>
     <fig>
       <title>Card with title, text, and links</title>
-      <image href="src/card-2.png" scalefit="yes"/>
+      <image href="src/card/titles-text-and-links.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -89,7 +89,7 @@
     </section>
     <fig>
       <title>Images</title>
-      <image href="src/card-3.png" scalefit="yes"/>
+      <image href="src/card/images.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -109,7 +109,7 @@
     </section>
     <fig>
       <title>Card with header and footer</title>
-      <image href="src/card-4.png" scalefit="yes"/>
+      <image href="src/card/header-and-footer.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -128,7 +128,7 @@
     </section>
     <fig>
       <title>Colored Card</title>
-      <image href="src/card-5.png" scalefit="yes"/>
+      <image href="src/card/colored-card.png" scalefit="yes"/>
     </fig>
     <codeblock>&lt;card color="success"&gt;
   &lt;title&gt;Card Title&lt;/title&gt;

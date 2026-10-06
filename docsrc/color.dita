@@ -25,7 +25,7 @@
 
     <fig>
       <title>Colors</title>
-      <image href="src/color-1.png" scalefit="yes"/>
+      <image href="src/color/colors.png" scalefit="yes"/>
     </fig>
 
     <tabbed-dialog style="pills" margin="t3">
@@ -47,7 +47,7 @@
 
     <fig>
       <title>DITA Elements</title>
-      <image href="src/color-2.png" scalefit="yes"/>
+      <image href="src/color/section-decoration.png" scalefit="yes"/>
     </fig>
 
     <tabbed-dialog style="pills" margin="t3">
@@ -68,7 +68,7 @@
 
     <fig>
       <title>Bootstrap Components</title>
-      <image href="src/color-3.png" scalefit="yes"/>
+      <image href="src/color/specialized-elements.png" scalefit="yes"/>
     </fig>
 
     <tabbed-dialog style="pills" margin="t3">
@@ -89,7 +89,7 @@
 
     <fig>
       <title>Text Color</title>
-      <image href="src/color-4.png" scalefit="yes"/>
+      <image href="src/color/text-color.png" scalefit="yes"/>
     </fig>
 
     <codeblock>&lt;p outputclass="text-primary"&gt;.text-primary&lt;/p&gt;

@@ -33,7 +33,7 @@
     </section>
     <fig>
       <title>Responsive images</title>
-      <image href="src/images-1.png" scalefit="yes"/>
+      <image href="src/images/responsive-images.png" scalefit="yes"/>
     </fig>
         <codeblock>&lt;image scalefit="yes" href="..." /&gt;</codeblock>
     <section>
@@ -45,7 +45,7 @@
     </section>
     <fig>
       <title>Image thumbnails</title>
-      <image href="src/images-2.png" scalefit="yes"/>
+      <image href="src/images/image-thumbnails.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>

@@ -37,7 +37,7 @@
   <body outputclass="language-markup">
     <fig>
       <title>Page navigation example</title>
-      <image href="src/pagination-1.png" scalefit="yes"/>
+      <image href="src/pagination/example.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -56,7 +56,7 @@
     </section>
     <fig>
       <title>Large pagination</title>
-      <image href="src/pagination-2.png" scalefit="yes"/>
+      <image href="src/pagination/sizing.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -70,7 +70,7 @@
     </tabbed-dialog>
     <fig>
       <title>Small pagination</title>
-      <image href="src/pagination-3.png" scalefit="yes"/>
+      <image href="src/pagination/small-pagination.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -95,7 +95,7 @@
     </section>
     <fig>
       <title>Centered pagination</title>
-      <image href="src/pagination-4.png" scalefit="yes"/>
+      <image href="src/pagination/alignment.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -109,7 +109,7 @@
     </tabbed-dialog>
     <fig>
       <title>End-aligned pagination</title>
-      <image href="src/pagination-5.png" scalefit="yes"/>
+      <image href="src/pagination/alignment-end.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>

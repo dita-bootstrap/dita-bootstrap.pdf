@@ -38,7 +38,7 @@
     </section>
     <fig>
       <title>Example</title>
-      <image href="src/figures-1.png" scalefit="yes"/>
+      <image href="src/figures/example.png" scalefit="yes"/>
     </fig>
     <codeblock>&lt;fig&gt;
   &lt;title&gt;A caption for the image.&lt;/title&gt;
@@ -51,7 +51,7 @@
     </section>
     <fig>
       <title>Right Aligned Figure Caption</title>
-      <image href="src/figures-2.png" scalefit="yes"/>
+      <image href="src/figures/right-aligned-figure-caption.png" scalefit="yes"/>
     </fig>
     <codeblock>&lt;fig&gt;
   &lt;title outputclass="text-end"&gt;A caption for the image.&lt;/title&gt;
@@ -65,7 +65,7 @@
     </section>
     <fig>
       <title>Adding borders</title>
-      <image href="src/figures-3.png" scalefit="yes"/>
+      <image href="src/figures/adding-borders.png" scalefit="yes"/>
     </fig>
     <codeblock>&lt;fig frame="all"&gt;
   ...

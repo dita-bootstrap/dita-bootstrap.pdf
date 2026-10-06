@@ -29,7 +29,7 @@
 
     <fig>
       <title>Margin</title>
-      <image href="src/spacing-1.png" scalefit="yes"/>
+      <image href="src/spacing/margin.png" scalefit="yes"/>
     </fig>
 
     <tabbed-dialog style="pills" margin="t3">
@@ -51,7 +51,7 @@
 
     <fig>
       <title>Padding</title>
-      <image href="src/spacing-2.png" scalefit="yes"/>
+      <image href="src/spacing/padding.png" scalefit="yes"/>
     </fig>
 
     <tabbed-dialog style="pills" margin="t3">
@@ -82,7 +82,7 @@
 
     <fig>
       <title>Directional Spacing</title>
-      <image href="src/spacing-3.png" scalefit="yes"/>
+      <image href="src/spacing/directional-spacing.png" scalefit="yes"/>
     </fig>
 
     <tabbed-dialog style="pills" margin="t3">

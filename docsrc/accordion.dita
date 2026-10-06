@@ -42,7 +42,7 @@
     </section>
     <fig>
       <title>Accordion</title>
-      <image href="src/accordion-1.png" scalefit="yes"/>
+      <image href="src/accordion/example.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -62,7 +62,7 @@
     </section>
     <fig>
       <title>Flush</title>
-      <image href="src/accordion-2.png" scalefit="yes"/>
+      <image href="src/accordion/flush.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>

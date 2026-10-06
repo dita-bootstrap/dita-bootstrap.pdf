@@ -36,7 +36,7 @@
     </section>
     <fig>
       <title>Bootstrap Table</title>
-      <image href="src/tables-1.png" scalefit="yes"/>
+      <image href="src/tables/overview.png" scalefit="yes"/>
     </fig>
 
     <tabbed-dialog style="pills" margin="t3">
@@ -55,7 +55,7 @@
     </section>
     <fig>
       <title>Table Variants</title>
-      <image href="src/tables-2.png" scalefit="yes"/>
+      <image href="src/tables/variants.png" scalefit="yes"/>
     </fig>
 
     <tabbed-dialog style="pills" margin="t3">
@@ -75,7 +75,7 @@
     </section>
     <fig>
       <title>Striped rows</title>
-      <image href="src/tables-3.png" scalefit="yes"/>
+      <image href="src/tables/striped-rows.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -94,7 +94,7 @@
     </section>
     <fig>
       <title>Striped columns</title>
-      <image href="src/tables-4.png" scalefit="yes"/>
+      <image href="src/tables/striped-columns.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -113,7 +113,7 @@
     </section>
     <fig>
       <title>Bordered tables</title>
-      <image href="src/tables-5.png" scalefit="yes"/>
+      <image href="src/tables/bordered-tables.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -131,7 +131,7 @@
     </section>
     <fig>
       <title>Tables without borders</title>
-      <image href="src/tables-6.png" scalefit="yes"/>
+      <image href="src/tables/tables-without-borders.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -150,7 +150,7 @@
     </section>
     <fig>
       <title>Small tables</title>
-      <image href="src/tables-7.png" scalefit="yes"/>
+      <image href="src/tables/small-tables.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -169,7 +169,7 @@
     </section>
     <fig>
       <title>Table group dividers</title>
-      <image href="src/tables-8.png" scalefit="yes"/>
+      <image href="src/tables/table-group-dividers.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -191,7 +191,7 @@
     </section>
     <fig>
       <title>Vertical alignment</title>
-      <image href="src/tables-9.png" scalefit="yes"/>
+      <image href="src/tables/vertical-alignment.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -211,7 +211,7 @@
     </section>
     <fig>
       <title>Table head 1</title>
-      <image href="src/tables-10.png" scalefit="yes"/>
+      <image href="src/tables/table-head.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
@@ -225,7 +225,7 @@
     </tabbed-dialog>
     <fig>
       <title>Table head 2</title>
-      <image href="src/tables-11.png" scalefit="yes"/>
+      <image href="src/tables/table-head-colors.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
