@@ -104,18 +104,12 @@
     />
     <xsl:variable name="element" select="if ($is-vertical) then 'fo:block' else 'fo:inline'"/>
 
-    <fo:basic-link xsl:use-attribute-sets="xref">
+    <xsl:element
+      name="{if (@href and (@scope = 'external' or not(empty(@format) or @format = 'dita') or opentopic-func:getDestinationId(@href) != '')) then 'fo:basic-link' else 'fo:inline'}"
+      use-attribute-sets="xref"
+    >
       <!-- Link Destination -->
-      <xsl:choose>
-        <xsl:when test="(@scope = 'external') or not(empty(@format) or @format = 'dita')">
-          <xsl:attribute name="external-destination">url('<xsl:value-of select="@href"/>')</xsl:attribute>
-        </xsl:when>
-        <xsl:when test="@href">
-          <xsl:attribute name="internal-destination">
-             <xsl:value-of select="opentopic-func:getDestinationId(@href)"/>
-          </xsl:attribute>
-        </xsl:when>
-      </xsl:choose>
+      <xsl:call-template name="xref-destination"/>
 
       <xsl:element name="{$element}">
         <xsl:call-template name="commonattributes"/>
@@ -330,7 +324,7 @@
           </xsl:choose>
         </fo:inline>
       </xsl:element>
-    </fo:basic-link>
+    </xsl:element>
   </xsl:template>
 
   <!-- Support for Bootstrap link utility classes (e.g., link-primary) or @color -->
@@ -360,7 +354,10 @@
        </xsl:choose>
     </xsl:variable>
 
-    <fo:basic-link xsl:use-attribute-sets="xref">
+    <xsl:element
+      name="{if (@href and (@scope = 'external' or not(empty(@format) or @format = 'dita') or opentopic-func:getDestinationId(@href) != '')) then 'fo:basic-link' else 'fo:inline'}"
+      use-attribute-sets="xref"
+    >
       <xsl:call-template name="commonattributes"/>
       <xsl:if test="$color != ''">
          <xsl:attribute name="color"><xsl:value-of select="$color"/></xsl:attribute>
@@ -370,16 +367,7 @@
          <xsl:attribute name="text-decoration">underline</xsl:attribute>
       </xsl:if>
 
-      <xsl:choose>
-        <xsl:when test="(@scope = 'external') or not(empty(@format) or @format = 'dita')">
-          <xsl:attribute name="external-destination">url('<xsl:value-of select="@href"/>')</xsl:attribute>
-        </xsl:when>
-        <xsl:when test="@href">
-          <xsl:attribute name="internal-destination">
-             <xsl:value-of select="opentopic-func:getDestinationId(@href)"/>
-          </xsl:attribute>
-        </xsl:when>
-      </xsl:choose>
+      <xsl:call-template name="xref-destination"/>
 
       <xsl:choose>
         <!-- If link has explicit child text or icons, use those, but suppress metadata -->
@@ -391,7 +379,28 @@
           <xsl:apply-templates select="." mode="insert-text"/>
         </xsl:otherwise>
       </xsl:choose>
-    </fo:basic-link>
+    </xsl:element>
+  </xsl:template>
+
+  <xsl:template name="xref-destination">
+    <xsl:choose>
+      <xsl:when test="(@scope = 'external') or not(empty(@format) or @format = 'dita')">
+        <xsl:attribute name="external-destination">url('<xsl:value-of select="@href"/>')</xsl:attribute>
+      </xsl:when>
+      <xsl:when test="@href and opentopic-func:getDestinationId(@href) != ''">
+        <xsl:attribute name="internal-destination" select="opentopic-func:getDestinationId(@href)"/>
+      </xsl:when>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template
+    match="*[contains(@class, ' topic/xref ')][@href][not(@scope = 'external' or not(empty(@format) or @format = 'dita'))][opentopic-func:getDestinationId(@href) = '']"
+    priority="3"
+  >
+    <fo:inline xsl:use-attribute-sets="xref">
+      <xsl:call-template name="commonattributes"/>
+      <xsl:apply-templates select="*[not(contains(@class, ' topic/desc '))] | text()"/>
+    </fo:inline>
   </xsl:template>
 
 </xsl:stylesheet>
