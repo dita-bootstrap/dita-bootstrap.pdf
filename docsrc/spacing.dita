@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
+<topic id="spacing">
+  <title>Spacing</title>
+  <shortdesc>Use margin and padding utilities to quickly control the layout of elements. The <xmlatt
+    >margin</xmlatt> and <xmlatt
+    >padding</xmlatt> attributes enable standard Bootstrap spacing across a range of DITA components.</shortdesc>
+  <prolog>
+    <metadata>
+      <keywords>
+        <indexterm>Spacing</indexterm>
+        <indexterm>Margin</indexterm>
+        <indexterm>Padding</indexterm>
+        <indexterm>CSS
+          <indexterm><xmlatt>outputclass</xmlatt></indexterm>
+        </indexterm>
+        <indexterm><xmlatt>margin</xmlatt></indexterm>
+        <indexterm><xmlatt>padding</xmlatt></indexterm>
+      </keywords>
+    </metadata>
+  </prolog>
+  <body outputclass="language-markup">
+    <section id="margin">
+      <title>Margin</title>
+      <p>The <xmlatt
+        >margin</xmlatt> attribute controls the distance between elements, supporting values from 0 to 5 and <codeph
+        >auto</codeph>.</p>
+    </section>
+
+<fig>
+      <title>Margin</title>
+      <image href="src/spacing/margin.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/spacing/margin.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/spacing/margin.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+
+    <section id="padding">
+      <title>Padding</title>
+      <p>The <xmlatt
+        >padding</xmlatt> attribute controls the internal spacing of an element, supporting values from 0 to 5.</p>
+    </section>
+
+<fig>
+      <title>Padding</title>
+      <image href="src/spacing/padding.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/spacing/padding.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/spacing/padding.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+
+    <section id="directional-spacing">
+      <title>Directional Spacing</title>
+      <p>The <xmlatt>margin</xmlatt> and <xmlatt
+        >padding</xmlatt> attributes also support directional spacing using a prefix:</p>
+      <ul>
+        <li><codeph>t</codeph> - Top</li>
+        <li><codeph>b</codeph> - Bottom</li>
+        <li><codeph>s</codeph> - Start (Left in LTR)</li>
+        <li><codeph>e</codeph> - End (Right in LTR)</li>
+        <li><codeph>x</codeph> - Horizontal (Start and End)</li>
+        <li><codeph>y</codeph> - Vertical (Top and Bottom)</li>
+      </ul>
+      <p>Multiple values can be specified as a space-separated list.</p>
+    </section>
+
+<fig>
+      <title>Directional Spacing</title>
+      <image href="src/spacing/directional-spacing.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/spacing/directional-spacing.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/spacing/directional-spacing.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+  </body>
+</topic>

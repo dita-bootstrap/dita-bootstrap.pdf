@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
+<!-- Within the sample documentation, where necessary, the texts describing the
+   usage of each component have been copied directly from the official Bootstrap
+   6.0 documentation (found at https://getbootstrap.com/docs/6.0), however DITA
+   markup is used throughout the examples describing how to implement these
+   components correctly using outputclass.
+
+   This work, is a derivative of "Bootstrap 6.0 docs" by Twitter, Inc.
+   and the Bootstrap Authors, and used under CC BY 3.0.
+
+    -->
+<topic id="theme">
+  <title>Theme</title>
+  <shortdesc>Combine one of three theme utilities with the Bootstrap theme color classes to set
+    color and background-color pairings on any element, just like component variants.</shortdesc>
+  <prolog>
+    <metadata>
+      <keywords>
+        <indexterm>Theme</indexterm>
+        <indexterm>Color</indexterm>
+        <indexterm>Background</indexterm>
+        <indexterm>CSS
+          <indexterm><xmlatt>outputclass</xmlatt></indexterm>
+        </indexterm>
+      </keywords>
+    </metadata>
+  </prolog>
+  <body outputclass="language-markup">
+
+    <section id="overview">
+      <title>Overview</title>
+      <p>Take any of Bootstrap theme color classes and add <codeph>theme-contrast</codeph>,
+        <codeph>theme-subtle</codeph>, or <codeph>theme-muted</codeph> to set a predefined
+        color and background-color pairing. Then optionally add <codeph>theme-border</codeph>
+        to set a predefined border color.</p>
+    </section>
+
+    <section id="contrast">
+      <title>Contrast</title>
+      <p>Contrast pairs the bg theme token with the contrast text color for maximum
+        readability with <codeph>theme-contrast</codeph>. This is ideal for high-emphasis
+        elements with solid backgrounds.</p>
+    </section>
+<fig>
+      <title>Contrast</title>
+      <image href="src/theme/contrast.png" scalefit="yes"/>
+    </fig>
+    <codeblock><coderef href="code/specialization/theme/contrast.xml"/></codeblock>
+
+    <p>Nested links inherit the contrast foreground so they stay legible on the solid background:</p>
+<fig>
+      <title>Contrast nested link</title>
+      <image href="src/theme/contrast-nested-link.png" scalefit="yes"/>
+    </fig>
+    <codeblock><coderef href="code/specialization/theme/contrast-nested-link.xml"/></codeblock>
+
+    <section id="subtle">
+      <title>Subtle</title>
+      <p>Subtle pairs the bg-subtle theme token with the text text color for a
+        lower-contrast, more subtle appearance. This combination will automatically
+        adjust to the current color mode.</p>
+    </section>
+<fig>
+      <title>Subtle</title>
+      <image href="src/theme/subtle.png" scalefit="yes"/>
+    </fig>
+    <codeblock><coderef href="code/specialization/theme/subtle.xml"/></codeblock>
+
+    <p>And with borders:</p>
+<fig>
+      <title>Subtle border</title>
+      <image href="src/theme/subtle-border.png" scalefit="yes"/>
+    </fig>
+    <codeblock><coderef href="code/specialization/theme/subtle-border.xml"/></codeblock>
+
+    <p>Nested links inherit the subtle foreground so they stay legible on the subtle background:</p>
+<fig>
+      <title>Subtle nested link</title>
+      <image href="src/theme/subtle-nested-link.png" scalefit="yes"/>
+    </fig>
+    <codeblock><coderef href="code/specialization/theme/subtle-nested-link.xml"/></codeblock>
+
+    <section id="muted">
+      <title>Muted</title>
+      <p>Muted pairs the bg-muted theme token with the text-emphasis text color for a
+        lower-contrast, more muted appearance. Like subtle, this combination will
+        automatically adjust to the current color mode.</p>
+    </section>
+<fig>
+      <title>Muted</title>
+      <image href="src/theme/muted.png" scalefit="yes"/>
+    </fig>
+    <codeblock><coderef href="code/specialization/theme/muted.xml"/></codeblock>
+
+    <p>Nested links inherit the muted foreground so they stay legible on the muted background:</p>
+<fig>
+      <title>Muted nested link</title>
+      <image href="src/theme/muted-nested-link.png" scalefit="yes"/>
+    </fig>
+    <codeblock><coderef href="code/specialization/theme/muted-nested-link.xml"/></codeblock>
+
+    <section id="comparison">
+      <title>Comparison</title>
+      <p>Here's a side-by-side comparison of all three styles for each theme color,
+        including nested links:</p>
+    </section>
+<fig>
+      <title>Comparison</title>
+      <image href="src/theme/comparison.png" scalefit="yes"/>
+    </fig>
+    <codeblock><coderef href="code/specialization/theme/comparison.xml"/></codeblock>
+
+    <section id="with-components">
+      <title>With components</title>
+      <p>Theme utilities work great with components that support theming. Use theme
+        style classes on individual elements.</p>
+    </section>
+<fig>
+      <title>With components</title>
+      <image href="src/theme/with-components.png" scalefit="yes"/>
+    </fig>
+    <codeblock><coderef href="code/specialization/theme/with-components.xml"/></codeblock>
+
+    <p>You can also mix theme colors within the same container by applying different
+      <codeph>theme-{color}</codeph> classes to child elements:</p>
+<fig>
+      <title>Status colors</title>
+      <image href="src/theme/status-colors.png" scalefit="yes"/>
+    </fig>
+    <codeblock><coderef href="code/specialization/theme/status-colors.xml"/></codeblock>
+
+    <section id="how-theme-values-are-built-up">
+      <title>How theme values are built up</title>
+      <p>Every theme value used throughout this documentation, whether on an individual
+        element's <xmlatt>theme</xmlatt> attribute (or the base plugin's <xmlatt
+        >outputclass</xmlatt>), or on one of the <parmname>--bootstrap.theme.*</parmname>
+        command line parameters below, is a hyphenated compound of one of the 8 Bootstrap
+        theme colors:</p>
+      <ul>
+        <li><codeph>accent</codeph></li>
+        <li><codeph>danger</codeph></li>
+        <li><codeph>info</codeph></li>
+        <li><codeph>inverse</codeph></li>
+        <li><codeph>primary</codeph></li>
+        <li><codeph>secondary</codeph></li>
+        <li><codeph>success</codeph></li>
+        <li><codeph>warning</codeph></li>
+      </ul>
+      <p>With a suffix indicating the theme style</p>
+      <ul>
+        <li><codeph>-contrast</codeph> pairs the solid background with the contrast text color</li>
+        <li><codeph>-subtle</codeph> pairs the low-contrast background with matching text</li>
+        <li><codeph>-muted</codeph> pairs the low-contrast background with muted text</li>
+        <li><codeph>-border</codeph> sets a predefined border color on its own</li>
+        <li><codeph>-subtle-border</codeph> combines <codeph>-subtle</codeph> and <codeph>-border</codeph></li>
+      </ul>
+      <p>The following command line parameters optionally consume a theme value to style layout regions:</p>
+      <parml>
+        <plentry>
+          <pt><parmname>--bootstrap.theme.header</parmname></pt>
+          <pd>Page header theme. Defaults to <option>primary-contrast</option></pd>
+        </plentry>
+        <plentry>
+          <pt><parmname>--bootstrap.theme.footer</parmname></pt>
+          <pd>Page footer theme. Defaults to <option>none</option></pd>
+        </plentry>
+        <plentry>
+          <pt><parmname>--bootstrap.theme.sidebar</parmname></pt>
+          <pd>Sidebar theme. Defaults to <option>none</option></pd>
+        </plentry>
+        <plentry>
+          <pt><parmname>--bootstrap.theme.topbar</parmname></pt>
+          <pd>Top bar theme. Defaults to <option>none</option></pd>
+        </plentry>
+        <plentry>
+          <pt><parmname>--bootstrap.theme.content</parmname></pt>
+          <pd>Main content area theme. Defaults to <option>none</option></pd>
+        </plentry>
+        <plentry>
+          <pt><parmname>--bootstrap.theme.scrollspy</parmname></pt>
+          <pd>Scrollspy menu theme. Defaults to <option>none</option></pd>
+        </plentry>
+        <plentry>
+          <pt><parmname>--bootstrap.theme.body</parmname></pt>
+          <pd>Page <xmlelement>body</xmlelement>. Defaults to
+            <option>none</option></pd>
+        </plentry>
+      </parml>
+    </section>
+
+  </body>
+</topic>

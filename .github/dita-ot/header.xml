@@ -1,0 +1,588 @@
+<nav class="navbar navbar-expand-lg bg-secondary-subtle">
+  <!-- Modify -xxl to change container size -->
+  <div class="container-xxl">
+    <!-- This shows the menu on mobile -->
+    <div class="bd-navbar-toggle">
+      <button
+        class="navbar-toggler p-2"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#bdSidebar"
+        aria-controls="bdSidebar"
+        aria-label="Toggle docs navigation"
+      >
+        <i class="bi bi-list"/>
+      </button>
+    </div>
+    <a
+      class="navbar-brand d-flex align-items-center gap-2"
+      href="https://dita-bootstrap.github.io"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        class="bi bi-badge-ci-fill"
+        viewBox="0 0 16 16"
+        width="32"
+        height="32"
+      >
+        <path
+          d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm3.027 4.002c-.83 0-1.319.642-1.319 1.753v.743c0 1.107.48 1.727 1.319 1.727.69 0 1.138-.435 1.186-1.05H7.36v.114c-.057 1.147-1.028 1.938-2.342 1.938-1.613 0-2.518-1.028-2.518-2.729v-.747C2.5 6.051 3.414 5 5.018 5c1.318 0 2.29.813 2.342 2v.11H6.213c-.048-.638-.505-1.108-1.186-1.108m6.14 -1h1.2v6h-1.2z"
+        />
+      </svg>
+      <span>DITA Bootstrap</span>
+    </a>
+    <button
+      class="navbar-toggler p-2"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="bi bi-three-dots"/>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdownPlugin"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Plugins
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownPlugin">
+            <li><a
+                class="dropdown-item"
+                href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.html"
+              >HTML Plugin</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.pdf"
+              >PDF Plugin</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.pdf.theme"
+              >Bootswatch PDF Themes</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.specialization"
+              >DITA Specialization for Bootstrap</a></li>
+            <li><hr class="dropdown-divider"/></li>
+            <li><a
+                class="dropdown-item"
+                href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.extension"
+              >Bootstrap Extension Plugin</a></li>
+        <li><a
+                class="dropdown-item"
+                href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.extension.specialization"
+              >DITA Specialization for Bootstrap Extension</a></li>
+        <li><a
+                class="dropdown-item"
+                href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.sass"
+              >Bootstrap Sass Plugin</a></li>
+        <li><a
+                class="dropdown-item"
+                href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.table"
+              >Bootstrap Table Plugin</a></li>
+        <li><a
+                class="dropdown-item"
+                href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.lunr"
+              >Lunr Search Plugin</a></li>
+        <li><a
+                class="dropdown-item"
+                href="https://www.dita-ot.org/plugins#!org.dita-bootstrap.watermark"
+              >Watermark Plugin</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdownSource"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Source
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownSource">
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.html"
+              >dita-bootstrap.html</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.pdf"
+              >dita-bootstrap.pdf</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.pdf.theme"
+              >dita-bootstrap.pdf.theme</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.specialization"
+              >dita-bootstrap.specialization</a></li>
+            <li><hr class="dropdown-divider"/></li>
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.extension"
+              >dita-bootstrap.extension</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.extension.specialization"
+              >dita-bootstrap.extension.specialization</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.lunr"
+              >dita-bootstrap.lunr</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.table"
+              >dita-bootstrap.table</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.sass"
+              >dita-bootstrap.sass</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.watermark"
+              >dita-bootstrap.watermark</a></li>
+            <li><hr class="dropdown-divider"/></li>
+             <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/com.example.bootstrap-component"
+              >com.example.bootstrap-component</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/com.example.bootstrap-offline"
+              >com.example.bootstrap-offline</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdownReleases"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Releases
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownReleases">
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.html/releases"
+              >dita-bootstrap.html</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.pdf/releases"
+              >dita-bootstrap.pdf</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.pdf.theme/releases"
+              >dita-bootstrap.pdf.theme</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.specialization/releases"
+              >dita-bootstrap.specialization</a></li>
+            <li><hr class="dropdown-divider"/></li>
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.extension/releases"
+              >dita-bootstrap.extension</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.extension.specialization/releases"
+              >dita-bootstrap.extension.specialization</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.lunr/releases"
+              >dita-bootstrap.lunr</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.sass/releases"
+              >dita-bootstrap.sass</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.table/releases"
+              >dita-bootstrap.table</a></li>
+            <li><a
+                class="dropdown-item"
+                href="https://github.com/dita-bootstrap/dita-bootstrap.watermark/releases"
+              >dita-bootstrap.watermark</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="https://getbootstrap.com/docs/5.3"
+          >Bootstrap Docs</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <!--
+          This is a lunr.js search box
+          It requires JavaScript to function.
+        -->
+        <li class="nav-item d-flex align-items-center">
+          <span class="nav-link pe-2">
+            <i class="bi bi-search"/>
+          </span>
+          <form class="position-relative me-auto search-box rounded">
+            <input
+              type="search"
+              class="form-control"
+              placeholder="Search…"
+              aria-label="Search for…"
+              dir="auto"
+            />
+          </form>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-0 me-1">
+        <!--
+          This is a dark/light color theme toggler.
+          It requires JavaScript to function.
+        -->
+        <li class="nav-item dropdown">
+          <a
+            href="#"
+            class="nav-link px-0 px-lg-2 dropdown-toggle d-flex align-items-center"
+            id="bd-color-mode"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            data-bs-display="static"
+          >
+            <span class="d-light">
+              <i class="bi bi-brightness-high-fill"/>
+            </span>
+            <span class="d-dark">
+              <i class="bi bi-moon-stars-fill"/>
+            </span>
+            <span class="d-auto">
+              <i class="bi bi-circle-half"/>
+            </span>
+            <span class="d-lg-none ms-2">Toggle color mode</span>
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="bd-color-mode"
+            style="--bs-dropdown-min-width: 6rem;"
+            data-bs-popper="static"
+          >
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-theme-value="light"
+              >
+                <i class="bi bi-brightness-high-fill"/>
+                <span class="ms-2">Light</span>
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-theme-value="dark"
+              >
+                <i class="bi bi-moon-stars-fill"/>
+                <span class="ms-2">Dark</span>
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-theme-value="auto"
+              >
+                <i class="bi bi-circle-half"/>
+                <span class="ms-2">Auto</span>
+              </button>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-0 me-1">
+        <!--
+          This is a css bootstrap theme toggler.
+          It requires JavaScript to function.
+        -->
+        <li class="nav-item dropdown">
+          <a
+            href="#"
+            class="nav-link px-0 px-lg-2 dropdown-toggle d-flex align-items-center"
+            id="bd-css-theme"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            data-bs-display="static"
+          >
+            <i class="bi bi-filetype-css"/>
+            <span class="d-lg-none ms-2">Toggle theme</span>
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end css-themes-list overflow-y-auto"
+            aria-labelledby="bd-css-theme"
+            style="--bs-dropdown-min-width: 6rem;"
+            data-bs-popper="static"
+          >
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+              >
+                Default
+              </button>
+            </li>
+            <li>
+              <hr class="dropdown-divider"/>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/brite/bootstrap.min.css"
+              >
+                Brite
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/cerulean/bootstrap.min.css"
+              >
+                Cerulean
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/cosmo/bootstrap.min.css"
+              >
+                Cosmo
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/cyborg/bootstrap.min.css"
+              >
+                Cyborg
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/darkly/bootstrap.min.css"
+              >
+                Darkly
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/flatly/bootstrap.min.css"
+              >
+                Flatly
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/journal/bootstrap.min.css"
+              >
+                Journal
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/litera/bootstrap.min.css"
+              >
+                Litera
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/lumen/bootstrap.min.css"
+              >
+                Lumen
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/lux/bootstrap.min.css"
+              >
+                Lux
+              </button>
+            </li>
+          <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/materia/bootstrap.min.css"
+              >
+                Materia
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/minty/bootstrap.min.css"
+              >
+                Minty
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/morph/bootstrap.min.css"
+              >
+                Morph
+              </button>
+            </li>
+
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/pulse/bootstrap.min.css"
+              >
+                Pulse
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/quartz/bootstrap.min.css"
+              >
+                Quartz
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/sandstone/bootstrap.min.css"
+              >
+                Sandstone
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/simplex/bootstrap.min.css"
+              >
+                Simplex
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/sketchy/bootstrap.min.css"
+              >
+                Sketchy
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/slate/bootstrap.min.css"
+              >
+                Slate
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/solar/bootstrap.min.css"
+              >
+                Solar
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/spacelab/bootstrap.min.css"
+              >
+                SpaceLab
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/superhero/bootstrap.min.css"
+              >
+                Superhero
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/united/bootstrap.min.css"
+              >
+                United
+              </button>
+            </li>
+          <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/vapor/bootstrap.min.css"
+              >
+                Vapor
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/yeti/bootstrap.min.css"
+              >
+                Yeti
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-css-href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/zephyr/bootstrap.min.css"
+              >
+                Zephyr
+              </button>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<!-- Within the sample documentation, where necessary, the texts describing the
+   usage of each component have been copied directly from the official Bootstrap
+   5.0 documentation (found at https://getbootstrap.com/docs/5.0), however DITA
+   markup is used throughout the examples describing how to implement these
+   components correctly using outputclass.
+
+   This work, is a derivative of "Bootstrap 6.0 docs" by Twitter, Inc.
+   and the Bootstrap Authors, and used under CC BY 3.0. See the accompanying LICENSE
+   file for applicable licenses.-->
+<topic id="figures">
+  <title>Figures</title>
+  <abstract>
+    <shortdesc>Documentation and examples for displaying related images and text with the figure component in
+      Bootstrap.</shortdesc>
+    <p>Anytime you need to display a piece of content—like an image with an optional caption, consider using a DITA
+        <xmlelement>fig</xmlelement> element. Bootstrap CSS classes <xmlatt>class="figure"</xmlatt>,
+        <xmlatt>class="figure-img"</xmlatt>, and <xmlatt>class="figure-caption"</xmlatt> are automatically included to
+      the output to provide some baseline styles for the HTML5 <xmlelement>figure</xmlelement> and
+        <xmlelement>figcaption</xmlelement> elements. </p>
+  </abstract>
+  <prolog>
+    <metadata>
+      <keywords>
+        <indexterm>Figure</indexterm>
+        <indexterm>CSS
+          <indexterm><xmlatt>outputclass</xmlatt></indexterm>
+        </indexterm>
+        <indexterm><xmlelement>fig</xmlelement></indexterm>
+      </keywords>
+    </metadata>
+  </prolog>
+  <body outputclass="language-markup">
+    <section id="example">
+      <title>Example</title>
+      <p>By default <xmlelement>figure</xmlelement> elements are styled as shown: </p>
+    </section>
+<fig>
+      <title>Example</title>
+      <image href="src/figures/a-caption-for-the-image.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/figures/a-caption-for-the-image.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/figures/a-caption-for-the-image.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="aligning-text">
+      <title>Aligning text</title>
+      <p>The figure’s caption can be aligned using the Bootstrap
+        <xref href="./color.dita" format="dita">text utilities</xref>.</p>
+    </section>
+<fig>
+      <title>Aligning text</title>
+      <image href="src/figures/caption-right-aligned.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/figures/caption-right-aligned.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/figures/caption-right-aligned.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+
+    <section id="adding-borders">
+      <title>Adding borders</title>
+      <p>Use the DITA <xmlatt>frame</xmlatt> attribute to add
+        <xref href="./borders.dita" format="dita">borders</xref> to a <xmlelement>fig</xmlelement>.</p>
+    </section>
+<fig>
+      <title>Adding borders</title>
+      <image href="src/figures/fig-frame.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/figures/fig-frame.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/figures/fig-frame.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+  </body>
+</topic>

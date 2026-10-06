@@ -70,3 +70,6 @@ node_modules
 
 out
 .gstack/
+
+docsrc/code/html
+docsrc/code/specialization

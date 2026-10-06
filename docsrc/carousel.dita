@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Within the sample documentation, where necessary, the texts describing the usage of each component have been copied
+  directly from the official Bootstrap 6.0 documentation (found at https://getbootstrap.com/docs/6.0), however DITA
+  markup is used throughout the examples describing how to implement these components correctly using outputclass.
+
+  This work is a derivative of "Bootstrap 6.0 docs" by Twitter, Inc. and the Bootstrap Authors,
+  and used under CC BY 3.0. See the accompanying LICENSE file for applicable licenses.
+-->
+<!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
+<topic id="carousel">
+  <title>Carousel</title>
+  <shortdesc>A slideshow component for cycling through elements—images or slides of text—like a carousel.</shortdesc>
+  <prolog>
+    <metadata>
+      <keywords>
+        <indexterm>Carousel</indexterm>
+        <indexterm>CSS
+          <indexterm><xmlatt>outputclass</xmlatt></indexterm>
+        </indexterm>
+        <indexterm><xmlelement>carousel</xmlelement></indexterm>
+        <indexterm><xmlelement>carousel-item</xmlelement></indexterm>
+        <indexterm><xmlelement>fig</xmlelement></indexterm>
+        <indexterm><xmlelement>image</xmlelement></indexterm>
+      </keywords>
+    </metadata>
+  </prolog>
+  <body outputclass="language-markup">
+    <section id="how-it-works">
+      <title>How it works</title>
+      <p>The carousel is a slideshow for cycling through a series of content, built with CSS 3D transforms and a bit of
+        JavaScript. It works with a series of images, text, or custom markup. It also includes support for previous/next
+        controls and indicators.</p>
+    </section>
+    <section id="example">
+      <title>Example</title>
+      <p>Carousels don’t automatically normalize slide dimensions. As such, you may need to use additional utilities or
+        custom styles to appropriately size content. While carousels support previous/next controls and indicators,
+        they’re not explicitly required. Add and customize as you see fit.</p>
+      <p>Carousels are displayed as a series of cells</p>
+      <p>Here is an example with slides</p>
+    </section>
+<fig>
+      <title>Example</title>
+      <image href="src/carousel/example.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/carousel/example.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/carousel/example.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="indicators">
+      <title>Indicators</title>
+      <p> Set <xmlatt>indicators="yes"</xmlatt> to add indicators to the carousel, alongside the
+        previous/next controls. The indicators let users jump directly to a particular slide.</p>
+    </section>
+<fig>
+      <title>Indicators</title>
+      <image href="src/carousel/indicators.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/carousel/indicators.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/carousel/indicators.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="with-captions">
+      <title>With captions</title>
+      <p>Add captions by using <xmlelement>fig</xmlelement> elements</p>
+    </section>
+<fig>
+      <title>With captions</title>
+      <image href="src/carousel/captions.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/carousel/captions.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/carousel/captions.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="with-non-image-elements">
+      <title>With non-image elements</title>
+      <p>Place additional DITA elements within a <xmlelement
+        >grid-row</xmlelement> element to add them within a carousel.
+        Additional structure and spacing can be added by using the <xmlelement>grid-col</xmlelement> element.</p>
+    </section>
+<fig>
+      <title>With non-image elements</title>
+      <image href="src/carousel/non-image-elements.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/carousel/non-image-elements.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/carousel/non-image-elements.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="multiple-slides">
+      <title>Multiple slides side-by-side</title>
+      <p>Add multiple <xmlelement>image</xmlelement> elements within each <xmlelement>carousel-item</xmlelement></p>
+    </section>
+<fig>
+      <title>Multiple slides side-by-side</title>
+      <image href="src/carousel/side-by-side.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/carousel/side-by-side.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/carousel/side-by-side.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+
+    <section id="multiple-slides-with-titles">
+      <title>Multiple slides with titles</title>
+      <p>Add multiple <xmlelement>image</xmlelement> elements within each <xmlelement
+        >carousel-item</xmlelement> and include a
+          <xmlelement>grid-row</xmlelement> element for title texts.</p>
+    </section>
+<fig>
+      <title>Multiple slides with titles</title>
+      <image href="src/carousel/slides-with-titles.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/carousel/slides-with-titles.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/carousel/slides-with-titles.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="crossfade">
+      <title>Crossfade</title>
+      <p> Add <xmlatt>fade="yes"</xmlatt> to your carousel to animate slides with a fade transition
+        instead of a slide. Depending on your carousel content (e.g., text only slides), you may want to add
+          <xmlelement>div outputclass="bg-body"</xmlelement> or some custom CSS to the carousel items for proper
+        crossfading.</p>
+    </section>
+<fig>
+      <title>Crossfade</title>
+      <image href="src/carousel/crossfade.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/carousel/crossfade.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/carousel/crossfade.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="autoplaying-carousels">
+      <title>Autoplaying carousels</title>
+      <p>Carousels autoplay on page load by default. Autoplaying carousels automatically pause while hovered with the
+        mouse. In browsers that support the Page Visibility API, the carousel will stop cycling when the webpage is not
+        visible to the user ( such as when the browser tab is inactive, or when the browser window is minimized). </p>
+      <p>When <xmlatt>autoplay="no"</xmlatt> is set, the carousel won’t automatically start to cycle on
+        page load. Instead, it will only start after the first user interaction.</p>
+    </section>
+<fig>
+      <title>Autoplaying carousels</title>
+      <image href="src/carousel/autoplay.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/carousel/autoplay.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/carousel/autoplay.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+
+    <section id="intervals">
+      <title>Carousel interval</title>
+      <p>Add <xmlatt>interval="2000"</xmlatt> to the <xmlelement
+        >carousel</xmlelement> to change the amount of time to delay
+        between automatically cycling to the next item.</p>
+    </section>
+<fig>
+      <title>Carousel interval</title>
+      <image href="src/carousel/carousel-interval.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/carousel/carousel-interval.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/carousel/carousel-interval.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="item-intervals">
+      <title>Individual carousel item interval</title>
+      <p>Add <xmlatt>interval="1000"</xmlatt> to a <xmlelement
+        >carousel-item</xmlelement> to change the amount of time to delay
+        between automatically cycling to the next item.</p>
+    </section>
+<fig>
+      <title>Individual carousel item interval</title>
+      <image href="src/carousel/item-interval.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/carousel/item-interval.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/carousel/item-interval.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="disable-touch-swipe">
+      <title>Disable touch swiping</title>
+      <p>Carousels support swiping left/right on touchscreen devices to move between slides. Add
+          <xmlatt>touch="no"</xmlatt> to disable this option.</p>
+    </section>
+<fig>
+      <title>Disable touch swiping</title>
+      <image href="src/carousel/disable-touch.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/carousel/disable-touch.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/carousel/disable-touch.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+  </body>
+</topic>

@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
+<!--
+  Within the sample documentation, where necessary, the texts describing the usage of each component have been copied
+  directly from the official Bootstrap 6.0 documentation (found at https://getbootstrap.com/docs/6.0), however DITA
+  markup is used throughout the examples describing how to implement these components correctly using outputclass.
+
+  This work is a derivative of "Bootstrap 6.0 docs" by Twitter, Inc. and the Bootstrap Authors,
+  and used under CC BY 3.0. See the accompanying LICENSE file for applicable licenses.
+-->
+<topic id="index">
+  <title>DITA Bootstrap PDF</title>
+  <shortdesc>Two plug-ins for
+    <xref href="http://www.dita-ot.org" format="html" scope="external">DITA Open Toolkit</xref> that extend the default
+    PDF output with a
+    <xref
+      href="https://getbootstrap.com/docs/6.0"
+      format="html"
+      scope="external"
+    >Bootstrap 6.0</xref> templating and components.
+  </shortdesc>
+  <prolog>
+    <metadata>
+      <keywords>
+        <indexterm>Bootstrap 6.0</indexterm>
+        <indexterm>DITA</indexterm>
+        <indexterm>installing</indexterm>
+      </keywords>
+    </metadata>
+  </prolog>
+  <body>
+    <section>
+      <title>Installing</title>
+      <p>Use the <cmdname>dita</cmdname> command to add the plug-ins to your DITA Open Toolkit installation:</p>
+    </section>
+     <accordion>
+        <accordion-item open="yes">
+        <title>DITA-OT 3.5 and newer</title>
+          <ol>  
+            <li>
+              <p><b>Optional:</b> install the specialization plug-in to add support for new DITA elements that
+               generate Bootstrap components:
+              </p>
+              <codeblock outputclass="language-bash"><cmdname>dita</cmdname> <parmname
+              >install</parmname> org.dita-bootstrap.specialization</codeblock>
+            </li>
+            <li>
+              <p>For PDF generation, install the PDF plug-in, and the PDF theme plug-in as shown:
+              </p>
+              <codeblock outputclass="language-bash"><cmdname>dita</cmdname> <parmname
+              >install</parmname> org.dita-bootstrap.pdf
+<cmdname>dita</cmdname> <parmname>install</parmname> org.dita-bootstrap.pdf.theme</codeblock>
+            </li>
+            <li>
+              <p>To add syntax highlighting using the Bootstrap color scheme, install the Prism.js plug-in if required:
+              </p>
+              <codeblock outputclass="language-bash"><cmdname>dita</cmdname> <parmname
+              >install</parmname> fox.jason.prismjs</codeblock>
+            </li>
+          </ol>
+      </accordion-item>
+      <accordion-item>
+        <title>DITA-OT 3.3 and newer</title>
+          <ol>  
+            <li>
+              <p><b>Optional:</b> install the specialization plug-in to add support for new DITA elements that
+               generate Bootstrap components:
+              </p>
+              <codeblock outputclass="language-bash"><cmdname>dita</cmdname> <parmname
+              >--install</parmname> org.dita-bootstrap.specialization</codeblock>
+          </li>
+          <li>
+          <p>For PDF generation, install the PDF plug-in, and add the PDF theme plug-in as shown:
+          </p>
+          <codeblock outputclass="language-bash"><cmdname>dita</cmdname> <parmname
+              >--install</parmname> org.dita-bootstrap.pdf
+<cmdname>dita</cmdname> <parmname>--install</parmname> org.dita-bootstrap.pdf.theme</codeblock>
+            </li>
+            <li>
+              <p>To add syntax highlighting using the bootstrap color scheme, install the Prism.js plug-in if required:
+              </p>
+              <codeblock outputclass="language-bash"><cmdname>dita</cmdname> <parmname
+              >--install</parmname> fox.jason.prismjs</codeblock>
+            </li>
+          </ol>
+      </accordion-item>
+      <accordion-item>
+        <title>DITA-OT 3.2 and older</title>
+          <ol>  
+            <li>
+              <p><b>Optional:</b> install the specialization plug-in to add support for new DITA elements that
+               generate Bootstrap components:
+              </p>
+              <codeblock outputclass="language-bash"><cmdname>dita</cmdname> <parmname
+              >--install</parmname> https://github.com/dita-bootstrap/dita-bootstrap.specialization/archive/master.zip</codeblock>
+            </li>
+            <li>
+              <p>For PDF generation, install the PDF plug-in, and add the PDF theme plug-in as shown:
+              </p>
+              <codeblock outputclass="language-bash"><cmdname>dita</cmdname> <parmname
+              >--install</parmname> https://github.com/dita-bootstrap/dita-bootstrap.pdf/archive/master.zip
+<cmdname>dita</cmdname> <parmname
+              >--install</parmname> https://github.com/dita-bootstrap/dita-bootstrap.pdf.theme/archive/master.zip</codeblock>
+            </li>
+            <li>
+              <p>To add syntax highlighting using the bootstrap color scheme, install the Prism.js plug-in if required:
+              </p>
+              <codeblock outputclass="language-bash"><cmdname>dita</cmdname> <parmname
+              >--install</parmname> https://github.com/jason-fox/fox.jason.prismjs/archive/master.zip</codeblock>
+            </li>
+          </ol>   
+      </accordion-item>
+    </accordion>
+    <section>
+      <title>Using</title>
+      <p>Specify the <option>pdf-bootstrap</option> format when building output with the <cmdname>dita</cmdname>
+        command:</p>
+      <codeblock outputclass="language-bash"><cmdname>dita</cmdname> <parmname
+        >--input</parmname>=path/to/your.ditamap <parmname>--format</parmname>=pdf-bootstrap</codeblock>
+
+       <p>If using DITA-Bootstrap specialization, ensure that the <codeph
+        >*.dita</codeph> files are using the following <codeph>DOCTYPE</codeph> declaration:</p>
+       <codeblock
+        outputclass="language-xml"
+      >&lt;!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd"&gt;</codeblock>
+        
+    </section>
+    <section>
+      <title>Bootswatch themes</title>
+      <indexterm><parmname>--bootstrap.theme</parmname></indexterm>
+      <p>PDFs can be generated to align with the themes Bootstrap themes available at
+        <xref href="https://bootswatch.com/" format="html" scope="external">Bootswatch</xref>.
+        To override the default appearance with a Bootswatch theme, pass a theme name to the <cmdname
+        >dita</cmdname> command via the <parmname>--bootstrap.theme</parmname> parameter:
+      </p>
+
+      <codeblock outputclass="language-bash"><cmdname>dita</cmdname> <parmname>--input</parmname>=<filepath
+        >path/to/your.ditamap</filepath> \
+     <parmname>--format</parmname>=<option>pdf-bootstrap</option> \
+     <parmname>--bootstrap.theme</parmname>=<option>&lt;theme-name&gt;</option></codeblock>
+     <p><b outputclass="h4">Parameters</b></p>
+     <parml otherprops="cols(4)">
+        <plentry>
+          <pt>
+            <parmname>--bootstrap.theme</parmname>
+          </pt>
+          <pd>
+            Defines the style of the PDF  - <option>default</option> applies default Bootstrap styling.
+          </pd>
+        </plentry>
+      </parml>
+
+      <carousel indicators="yes" margin="t2">
+        <carousel-item>
+          <grid-row>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/brite/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/brite/"
+                    format="html"
+                    scope="external"
+                  ><option>brite</option></xref>
+                </p>
+              </card>
+            </grid-col>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/cerulean/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/cerulean/"
+                    format="html"
+                    scope="external"
+                  ><option>cerulean</option></xref>
+                </p>
+              </card>
+            </grid-col>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/cosmo/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/cosmo/"
+                    format="html"
+                    scope="external"
+                  ><option>cosmo</option></xref>
+                </p>
+              </card>
+            </grid-col>
+          </grid-row>
+        </carousel-item>
+        <carousel-item>
+          <grid-row>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/cyborg/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/cyborg/"
+                    format="html"
+                    scope="external"
+                  ><option>cyborg</option></xref>
+                </p>
+              </card>
+            </grid-col>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/darkly/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/darkly/"
+                    format="html"
+                    scope="external"
+                  ><option>darkly</option></xref>
+                </p>
+              </card>
+            </grid-col>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/flatly/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/flatly/"
+                    format="html"
+                    scope="external"
+                  ><option>flatly</option></xref>
+                </p>
+              </card>
+            </grid-col>
+          </grid-row>
+        </carousel-item>
+        <carousel-item>
+          <grid-row>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/journal/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/journal/"
+                    format="html"
+                    scope="external"
+                  ><option>journal</option></xref>
+                </p>
+              </card>
+            </grid-col>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/litera/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/litera/"
+                    format="html"
+                    scope="external"
+                  ><option>litera</option></xref>
+                </p>
+              </card>
+            </grid-col>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/lumen/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/lumen/"
+                    format="html"
+                    scope="external"
+                  ><option>lumen</option></xref>
+                </p>
+              </card>
+            </grid-col>
+          </grid-row>
+        </carousel-item>
+        <carousel-item>
+          <grid-row>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/lux/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/lux/"
+                    format="html"
+                    scope="external"
+                  ><option>lux</option></xref>
+                </p>
+              </card>
+            </grid-col>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/materia/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/materia/"
+                    format="html"
+                    scope="external"
+                  ><option>materia</option></xref>
+                </p>
+              </card>
+            </grid-col>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/minty/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/minty/"
+                    format="html"
+                    scope="external"
+                  ><option>minty</option></xref>
+                </p>
+              </card>
+            </grid-col>
+          </grid-row>
+        </carousel-item>
+        <carousel-item>
+          <grid-row>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/morph/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/morph/"
+                    format="html"
+                    scope="external"
+                  ><option>morph</option></xref>
+                </p>
+              </card>
+            </grid-col>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/pulse/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/pulse/"
+                    format="html"
+                    scope="external"
+                  ><option>pulse</option></xref>
+                </p>
+              </card>
+            </grid-col>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/quartz/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/quartz/"
+                    format="html"
+                    scope="external"
+                  ><option>quartz</option></xref>
+                </p>
+              </card>
+            </grid-col>
+          </grid-row>
+        </carousel-item>
+        <carousel-item>
+          <grid-row>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/sandstone/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/sandstone/"
+                    format="html"
+                    scope="external"
+                  ><option>sandstone</option></xref>
+                </p>
+              </card>
+            </grid-col>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/simplex/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/simplex/"
+                    format="html"
+                    scope="external"
+                  ><option>simplex</option></xref>
+                </p>
+              </card>
+            </grid-col>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/sketchy/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/sketchy/"
+                    format="html"
+                    scope="external"
+                  ><option>sketchy</option></xref>
+                </p>
+              </card>
+            </grid-col>
+          </grid-row>
+        </carousel-item>
+        <carousel-item>
+          <grid-row>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/slate/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/slate/"
+                    format="html"
+                    scope="external"
+                  ><option>slate</option></xref>
+                </p>
+              </card>
+            </grid-col>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/solar/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/solar/"
+                    format="html"
+                    scope="external"
+                  ><option>solar</option></xref>
+                </p>
+              </card>
+            </grid-col>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/spacelab/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/spacelab/"
+                    format="html"
+                    scope="external"
+                  ><option>spacelab</option></xref>
+                </p>
+              </card>
+            </grid-col>
+          </grid-row>
+        </carousel-item>
+        <carousel-item>
+          <grid-row>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/superhero/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/superhero/"
+                    format="html"
+                    scope="external"
+                  ><option>superhero</option></xref>
+                </p>
+              </card>
+            </grid-col>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/united/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/united/"
+                    format="html"
+                    scope="external"
+                  ><option>united</option></xref>
+                </p>
+              </card>
+            </grid-col>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/vapor/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/vapor/"
+                    format="html"
+                    scope="external"
+                  ><option>vapor</option></xref>
+                </p>
+              </card>
+            </grid-col>
+          </grid-row>
+        </carousel-item>
+        <carousel-item>
+          <grid-row>
+            <grid-col colspan="4">
+              <card width="100">
+                <image scope="external" href="https://bootswatch.com/yeti/thumbnail.png"/>
+                <p outputclass="text-center">
+                  <xref
+                    outputclass="link stretched-link link-underline link-underline-opacity-0"
+                    href="https://bootswatch.com/yeti/"
+                    format="html"
+                    scope="external"
+                  ><option>yeti</option></xref>
+                </p>
+              </card>
+            </grid-col>
+          </grid-row>
+        </carousel-item>
+      </carousel>
+    </section>
+  </body>
+</topic>

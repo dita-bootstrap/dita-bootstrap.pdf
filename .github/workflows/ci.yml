@@ -4,11 +4,13 @@ name: CI
     branches:
       - master
       - develop
+      - v5
+      - v6
   workflow_dispatch:
 
 jobs:
   build-dita:
-    name: Build DITA
+    name: Build PDF Sample
     runs-on: ubuntu-latest
     steps:
       - name: Git checkout
@@ -43,3 +45,74 @@ jobs:
         with:
           name: pdf
           path: out/pdf
+
+  build-html:
+    name: Build HTML Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v7
+
+      - name: Git checkout specialization
+        uses: actions/checkout@v7
+        with:
+          repository: dita-bootstrap/dita-bootstrap.specialization
+          ref: ${{ github.ref_name }}
+          path: specialization
+
+      - name: Git checkout HTML
+        uses: actions/checkout@v7
+        with:
+          repository: dita-bootstrap/dita-bootstrap.html
+          ref: ${{ github.ref_name }}
+          path: html
+
+      - name: Copy code examples
+        run: HTML_DIR=html SPEC_DIR=specialization ./copy-code.sh
+
+      - name: Calculate short SHA
+        uses: benjlevesque/short-sha@v4.0
+        id: short-sha
+        with:
+          length: 7
+
+      - name: Build Bootstrap
+        uses: dita-ot/dita-ot-action@4.4
+        with:
+          install: |
+            apt-get update -q
+            export DEBIAN_FRONTEND=noninteractive
+            apt-get install -qy --no-install-recommends nodejs
+            nodejs -v
+          plugins: |
+            fox.jason.extend.css
+            https://github.com/dita-bootstrap/dita-bootstrap.specialization/archive/develop.zip
+            https://github.com/dita-bootstrap/dita-bootstrap.html/archive/develop.zip
+            https://github.com/dita-bootstrap/dita-bootstrap.lunr/archive/develop.zip
+            https://github.com/jason-fox/fox.jason.prismjs/archive/master.zip
+            fox.jason.favicon
+            fox.jason.open-graph
+            https://github.com/dita-bootstrap/dita-bootstrap.theme-switcher/archive/develop.zip
+          project: .github/dita-ot/html.xml
+
+      - name: Determine target folder
+        id: set-target
+        run: |
+          if [ "${{ github.ref_name }}" = "master" ] || [ "${{ github.ref_name }}" = "develop" ]; then
+            echo "target_dir=" >> $GITHUB_OUTPUT
+            printf 'clean_exclude<<EOF\nv5\nv6\nEOF\n' >> $GITHUB_OUTPUT
+          else
+            echo "target_dir=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Deploy HTML 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.9.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: out/html
+          target-folder: ${{ steps.set-target.outputs.target_dir }}
+          commit-message: '🚀 Deploy ${{ steps.short-sha.outputs.sha }} to GitHub Pages'
+          git-config-name: 'GitHub Action'
+          git-config-email: 'action@github.com'
+          clean-exclude: ${{ steps.set-target.outputs.clean_exclude }}

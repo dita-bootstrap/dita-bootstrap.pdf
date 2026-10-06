@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Within the sample documentation, where necessary, the texts describing the usage of each component have been copied
+  directly from the official Bootstrap 6.0 documentation (found at https://getbootstrap.com/docs/6.0), however DITA
+  markup is used throughout the examples describing how to implement these components correctly using outputclass.
+
+  This work is a derivative of "Bootstrap 6.0 docs" by Twitter, Inc. and the Bootstrap Authors,
+  and used under CC BY 3.0. See the accompanying LICENSE file for applicable licenses.
+-->
+<!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
+<topic id="pagination">
+  <title>Pagination</title>
+  <abstract>
+    <shortdesc>Documentation and examples for showing pagination to indicate a series of related content exists across
+      multiple pages.</shortdesc>
+    <p>Bootstrap uses a large block of connected links for pagination, making links hard to miss and easily scalable—all
+      while providing large hit areas. Pagination is built with <xmlelement>ol</xmlelement> DITA elements so screen
+      readers can announce the number of available links. They are wrapped in an HTML <xmlelement>nav</xmlelement>
+      element to identify them as a navigation sections to screen readers and other assistive technologies.</p>
+    <p>In addition, as pages likely have more than one such navigation section, it’s advisable to provide a descriptive
+      aria-label by placing the <xmlelement>ol</xmlelement> within a dedicated <xmlelement>section</xmlelement> with a
+        <xmlelement>title</xmlelement> for the <xmlelement>nav</xmlelement> to reflect its purpose. For example, if the
+      pagination component is used to navigate between a set of search results, an appropriate
+        <xmlelement>title</xmlelement> could be <i>"Search results pages"</i>.</p>
+  </abstract>
+  <prolog>
+    <metadata>
+      <keywords>
+        <indexterm>Pagination</indexterm>
+        <indexterm>CSS
+          <indexterm><xmlatt>outputclass</xmlatt></indexterm>
+        </indexterm>
+        <indexterm><xmlelement>ol</xmlelement></indexterm>
+      </keywords>
+    </metadata>
+  </prolog>
+  <body outputclass="language-markup">
+<fig>
+      <title>Pagination</title>
+      <image href="src/pagination/example.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/pagination/example.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/pagination/example.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="variants">
+      <title>Variants</title>
+      <p>Add a <xmlatt>theme</xmlatt> attribute to a pagination list to apply a semantic theme color across the
+        component, including hover, focus, and the active page item.</p>
+    </section>
+<fig>
+      <title>Variants</title>
+      <image href="src/pagination/variants.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/pagination/variants.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/pagination/variants.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+
+    <section id="sizing">
+      <title>Sizing</title>
+      <p>Fancy larger or smaller pagination? Use <xmlatt>size="large"</xmlatt> or
+          <xmlatt>size="small"</xmlatt> for additional sizes.</p>
+    </section>
+<fig>
+      <title>Sizing</title>
+      <image href="src/pagination/sizing.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/pagination/sizing.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/pagination/sizing.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+<fig>
+      <title>Small pagination</title>
+      <image href="src/pagination/small-pagination.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/pagination/small-pagination.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/pagination/small-pagination.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="alignment">
+      <title>Alignment</title>
+      <p>Change the alignment of pagination component by appending Bootstrap
+        <xref
+          href="https://getbootstrap.com/docs/6.0/utilities/flex/"
+          format="html"
+          scope="external"
+        >flexbox utility</xref> classes
+        to the <xmlatt>outputclass</xmlatt>
+      </p>
+    </section>
+<fig>
+      <title>Alignment</title>
+      <image href="src/pagination/alignment.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/pagination/alignment.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/pagination/alignment.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+<fig>
+      <title>Alignment end</title>
+      <image href="src/pagination/alignment-end.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/pagination/alignment-end.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/pagination/alignment-end.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+  </body>
+</topic>

@@ -1,0 +1,4 @@
+<div class="mt-4 bg-secondary-subtle justify-content-center d-flex p-2">
+   <i class="bi bi-filetype-pdf text-danger fs-4 me-1 d-inline-flex"/>
+  <span class="badge bg-dark small m-0 d-inline-flex">PDF</span>
+</div>

@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
+<!-- Within the sample documentation, where necessary, the texts describing the
+   usage of each component have been copied directly from the official Bootstrap
+   6.0 documentation (found at https://getbootstrap.com/docs/6.0), however DITA
+   markup is used throughout the examples describing how to implement these
+   components correctly using outputclass. -->
+<topic id="typography">
+  <title>Typography</title>
+  <shortdesc>Documentation and examples for Bootstrap typography, including global settings, headings, body text, lists,
+    and more.</shortdesc>
+  <prolog>
+    <metadata>
+      <keywords>
+        <indexterm>Typography</indexterm>
+        <indexterm>CSS
+          <indexterm><xmlatt>outputclass</xmlatt></indexterm>
+        </indexterm>
+        <indexterm><xmlatt>otherprops</xmlatt></indexterm>
+        <indexterm><xmlelement>title</xmlelement></indexterm>
+        <indexterm><xmlelement>dl</xmlelement></indexterm>
+      </keywords>
+    </metadata>
+  </prolog>
+  <body outputclass="language-markup">
+    <section id="headings">
+      <title>Headings</title>
+      <p>All HTML headings, <xmlelement>h1</xmlelement> through <xmlelement>h6</xmlelement>, are available.
+          <xmlatt>outputclass="h1"</xmlatt> through <xmlatt>outputclass="h6"</xmlatt> are also available, for when you
+        want to match the font styling of a heading but cannot use the associated HTML element.</p>
+    </section>
+<fig>
+      <title>Headings</title>
+      <image href="src/typography/headings.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/typography/headings.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/typography/headings.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="customizing-headings">
+      <title>Customizing headings</title>
+      <p>Annotate a <xmlelement>ph</xmlelement> with an <xmlatt>outputclass</xmlatt> to recreate the small secondary
+        heading text from Bootstrap 3.</p>
+    </section>
+<fig>
+      <title>Customizing headings</title>
+      <image href="src/typography/customizing-headings.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/typography/customizing-headings.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/typography/customizing-headings.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="display-headings">
+      <title>Display headings</title>
+      <p>Traditional heading elements are designed to work best in the meat of your page content. When you need a
+        heading to stand out, consider using a display heading — a larger, slightly more opinionated heading style.</p>
+    </section>
+<fig>
+      <title>Display headings</title>
+      <image href="src/typography/display-headings.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/typography/display-headings.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/typography/display-headings.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="lead">
+      <title>Lead</title>
+      <p>Make a paragraph stand out by adding <xmlatt
+        >outputclass="fw-light fs-lg"</xmlatt> — this is automatically added to
+          <xmlelement>shortdesc</xmlelement> elements.</p>
+    </section>
+<fig>
+      <title>Lead</title>
+      <image href="src/typography/lead.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/typography/lead.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/typography/lead.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="inline-text-elements">
+      <title>Inline text elements</title>
+      <p>Styling for common inline HTML5 elements.</p>
+    </section>
+<fig>
+      <title>Inline text elements</title>
+      <image href="src/typography/inline-text-elements.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/typography/inline-text-elements.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/typography/inline-text-elements.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="text-utilities">
+      <title>Text utilities</title>
+      <p>Change text alignment, transform, style, weight, line-height, decoration and color with Bootstrap’s
+        <xref href="./color.dita" format="dita">text and color utilities</xref>.</p>
+    </section>
+
+    <section id="abbreviations">
+      <title>Abbreviations</title>
+      <p>Stylized implementation of HTML’s <xmlelement>abbr</xmlelement> element for abbreviations and acronyms to show
+        the expanded version on hover. Abbreviations have a default underline and gain a help cursor to provide
+        additional context on hover and to users of assistive technologies. </p>
+      <p>Add <xmlatt>outputclass="initialism"</xmlatt> to an abbreviation for a slightly smaller font-size.</p>
+    </section>
+<fig>
+      <title>Abbreviations</title>
+      <image href="src/typography/abbreviations.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/typography/abbreviations.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/typography/abbreviations.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="blockquotes">
+      <title>Blockquotes</title>
+      <p>For quoting blocks of content from another source within your document, use the DITA
+          <xmlelement>lq</xmlelement> element, it is styled automatically.</p>
+    </section>
+<fig>
+      <title>Blockquotes</title>
+      <image href="src/typography/blockquotes.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/typography/blockquotes.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/typography/blockquotes.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="naming-a-source">
+      <title>Naming a source</title>
+      <p>The HTML spec requires that blockquote attribution be placed outside the rendered HTML
+          <xmlelement>blockquote</xmlelement> element. When providing attribution, wrap your the DITA
+          <xmlelement>lq</xmlelement> in a <xmlelement>fig</xmlelement> and add a <xmlelement>title</xmlelement> to the
+          <xmlelement>fig</xmlelement>. Be sure to wrap the name of the source work in the <xmlelement>cite</xmlelement>
+        as well.</p>
+    </section>
+<fig>
+      <title>Naming a source</title>
+      <image href="src/typography/blockquote-attribution.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/typography/blockquote-attribution.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/typography/blockquote-attribution.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="alignment">
+      <title>Alignment</title>
+      <p>Use text utilities such as <xmlatt>outputclass="text-center"</xmlatt> as needed to change the alignment of your
+        blockquote.</p>
+    </section>
+<fig>
+      <title>Alignment</title>
+      <image href="src/typography/blockquote-attribution-centered.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/typography/blockquote-attribution-centered.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/typography/blockquote-attribution-centered.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+<fig>
+      <title>Blockquote attribution right aligned</title>
+      <image href="src/typography/blockquote-attribution-right-aligned.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/typography/blockquote-attribution-right-aligned.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/typography/blockquote-attribution-right-aligned.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+
+    <section id="lists">
+      <title outputclass="h2">Lists</title>
+    </section>
+    <section id="unstyled">
+      <title outputclass="h3">Unstyled</title>
+      <p>Remove the default list-style and left margin on list items (immediate children only). This only applies to
+        immediate children list items, meaning you will need to add the <xmlatt>outputclass="list-unstyled"</xmlatt> for
+        any nested lists as well.</p>
+    </section>
+<fig>
+      <title>Unstyled</title>
+      <image href="src/typography/unstyled.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/typography/unstyled.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/typography/unstyled.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="inline">
+      <title outputclass="h3">Inline</title>
+      <p>Remove a list’s bullets and apply some light margin using the
+        <xmlatt>outputclass="list-inline"</xmlatt> attribute.
+      </p>
+    </section>
+<fig>
+      <title>Inline</title>
+      <image href="src/typography/inline.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/typography/inline.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/typography/inline.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="description-list-alignment">
+      <title outputclass="h3">Description list alignment</title>
+      <p>Terms and descriptions align horizontally using Bootstrap’s grid system of predefined classes. For longer
+        terms, text is truncated with an ellipsis.</p>
+    </section>
+<fig>
+      <title>Description list alignment</title>
+      <image href="src/typography/description-list-alignment.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/typography/description-list-alignment.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/typography/description-list-alignment.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="description-list-column-width">
+      <title outputclass="h3">Description list column width</title>
+      <p>Definitions lists use the twelve column system defined by the Bootstrap grid. By default each <xmlelement
+        >dt</xmlelement> spreads over 3 column widths and each <xmlelement
+        >dd</xmlelement> spreads over 9 column widths. Alter default width of terms by adding <xmlatt
+        >colspan</xmlatt></p>
+    </section>
+<fig>
+      <title>Alignment</title>
+      <image href="src/typography/alignment.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/typography/alignment.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/typography/alignment.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+  </body>
+</topic>
