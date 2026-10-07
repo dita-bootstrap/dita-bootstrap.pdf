@@ -2,10 +2,10 @@
 <!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
 <!--
   Within the sample documentation, where necessary, the texts describing the usage of each component have been copied
-  directly from the official Bootstrap 5.3 documentation (found at https://getbootstrap.com/docs/5.3), however DITA
+  directly from the official Bootstrap 6.0 documentation (found at https://getbootstrap.com/docs/6.0), however DITA
   markup is used throughout the examples describing how to implement these components correctly using outputclass.
 
-  This work is a derivative of "Bootstrap 5.3 docs" by Twitter, Inc. and the Bootstrap Authors,
+  This work is a derivative of "Bootstrap 6.0 docs" by Twitter, Inc. and the Bootstrap Authors,
   and used under CC BY 3.0. See the accompanying LICENSE file for applicable licenses.
 -->
 <topic id="tables">
@@ -25,7 +25,7 @@
     </metadata>
   </prolog>
   <body outputclass="language-markup">
-    <section>
+    <section id="overview">
       <title>Overview</title>
       <p>Due to the widespread use of <xmlelement>table</xmlelement> elements across third-party widgets like calendars
         and date pickers, Bootstrap’s tables are opt-in. Extend with optional modifier output classes or custom styles.
@@ -34,11 +34,10 @@
       <p>Using the most basic table markup, here’s how the default DITA Bootstrap <codeph>.table</codeph>-based tables
         look in Bootstrap.</p>
     </section>
-    <fig>
-      <title>Bootstrap Table</title>
+<fig>
+      <title>Overview</title>
       <image href="src/tables/overview.png" scalefit="yes"/>
     </fig>
-
     <tabbed-dialog style="pills" margin="t3">
       <section>
         <title>Specialization</title>
@@ -49,15 +48,14 @@
         <codeblock><coderef href="code/html/tables/overview.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <section>
+    <section id="variants">
       <title>Variants</title>
       <p>Use contextual classes to color tables, table rows or individual cells.</p>
     </section>
-    <fig>
-      <title>Table Variants</title>
+<fig>
+      <title>Variants</title>
       <image href="src/tables/variants.png" scalefit="yes"/>
     </fig>
-
     <tabbed-dialog style="pills" margin="t3">
       <section>
         <title>Specialization</title>
@@ -68,12 +66,12 @@
         <codeblock><coderef href="code/html/tables/variants.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <section>
+    <section id="striped-rows">
       <title>Striped rows</title>
       <p>Use <xmlatt>striped="yes"</xmlatt> to add zebra-striping to any table row
         within the <xmlelement>tbody</xmlelement>.</p>
     </section>
-    <fig>
+<fig>
       <title>Striped rows</title>
       <image href="src/tables/striped-rows.png" scalefit="yes"/>
     </fig>
@@ -87,12 +85,12 @@
         <codeblock><coderef href="code/html/tables/striped-rows.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <section>
+    <section id="striped-columns">
       <title>Striped columns</title>
       <p>Use <xmlatt>striped-columns="yes"</xmlatt> to add zebra-striping to any table column
         within the <xmlelement>tbody</xmlelement>.</p>
     </section>
-    <fig>
+<fig>
       <title>Striped columns</title>
       <image href="src/tables/striped-columns.png" scalefit="yes"/>
     </fig>
@@ -106,12 +104,12 @@
         <codeblock><coderef href="code/html/tables/striped-columns.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <section>
+    <section id="bordered-tables">
       <title>Bordered tables</title>
       <p>Add <xmlatt>rowsep="1"</xmlatt> and <xmlatt
         >colsep="1"</xmlatt> for borders on all sides of the table and cells.</p>
     </section>
-    <fig>
+<fig>
       <title>Bordered tables</title>
       <image href="src/tables/bordered-tables.png" scalefit="yes"/>
     </fig>
@@ -125,11 +123,11 @@
         <codeblock><coderef href="code/html/tables/bordered-tables.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <section>
+    <section id="tables-without-borders">
       <title>Tables without borders</title>
       <p>Add <xmlatt>rowsep="0"</xmlatt> and <xmlatt>colsep="0"</xmlatt> for a table without borders.</p>
     </section>
-    <fig>
+<fig>
       <title>Tables without borders</title>
       <image href="src/tables/tables-without-borders.png" scalefit="yes"/>
     </fig>
@@ -143,12 +141,12 @@
         <codeblock><coderef href="code/html/tables/tables-without-borders.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <!--section>
+    <section id="small-tables">
       <title>Small tables</title>
       <p>Add <xmlatt>compact="yes"</xmlatt> to make any table more compact by cutting all cell <codeph
         >padding</codeph> in half.</p>
     </section>
-    <fig>
+<fig>
       <title>Small tables</title>
       <image href="src/tables/small-tables.png" scalefit="yes"/>
     </fig>
@@ -161,13 +159,13 @@
         <title><xmlatt>outputclass</xmlatt></title>
         <codeblock><coderef href="code/html/tables/small-tables.xml"/></codeblock>
       </section>
-    </tabbed-dialog-->
-    <section>
+    </tabbed-dialog>
+    <section id="table-group-dividers">
       <title>Table group dividers</title>
       <p>Add a thicker border, darker between table groups—<xmlelement>thead</xmlelement> and <xmlelement
         >tbody</xmlelement>, with <xmlatt>divider="yes"</xmlatt> on the table.</p>
     </section>
-    <fig>
+<fig>
       <title>Table group dividers</title>
       <image href="src/tables/table-group-dividers.png" scalefit="yes"/>
     </fig>
@@ -181,7 +179,7 @@
         <codeblock><coderef href="code/html/tables/table-group-dividers.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <section>
+    <section id="vertical-alignment">
       <title>Vertical alignment</title>
       <p>Table cells of <xmlelement
         >thead</xmlelement> are always vertical aligned to the bottom. Table cells in <xmlelement
@@ -189,7 +187,7 @@
         >table</xmlelement> and are aligned to the top by default. Use the <xmlatt
         >valign</xmlatt> attribute to re-align where needed.</p>
     </section>
-    <fig>
+<fig>
       <title>Vertical alignment</title>
       <image href="src/tables/vertical-alignment.png" scalefit="yes"/>
     </fig>
@@ -203,14 +201,14 @@
         <codeblock><coderef href="code/html/tables/vertical-alignment.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <section>
+    <section id="table-head">
       <title>Table head</title>
-      <p>Similar to tables and dark tables, use the modifier <xmlatt>color="light"</xmlatt> or
-          <xmlatt>color="dark"</xmlatt> to make <xmlelement>thead</xmlelement> elements appear light or dark
+      <p>Similar to tables and dark tables, use the modifier <xmlatt>theme="accent"</xmlatt> or
+          <xmlatt>theme="inverse"</xmlatt> to make <xmlelement>thead</xmlelement> elements appear light or dark
         gray.</p>
     </section>
-    <fig>
-      <title>Table head 1</title>
+<fig>
+      <title>Table head</title>
       <image href="src/tables/table-head.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
@@ -223,8 +221,8 @@
         <codeblock><coderef href="code/html/tables/table-head.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <fig>
-      <title>Table head 2</title>
+<fig>
+      <title>Table head colors</title>
       <image href="src/tables/table-head-colors.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">

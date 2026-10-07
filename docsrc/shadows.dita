@@ -17,7 +17,7 @@
     </metadata>
   </prolog>
   <body outputclass="language-markup">
-    <section>
+    <section id="shadow-utilities">
       <title>Shadow Utilities</title>
       <p>Bootstrap provides utilities for adding depth with text-bg colors and box-shadows. The <xmlatt>shadow</xmlatt>
         attribute can be set to <codeph>yes</codeph>, <codeph>sm</codeph>, <codeph>lg</codeph> or
@@ -26,11 +26,10 @@
         automatically added to prevent the shadow from being clipped by the parent container.</p>
     </section>
 
-    <fig>
+<fig>
       <title>Shadow Utilities</title>
       <image href="src/shadows/shadow-utilities.png" scalefit="yes"/>
     </fig>
-
     <tabbed-dialog style="pills" margin="t3">
       <section>
         <title>Specialization</title>
@@ -42,16 +41,15 @@
       </section>
     </tabbed-dialog>
 
-    <section>
-      <title>Bootstap Components with Shadows</title>
+    <section id="applied-shadow">
+      <title>Applied Shadow</title>
       <p>Shadows can be applied to complex elements as follow:</p>
     </section>
 
-    <fig>
-      <title>Card with Shadow</title>
+<fig>
+      <title>Applied Shadow</title>
       <image href="src/shadows/applied-shadow.png" scalefit="yes"/>
     </fig>
-
     <tabbed-dialog style="pills" margin="t3">
       <section>
         <title>Specialization</title>

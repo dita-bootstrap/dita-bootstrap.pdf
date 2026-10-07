@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Within the sample documentation, where necessary, the texts describing the usage of each component have been copied
-  directly from the official Bootstrap 5.3 documentation (found at https://getbootstrap.com/docs/5.3), however DITA
+  directly from the official Bootstrap 6.0 documentation (found at https://getbootstrap.com/docs/6.0), however DITA
   markup is used throughout the examples describing how to implement these components correctly using outputclass.
 
-  This work is a derivative of "Bootstrap 5.3 docs" by Twitter, Inc. and the Bootstrap Authors,
+  This work is a derivative of "Bootstrap 6.0 docs" by Twitter, Inc. and the Bootstrap Authors,
   and used under CC BY 3.0. See the accompanying LICENSE file for applicable licenses.
 -->
 <!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
@@ -26,13 +26,13 @@
     </metadata>
   </prolog>
   <body outputclass="language-markup">
-    <section>
+    <section id="basic-example">
       <title>Basic example</title>
       <p>The most basic list group is an unordered list with list items and the proper classes. Build upon it with the
         options that follow, or with your own CSS as needed.</p>
     </section>
-    <fig>
-      <title>List Group</title>
+<fig>
+      <title>Basic example</title>
       <image href="src/list-group/basic-example.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
@@ -45,11 +45,11 @@
         <codeblock><coderef href="code/html/list-group/basic-example.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <section>
+    <section id="compacted-list-group">
       <title>Compacted list group</title>
       <p>Add <xmlatt>compact="yes"</xmlatt> to reduce the padding of list items</p>
     </section>
-    <fig>
+<fig>
       <title>Compacted list group</title>
       <image href="src/list-group/compacted-list-group.png" scalefit="yes"/>
     </fig>
@@ -63,11 +63,11 @@
         <codeblock><coderef href="code/html/list-group/compacted-list-group.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <section>
+    <section id="expanded-list-group">
       <title>Expanded list group</title>
       <p>Add <xmlatt>compact="no"</xmlatt> to increase the padding of list items</p>
     </section>
-    <fig>
+<fig>
       <title>Expanded list group</title>
       <image href="src/list-group/expanded-list-group.png" scalefit="yes"/>
     </fig>
@@ -81,13 +81,13 @@
         <codeblock><coderef href="code/html/list-group/expanded-list-group.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <section>
+    <section id="flush">
       <title>Flush</title>
       <p>Add a <xmlatt>flush="yes"</xmlatt> to remove some borders and
         rounded corners to render list group items edge-to-edge in a parent container (e.g., cards).</p>
     </section>
-    <fig>
-      <title>Flush List Group</title>
+<fig>
+      <title>Flush</title>
       <image href="src/list-group/flush.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">

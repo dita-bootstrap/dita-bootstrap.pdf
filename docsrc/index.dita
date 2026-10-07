@@ -2,10 +2,10 @@
 <!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
 <!--
   Within the sample documentation, where necessary, the texts describing the usage of each component have been copied
-  directly from the official Bootstrap 5.3 documentation (found at https://getbootstrap.com/docs/5.3), however DITA
+  directly from the official Bootstrap 6.0 documentation (found at https://getbootstrap.com/docs/6.0), however DITA
   markup is used throughout the examples describing how to implement these components correctly using outputclass.
 
-  This work is a derivative of "Bootstrap 5.3 docs" by Twitter, Inc. and the Bootstrap Authors,
+  This work is a derivative of "Bootstrap 6.0 docs" by Twitter, Inc. and the Bootstrap Authors,
   and used under CC BY 3.0. See the accompanying LICENSE file for applicable licenses.
 -->
 <topic id="index">
@@ -14,15 +14,15 @@
     <xref href="http://www.dita-ot.org" format="html" scope="external">DITA Open Toolkit</xref> that extend the default
     PDF output with a
     <xref
-      href="https://getbootstrap.com/docs/5.3"
+      href="https://getbootstrap.com/docs/6.0"
       format="html"
       scope="external"
-    >Bootstrap 5.3</xref> templating and components.
+    >Bootstrap 6.0</xref> templating and components.
   </shortdesc>
   <prolog>
     <metadata>
       <keywords>
-        <indexterm>Bootstrap 5.3</indexterm>
+        <indexterm>Bootstrap 6.0</indexterm>
         <indexterm>DITA</indexterm>
         <indexterm>installing</indexterm>
       </keywords>

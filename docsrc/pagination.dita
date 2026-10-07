@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Within the sample documentation, where necessary, the texts describing the usage of each component have been copied
-  directly from the official Bootstrap 5.3 documentation (found at https://getbootstrap.com/docs/5.3), however DITA
+  directly from the official Bootstrap 6.0 documentation (found at https://getbootstrap.com/docs/6.0), however DITA
   markup is used throughout the examples describing how to implement these components correctly using outputclass.
 
-  This work is a derivative of "Bootstrap 5.3 docs" by Twitter, Inc. and the Bootstrap Authors,
+  This work is a derivative of "Bootstrap 6.0 docs" by Twitter, Inc. and the Bootstrap Authors,
   and used under CC BY 3.0. See the accompanying LICENSE file for applicable licenses.
 -->
 <!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
@@ -35,8 +35,8 @@
     </metadata>
   </prolog>
   <body outputclass="language-markup">
-    <fig>
-      <title>Page navigation example</title>
+<fig>
+      <title>Pagination</title>
       <image href="src/pagination/example.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
@@ -49,13 +49,33 @@
         <codeblock><coderef href="code/html/pagination/example.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <section>
+    <section id="variants">
+      <title>Variants</title>
+      <p>Add a <xmlatt>theme</xmlatt> attribute to a pagination list to apply a semantic theme color across the
+        component, including hover, focus, and the active page item.</p>
+    </section>
+<fig>
+      <title>Variants</title>
+      <image href="src/pagination/variants.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/pagination/variants.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/pagination/variants.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+
+    <section id="sizing">
       <title>Sizing</title>
       <p>Fancy larger or smaller pagination? Use <xmlatt>size="large"</xmlatt> or
           <xmlatt>size="small"</xmlatt> for additional sizes.</p>
     </section>
-    <fig>
-      <title>Large pagination</title>
+<fig>
+      <title>Sizing</title>
       <image href="src/pagination/sizing.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
@@ -68,7 +88,7 @@
         <codeblock><coderef href="code/html/pagination/sizing.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <fig>
+<fig>
       <title>Small pagination</title>
       <image href="src/pagination/small-pagination.png" scalefit="yes"/>
     </fig>
@@ -82,19 +102,19 @@
         <codeblock><coderef href="code/html/pagination/small-pagination.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <section>
+    <section id="alignment">
       <title>Alignment</title>
       <p>Change the alignment of pagination component by appending Bootstrap
         <xref
-          href="https://getbootstrap.com/docs/5.3/utilities/flex/"
+          href="https://getbootstrap.com/docs/6.0/utilities/flex/"
           format="html"
           scope="external"
         >flexbox utility</xref> classes
         to the <xmlatt>outputclass</xmlatt>
       </p>
     </section>
-    <fig>
-      <title>Centered pagination</title>
+<fig>
+      <title>Alignment</title>
       <image href="src/pagination/alignment.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
@@ -107,8 +127,8 @@
         <codeblock><coderef href="code/html/pagination/alignment.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <fig>
-      <title>End-aligned pagination</title>
+<fig>
+      <title>Alignment end</title>
       <image href="src/pagination/alignment-end.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">

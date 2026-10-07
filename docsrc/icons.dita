@@ -1,3 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Within the sample documentation, where necessary, the texts describing the usage of each component have been copied
+  directly from the official Bootstrap 6.0 documentation (found at https://getbootstrap.com/docs/6.0), however DITA
+  markup is used throughout the examples describing how to implement these components correctly using outputclass.
+
+  This work is a derivative of "Bootstrap 6.0 docs" by Twitter, Inc. and the Bootstrap Authors,
+  and used under CC BY 3.0. See the accompanying LICENSE file for applicable licenses.
+-->
 <!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
 <topic id="icons">
   <title>Icons</title>
@@ -19,7 +28,7 @@
     </metadata>
   </prolog>
   <body outputclass="language-markup">
-    <section>
+    <section id="bootstrap-icons">
       <title>Bootstrap Icons</title>
       <p>
         <xref href="https://icons.getbootstrap.com/" format="html" scope="external">Bootstrap Icons</xref> is a growing
@@ -28,7 +37,7 @@
         >Link</xmlelement> to the default Bootstrap Icons CDN set is included by default. </p>
     </section>
 
-    <section>
+    <section id="example">
       <title>Example</title>
       <p>Icon fonts with classes for every icon are included in Bootstrap Icons. Include the icon web fonts in your page
         via CSS, then reference the class names as needed in your DITA (e.g., <xmlelement>icon
@@ -36,14 +45,14 @@
       <p>Use a <xmlatt>style</xmlatt> attribute and alter the CSS font-size and color to change the icon
         appearance.</p>
     </section>
-    <fig>
-      <title>Icons</title>
+<fig>
+      <title>Example</title>
       <image href="src/icons/example.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
         <title>Specialization</title>
-        <codeblock><coderef href="code/icons/example.xml"/></codeblock>
+        <codeblock><coderef href="code/specialization/icons/example.xml"/></codeblock>
       </section>
       <section>
         <title><xmlatt>outputclass</xmlatt></title>
@@ -51,14 +60,14 @@
       </section>
     </tabbed-dialog>
   <p>Icons placed within an <xmlelement>xref</xmlelement> element are colorized appropriately:</p>
-  <fig>
-    <title>Links with Icons</title>
-    <image href="src/icons/dark-link.png" scalefit="yes"/>
-  </fig>
+<fig>
+      <title>Dark link</title>
+      <image href="src/icons/dark-link.png" scalefit="yes"/>
+    </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
         <title>Specialization</title>
-        <codeblock><coderef href="code/icons/dark-link.xml"/></codeblock>
+        <codeblock><coderef href="code/specialization/icons/dark-link.xml"/></codeblock>
       </section>
       <section>
         <title><xmlatt>outputclass</xmlatt></title>
@@ -66,19 +75,73 @@
       </section>
     </tabbed-dialog>
     <p>Icons can also be placed within buttons as shown:</p>
-    <fig>
-      <title>Buttons with Icons</title>
+<fig>
+      <title>Icons in buttons</title>
       <image href="src/icons/icons-in-buttons.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
       <section>
         <title>Specialization</title>
-        <codeblock><coderef href="code/icons/icons-in-buttons.xml"/></codeblock>
+        <codeblock><coderef href="code/specialization/icons/icons-in-buttons.xml"/></codeblock>
       </section>
       <section>
         <title><xmlatt>outputclass</xmlatt></title>
         <codeblock><coderef href="code/html/icons/icons-in-buttons.xml"/></codeblock>
       </section>
     </tabbed-dialog>
+    <p>Icons can also be used within <xmlelement>chapter</xmlelement> headings,
+      and <xmlelement>topicref</xmlelement> elements by adding
+      <xmlelement>othermeta name="icon"</xmlelement>  and
+      <xmlelement>othermeta name="icon-style"</xmlelement> elements.
+    </p>
+    <fig>
+      <title>Collapsible ToC with icon elements</title>
+      <image scalefit="yes" href="./src/icons/collapsible.png"/>
+    </fig>
+    <fig>
+      <title>Icons elements within a menu bar</title>
+      <image scalefit="yes" href="./src/icons/menubar.png"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/icons/icons-elements-within-a-menu-bar.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/icons/icons-elements-within-a-menu-bar.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="installing-other-icons">
+      <title>Installing other icons</title>
+      <p>Other icon sets such as
+        <xref href="https://fontawesome.com/" format="html" scope="external">Font Awesome</xref>
+        <xref href="https://feathericons.com/" format="html" scope="external">Feather</xref> and
+        <xref href="https://octicons.github.com/" format="html" scope="external">Octicons</xref> are available. To use
+        an alternative set of icons, modify the
+        <xref
+          href="https://github.com/dita-bootstrap/dita-bootstrap.html/blob/master/includes/bootstrap.icons.hdf.xml"
+          format="html"
+          scope="external"
+        >sample header</xref> or specify the path of the Icons CDN file using the
+          <parmname>--icons.cdn.path</parmname> parameter.</p>
+      <codeblock outputclass="language-bash"><cmdname>dita</cmdname> <parmname>--input</parmname>=<filepath
+        >path/to/your.ditamap</filepath> \
+     <parmname>--format</parmname>=<option>html5-bootstrap</option> \
+     <parmname>--icons.include</parmname>=<option>yes</option> \
+     <parmname>--icons.cdn.path</parmname>=<filepath>path/to/icon-cdn-header.xml</filepath></codeblock>
+    </section>
+    <section id="excluding-icons">
+      <title>Excluding icons</title>
+      <indexterm><parmname>--icons.cdn.path</parmname></indexterm>
+      <indexterm><parmname>--icons.include</parmname></indexterm>
+      <p>For performance reasons, if you don't need
+        any icons you can exclude them by setting the <parmname>--icons.include</parmname>=<option>no</option>
+      </p>
+      <codeblock outputclass="language-bash"><cmdname>dita</cmdname> <parmname>--input</parmname>=<filepath
+        >path/to/your.ditamap</filepath> \
+     <parmname>--format</parmname>=<option>html5-bootstrap</option> \
+     <parmname>--icons.include</parmname>=<option>no</option></codeblock>
+   </section>
   </body>
 </topic>

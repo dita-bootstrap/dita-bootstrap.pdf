@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Within the sample documentation, where necessary, the texts describing the usage of each component have been copied
-  directly from the official Bootstrap 5.3 documentation (found at https://getbootstrap.com/docs/5.3), however DITA
+  directly from the official Bootstrap 6.0 documentation (found at https://getbootstrap.com/docs/6.0), however DITA
   markup is used throughout the examples describing how to implement these components correctly using outputclass.
 
-  This work is a derivative of "Bootstrap 5.3 docs" by Twitter, Inc. and the Bootstrap Authors,
+  This work is a derivative of "Bootstrap 6.0 docs" by Twitter, Inc. and the Bootstrap Authors,
   and used under CC BY 3.0. See the accompanying LICENSE file for applicable licenses.
 -->
 <!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
@@ -23,14 +23,14 @@
     </metadata>
   </prolog>
   <body outputclass="language-markup">
-    <section>
+    <section id="basic-example">
       <title>Basic example</title>
       <p>Wrap a series of buttons with <xmlelement>xref outputclass="btn-*"</xmlelement> in a <xmlelement>div
           outputclass="btn-group"</xmlelement>
       </p>
     </section>
-    <fig>
-      <title>Button Group</title>
+<fig>
+      <title>Basic example</title>
       <image href="src/button-group/basic-example.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
@@ -43,11 +43,11 @@
         <codeblock><coderef href="code/html/button-group/basic-example.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <section>
-      <title>Mixed styles</title>
+    <section id="theme-variants">
+      <title>Theme variants</title>
     </section>
-    <fig>
-      <title>Mixed styles</title>
+<fig>
+      <title>Theme variants</title>
       <image href="src/button-group/mixed-styles.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
@@ -60,11 +60,11 @@
         <codeblock><coderef href="code/html/button-group/mixed-styles.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <!--section>
-      <title>Outlined styles</title>
+    <section id="style-variants">
+      <title>Style variants</title>
     </section>
-    <fig>
-      <title>Outlined styles</title>
+<fig>
+      <title>Style variants</title>
       <image href="src/button-group/outlined-styles.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
@@ -76,12 +76,12 @@
         <title><xmlatt>outputclass</xmlatt></title>
         <codeblock><coderef href="code/html/button-group/outlined-styles.xml"/></codeblock>
       </section>
-    </tabbed-dialog-->
-    <section>
+    </tabbed-dialog>
+    <section id="button-toolbar">
       <title>Button toolbar</title>
       <p>Combine sets of button groups into button toolbars for more complex components.</p>
     </section>
-    <fig>
+<fig>
       <title>Button toolbar</title>
       <image href="src/button-group/button-toolbar.png" scalefit="yes"/>
     </fig>
@@ -95,11 +95,11 @@
         <codeblock><coderef href="code/html/button-group/button-toolbar.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <!--section>
+    <section id="vertical-variation">
       <title>Vertical variation</title>
       <p>Make a set of buttons appear vertically stacked rather than horizontally.</p>
     </section>
-    <fig>
+<fig>
       <title>Vertical variation</title>
       <image href="src/button-group/vertical-variation.png" scalefit="yes"/>
     </fig>
@@ -112,6 +112,6 @@
         <title><xmlatt>outputclass</xmlatt></title>
         <codeblock><coderef href="code/html/button-group/vertical-variation.xml"/></codeblock>
       </section>
-    </tabbed-dialog-->
+    </tabbed-dialog>
   </body>
 </topic>

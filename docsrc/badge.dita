@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Within the sample documentation, where necessary, the texts describing the usage of each component have been copied
-  directly from the official Bootstrap 5.3 documentation (found at https://getbootstrap.com/docs/5.3), however DITA
+  directly from the official Bootstrap 6.0 documentation (found at https://getbootstrap.com/docs/6.0), however DITA
   markup is used throughout the examples describing how to implement these components correctly using outputclass.
 
-  This work is a derivative of "Bootstrap 5.3 docs" by Twitter, Inc. and the Bootstrap Authors,
+  This work is a derivative of "Bootstrap 6.0 docs" by Twitter, Inc. and the Bootstrap Authors,
   and used under CC BY 3.0. See the accompanying LICENSE file for applicable licenses.
 -->
 <!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
@@ -23,13 +23,25 @@
     </metadata>
   </prolog>
   <body outputclass="language-markup">
-    <section>
-      <title>Example</title>
-      <p>Badges scale to match the size of the immediate parent element by using relative font sizing and
-          <xmlatt>em</xmlatt> units. As of v5, badges no longer have focus or hover styles for links.</p>
+    <section id="examples">
+      <title>Examples</title>
+      <p>Badges are tiny, static display components used for adding context to other elements. They can be used as
+        part of navigation, buttons, and more to provide a counter or label. Badges scale to match the size of the
+        immediate parent element by using relative font sizing and <xmlatt>em</xmlatt> units.</p>
+      <p>Badges come in three variants: solid (default), subtle, and outline.</p>
     </section>
-    <fig>
-      <title>Badges</title>
+<fig>
+      <title>Examples</title>
+      <image href="src/badge/theme-variants.png" scalefit="yes"/>
+    </fig>
+    <codeblock><coderef href="code/specialization/badge/theme-variants.xml"/></codeblock>
+
+    <section id="headings">
+      <title>Headings</title>
+      <p>Badges adapt to the font-size of the parent element.</p>
+    </section>
+<fig>
+      <title>Headings</title>
       <image href="src/badge/example.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">
@@ -42,15 +54,13 @@
         <codeblock><coderef href="code/html/badge/example.xml"/></codeblock>
       </section>
     </tabbed-dialog>
-    <section>
-      <title>Background colors</title>
-      <p>Set a background-color with contrasting foreground color with Bootstrap’s <codeph
-        >text-bg-{color}</codeph> helpers. Previously it was required to manually pair your choice of <xmlatt
-        >outputclass</xmlatt> <codeph>text-{color}</codeph> and <codeph
-        >bg-{color}</codeph> utilities for styling, which you still may use if you prefer.</p>
+    <section id="variants">
+      <title>Variants</title>
+      <p>Use the contextual <xmlatt>theme</xmlatt> attribute to apply a semantic theme color to badges, in any of the
+        solid, subtle, or outline styles.</p>
     </section>
-    <fig>
-      <title>Background colors</title>
+<fig>
+      <title>Variants</title>
       <image href="src/badge/background-colors.png" scalefit="yes"/>
     </fig>
     <tabbed-dialog style="pills" margin="t3">

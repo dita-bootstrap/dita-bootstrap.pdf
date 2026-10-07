@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Within the sample documentation, where necessary, the texts describing the usage of each component have been copied
-  directly from the official Bootstrap 5.3 documentation (found at https://getbootstrap.com/docs/5.3), however DITA
+  directly from the official Bootstrap 6.0 documentation (found at https://getbootstrap.com/docs/6.0), however DITA
   markup is used throughout the examples describing how to implement these components correctly using outputclass.
 
-  This work is a derivative of "Bootstrap 5.3 docs" by Twitter, Inc. and the Bootstrap Authors,
+  This work is a derivative of "Bootstrap 6.0 docs" by Twitter, Inc. and the Bootstrap Authors,Bootstrap 6.0 docs
   and used under CC BY 3.0. See the accompanying LICENSE file for applicable licenses.
 -->
 <!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
@@ -24,16 +24,27 @@
     </metadata>
   </prolog>
   <body outputclass="language-markup">
-    <section>
+    <section id="base-class">
+      <title>Base class</title>
+      <p>Buttons have a standard <codeph>btn</codeph> class that sets up basic styles such as padding and content
+        alignment, along with fallback visual styles for basic accessibility. Change this class to another button
+        class to apply different visual styles for a specific button variant and theme.</p>
+    </section>
+<fig>
+      <title>Base class</title>
+      <image href="src/buttons/base-class.png" scalefit="yes"/>
+    </fig>
+    <codeblock><coderef href="code/specialization/buttons/base-class.xml"/></codeblock>
+
+    <section id="example">
       <title>Example</title>
       <p>Bootstrap includes several predefined button styles, each serving its own semantic purpose, with a few extras
         thrown in for more control.</p>
     </section>
-    <fig>
-      <title>Buttons</title>
+<fig>
+      <title>Example</title>
       <image href="src/buttons/example.png" scalefit="yes"/>
     </fig>
-
     <tabbed-dialog style="pills" margin="t3">
       <section>
         <title>Specialization</title>
@@ -45,13 +56,54 @@
       </section>
     </tabbed-dialog>
 
-    <!--section>
+    <section id="variants">
+      <title>Variants</title>
+      <p>Compare the solid (default), outline, subtle, and text button styles at once, combined with theme
+        colors.</p>
+    </section>
+<fig>
+      <title>Variants</title>
+      <image href="src/buttons/variants.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/buttons/variants.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/buttons/variants.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+
+    <section id="styled-buttons">
+      <title>Styled buttons</title>
+      <p>Add visual depth to solid buttons with gradients and shadows using the <codeph>btn-styled</codeph> modifier
+        class. This provides a more three-dimensional appearance that can be customized further with CSS
+        variables.</p>
+    </section>
+<fig>
+      <title>Styled buttons</title>
+      <image href="src/buttons/styled-buttons.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/buttons/styled-buttons.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/buttons/styled-buttons.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+
+    <section id="outline-buttons">
       <title>Outline buttons</title>
       <p>In need of a button, but not the hefty background colors they bring? Replace the default modifier classes with
         the <xmlatt>outputclass</xmlatt> and a value of <codeph>btn-outline-*</codeph> to remove all background images
         and colors on any button.</p>
     </section>
-    <fig>
+<fig>
       <title>Outline buttons</title>
       <image href="src/buttons/outline-buttons.png" scalefit="yes"/>
     </fig>
@@ -64,17 +116,16 @@
         <title><xmlatt>outputclass</xmlatt></title>
         <codeblock><coderef href="code/html/buttons/outline-buttons.xml"/></codeblock>
       </section>
-    </tabbed-dialog-->
-    <section>
+    </tabbed-dialog>
+    <section id="sizing">
       <title>Sizing</title>
-      <p>Fancy larger or smaller buttons? Use <xmlatt>size="large"</xmlatt> or
-          <xmlatt>size="small"</xmlatt> for additional sizes.</p>
+      <p>Fancy larger or smaller buttons? Use <xmlatt>size="large"</xmlatt>, <xmlatt>size="small"</xmlatt>, or
+          <xmlatt>size="xs"</xmlatt> for additional sizes.</p>
     </section>
-    <fig>
-      <title>Large Buttons</title>
+<fig>
+      <title>Sizing</title>
       <image href="src/buttons/sizing.png" scalefit="yes"/>
     </fig>
-
     <tabbed-dialog style="pills" margin="t3">
       <section>
         <title>Specialization</title>
@@ -86,11 +137,10 @@
       </section>
     </tabbed-dialog>
 
-    <fig>
-      <title>Small Buttons</title>
+<fig>
+      <title>Small buttons</title>
       <image href="src/buttons/small-buttons.png" scalefit="yes"/>
     </fig>
-
     <tabbed-dialog style="pills" margin="t3">
       <section>
         <title>Specialization</title>
@@ -99,6 +149,21 @@
       <section>
         <title><xmlatt>outputclass</xmlatt></title>
         <codeblock><coderef href="code/html/buttons/small-buttons.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+
+<fig>
+      <title>Extra small buttons</title>
+      <image href="src/buttons/extra-small-buttons.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/buttons/extra-small-buttons.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/buttons/extra-small-buttons.xml"/></codeblock>
       </section>
     </tabbed-dialog>
   </body>

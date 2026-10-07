@@ -20,18 +20,17 @@
     </metadata>
   </prolog>
   <body outputclass="language-markup">
-    <section>
+    <section id="margin">
       <title>Margin</title>
       <p>The <xmlatt
-        >margin</xmlatt> attribute controls the distance between elements, supporting values from 0 to 5 and <codeph
+        >margin</xmlatt> attribute controls the distance between elements, supporting values from 0 to 12 and <codeph
         >auto</codeph>.</p>
     </section>
 
-    <fig>
+<fig>
       <title>Margin</title>
       <image href="src/spacing/margin.png" scalefit="yes"/>
     </fig>
-
     <tabbed-dialog style="pills" margin="t3">
       <section>
         <title>Specialization</title>
@@ -43,17 +42,16 @@
       </section>
     </tabbed-dialog>
 
-    <section>
+    <section id="padding">
       <title>Padding</title>
       <p>The <xmlatt
-        >padding</xmlatt> attribute controls the internal spacing of an element, supporting values from 0 to 5.</p>
+        >padding</xmlatt> attribute controls the internal spacing of an element, supporting values from 0 to 12.</p>
     </section>
 
-    <fig>
+<fig>
       <title>Padding</title>
       <image href="src/spacing/padding.png" scalefit="yes"/>
     </fig>
-
     <tabbed-dialog style="pills" margin="t3">
       <section>
         <title>Specialization</title>
@@ -65,7 +63,7 @@
       </section>
     </tabbed-dialog>
 
-    <section>
+    <section id="directional-spacing">
       <title>Directional Spacing</title>
       <p>The <xmlatt>margin</xmlatt> and <xmlatt
         >padding</xmlatt> attributes also support directional spacing using a prefix:</p>
@@ -80,11 +78,10 @@
       <p>Multiple values can be specified as a space-separated list.</p>
     </section>
 
-    <fig>
+<fig>
       <title>Directional Spacing</title>
       <image href="src/spacing/directional-spacing.png" scalefit="yes"/>
     </fig>
-
     <tabbed-dialog style="pills" margin="t3">
       <section>
         <title>Specialization</title>
