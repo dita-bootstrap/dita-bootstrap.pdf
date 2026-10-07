@@ -35,5 +35,6 @@
   <xsl:include href="fo/icon.xsl"/>
   <xsl:include href="fo/list-group.xsl"/>
   <xsl:include href="fo/pagination.xsl"/>
+  <xsl:include href="fo/stepper.xsl"/>
 
 </xsl:stylesheet>

@@ -69,9 +69,10 @@
     </tabbed-dialog>
     <section id="border-styling">
       <title>Border Styling</title>
-      <p>The <xmlatt>border</xmlatt> attribute also accepts numeric values 1-5 for width. The <xmlatt
+      <p>The <xmlatt>border</xmlatt> attribute accepts <codeph>yes</codeph> for a default border, <codeph
+        >keyline</codeph> for a hairline border, and numeric values 1-5 for width. The <xmlatt
         >rounded</xmlatt> attribute 
-        supports values 0-5, <codeph>circle</codeph> and <codeph>pill</codeph>.
+        supports values 0-9, <codeph>circle</codeph> and <codeph>pill</codeph>.
         The <codeph>-border</codeph> theme suffix (e.g. <codeph>theme="primary-border"</codeph>) can be used to set
         the color of the border.</p>
     </section>

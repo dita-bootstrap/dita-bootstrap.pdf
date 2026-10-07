@@ -23,7 +23,7 @@
     <section id="margin">
       <title>Margin</title>
       <p>The <xmlatt
-        >margin</xmlatt> attribute controls the distance between elements, supporting values from 0 to 5 and <codeph
+        >margin</xmlatt> attribute controls the distance between elements, supporting values from 0 to 12 and <codeph
         >auto</codeph>.</p>
     </section>
 
@@ -45,7 +45,7 @@
     <section id="padding">
       <title>Padding</title>
       <p>The <xmlatt
-        >padding</xmlatt> attribute controls the internal spacing of an element, supporting values from 0 to 5.</p>
+        >padding</xmlatt> attribute controls the internal spacing of an element, supporting values from 0 to 12.</p>
     </section>
 
 <fig>

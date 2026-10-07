@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Within the sample documentation, where necessary, the texts describing the usage of each component have been copied
+  directly from the official Bootstrap 6.0 documentation (found at https://getbootstrap.com/docs/6.0), however DITA
+  markup is used throughout the examples describing how to implement these components correctly using outputclass.
+
+  This work is a derivative of "Bootstrap 6.0 docs" by Twitter, Inc. and the Bootstrap Authors,
+  and used under CC BY 3.0. See the accompanying LICENSE file for applicable licenses.
+-->
+<!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
+<topic id="stepper">
+  <title>Stepper</title>
+  <abstract>
+    <shortdesc
+    >Documentation and examples for creating timelines, wizards, or step-by-step progress indicators.</shortdesc>
+    <p>Steppers are built on ordered lists and display vertically by default. Use the <xmlelement>stepper</xmlelement>
+      element, a specialization of <xmlelement>ol</xmlelement> containing <xmlelement>stepper-item</xmlelement>
+      elements, or add <codeph>outputclass="stepper"</codeph> to an <xmlelement>ol</xmlelement>. Mark completed or
+      current steps with <xmlatt>active="yes"</xmlatt> on the <xmlelement>stepper-item</xmlelement>, or
+      <codeph>active</codeph> in the <xmlatt>outputclass</xmlatt> of an <xmlelement>li</xmlelement>.</p>
+  </abstract>
+  <prolog>
+    <metadata>
+      <keywords>
+        <indexterm>Stepper</indexterm>
+        <indexterm>CSS
+          <indexterm><xmlatt>outputclass</xmlatt></indexterm>
+        </indexterm>
+        <indexterm><xmlelement>ol</xmlelement></indexterm>
+      </keywords>
+    </metadata>
+  </prolog>
+  <body outputclass="language-markup">
+    <fig>
+      <title>Stepper</title>
+      <image href="src/stepper/example.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/stepper/example.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/stepper/example.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="horizontal">
+      <title>Horizontal</title>
+      <p>Set <xmlatt>orientation="horizontal"</xmlatt>, or add <codeph>stepper-horizontal</codeph> to the
+        <xmlatt>outputclass</xmlatt>, for a horizontal layout.</p>
+    </section>
+    <fig>
+      <title>Horizontal</title>
+      <image href="src/stepper/horizontal.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/stepper/horizontal.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/stepper/horizontal.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="vertical">
+      <title>Vertical</title>
+      <p>Set <xmlatt>orientation="vertical"</xmlatt>, or add <codeph>stepper-vertical</codeph> to the
+        <xmlatt>outputclass</xmlatt>, to force a vertical layout.</p>
+    </section>
+    <fig>
+      <title>Vertical</title>
+      <image href="src/stepper/vertical.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/stepper/vertical.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/stepper/vertical.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="variants">
+      <title>Variants</title>
+      <p>Add a <xmlatt>theme</xmlatt> attribute to individual <xmlelement>stepper-item</xmlelement> elements, or a
+        <codeph>theme-{color}</codeph> outputclass to an <xmlelement>li</xmlelement>.</p>
+    </section>
+    <fig>
+      <title>Variants</title>
+      <image href="src/stepper/variants.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/stepper/variants.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/stepper/variants.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+  </body>
+</topic>

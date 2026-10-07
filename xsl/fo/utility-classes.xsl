@@ -566,7 +566,7 @@
             <xsl:when test="$token = 'auto'">
               <xsl:value-of select="concat($prefix, '-auto')"/>
             </xsl:when>
-            <xsl:when test="string-length($token) = 1">
+            <xsl:when test="matches($token, '^[0-9]+$')">
               <xsl:value-of select="concat($prefix, '-', $token)"/>
             </xsl:when>
             <xsl:otherwise>
