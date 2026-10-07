@@ -102,10 +102,17 @@
   <!-- Utilities -->
   <xsl:variable name="bootstrap-spacing-0">0</xsl:variable>
   <xsl:variable name="bootstrap-spacing-1">3pt</xsl:variable>
-  <xsl:variable name="bootstrap-spacing-2">6pt</xsl:variable>
-  <xsl:variable name="bootstrap-spacing-3">12pt</xsl:variable>
-  <xsl:variable name="bootstrap-spacing-4">18pt</xsl:variable>
-  <xsl:variable name="bootstrap-spacing-5">36pt</xsl:variable>
+  <xsl:variable name="bootstrap-spacing-2">4.5pt</xsl:variable>
+  <xsl:variable name="bootstrap-spacing-3">6pt</xsl:variable>
+  <xsl:variable name="bootstrap-spacing-4">9pt</xsl:variable>
+  <xsl:variable name="bootstrap-spacing-5">12pt</xsl:variable>
+  <xsl:variable name="bootstrap-spacing-6">15pt</xsl:variable>
+  <xsl:variable name="bootstrap-spacing-7">18pt</xsl:variable>
+  <xsl:variable name="bootstrap-spacing-8">21pt</xsl:variable>
+  <xsl:variable name="bootstrap-spacing-9">24pt</xsl:variable>
+  <xsl:variable name="bootstrap-spacing-10">27pt</xsl:variable>
+  <xsl:variable name="bootstrap-spacing-11">30pt</xsl:variable>
+  <xsl:variable name="bootstrap-spacing-12">36pt</xsl:variable>
 
   <xsl:variable name="bootstrap-border-color">#dee2e6</xsl:variable>
   <xsl:variable name="bootstrap-card-border-color" select="$bootstrap-border-color"/>
@@ -115,11 +122,15 @@
 
   <xsl:variable name="bootstrap-rounded">6pt</xsl:variable>
   <xsl:variable name="bootstrap-rounded-0">0</xsl:variable>
-  <xsl:variable name="bootstrap-rounded-1">3pt</xsl:variable>
-  <xsl:variable name="bootstrap-rounded-2">4pt</xsl:variable>
-  <xsl:variable name="bootstrap-rounded-3">5pt</xsl:variable>
-  <xsl:variable name="bootstrap-rounded-4">8pt</xsl:variable>
-  <xsl:variable name="bootstrap-rounded-5">16pt</xsl:variable>
+  <xsl:variable name="bootstrap-rounded-1">1.5pt</xsl:variable>
+  <xsl:variable name="bootstrap-rounded-2">2.25pt</xsl:variable>
+  <xsl:variable name="bootstrap-rounded-3">3pt</xsl:variable>
+  <xsl:variable name="bootstrap-rounded-4">4.5pt</xsl:variable>
+  <xsl:variable name="bootstrap-rounded-5">6pt</xsl:variable>
+  <xsl:variable name="bootstrap-rounded-6">7.5pt</xsl:variable>
+  <xsl:variable name="bootstrap-rounded-7">9pt</xsl:variable>
+  <xsl:variable name="bootstrap-rounded-8">10.5pt</xsl:variable>
+  <xsl:variable name="bootstrap-rounded-9">12pt</xsl:variable>
   <xsl:variable name="bootstrap-rounded-circle">50%</xsl:variable>
   <xsl:variable name="bootstrap-rounded-pill">100pt</xsl:variable>
 

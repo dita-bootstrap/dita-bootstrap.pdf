@@ -255,7 +255,7 @@
         <xsl:variable name="token" select="."/>
 
         <!-- Apply base border style for numeric thickness outside the variable to avoid Saxon error -->
-        <xsl:if test="string(number($token)) != 'NaN'">
+        <xsl:if test="string(number($token)) != 'NaN' or $token = 'keyline'">
           <xsl:call-template name="processBootstrapAttrSetReflection">
             <xsl:with-param name="attrSet" select="'border'"/>
           </xsl:call-template>

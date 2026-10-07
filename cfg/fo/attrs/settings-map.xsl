@@ -96,6 +96,13 @@
     <entry name="bootstrap-spacing-3"><xsl:value-of select="$bootstrap-spacing-3"/></entry>
     <entry name="bootstrap-spacing-4"><xsl:value-of select="$bootstrap-spacing-4"/></entry>
     <entry name="bootstrap-spacing-5"><xsl:value-of select="$bootstrap-spacing-5"/></entry>
+    <entry name="bootstrap-spacing-6"><xsl:value-of select="$bootstrap-spacing-6"/></entry>
+    <entry name="bootstrap-spacing-7"><xsl:value-of select="$bootstrap-spacing-7"/></entry>
+    <entry name="bootstrap-spacing-8"><xsl:value-of select="$bootstrap-spacing-8"/></entry>
+    <entry name="bootstrap-spacing-9"><xsl:value-of select="$bootstrap-spacing-9"/></entry>
+    <entry name="bootstrap-spacing-10"><xsl:value-of select="$bootstrap-spacing-10"/></entry>
+    <entry name="bootstrap-spacing-11"><xsl:value-of select="$bootstrap-spacing-11"/></entry>
+    <entry name="bootstrap-spacing-12"><xsl:value-of select="$bootstrap-spacing-12"/></entry>
 
     <entry name="bootstrap-border-color"><xsl:value-of select="$bootstrap-border-color"/></entry>
     <entry name="bootstrap-border-width"><xsl:value-of select="$bootstrap-border-width"/></entry>
@@ -107,6 +114,10 @@
     <entry name="bootstrap-rounded-3"><xsl:value-of select="$bootstrap-rounded-3"/></entry>
     <entry name="bootstrap-rounded-4"><xsl:value-of select="$bootstrap-rounded-4"/></entry>
     <entry name="bootstrap-rounded-5"><xsl:value-of select="$bootstrap-rounded-5"/></entry>
+    <entry name="bootstrap-rounded-6"><xsl:value-of select="$bootstrap-rounded-6"/></entry>
+    <entry name="bootstrap-rounded-7"><xsl:value-of select="$bootstrap-rounded-7"/></entry>
+    <entry name="bootstrap-rounded-8"><xsl:value-of select="$bootstrap-rounded-8"/></entry>
+    <entry name="bootstrap-rounded-9"><xsl:value-of select="$bootstrap-rounded-9"/></entry>
     <entry name="bootstrap-rounded-circle"><xsl:value-of select="$bootstrap-rounded-circle"/></entry>
     <entry name="bootstrap-rounded-pill"><xsl:value-of select="$bootstrap-rounded-pill"/></entry>
 

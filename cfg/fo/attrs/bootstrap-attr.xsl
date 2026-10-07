@@ -541,6 +541,182 @@
         select="$bootstrap-spacing-5"
       /></xsl:attribute></xsl:attribute-set>
 
+  <xsl:attribute-set name="p-6"><xsl:attribute name="padding"><xsl:value-of
+        select="$bootstrap-spacing-6"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="p-7"><xsl:attribute name="padding"><xsl:value-of
+        select="$bootstrap-spacing-7"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="p-8"><xsl:attribute name="padding"><xsl:value-of
+        select="$bootstrap-spacing-8"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="p-9"><xsl:attribute name="padding"><xsl:value-of
+        select="$bootstrap-spacing-9"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="p-10"><xsl:attribute name="padding"><xsl:value-of
+        select="$bootstrap-spacing-10"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="p-11"><xsl:attribute name="padding"><xsl:value-of
+        select="$bootstrap-spacing-11"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="p-12"><xsl:attribute name="padding"><xsl:value-of
+        select="$bootstrap-spacing-12"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pt-6"><xsl:attribute name="padding-top"><xsl:value-of
+        select="$bootstrap-spacing-6"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pt-7"><xsl:attribute name="padding-top"><xsl:value-of
+        select="$bootstrap-spacing-7"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pt-8"><xsl:attribute name="padding-top"><xsl:value-of
+        select="$bootstrap-spacing-8"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pt-9"><xsl:attribute name="padding-top"><xsl:value-of
+        select="$bootstrap-spacing-9"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pt-10"><xsl:attribute name="padding-top"><xsl:value-of
+        select="$bootstrap-spacing-10"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pt-11"><xsl:attribute name="padding-top"><xsl:value-of
+        select="$bootstrap-spacing-11"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pt-12"><xsl:attribute name="padding-top"><xsl:value-of
+        select="$bootstrap-spacing-12"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pb-6"><xsl:attribute name="padding-bottom"><xsl:value-of
+        select="$bootstrap-spacing-6"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pb-7"><xsl:attribute name="padding-bottom"><xsl:value-of
+        select="$bootstrap-spacing-7"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pb-8"><xsl:attribute name="padding-bottom"><xsl:value-of
+        select="$bootstrap-spacing-8"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pb-9"><xsl:attribute name="padding-bottom"><xsl:value-of
+        select="$bootstrap-spacing-9"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pb-10"><xsl:attribute name="padding-bottom"><xsl:value-of
+        select="$bootstrap-spacing-10"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pb-11"><xsl:attribute name="padding-bottom"><xsl:value-of
+        select="$bootstrap-spacing-11"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pb-12"><xsl:attribute name="padding-bottom"><xsl:value-of
+        select="$bootstrap-spacing-12"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="ps-6"><xsl:attribute name="padding-left"><xsl:value-of
+        select="$bootstrap-spacing-6"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="ps-7"><xsl:attribute name="padding-left"><xsl:value-of
+        select="$bootstrap-spacing-7"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="ps-8"><xsl:attribute name="padding-left"><xsl:value-of
+        select="$bootstrap-spacing-8"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="ps-9"><xsl:attribute name="padding-left"><xsl:value-of
+        select="$bootstrap-spacing-9"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="ps-10"><xsl:attribute name="padding-left"><xsl:value-of
+        select="$bootstrap-spacing-10"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="ps-11"><xsl:attribute name="padding-left"><xsl:value-of
+        select="$bootstrap-spacing-11"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="ps-12"><xsl:attribute name="padding-left"><xsl:value-of
+        select="$bootstrap-spacing-12"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pe-6"><xsl:attribute name="padding-right"><xsl:value-of
+        select="$bootstrap-spacing-6"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pe-7"><xsl:attribute name="padding-right"><xsl:value-of
+        select="$bootstrap-spacing-7"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pe-8"><xsl:attribute name="padding-right"><xsl:value-of
+        select="$bootstrap-spacing-8"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pe-9"><xsl:attribute name="padding-right"><xsl:value-of
+        select="$bootstrap-spacing-9"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pe-10"><xsl:attribute name="padding-right"><xsl:value-of
+        select="$bootstrap-spacing-10"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pe-11"><xsl:attribute name="padding-right"><xsl:value-of
+        select="$bootstrap-spacing-11"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="pe-12"><xsl:attribute name="padding-right"><xsl:value-of
+        select="$bootstrap-spacing-12"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="px-6"><xsl:attribute name="padding-left"><xsl:value-of
+        select="$bootstrap-spacing-6"
+      /></xsl:attribute><xsl:attribute name="padding-right"><xsl:value-of
+        select="$bootstrap-spacing-6"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="px-7"><xsl:attribute name="padding-left"><xsl:value-of
+        select="$bootstrap-spacing-7"
+      /></xsl:attribute><xsl:attribute name="padding-right"><xsl:value-of
+        select="$bootstrap-spacing-7"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="px-8"><xsl:attribute name="padding-left"><xsl:value-of
+        select="$bootstrap-spacing-8"
+      /></xsl:attribute><xsl:attribute name="padding-right"><xsl:value-of
+        select="$bootstrap-spacing-8"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="px-9"><xsl:attribute name="padding-left"><xsl:value-of
+        select="$bootstrap-spacing-9"
+      /></xsl:attribute><xsl:attribute name="padding-right"><xsl:value-of
+        select="$bootstrap-spacing-9"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="px-10"><xsl:attribute name="padding-left"><xsl:value-of
+        select="$bootstrap-spacing-10"
+      /></xsl:attribute><xsl:attribute name="padding-right"><xsl:value-of
+        select="$bootstrap-spacing-10"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="px-11"><xsl:attribute name="padding-left"><xsl:value-of
+        select="$bootstrap-spacing-11"
+      /></xsl:attribute><xsl:attribute name="padding-right"><xsl:value-of
+        select="$bootstrap-spacing-11"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="px-12"><xsl:attribute name="padding-left"><xsl:value-of
+        select="$bootstrap-spacing-12"
+      /></xsl:attribute><xsl:attribute name="padding-right"><xsl:value-of
+        select="$bootstrap-spacing-12"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="py-6"><xsl:attribute name="padding-top"><xsl:value-of
+        select="$bootstrap-spacing-6"
+      /></xsl:attribute><xsl:attribute name="padding-bottom"><xsl:value-of
+        select="$bootstrap-spacing-6"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="py-7"><xsl:attribute name="padding-top"><xsl:value-of
+        select="$bootstrap-spacing-7"
+      /></xsl:attribute><xsl:attribute name="padding-bottom"><xsl:value-of
+        select="$bootstrap-spacing-7"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="py-8"><xsl:attribute name="padding-top"><xsl:value-of
+        select="$bootstrap-spacing-8"
+      /></xsl:attribute><xsl:attribute name="padding-bottom"><xsl:value-of
+        select="$bootstrap-spacing-8"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="py-9"><xsl:attribute name="padding-top"><xsl:value-of
+        select="$bootstrap-spacing-9"
+      /></xsl:attribute><xsl:attribute name="padding-bottom"><xsl:value-of
+        select="$bootstrap-spacing-9"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="py-10"><xsl:attribute name="padding-top"><xsl:value-of
+        select="$bootstrap-spacing-10"
+      /></xsl:attribute><xsl:attribute name="padding-bottom"><xsl:value-of
+        select="$bootstrap-spacing-10"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="py-11"><xsl:attribute name="padding-top"><xsl:value-of
+        select="$bootstrap-spacing-11"
+      /></xsl:attribute><xsl:attribute name="padding-bottom"><xsl:value-of
+        select="$bootstrap-spacing-11"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="py-12"><xsl:attribute name="padding-top"><xsl:value-of
+        select="$bootstrap-spacing-12"
+      /></xsl:attribute><xsl:attribute name="padding-bottom"><xsl:value-of
+        select="$bootstrap-spacing-12"
+      /></xsl:attribute></xsl:attribute-set>
+
   <!-- Standard Bootstrap Spacing (Margin) -->
   <xsl:attribute-set name="m-0"><xsl:attribute name="margin"><xsl:value-of
         select="$bootstrap-spacing-0"
@@ -699,6 +875,182 @@
         select="$bootstrap-spacing-5"
       /></xsl:attribute></xsl:attribute-set>
 
+  <xsl:attribute-set name="m-6"><xsl:attribute name="margin"><xsl:value-of
+        select="$bootstrap-spacing-6"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="m-7"><xsl:attribute name="margin"><xsl:value-of
+        select="$bootstrap-spacing-7"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="m-8"><xsl:attribute name="margin"><xsl:value-of
+        select="$bootstrap-spacing-8"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="m-9"><xsl:attribute name="margin"><xsl:value-of
+        select="$bootstrap-spacing-9"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="m-10"><xsl:attribute name="margin"><xsl:value-of
+        select="$bootstrap-spacing-10"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="m-11"><xsl:attribute name="margin"><xsl:value-of
+        select="$bootstrap-spacing-11"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="m-12"><xsl:attribute name="margin"><xsl:value-of
+        select="$bootstrap-spacing-12"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mt-6"><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-spacing-6"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mt-7"><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-spacing-7"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mt-8"><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-spacing-8"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mt-9"><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-spacing-9"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mt-10"><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-spacing-10"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mt-11"><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-spacing-11"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mt-12"><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-spacing-12"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mb-6"><xsl:attribute name="margin-bottom"><xsl:value-of
+        select="$bootstrap-spacing-6"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mb-7"><xsl:attribute name="margin-bottom"><xsl:value-of
+        select="$bootstrap-spacing-7"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mb-8"><xsl:attribute name="margin-bottom"><xsl:value-of
+        select="$bootstrap-spacing-8"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mb-9"><xsl:attribute name="margin-bottom"><xsl:value-of
+        select="$bootstrap-spacing-9"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mb-10"><xsl:attribute name="margin-bottom"><xsl:value-of
+        select="$bootstrap-spacing-10"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mb-11"><xsl:attribute name="margin-bottom"><xsl:value-of
+        select="$bootstrap-spacing-11"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mb-12"><xsl:attribute name="margin-bottom"><xsl:value-of
+        select="$bootstrap-spacing-12"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="ms-6"><xsl:attribute name="margin-left"><xsl:value-of
+        select="$bootstrap-spacing-6"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="ms-7"><xsl:attribute name="margin-left"><xsl:value-of
+        select="$bootstrap-spacing-7"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="ms-8"><xsl:attribute name="margin-left"><xsl:value-of
+        select="$bootstrap-spacing-8"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="ms-9"><xsl:attribute name="margin-left"><xsl:value-of
+        select="$bootstrap-spacing-9"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="ms-10"><xsl:attribute name="margin-left"><xsl:value-of
+        select="$bootstrap-spacing-10"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="ms-11"><xsl:attribute name="margin-left"><xsl:value-of
+        select="$bootstrap-spacing-11"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="ms-12"><xsl:attribute name="margin-left"><xsl:value-of
+        select="$bootstrap-spacing-12"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="me-6"><xsl:attribute name="margin-right"><xsl:value-of
+        select="$bootstrap-spacing-6"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="me-7"><xsl:attribute name="margin-right"><xsl:value-of
+        select="$bootstrap-spacing-7"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="me-8"><xsl:attribute name="margin-right"><xsl:value-of
+        select="$bootstrap-spacing-8"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="me-9"><xsl:attribute name="margin-right"><xsl:value-of
+        select="$bootstrap-spacing-9"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="me-10"><xsl:attribute name="margin-right"><xsl:value-of
+        select="$bootstrap-spacing-10"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="me-11"><xsl:attribute name="margin-right"><xsl:value-of
+        select="$bootstrap-spacing-11"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="me-12"><xsl:attribute name="margin-right"><xsl:value-of
+        select="$bootstrap-spacing-12"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mx-6"><xsl:attribute name="margin-left"><xsl:value-of
+        select="$bootstrap-spacing-6"
+      /></xsl:attribute><xsl:attribute name="margin-right"><xsl:value-of
+        select="$bootstrap-spacing-6"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mx-7"><xsl:attribute name="margin-left"><xsl:value-of
+        select="$bootstrap-spacing-7"
+      /></xsl:attribute><xsl:attribute name="margin-right"><xsl:value-of
+        select="$bootstrap-spacing-7"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mx-8"><xsl:attribute name="margin-left"><xsl:value-of
+        select="$bootstrap-spacing-8"
+      /></xsl:attribute><xsl:attribute name="margin-right"><xsl:value-of
+        select="$bootstrap-spacing-8"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mx-9"><xsl:attribute name="margin-left"><xsl:value-of
+        select="$bootstrap-spacing-9"
+      /></xsl:attribute><xsl:attribute name="margin-right"><xsl:value-of
+        select="$bootstrap-spacing-9"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mx-10"><xsl:attribute name="margin-left"><xsl:value-of
+        select="$bootstrap-spacing-10"
+      /></xsl:attribute><xsl:attribute name="margin-right"><xsl:value-of
+        select="$bootstrap-spacing-10"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mx-11"><xsl:attribute name="margin-left"><xsl:value-of
+        select="$bootstrap-spacing-11"
+      /></xsl:attribute><xsl:attribute name="margin-right"><xsl:value-of
+        select="$bootstrap-spacing-11"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="mx-12"><xsl:attribute name="margin-left"><xsl:value-of
+        select="$bootstrap-spacing-12"
+      /></xsl:attribute><xsl:attribute name="margin-right"><xsl:value-of
+        select="$bootstrap-spacing-12"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="my-6"><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-spacing-6"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+        select="$bootstrap-spacing-6"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="my-7"><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-spacing-7"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+        select="$bootstrap-spacing-7"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="my-8"><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-spacing-8"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+        select="$bootstrap-spacing-8"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="my-9"><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-spacing-9"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+        select="$bootstrap-spacing-9"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="my-10"><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-spacing-10"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+        select="$bootstrap-spacing-10"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="my-11"><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-spacing-11"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+        select="$bootstrap-spacing-11"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="my-12"><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-spacing-12"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+        select="$bootstrap-spacing-12"
+      /></xsl:attribute></xsl:attribute-set>
+
   <xsl:attribute-set name="m-auto"><xsl:attribute name="margin">auto</xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="mx-auto"><xsl:attribute name="margin-left">auto</xsl:attribute><xsl:attribute
       name="margin-right"
@@ -781,6 +1133,9 @@
         select="$bootstrap-inverse"
       /></xsl:attribute></xsl:attribute-set>
   <!-- Border Thickness -->
+  <xsl:attribute-set name="border-keyline"><xsl:attribute
+      name="border-width"
+    >0.375pt</xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="border-1"><xsl:attribute name="border-width">1pt</xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="border-2"><xsl:attribute name="border-width">2pt</xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="border-3"><xsl:attribute name="border-width">3pt</xsl:attribute></xsl:attribute-set>
@@ -836,6 +1191,18 @@
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="rounded-5"><xsl:attribute name="fox:border-radius"><xsl:value-of
         select="$bootstrap-rounded-5"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="rounded-6"><xsl:attribute name="fox:border-radius"><xsl:value-of
+        select="$bootstrap-rounded-6"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="rounded-7"><xsl:attribute name="fox:border-radius"><xsl:value-of
+        select="$bootstrap-rounded-7"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="rounded-8"><xsl:attribute name="fox:border-radius"><xsl:value-of
+        select="$bootstrap-rounded-8"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="rounded-9"><xsl:attribute name="fox:border-radius"><xsl:value-of
+        select="$bootstrap-rounded-9"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="rounded-circle"><xsl:attribute name="fox:border-radius"><xsl:value-of
         select="$bootstrap-rounded-circle"
