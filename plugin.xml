@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="dita-ot/plugin.rnc" type="application/relax-ng-compact-syntax"?>
 <plugin id="org.dita-bootstrap.pdf" version="1.0.0">
-  <require plugin="org.dita-bootstrap.specialization"/>
+  <!--require plugin="org.dita-bootstrap.dtd"/-->
   <feature extension="dita.xsl.xslfo" value="xsl/xslfo.xsl" type="file"/>
   <feature
     extension="dita.specialization.catalog.relative"

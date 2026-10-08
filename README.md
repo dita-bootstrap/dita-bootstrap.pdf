@@ -13,7 +13,7 @@ A plug-in for [DITA Open Toolkit][1] that adds PDF print output to the [DITA Boo
 Use the `dita` command to add this plug-in and its requirements to your DITA Open Toolkit installation:
 
 ```console
-dita install dita-bootstrap.specialization
+dita install dita-bootstrap.dtd
 dita install dita-bootstrap.pdf
 ```
 

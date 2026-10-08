@@ -42,7 +42,7 @@
                generate Bootstrap components:
               </p>
               <codeblock outputclass="language-bash"><cmdname>dita</cmdname> <parmname
-              >install</parmname> org.dita-bootstrap.specialization</codeblock>
+              >install</parmname> org.dita-bootstrap.dtd</codeblock>
             </li>
             <li>
               <p>For PDF generation, install the PDF plug-in, and the PDF theme plug-in as shown:
@@ -67,7 +67,7 @@
                generate Bootstrap components:
               </p>
               <codeblock outputclass="language-bash"><cmdname>dita</cmdname> <parmname
-              >--install</parmname> org.dita-bootstrap.specialization</codeblock>
+              >--install</parmname> org.dita-bootstrap.dtd</codeblock>
           </li>
           <li>
           <p>For PDF generation, install the PDF plug-in, and add the PDF theme plug-in as shown:
@@ -92,7 +92,7 @@
                generate Bootstrap components:
               </p>
               <codeblock outputclass="language-bash"><cmdname>dita</cmdname> <parmname
-              >--install</parmname> https://github.com/dita-bootstrap/dita-bootstrap.specialization/archive/master.zip</codeblock>
+              >--install</parmname> https://github.com/dita-bootstrap/dita-bootstrap.dtd/archive/develop.zip</codeblock>
             </li>
             <li>
               <p>For PDF generation, install the PDF plug-in, and add the PDF theme plug-in as shown:
