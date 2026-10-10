@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="dita-ot/plugin.rnc" type="application/relax-ng-compact-syntax"?>
-<plugin id="org.dita-bootstrap.pdf" version="1.0.0">
+<plugin id="org.dita-bootstrap.pdf" version="5.3.9">
   <!--require plugin="org.dita-bootstrap.dtd"/-->
   <feature extension="dita.xsl.xslfo" value="xsl/xslfo.xsl" type="file"/>
   <feature
