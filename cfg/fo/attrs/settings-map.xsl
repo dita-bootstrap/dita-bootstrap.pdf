@@ -19,6 +19,22 @@
     <entry name="bootstrap-heading-color"><xsl:value-of select="$bootstrap-heading-color"/></entry>
     <entry name="bootstrap-heading-font-weight"><xsl:value-of select="$bootstrap-heading-font-weight"/></entry>
 
+    <entry name="bootstrap-primary-fg"><xsl:value-of select="$bootstrap-primary-fg"/></entry>
+    <entry name="bootstrap-primary-border"><xsl:value-of select="$bootstrap-primary-border"/></entry>
+    <entry name="bootstrap-secondary-fg"><xsl:value-of select="$bootstrap-secondary-fg"/></entry>
+    <entry name="bootstrap-secondary-border"><xsl:value-of select="$bootstrap-secondary-border"/></entry>
+    <entry name="bootstrap-success-fg"><xsl:value-of select="$bootstrap-success-fg"/></entry>
+    <entry name="bootstrap-success-border"><xsl:value-of select="$bootstrap-success-border"/></entry>
+    <entry name="bootstrap-danger-fg"><xsl:value-of select="$bootstrap-danger-fg"/></entry>
+    <entry name="bootstrap-danger-border"><xsl:value-of select="$bootstrap-danger-border"/></entry>
+    <entry name="bootstrap-warning-fg"><xsl:value-of select="$bootstrap-warning-fg"/></entry>
+    <entry name="bootstrap-warning-border"><xsl:value-of select="$bootstrap-warning-border"/></entry>
+    <entry name="bootstrap-info-fg"><xsl:value-of select="$bootstrap-info-fg"/></entry>
+    <entry name="bootstrap-info-border"><xsl:value-of select="$bootstrap-info-border"/></entry>
+    <entry name="bootstrap-accent-fg"><xsl:value-of select="$bootstrap-accent-fg"/></entry>
+    <entry name="bootstrap-accent-border"><xsl:value-of select="$bootstrap-accent-border"/></entry>
+    <entry name="bootstrap-inverse-fg"><xsl:value-of select="$bootstrap-inverse-fg"/></entry>
+    <entry name="bootstrap-inverse-border"><xsl:value-of select="$bootstrap-inverse-border"/></entry>
     <entry name="bootstrap-primary-subtle"><xsl:value-of select="$bootstrap-primary-subtle"/></entry>
     <entry name="bootstrap-primary-subtle-text"><xsl:value-of select="$bootstrap-primary-subtle-text"/></entry>
     <entry name="bootstrap-secondary-subtle"><xsl:value-of select="$bootstrap-secondary-subtle"/></entry>

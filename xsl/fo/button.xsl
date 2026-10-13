@@ -186,6 +186,11 @@
                 <xsl:with-param name="theme" select="concat($theme, '-subtle')"/>
                 <xsl:with-param name="prefix" select="'__bg__'"/>
             </xsl:call-template>
+            <xsl:call-template name="processBootstrapAttrSetReflection">
+              <xsl:with-param name="attrSet" select="concat('__color__', $theme)"/>
+            </xsl:call-template>
+            <xsl:attribute name="border-style">none</xsl:attribute>
+            <xsl:attribute name="border-width">0pt</xsl:attribute>
           </xsl:when>
           <xsl:when test="$is-outline or $is-text">
             <xsl:call-template name="processBootstrapAttrSetReflection">
@@ -214,6 +219,7 @@
           <xsl:if test="$theme != ''">
             <xsl:call-template name="processBootstrapBorderColor">
               <xsl:with-param name="attrValue" select="$theme"/>
+              <xsl:with-param name="themeBorder" select="$is-outline"/>
             </xsl:call-template>
           </xsl:if>
         </xsl:if>
@@ -253,10 +259,21 @@
           </xsl:call-template>
         </xsl:if>
         
-        <!-- Rounding (Default to '2' (4pt) instead of 'yes' (6pt)) -->
-        <xsl:call-template name="processBootstrapRounded">
-          <xsl:with-param name="attrValue" select="(@rounded, if ($size = ('xs', 'small')) then '1' else '2')[1]"/>
-        </xsl:call-template>
+        <xsl:choose>
+          <xsl:when test="@rounded">
+            <xsl:call-template name="processBootstrapRounded">
+              <xsl:with-param name="attrValue" select="@rounded"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when
+            test="not(normalize-space(if ($size = 'large') then $bootstrap-btn-rounded-lg else $bootstrap-btn-rounded) = ('0', '0pt', '0px', ''))"
+          >
+            <xsl:attribute
+              name="fox:border-radius"
+              select="if ($size = 'large') then $bootstrap-btn-rounded-lg else $bootstrap-btn-rounded"
+            />
+          </xsl:when>
+        </xsl:choose>
         
         <!-- Legacy / Spacing utility support -->
         <xsl:call-template name="processBootstrapSpacing">

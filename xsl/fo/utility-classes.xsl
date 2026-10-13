@@ -388,8 +388,11 @@
   <xsl:template name="processBootstrapBorderColor">
     <xsl:param name="attrValue"/>
     <xsl:param name="theme" select="''"/>
+    <!-- Use the theme border shade instead of its base color -->
+    <xsl:param name="themeBorder" select="false()"/>
     
     <xsl:variable name="resolvedTheme" select="if ($theme != '') then $theme else $attrValue"/>
+    <xsl:variable name="baseTheme" select="replace($resolvedTheme, '-subtle$', '')"/>
     
     <xsl:if test="$resolvedTheme != ''">
       <xsl:variable
@@ -401,7 +404,10 @@
         <xsl:attribute name="border-width"><xsl:value-of select="$bootstrap-border-width"/></xsl:attribute>
       </xsl:if>
       <xsl:call-template name="processBootstrapAttrSetReflection">
-        <xsl:with-param name="attrSet" select="concat('border-', $resolvedTheme)"/>
+        <xsl:with-param
+          name="attrSet"
+          select="if ($themeBorder and not(contains($baseTheme, '-'))) then concat('border-theme-', $baseTheme) else concat('border-', $resolvedTheme)"
+        />
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
@@ -902,6 +908,7 @@
           select="if ($theme = '' and $ownIsBorder and $ownColor != '') then (if ($ownIsSubtle) then concat($ownColor, '-subtle') else $ownColor) else ()"
         />
             <xsl:with-param name="theme" select="$theme"/>
+            <xsl:with-param name="themeBorder" select="$variant = 'subtle' or ($theme = '' and $ownIsSubtle)"/>
         </xsl:call-template>
       </xsl:if>
       <xsl:call-template name="processBootstrapRounded">

@@ -142,7 +142,10 @@
                       </xsl:choose>
                    </xsl:variable>
                    <xsl:call-template name="getBootstrapAttrValue">
-                      <xsl:with-param name="attrSet" select="concat('__bg__', $note-theme, '-subtle')"/>
+                      <xsl:with-param
+                    name="attrSet"
+                    select="concat('__bg__', $note-theme, if ($bootstrap-alert-solid) then '' else '-subtle')"
+                  />
                    </xsl:call-template>
                 </xsl:when>
                 <xsl:otherwise>currentColor</xsl:otherwise>

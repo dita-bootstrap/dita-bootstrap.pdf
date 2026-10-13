@@ -76,28 +76,28 @@
 
   <!-- Standard Bootstrap Text Colors -->
   <xsl:attribute-set name="__color__primary">
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-primary"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-primary-fg"/></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="__color__secondary">
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-secondary"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-secondary-fg"/></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="__color__success">
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-success"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-success-fg"/></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="__color__danger">
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-danger"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-danger-fg"/></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="__color__warning">
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-warning"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-warning-fg"/></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="__color__info">
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-info"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-info-fg"/></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="__color__accent">
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-accent"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-accent-fg"/></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="__color__inverse">
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-inverse"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-inverse-fg"/></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="common.link">
     <xsl:attribute name="color">
@@ -128,6 +128,12 @@
           <xsl:choose>
             <xsl:when test="$contextColor = '' or contains($contextSuffix, 'border')">
               <xsl:value-of select="$bootstrap-link"/>
+            </xsl:when>
+            <xsl:when
+              test="$contextSuffix = '' and not($bootstrap-alert-solid) and exists(ancestor::*[contains(@class, ' topic/note ') or contains(@class, ' bootstrap-d/alert ') or tokenize(@outputclass, ' ') = 'alert'])"
+            >
+              <xsl:variable name="subtleVar" select="concat('bootstrap-', $contextColor, '-subtle-text')"/>
+              <xsl:value-of select="$bootstrap-settings/entry[@name = $subtleVar]"/>
             </xsl:when>
             <xsl:when test="contains($contextSuffix, 'subtle')">
               <xsl:variable name="subtleVar" select="concat('bootstrap-', $contextColor, '-subtle-text')"/>
@@ -1133,6 +1139,31 @@
         select="$bootstrap-inverse"
       /></xsl:attribute></xsl:attribute-set>
   <!-- Border Thickness -->
+  <xsl:attribute-set name="border-theme-primary"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-primary-border"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="border-theme-secondary"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-secondary-border"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="border-theme-success"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-success-border"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="border-theme-danger"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-danger-border"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="border-theme-warning"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-warning-border"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="border-theme-info"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-info-border"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="border-theme-accent"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-accent-border"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="border-theme-inverse"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-inverse-border"
+      /></xsl:attribute></xsl:attribute-set>
+
   <xsl:attribute-set name="border-keyline"><xsl:attribute
       name="border-width"
     >0.375pt</xsl:attribute></xsl:attribute-set>

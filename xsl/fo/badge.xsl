@@ -59,6 +59,7 @@
           </xsl:call-template>
           <xsl:call-template name="processBootstrapBorderColor">
             <xsl:with-param name="attrValue" select="$theme"/>
+            <xsl:with-param name="themeBorder" select="true()"/>
           </xsl:call-template>
         </xsl:when>
         <xsl:when test="$style = 'subtle'">
@@ -66,6 +67,11 @@
               <xsl:with-param name="theme" select="concat($theme, '-subtle')"/>
               <xsl:with-param name="prefix" select="'__bg__'"/>
           </xsl:call-template>
+          <xsl:call-template name="processBootstrapAttrSetReflection">
+            <xsl:with-param name="attrSet" select="concat('__color__', $theme)"/>
+          </xsl:call-template>
+          <xsl:attribute name="border-style">none</xsl:attribute>
+          <xsl:attribute name="border-width">0pt</xsl:attribute>
         </xsl:when>
         <xsl:when test="$explicitTheme = ''">
           <xsl:attribute name="background-color" select="$bootstrap-badge-default-bg"/>
@@ -90,7 +96,7 @@
       <!-- 4. Default Rounding (tighter badge look) if not overridden -->
       <xsl:if test="not(@rounded or exists(tokenize(@outputclass, ' ')[starts-with(., 'rounded-')]))">
         <xsl:call-template name="processBootstrapRounded">
-            <xsl:with-param name="attrValue" select="'1'"/>
+            <xsl:with-param name="attrValue" select="'7'"/>
         </xsl:call-template>
       </xsl:if>
 

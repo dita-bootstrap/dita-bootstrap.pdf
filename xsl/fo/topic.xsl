@@ -8,9 +8,24 @@
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:opentopic-func="http://www.idiominc.com/opentopic/exsl/function"
-  exclude-result-prefixes="xs opentopic-func"
+  xmlns:bs="https://dita-bootstrap.github.io/pdf"
+  exclude-result-prefixes="xs opentopic-func bs"
   version="2.0"
 >
+
+  <xsl:function name="bs:darken" as="xs:string">
+    <xsl:param name="hex" as="xs:string"/>
+    <xsl:param name="factor" as="xs:double"/>
+    <xsl:variable name="h" select="lower-case(replace($hex, '^#', ''))"/>
+    <xsl:variable
+      name="full"
+      select="if (string-length($h) = 3) then string-join(for $c in string-to-codepoints($h) return codepoints-to-string(($c, $c)), '') else $h"
+    />
+    <xsl:variable name="digits" select="'0123456789abcdef'"/>
+    <xsl:sequence
+      select="concat('#', string-join(for $i in (0, 2, 4), $v in string-length(substring-before($digits, substring($full, $i + 1, 1))) * 16 + string-length(substring-before($digits, substring($full, $i + 2, 1))) return concat(substring($digits, xs:integer(floor(round($v * $factor) div 16)) + 1, 1), substring($digits, xs:integer(round($v * $factor) mod 16) + 1, 1)), ''))"
+    />
+  </xsl:function>
 
   <!-- Template to customize section titles using Bootstrap heading sizes -->
   <xsl:template match="*[contains(@class, ' topic/section ')]/*[contains(@class, ' topic/title ')]">
@@ -309,7 +324,7 @@
         select="
         if ($isMuted) then concat('__muted__', $theme)
         else if ($isBorderOnly) then concat('border-', $theme)
-        else if ($isSubtle) then concat('__bg__', $theme, '-subtle')
+        else if ($isSubtle and not($bootstrap-alert-solid)) then concat('__bg__', $theme, '-subtle')
         else concat('__bg__', $theme)"
       />
       <xsl:variable name="icon-color-raw">
@@ -324,7 +339,7 @@
       />
       <xsl:variable name="icon-color">
         <xsl:choose>
-          <xsl:when test="$icon-color-is-white">
+          <xsl:when test="$icon-color-is-white and not($bootstrap-alert-solid)">
             <xsl:call-template name="getBootstrapAttrValue">
               <xsl:with-param name="attrSet" select="concat('__bg__', $theme, '-subtle')"/>
               <xsl:with-param name="attrName" select="'background-color'"/>
@@ -333,6 +348,21 @@
           <xsl:otherwise>
             <xsl:value-of select="$icon-color-raw"/>
           </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+
+      <xsl:variable name="bar-color">
+        <xsl:choose>
+          <xsl:when test="$bootstrap-alert-solid and $isSubtle">
+            <xsl:variable name="solid-bg">
+              <xsl:call-template name="getBootstrapAttrValue">
+                <xsl:with-param name="attrSet" select="concat('__bg__', $theme)"/>
+                <xsl:with-param name="attrName" select="'background-color'"/>
+              </xsl:call-template>
+            </xsl:variable>
+            <xsl:value-of select="bs:darken($solid-bg, 0.65)"/>
+          </xsl:when>
+          <xsl:otherwise><xsl:value-of select="$icon-color"/></xsl:otherwise>
         </xsl:choose>
       </xsl:variable>
 
@@ -354,7 +384,10 @@
         </xsl:when>
         <xsl:otherwise>
           <xsl:call-template name="bootstrap.decoration">
-              <xsl:with-param name="variant" select="if ($isSubtle) then 'subtle' else ''"/>
+              <xsl:with-param
+              name="variant"
+              select="if ($isSubtle and not($bootstrap-alert-solid)) then 'subtle' else ''"
+            />
               <xsl:with-param name="theme" select="$theme"/>
               <xsl:with-param name="defaultRounded" select="true()"/>
           </xsl:call-template>
@@ -373,12 +406,12 @@
         <xsl:when test="$direction = 'rtl' or $direction = 'rl'">
           <xsl:attribute name="border-right-width"><xsl:value-of select="$bootstrap-note-border-width"/></xsl:attribute>
           <xsl:attribute name="border-right-style">solid</xsl:attribute>
-          <xsl:attribute name="border-right-color"><xsl:value-of select="$icon-color"/></xsl:attribute>
+          <xsl:attribute name="border-right-color"><xsl:value-of select="$bar-color"/></xsl:attribute>
         </xsl:when>
         <xsl:otherwise>
           <xsl:attribute name="border-left-width"><xsl:value-of select="$bootstrap-note-border-width"/></xsl:attribute>
           <xsl:attribute name="border-left-style">solid</xsl:attribute>
-          <xsl:attribute name="border-left-color"><xsl:value-of select="$icon-color"/></xsl:attribute>
+          <xsl:attribute name="border-left-color"><xsl:value-of select="$bar-color"/></xsl:attribute>
         </xsl:otherwise>
       </xsl:choose>
 

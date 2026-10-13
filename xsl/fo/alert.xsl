@@ -58,7 +58,10 @@
         </xsl:when>
         <xsl:otherwise>
           <xsl:call-template name="bootstrap.decoration">
-              <xsl:with-param name="variant" select="if ($isSubtle) then 'subtle' else ''"/>
+              <xsl:with-param
+              name="variant"
+              select="if ($isSubtle and not($bootstrap-alert-solid)) then 'subtle' else ''"
+            />
               <xsl:with-param name="theme" select="$theme"/>
               <xsl:with-param name="defaultRounded" select="true()"/>
           </xsl:call-template>
