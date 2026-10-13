@@ -7,7 +7,7 @@
 :root {
   --dita-prussian-blue: var(--bs-primary-fg-emphasis);
   --dita-maroon: var(--bs-danger-fg-emphasis);
-  --dita-violet: var(--bs-purple-400);
+  --dita-violet: var(--bs-accent-fg);
   --bs-code-color: rgb(from var(--bs-danger-base) r g calc(b + 63));
 }
 
@@ -15,12 +15,6 @@
  *  This file is part of the DITA Bootstrap plug-in for DITA Open Toolkit.
  *  See the accompanying LICENSE file for applicable licenses.
  */
-
-.list-group-item.active,
-.nav-link.active,
-[data-bs-theme='dark'] {
-  --dita-violet: color-mix(in oklch, var(--bs-purple-400), var(--bs-white) 30%);
-}
 
 .list-group-item {
   border-radius: 0;
@@ -51,16 +45,6 @@
   display: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --dita-violet: color-mix(in oklch, var(--bs-purple-400), var(--bs-white) 30%);
-  }
-
-  [data-bs-theme='light'] {
-    --dita-violet: var(--bs-purple-400);
-  }
-}
-
 .syntaxdiagram {
   color: var(--dita-maroon);
 }
@@ -73,6 +57,7 @@
 .xmlnsname,
 .xmlpi {
   font-family: var(--bs-font-mono);
+  font-size: var(--bs-code-font-size);
   color: var(--dita-violet);
   overflow-wrap: break-word;
 }
@@ -89,7 +74,7 @@
 
 .cmdname,
 .parmname {
-  font-weight: 700;
+  font-weight: var(--bs-font-weight-bold);
   color: var(--dita-prussian-blue);
 }
 
@@ -109,20 +94,15 @@
 }
 
 .boolean {
-  color: var(--bs-green-400);
+  color: var(--bs-success-fg);
 }
 
 .state {
-  color: var(--bs-red-400);
-}
-
-.navbar-brand > svg {
-  margin: 4px 6px;
-  vertical-align: text-top;
+  color: var(--bs-danger-fg);
 }
 
 .bs-container {
-  margin: 1rem auto;
+  margin: var(--bs-spacer-5) auto;
 }
 
 #bs-sidebar-nav .navbar-brand {
@@ -150,15 +130,14 @@
 }
 
 .note {
-  border-left: 6px solid;
-  border-left-color: var(--bs-alert-border-color, transparent);
+  border-left: calc(var(--bs-border-width) * 6) solid;
 }
 
 [dir='rtl'] .note {
-  border-right: 6px solid;
-  border-right-color: var(--bs-alert-border-color, transparent);
+  border-right: calc(var(--bs-border-width) * 6) solid;
   border-left: 0;
 }
+
 
 .navbar .menu {
   --bs-theme-fg: initial;
@@ -168,6 +147,8 @@
   --bs-theme-bg-muted: initial;
   --bs-theme-border: initial;
   --bs-theme-contrast: initial;
+  --bs-theme-fg-emphasis: initial;
+  --bs-theme-focus-ring: initial;
 }
 
 .card .card-body pre {
@@ -191,7 +172,7 @@
   display: grid;
   grid-template-areas: 'sidebar main';
   grid-template-columns: minmax(260px, 1fr) minmax(0, 5fr);
-  gap: 1.5rem;
+  gap: var(--bs-spacer-7);
 }
 
 .bs-sidebar {
@@ -200,7 +181,7 @@
 
 .bs-sidebar .nav-pills .nav-link {
   justify-content: flex-start;
-  font-size: 0.875rem;
+  font-size: var(--bs-font-size-sm);
   text-align: left;
   overflow-wrap: break-word;
   white-space: normal;
@@ -220,10 +201,10 @@
 }
 .bs-fixed-footer {
   height: auto;
-  padding-top: 0.25rem;
+  padding-top: var(--bs-spacer-1);
 }
 
-@media (max-width: 1023.98px) {
+@media (width < 1024px) {
   .bs-main {
     margin-inline: auto;
   }
@@ -232,7 +213,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .bs-main {
     display: grid;
     grid-template-areas: 'content';
@@ -241,7 +222,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   .bs-main {
     grid-template-areas: 'content';
     grid-template-rows: auto 1fr;
@@ -249,21 +230,21 @@
 
   .codeblock {
     min-width: 100%;
-    max-width: calc(80vw - 2rem);
+    max-width: calc(80vw - var(--bs-spacer-9));
   }
 
   .bs-sidebar {
-    --bs-sidebar-top: calc(var(--bs-navbar-min-height, 3.5rem) + 1.5rem);
+    --bs-sidebar-top: calc(var(--bs-navbar-min-height, 3.5rem) + var(--bs-spacer-7));
     position: sticky;
     top: var(--bs-sidebar-top);
     display: block !important;
-    height: calc(100vh - var(--bs-sidebar-top) - 1rem);
-    padding-left: 0.25rem;
-    margin-left: -0.25rem;
+    height: calc(100vh - var(--bs-sidebar-top) - var(--bs-spacer-5));
+    padding-left: var(--bs-spacer-1);
+    margin-left: calc(var(--bs-spacer-1) * -1);
   }
 }
 
-@media (max-width: 1023.98px) {
+@media (width < 1024px) {
   .bd-navbar .bd-navbar-toggle {
     width: 4.25rem;
   }
@@ -322,12 +303,12 @@ article [tabindex='0'] {
 .bd-links {
   padding-left: 0;
   overflow: auto;
-  font-weight: 600;
+  font-weight: var(--bs-font-weight-semibold);
 }
 
 .bd-links a {
-  padding: 0.1875rem 0.5rem;
-  margin-top: 0.125rem;
+  padding: calc(var(--bs-spacer-1) * 0.75) var(--bs-spacer-3);
+  margin-top: calc(var(--bs-spacer-1) / 2);
   color: var(--bs-fg-body);
   text-decoration: none;
 }
@@ -348,33 +329,33 @@ article [tabindex='0'] {
   color: var(--bs-theme-fg-emphasis, var(--bs-link-hover-color)) !important;
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .bd-links {
     position: sticky;
     display: block !important;
-    padding: 0 0.25rem;
+    padding: 0 var(--bs-spacer-1);
   }
 }
 
-@media (max-width: 767.98px) {
+@media (width < 768px) {
   .bd-links > ul {
-    padding: 1.5rem 0.75rem;
+    padding: var(--bs-spacer-7) var(--bs-spacer-4);
     background-color: var(--bs-bg-body);
   }
 }
 
 .bd-links li li a {
-  font-size: 0.875em;
+  font-size: var(--bs-font-size-sm);
 }
 
 .bd-divider {
-  font-size: 0.875em;
-  font-weight: 600;
+  font-size: var(--bs-font-size-sm);
+  font-weight: var(--bs-font-weight-semibold);
 }
 
 .bd-links .btn {
-  padding: 0.25rem !important;
-  font-weight: 600;
+  padding: var(--bs-spacer-1) !important;
+  font-weight: var(--bs-font-weight-semibold);
   color: var(--bs-fg-body);
   background-color: transparent;
   border: 0;
@@ -386,29 +367,29 @@ article [tabindex='0'] {
 }
 
 .bd-links .ps-2 {
-  padding-left: 0.5rem !important;
+  padding-left: var(--bs-spacer-3) !important;
 }
 
 [dir='rtl'] .bd-links .ps-2 {
-  padding-right: 0.5rem !important;
+  padding-right: var(--bs-spacer-3) !important;
   padding-left: 0 !important;
 }
 
 .bd-links .ps-3 {
-  padding-left: 0.75rem !important;
+  padding-left: var(--bs-spacer-4) !important;
 }
 
 [dir='rtl'] .bd-links .ps-3 {
-  padding-right: 0.75rem !important;
+  padding-right: var(--bs-spacer-4) !important;
   padding-left: 0 !important;
 }
 
 .bd-links .ps-4 {
-  padding-left: 1rem !important;
+  padding-left: var(--bs-spacer-5) !important;
 }
 
 [dir='rtl'] .bd-links .ps-4 {
-  padding-right: 1rem !important;
+  padding-right: var(--bs-spacer-5) !important;
   padding-left: 0 !important;
 }
 
@@ -421,24 +402,36 @@ article [tabindex='0'] {
 }
 
 .bd-links .active {
-  font-weight: 600;
+  font-weight: var(--bs-font-weight-semibold);
   color: var(--bs-fg-body);
 }
 
-html:root {
+:root {
+  --prism-skew: black;
+  --prism-bg-skew: white;
+  --prism-maintext: var(--bs-fg-body);
   --prism-background: transparent;
-  --prism-maintext: light-dark(var(--bs-gray-900), var(--bs-white));
-  --prism-text: light-dark(var(--bs-gray-600), var(--bs-gray-400));
-  --prism-punctuation: light-dark(var(--bs-gray-600), var(--bs-gray-400));
+  --prism-text: color-mix(in srgb, var(--bs-gray-500) 70%, var(--prism-skew));
+  --prism-punctuation: color-mix(in srgb, var(--bs-gray-500) 70%, var(--prism-skew));
   --prism-namespace: var(--prism-text);
-  --prism-keywords: light-dark(var(--bs-blue-600), var(--bs-blue-400));
-  --prism-strings: light-dark(var(--bs-green-600), var(--bs-green-400));
-  --prism-symbol: light-dark(var(--bs-pink-600), var(--bs-pink-400));
-  --prism-type: light-dark(var(--bs-red-600), var(--bs-red-400));
-  --prism-regex: light-dark(var(--bs-orange-600), var(--bs-orange-400));
-  --prism-deleted: light-dark(var(--bs-red-600), var(--bs-red-400));
-  --prism-url: light-dark(var(--bs-yellow-600), var(--bs-yellow-400));
+  --prism-keywords: color-mix(in srgb, var(--bs-blue-500) 70%, var(--prism-skew));
+  --prism-strings: color-mix(in srgb, var(--bs-green-500) 70%, var(--prism-skew));
+  --prism-symbol: color-mix(in srgb, var(--bs-pink-500) 70%, var(--prism-skew));
+  --prism-type: color-mix(in srgb, var(--bs-red-500) 70%, var(--prism-skew));
+  --prism-regex: color-mix(in srgb, var(--bs-orange-500) 70%, var(--prism-skew));
+  --prism-deleted: color-mix(in srgb, var(--bs-red-500) 70%, var(--prism-skew));
+  --prism-url: color-mix(in srgb, var(--bs-warning-fg-emphasis) 70%, var(--prism-skew));
 }
+
+[data-bs-theme='dark'] {
+  --prism-skew: white;
+  --prism-bg-skew: black;
+}
+
+.card pre[class*="language-"] {
+  border: none;
+}
+
 
 /**
  * Use css variables in themes with a fallback to the prism.js default theme
