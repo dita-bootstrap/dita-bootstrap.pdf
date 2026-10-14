@@ -102,10 +102,12 @@
       </xsl:call-template>
     </xsl:variable>
     
+    <xsl:variable name="is-flush" select="../@flush = 'yes' or tokenize(../@outputclass, ' ') = 'accordion-flush'"/>
+
     <fo:table table-layout="fixed" width="100%">
       <xsl:attribute name="border-bottom">
         <xsl:value-of
-          select="concat($bootstrap-border-width, ' solid ', if (string($bootstrap-surface-border) != '') then $bootstrap-surface-border else $bootstrap-border-color)"
+          select="concat($bootstrap-border-width, ' solid ', if (not($is-flush) and string($bootstrap-surface-border) != '') then $bootstrap-surface-border else $bootstrap-border-color)"
         />
       </xsl:attribute>
       <xsl:if test="position() = last()">
@@ -122,6 +124,11 @@
           <fo:table-cell padding="10pt 15pt">
             <xsl:call-template name="processBootstrapDirection"/>
             <xsl:choose>
+               <xsl:when
+                test="$is-flush and (string($bootstrap-surface-image) != '' or string($bootstrap-surface-bg) != '')"
+              >
+                  <xsl:attribute name="color" select="$bootstrap-body-color"/>
+               </xsl:when>
                <xsl:when test="string($bootstrap-surface-image) != ''">
                   <xsl:attribute name="color" select="$bootstrap-surface-image-text"/>
                </xsl:when>

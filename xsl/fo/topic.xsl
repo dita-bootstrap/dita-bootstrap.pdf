@@ -393,7 +393,7 @@
             </xsl:variable>
             <xsl:value-of select="bs:darken($image-bar, xs:double($bootstrap-surface-image-bar-factor))"/>
           </xsl:when>
-          <xsl:when test="$bootstrap-alert-solid and $isSubtle">
+          <xsl:when test="$bootstrap-alert-solid and ($isSubtle or $icon-color-is-white)">
             <xsl:variable name="solid-bg">
               <xsl:call-template name="getBootstrapAttrValue">
                 <xsl:with-param name="attrSet" select="concat('__bg__', $theme)"/>

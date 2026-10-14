@@ -94,7 +94,9 @@
       <xsl:attribute name="vertical-align">baseline</xsl:attribute>
 
       <!-- 4. Default Rounding (tighter badge look) if not overridden -->
-      <xsl:if test="not(@rounded or exists(tokenize(@outputclass, ' ')[starts-with(., 'rounded-')]))">
+      <xsl:if
+        test="number(replace($bootstrap-rounded, '[a-z]+$', '')) != 0 and not(@rounded or exists(tokenize(@outputclass, ' ')[starts-with(., 'rounded-')]))"
+      >
         <xsl:call-template name="processBootstrapRounded">
             <xsl:with-param name="attrValue" select="'7'"/>
         </xsl:call-template>
