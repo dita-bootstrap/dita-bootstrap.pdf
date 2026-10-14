@@ -62,6 +62,9 @@
                         </xsl:if>
                      </xsl:if>
 
+                     <xsl:if test="not($is-flush) and string($bootstrap-card-fill) != ''">
+                        <xsl:attribute name="background-color" select="$bootstrap-card-fill"/>
+                     </xsl:if>
                      <xsl:if test="not($is-flush)"><xsl:call-template name="bootstrap.surface.image"/></xsl:if>
                      <xsl:if test="not($is-flush)"><xsl:call-template name="bootstrap.surface"/></xsl:if>
                      <xsl:if test="not($is-flush) and $glow-theme != ''">

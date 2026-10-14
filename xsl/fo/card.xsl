@@ -130,6 +130,8 @@
   <xsl:template name="corner-mask">
     <xsl:param name="corner"/>
     <xsl:param name="radius"/>
+    <xsl:param name="top" select="''"/>
+    <xsl:param name="left" select="''"/>
     <xsl:variable name="glow">
       <xsl:call-template name="glow-color">
         <xsl:with-param name="theme"><xsl:call-template name="get-theme-color"/></xsl:with-param>
@@ -143,11 +145,21 @@
     <fo:block-container position="absolute" width="{$radius}" height="{$radius}" overflow="hidden">
       <xsl:attribute name="top">
         <xsl:choose>
-          <xsl:when test="$is-top"><xsl:value-of select="concat('-', (2 * $border-num) + 0.95, 'pt')"/></xsl:when>
+          <xsl:when test="$top != ''"><xsl:value-of select="$top"/></xsl:when>
+          <xsl:when test="$border-num = 0 and $is-top">0pt</xsl:when>
+          <xsl:when test="$is-top"><xsl:value-of
+              select="concat('-', max((2 * $border-num, 2)) + 0.95, 'pt')"
+            /></xsl:when>
           <xsl:otherwise>0pt</xsl:otherwise>
         </xsl:choose>
       </xsl:attribute>
       <xsl:choose>
+        <xsl:when test="$left != ''">
+          <xsl:attribute name="left" select="$left"/>
+        </xsl:when>
+        <xsl:when test="$border-num = 0">
+          <xsl:attribute name="left" select="if ($is-left) then '0pt' else concat('100% - ', $radius-num, 'pt')"/>
+        </xsl:when>
         <xsl:when test="$is-left">
           <xsl:attribute name="left">
             <xsl:choose>
@@ -168,6 +180,10 @@
         </xsl:otherwise>
       </xsl:choose>
       <fo:block>
+        <xsl:if test="$border-num = 0">
+          <xsl:attribute name="font-size">0pt</xsl:attribute>
+          <xsl:attribute name="line-height">0pt</xsl:attribute>
+        </xsl:if>
         <fo:instream-foreign-object>
           <svg:svg
             xmlns:svg="http://www.w3.org/2000/svg"
@@ -181,9 +197,16 @@
             <xsl:variable name="t" select="0.585786"/>
             <xsl:variable name="edge-x" select="(1 - $cx) + $t * ((2 * $cx) - 1)"/>
             <xsl:variable name="edge-y" select="$oy + $t * (1 - (2 * $oy))"/>
+            <xsl:variable
+              name="arc"
+              select="if ($corner = 'tl') then 'M0,0 L1,0 A1,1 0 0 0 0,1 Z'
+                      else if ($corner = 'tr') then 'M1,0 L0,0 A1,1 0 0 1 1,1 Z'
+                      else if ($corner = 'bl') then 'M0,1 L1,1 A1,1 0 0 1 0,0 Z'
+                      else 'M1,1 L0,1 A1,1 0 0 0 1,0 Z'"
+            />
             <svg:path
               fill="{if ($glow != '') then dita-ot:mix-white($glow, $glow-alphas[last()]) else 'white'}"
-              d="{concat('M', 1 - $cx, ',', $oy, ' L', $edge-x, ',', $oy, ' L', 1 - $cx, ',', $edge-y, ' Z')}"
+              d="{if ($border-num = 0) then $arc else concat('M', 1 - $cx, ',', $oy, ' L', $edge-x, ',', $oy, ' L', 1 - $cx, ',', $edge-y, ' Z')}"
             />
           </svg:svg>
         </fo:instream-foreign-object>
@@ -233,6 +256,9 @@
           <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-body-bg"/></xsl:attribute>
         </xsl:if>
         <xsl:attribute name="overflow">hidden</xsl:attribute>
+        <xsl:if test="string($bootstrap-card-fill) != ''">
+          <xsl:attribute name="background-color" select="$bootstrap-card-fill"/>
+        </xsl:if>
         <xsl:call-template name="bootstrap.decoration"/>
         <xsl:call-template name="bootstrap.surface.image"/>
         <xsl:call-template name="bootstrap.surface">
@@ -418,6 +444,28 @@
                     <xsl:call-template name="processBootstrapDirection"/>
                     <xsl:apply-templates select="$footer"/>
                    </fo:block>
+                 <xsl:if
+                  test="$card-radius != '' and number(substring-before(concat($bootstrap-border-width, 'pt'), 'pt')) = 0"
+                >
+                    <xsl:variable
+                    name="mask-radius"
+                    select="number(substring-before(concat($card-radius, 'pt'), 'pt'))"
+                  />
+                    <fo:block-container height="0pt" position="relative" overflow="visible">
+                       <xsl:call-template name="corner-mask">
+                          <xsl:with-param name="corner" select="'bl'"/>
+                          <xsl:with-param name="radius" select="$card-radius"/>
+                          <xsl:with-param name="top" select="concat(8 - $mask-radius, 'pt')"/>
+                          <xsl:with-param name="left" select="'-15pt'"/>
+                       </xsl:call-template>
+                       <xsl:call-template name="corner-mask">
+                          <xsl:with-param name="corner" select="'br'"/>
+                          <xsl:with-param name="radius" select="$card-radius"/>
+                          <xsl:with-param name="top" select="concat(8 - $mask-radius, 'pt')"/>
+                          <xsl:with-param name="left" select="concat('100% + ', 15 - $mask-radius, 'pt')"/>
+                       </xsl:call-template>
+                    </fo:block-container>
+                 </xsl:if>
               </fo:table-cell>
             </fo:table-row>
           </xsl:if>
@@ -448,7 +496,7 @@
             <xsl:with-param name="radius" select="$card-radius"/>
           </xsl:call-template>
         </xsl:if>
-        <xsl:if test="$has-footer">
+        <xsl:if test="$has-footer and number(substring-before(concat($bootstrap-border-width, 'pt'), 'pt')) != 0">
           <xsl:variable name="strip-radius-num" select="number(substring-before(concat($card-radius, 'pt'), 'pt'))"/>
           <xsl:variable
             name="strip-border-num"

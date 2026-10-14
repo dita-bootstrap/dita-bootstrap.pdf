@@ -167,6 +167,7 @@
   <xsl:variable name="bootstrap-border-color">#c6cbcf</xsl:variable>
   <xsl:variable name="bootstrap-card-border-color" select="$bootstrap-border-color"/>
   <xsl:variable name="bootstrap-card-background-color" select="$bootstrap-secondary-subtle"/>
+  <xsl:variable name="bootstrap-card-fill"/>
   <xsl:variable name="bootstrap-border-width">1pt</xsl:variable>
   <xsl:variable name="bootstrap-blockquote-border-width">3pt</xsl:variable>
 
