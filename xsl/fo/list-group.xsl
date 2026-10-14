@@ -15,10 +15,25 @@
     match="*[contains(@class, ' bootstrap-d/list-group ') or (tokenize(@outputclass, ' ') = 'list-group' and contains(@class, ' topic/ul '))]"
     priority="5"
   >
+    <xsl:variable name="in-card" select="exists(parent::*[contains(@class, ' bootstrap-d/card ')])"/>
+    <xsl:variable
+      name="card-first"
+      select="$in-card and not(preceding-sibling::*[not(contains(@class, ' topic/title ') or contains(@class, ' bootstrap-d/card-header '))])"
+    />
+    <xsl:variable
+      name="card-last"
+      select="$in-card and not(following-sibling::*[not(contains(@class, ' bootstrap-d/card-footer '))])"
+    />
     <fo:block>
       <xsl:call-template name="commonattributes"/>
       <xsl:call-template name="processBootstrapDirection"/>
-      
+      <xsl:if test="$in-card">
+        <xsl:attribute name="margin-left">-15pt</xsl:attribute>
+        <xsl:attribute name="margin-right">-15pt</xsl:attribute>
+        <xsl:if test="$card-first"><xsl:attribute name="margin-top">-10pt</xsl:attribute></xsl:if>
+        <xsl:if test="$card-last"><xsl:attribute name="margin-bottom">-10pt</xsl:attribute></xsl:if>
+      </xsl:if>
+
       <xsl:call-template name="processBootstrapSpacing">
         <xsl:with-param name="attrValue" select="@margin"/>
         <xsl:with-param name="prefix" select="'m'"/>
@@ -31,6 +46,13 @@
       <fo:table table-layout="fixed" width="100%" border-collapse="collapse">
          <!-- Default border if not 'flush' -->
          <xsl:choose>
+            <xsl:when test="$in-card">
+               <xsl:if test="not($card-first)">
+                  <xsl:attribute name="border-top">
+                    <xsl:value-of select="concat($bootstrap-border-width, ' solid ', $bootstrap-border-color)"/>
+                  </xsl:attribute>
+               </xsl:if>
+            </xsl:when>
             <xsl:when test="@flush = 'yes' or tokenize(@outputclass, ' ') = 'list-group-flush'">
                <!-- No border on flush -->
             </xsl:when>
@@ -110,7 +132,10 @@
 
         <!-- Remove bottom border for the last item if it's not flush (since the table bottom border exists) -->
         <xsl:if
-          test="position() = last() and not(../@flush = 'yes' or tokenize(../@outputclass, ' ') = 'list-group-flush')"
+          test="position() = last() and (
+            (../parent::*[contains(@class, ' bootstrap-d/card ')] and not(../following-sibling::*[not(contains(@class, ' bootstrap-d/card-footer '))]))
+            or (not(../parent::*[contains(@class, ' bootstrap-d/card ')]) and not(../@flush = 'yes' or tokenize(../@outputclass, ' ') = 'list-group-flush'))
+          )"
         >
             <xsl:attribute name="border-bottom">none</xsl:attribute>
         </xsl:if>
@@ -118,6 +143,10 @@
         <xsl:call-template name="processBootstrapDirection"/>
         <fo:block>
            <xsl:call-template name="processBootstrapDirection"/>
+           <xsl:if test="../parent::*[contains(@class, ' bootstrap-d/card ')]">
+              <xsl:attribute name="margin-left">15pt</xsl:attribute>
+              <xsl:attribute name="margin-right">15pt</xsl:attribute>
+           </xsl:if>
            <xsl:apply-templates/>
         </fo:block>
       </fo:table-cell>
