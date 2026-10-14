@@ -27,6 +27,20 @@
     />
   </xsl:function>
 
+  <xsl:function name="bs:mute" as="xs:string">
+    <xsl:param name="hex" as="xs:string"/>
+    <xsl:variable name="h" select="lower-case(replace($hex, '^#', ''))"/>
+    <xsl:variable name="digits" select="'0123456789abcdef'"/>
+    <xsl:variable
+      name="rgb"
+      select="for $i in (0, 2, 4) return string-length(substring-before($digits, substring($h, $i + 1, 1))) * 16 + string-length(substring-before($digits, substring($h, $i + 2, 1)))"
+    />
+    <xsl:variable name="luma" select="0.299 * $rgb[1] + 0.587 * $rgb[2] + 0.114 * $rgb[3]"/>
+    <xsl:sequence
+      select="concat('#', string-join(for $c in $rgb return concat(substring($digits, xs:integer(floor(round(($c + 3 * $luma) div 4) div 16)) + 1, 1), substring($digits, xs:integer(round(($c + 3 * $luma) div 4) mod 16) + 1, 1)), ''))"
+    />
+  </xsl:function>
+
   <!-- Template to customize section titles using Bootstrap heading sizes -->
   <xsl:template match="*[contains(@class, ' topic/section ')]/*[contains(@class, ' topic/title ')]">
     <xsl:choose>
@@ -386,7 +400,7 @@
                 <xsl:with-param name="attrName" select="'background-color'"/>
               </xsl:call-template>
             </xsl:variable>
-            <xsl:value-of select="bs:darken($solid-bg, 0.65)"/>
+            <xsl:value-of select="bs:mute(bs:darken($solid-bg, 0.65))"/>
           </xsl:when>
           <xsl:otherwise><xsl:value-of select="$icon-color"/></xsl:otherwise>
         </xsl:choose>
