@@ -413,11 +413,7 @@
             name="strip-border-num"
             select="number(substring-before(concat($bootstrap-border-width, 'pt'), 'pt'))"
           />
-          <fo:block-container
-            height="{$card-radius}"
-            margin-top="-{$strip-radius-num - (2 * $strip-border-num) - 2}pt"
-            position="relative"
-          >
+          <fo:block-container height="{$card-radius}" margin-top="-{$strip-radius-num}pt" position="relative">
             <xsl:call-template name="corner-mask">
               <xsl:with-param name="corner" select="'bl'"/>
               <xsl:with-param name="radius" select="$card-radius"/>
