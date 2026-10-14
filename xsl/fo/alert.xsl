@@ -7,9 +7,9 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
   xmlns:fox="http://xmlgraphics.apache.org/fop/extensions"
-  xmlns:bs="https://dita-bootstrap.github.io/pdf"
+  xmlns:dita-ot="http://dita-ot.sourceforge.net/ns/201007/dita-ot"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  exclude-result-prefixes="bs xs"
+  exclude-result-prefixes="dita-ot xs"
   version="2.0"
 >
 
@@ -97,7 +97,7 @@
         </xsl:variable>
         <xsl:attribute
             name="border-left-color"
-            select="bs:darken($image-bar, xs:double($bootstrap-surface-image-bar-factor))"
+            select="dita-ot:darken($image-bar, xs:double($bootstrap-surface-image-bar-factor))"
           />
       </xsl:if>
 

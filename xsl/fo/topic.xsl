@@ -8,12 +8,12 @@
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:opentopic-func="http://www.idiominc.com/opentopic/exsl/function"
-  xmlns:bs="https://dita-bootstrap.github.io/pdf"
-  exclude-result-prefixes="xs opentopic-func bs"
+  xmlns:dita-ot="http://dita-ot.sourceforge.net/ns/201007/dita-ot"
+  exclude-result-prefixes="xs opentopic-func dita-ot"
   version="2.0"
 >
 
-  <xsl:function name="bs:darken" as="xs:string">
+  <xsl:function name="dita-ot:darken" as="xs:string">
     <xsl:param name="hex" as="xs:string"/>
     <xsl:param name="factor" as="xs:double"/>
     <xsl:variable name="h" select="lower-case(replace($hex, '^#', ''))"/>
@@ -27,7 +27,7 @@
     />
   </xsl:function>
 
-  <xsl:function name="bs:mute" as="xs:string">
+  <xsl:function name="dita-ot:mute" as="xs:string">
     <xsl:param name="hex" as="xs:string"/>
     <xsl:variable name="h" select="lower-case(replace($hex, '^#', ''))"/>
     <xsl:variable name="digits" select="'0123456789abcdef'"/>
@@ -402,7 +402,7 @@
                 <xsl:with-param name="attrName" select="'background-color'"/>
               </xsl:call-template>
             </xsl:variable>
-            <xsl:value-of select="bs:darken($image-bar, xs:double($bootstrap-surface-image-bar-factor))"/>
+            <xsl:value-of select="dita-ot:darken($image-bar, xs:double($bootstrap-surface-image-bar-factor))"/>
           </xsl:when>
           <xsl:when test="$bootstrap-alert-solid and ($isSubtle or $icon-color-is-white)">
             <xsl:variable name="solid-bg">
@@ -411,7 +411,7 @@
                 <xsl:with-param name="attrName" select="'background-color'"/>
               </xsl:call-template>
             </xsl:variable>
-            <xsl:value-of select="bs:mute(bs:darken($solid-bg, 0.65))"/>
+            <xsl:value-of select="dita-ot:mute(dita-ot:darken($solid-bg, 0.65))"/>
           </xsl:when>
           <xsl:otherwise><xsl:value-of select="$icon-color"/></xsl:otherwise>
         </xsl:choose>

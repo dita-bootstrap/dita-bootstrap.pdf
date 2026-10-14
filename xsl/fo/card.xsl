@@ -10,8 +10,7 @@
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:opentopic-func="http://www.idiominc.com/opentopic/exsl/function"
   xmlns:dita-ot="http://dita-ot.sourceforge.net/ns/201007/dita-ot"
-  xmlns:bs="https://dita-bootstrap.github.io/pdf"
-  exclude-result-prefixes="xs opentopic-func dita-ot bs"
+  exclude-result-prefixes="xs opentopic-func dita-ot"
   version="2.0"
 >
 
@@ -183,7 +182,7 @@
             <xsl:variable name="edge-x" select="(1 - $cx) + $t * ((2 * $cx) - 1)"/>
             <xsl:variable name="edge-y" select="$oy + $t * (1 - (2 * $oy))"/>
             <svg:path
-              fill="{if ($glow != '') then bs:mix-white($glow, $glow-alphas[last()]) else 'white'}"
+              fill="{if ($glow != '') then dita-ot:mix-white($glow, $glow-alphas[last()]) else 'white'}"
               d="{concat('M', 1 - $cx, ',', $oy, ' L', $edge-x, ',', $oy, ' L', 1 - $cx, ',', $edge-y, ' Z')}"
             />
           </svg:svg>

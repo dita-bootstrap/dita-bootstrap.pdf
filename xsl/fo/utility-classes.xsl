@@ -8,8 +8,8 @@
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
   xmlns:fox="http://xmlgraphics.apache.org/fop/extensions"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:bs="https://dita-bootstrap.github.io/pdf"
-  exclude-result-prefixes="xs bs"
+  xmlns:dita-ot="http://dita-ot.sourceforge.net/ns/201007/dita-ot"
+  exclude-result-prefixes="xs dita-ot"
   version="2.0"
 >
 
@@ -1174,7 +1174,7 @@
 
   </xsl:template>
 
-  <xsl:function name="bs:mix-white" as="xs:string">
+  <xsl:function name="dita-ot:mix-white" as="xs:string">
     <xsl:param name="hex" as="xs:string"/>
     <xsl:param name="alpha" as="xs:double"/>
     <xsl:variable name="h" select="lower-case(replace($hex, '^#', ''))"/>
@@ -1262,7 +1262,7 @@
         <xsl:apply-templates select="$inner/node()" mode="strip-margin"/>
       </xsl:when>
       <xsl:otherwise>
-        <fo:block background-color="{bs:mix-white($color, $alphas[1])}">
+        <fo:block background-color="{dita-ot:mix-white($color, $alphas[1])}">
           <xsl:choose>
             <xsl:when test="$indent">
               <xsl:attribute name="padding" select="'1pt 0'"/>

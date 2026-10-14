@@ -7,11 +7,33 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
   xmlns:fox="http://xmlgraphics.apache.org/fop/extensions"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:dita-ot="http://dita-ot.sourceforge.net/ns/201007/dita-ot"
+  exclude-result-prefixes="xs dita-ot"
   version="2.0"
 >
 
   <xsl:import href="default-values.xsl"/>
   <xsl:import href="settings-map.xsl"/>
+
+  <xsl:function name="dita-ot:on-solid-alert" as="xs:boolean">
+    <xsl:param name="node" as="node()"/>
+    <xsl:sequence
+      select="$bootstrap-alert-solid and string($bootstrap-surface-bg) != '' and exists($node/ancestor::*[
+        contains(@class, ' topic/note ') or contains(@class, ' bootstrap-d/alert ')])"
+    />
+  </xsl:function>
+
+  <xsl:function name="dita-ot:on-surface" as="xs:boolean">
+    <xsl:param name="node" as="node()"/>
+    <xsl:sequence
+      select="(string($bootstrap-surface-bg) != '' or string($bootstrap-surface-image) != '') and exists($node/ancestor::*[
+        contains(@class, ' bootstrap-d/card ') or contains(@class, ' bootstrap-d/accordion ') or
+        tokenize(@outputclass, ' ') = ('card', 'accordion', 'list-group') or
+        contains(@class, ' topic/table ') or contains(@class, ' topic/simpletable ') or
+        (not($bootstrap-alert-solid) and (contains(@class, ' topic/note ') or contains(@class, ' bootstrap-d/alert ')))])"
+    />
+  </xsl:function>
 
   <xsl:template name="get-context-theme-color">
     <xsl:variable name="rawTheme">
@@ -1413,57 +1435,81 @@
   <!-- Monospace and Code Elements -->
   <xsl:attribute-set name="codeph" use-attribute-sets="base-font">
     <xsl:attribute name="font-family">monospace</xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-code-color"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of
+        select="if (dita-ot:on-solid-alert(.)) then 'inherit' else if (dita-ot:on-surface(.) and string($bootstrap-surface-code-color) != '') then $bootstrap-surface-code-color else $bootstrap-code-color"
+      /></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="filepath" use-attribute-sets="base-font">
     <xsl:attribute name="font-family">monospace</xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-code-color"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of
+        select="if (dita-ot:on-solid-alert(.)) then 'inherit' else if (dita-ot:on-surface(.) and string($bootstrap-surface-code-color) != '') then $bootstrap-surface-code-color else $bootstrap-code-color"
+      /></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="option">
     <xsl:attribute name="font-family">monospace</xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-code-color"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of
+        select="if (dita-ot:on-solid-alert(.)) then 'inherit' else if (dita-ot:on-surface(.) and string($bootstrap-surface-code-color) != '') then $bootstrap-surface-code-color else $bootstrap-code-color"
+      /></xsl:attribute>
   </xsl:attribute-set>
 
   <!-- Commands & Parameters -->
   <xsl:attribute-set name="cmdname">
     <xsl:attribute name="font-family">monospace</xsl:attribute>
     <xsl:attribute name="font-weight">bold</xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-dita-prussian-blue"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of
+        select="if (dita-ot:on-solid-alert(.)) then 'inherit' else if (dita-ot:on-surface(.) and string($bootstrap-surface-cmd-color) != '') then $bootstrap-surface-cmd-color else $bootstrap-dita-prussian-blue"
+      /></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="parmname">
     <xsl:attribute name="font-family">monospace</xsl:attribute>
     <xsl:attribute name="font-weight">bold</xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-dita-prussian-blue"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of
+        select="if (dita-ot:on-solid-alert(.)) then 'inherit' else if (dita-ot:on-surface(.) and string($bootstrap-surface-cmd-color) != '') then $bootstrap-surface-cmd-color else $bootstrap-dita-prussian-blue"
+      /></xsl:attribute>
   </xsl:attribute-set>
 
   <!-- XML Entities -->
   <xsl:attribute-set name="numcharref">
     <xsl:attribute name="font-family">monospace</xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-dita-violet"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of
+        select="if (dita-ot:on-solid-alert(.)) then 'inherit' else if (dita-ot:on-surface(.) and string($bootstrap-surface-xml-color) != '') then $bootstrap-surface-xml-color else $bootstrap-dita-violet"
+      /></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="parameterentity">
     <xsl:attribute name="font-family">monospace</xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-dita-violet"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of
+        select="if (dita-ot:on-solid-alert(.)) then 'inherit' else if (dita-ot:on-surface(.) and string($bootstrap-surface-xml-color) != '') then $bootstrap-surface-xml-color else $bootstrap-dita-violet"
+      /></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="textentity">
     <xsl:attribute name="font-family">monospace</xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-dita-violet"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of
+        select="if (dita-ot:on-solid-alert(.)) then 'inherit' else if (dita-ot:on-surface(.) and string($bootstrap-surface-xml-color) != '') then $bootstrap-surface-xml-color else $bootstrap-dita-violet"
+      /></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="xmlatt">
     <xsl:attribute name="font-family">monospace</xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-dita-violet"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of
+        select="if (dita-ot:on-solid-alert(.)) then 'inherit' else if (dita-ot:on-surface(.) and string($bootstrap-surface-xml-color) != '') then $bootstrap-surface-xml-color else $bootstrap-dita-violet"
+      /></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="xmlelement">
     <xsl:attribute name="font-family">monospace</xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-dita-violet"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of
+        select="if (dita-ot:on-solid-alert(.)) then 'inherit' else if (dita-ot:on-surface(.) and string($bootstrap-surface-xml-color) != '') then $bootstrap-surface-xml-color else $bootstrap-dita-violet"
+      /></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="xmlnsname">
     <xsl:attribute name="font-family">monospace</xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-dita-violet"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of
+        select="if (dita-ot:on-solid-alert(.)) then 'inherit' else if (dita-ot:on-surface(.) and string($bootstrap-surface-xml-color) != '') then $bootstrap-surface-xml-color else $bootstrap-dita-violet"
+      /></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="xmlpi">
     <xsl:attribute name="font-family">monospace</xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-dita-violet"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of
+        select="if (dita-ot:on-solid-alert(.)) then 'inherit' else if (dita-ot:on-surface(.) and string($bootstrap-surface-xml-color) != '') then $bootstrap-surface-xml-color else $bootstrap-dita-violet"
+      /></xsl:attribute>
   </xsl:attribute-set>
 
   <!-- Syntax -->
