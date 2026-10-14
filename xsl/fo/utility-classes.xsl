@@ -1385,7 +1385,7 @@
     <xsl:variable name="block">
     <xsl:choose>
       <xsl:when test="@frame">
-        <fo:block>
+        <fo:block space-before="6pt">
           <xsl:call-template name="processBootstrapFrame">
             <xsl:with-param name="attrValue" select="@frame"/>
           </xsl:call-template>
@@ -1417,7 +1417,7 @@
         </fo:block>
       </xsl:when>
       <xsl:otherwise>
-        <fo:block>
+        <fo:block space-before="6pt">
           <xsl:attribute name="background-color"><xsl:value-of select="$prismjs.card.background.color"/></xsl:attribute>
           <xsl:apply-templates select="." mode="prismDecoration"/>
           <xsl:if test="number($ancestorStartPad) > 0">

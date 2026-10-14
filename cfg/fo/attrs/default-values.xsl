@@ -153,10 +153,10 @@
   <!-- Utilities -->
   <xsl:variable name="bootstrap-spacing-0">0</xsl:variable>
   <xsl:variable name="bootstrap-spacing-1">3pt</xsl:variable>
-  <xsl:variable name="bootstrap-spacing-2">4.5pt</xsl:variable>
-  <xsl:variable name="bootstrap-spacing-3">6pt</xsl:variable>
-  <xsl:variable name="bootstrap-spacing-4">9pt</xsl:variable>
-  <xsl:variable name="bootstrap-spacing-5">12pt</xsl:variable>
+  <xsl:variable name="bootstrap-spacing-2">6pt</xsl:variable>
+  <xsl:variable name="bootstrap-spacing-3">12pt</xsl:variable>
+  <xsl:variable name="bootstrap-spacing-4">18pt</xsl:variable>
+  <xsl:variable name="bootstrap-spacing-5">36pt</xsl:variable>
   <xsl:variable name="bootstrap-spacing-6">15pt</xsl:variable>
   <xsl:variable name="bootstrap-spacing-7">18pt</xsl:variable>
   <xsl:variable name="bootstrap-spacing-8">21pt</xsl:variable>
