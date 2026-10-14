@@ -234,6 +234,16 @@
                        <xsl:call-template name="processBootstrapAttrSetReflection">
                           <xsl:with-param name="attrSet" select="concat('__bg__', $theme)"/>
                        </xsl:call-template>
+                       <xsl:if test="string($bootstrap-surface-image) != ''">
+                          <xsl:attribute
+                        name="background-color"
+                        select="$bootstrap-settings/entry[@name = concat('bootstrap-btn-', $theme, '-bg')]"
+                      />
+                          <xsl:attribute
+                        name="color"
+                        select="$bootstrap-settings/entry[@name = concat('bootstrap-btn-', $theme, '-color')]"
+                      />
+                       </xsl:if>
                        <xsl:attribute name="border-bottom">
                           <xsl:value-of select="concat($bootstrap-border-width, ' solid')"/>
                        </xsl:attribute>
@@ -242,6 +252,14 @@
                              <xsl:with-param name="attrSet" select="concat('border-', $theme)"/>
                              <xsl:with-param name="attrName" select="'border-color'"/>
                           </xsl:call-template>
+                       </xsl:attribute>
+                    </xsl:when>
+                    <xsl:when test="string($bootstrap-surface-image) != ''">
+                       <xsl:call-template name="bootstrap.surface.image"/>
+                       <xsl:attribute name="border-bottom">
+                          <xsl:value-of
+                        select="concat($bootstrap-border-width, ' solid ', $bootstrap-surface-image-border)"
+                      />
                        </xsl:attribute>
                     </xsl:when>
                     <xsl:when test="string($bootstrap-surface-bg) != ''">
@@ -330,6 +348,14 @@
                           </xsl:call-template>
                        </xsl:attribute>
                     </xsl:when>
+                    <xsl:when test="string($bootstrap-surface-image) != ''">
+                       <xsl:call-template name="bootstrap.surface.image"/>
+                       <xsl:attribute name="border-top">
+                          <xsl:value-of
+                        select="concat($bootstrap-border-width, ' solid ', $bootstrap-surface-image-border)"
+                      />
+                       </xsl:attribute>
+                    </xsl:when>
                     <xsl:when test="string($bootstrap-surface-bg) != ''">
                        <xsl:attribute name="background-color" select="$bootstrap-surface-header-bg"/>
                        <xsl:attribute name="color" select="$bootstrap-surface-text"/>
@@ -414,7 +440,7 @@
     <fo:block
       font-size="14pt"
       font-weight="{$bootstrap-heading-font-weight}"
-      color="{$bootstrap-heading-color}"
+      color="{if (string($bootstrap-surface-image) != '') then $bootstrap-surface-image-text else $bootstrap-heading-color}"
       margin-bottom="8pt"
     >
        <xsl:call-template name="processBootstrapDirection"/>
