@@ -98,10 +98,11 @@
     </xsl:variable>
     <xsl:call-template name="apply-glow-wrapper">
       <xsl:with-param name="inner" select="$glow-out"/>
-      <xsl:with-param name="color"><xsl:call-template name="glow-color"><xsl:with-param
-            name="theme"
-            select="$glow-theme"
-          /></xsl:call-template></xsl:with-param>
+      <xsl:with-param name="color">
+        <xsl:if test="not(@flush = 'yes' or tokenize(@outputclass, ' ') = 'accordion-flush')">
+          <xsl:call-template name="glow-color"><xsl:with-param name="theme" select="$glow-theme"/></xsl:call-template>
+        </xsl:if>
+      </xsl:with-param>
 
     </xsl:call-template>
   </xsl:template>

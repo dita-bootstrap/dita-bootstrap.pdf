@@ -124,6 +124,7 @@
   <xsl:variable name="bootstrap-surface-text"/>
   <xsl:variable name="bootstrap-surface-heading-color"/>
   <xsl:variable name="bootstrap-glow-color"/>
+  <xsl:variable name="bootstrap-glow-scope">all</xsl:variable>
   <xsl:variable name="bootstrap-surface-code-color"/>
   <xsl:variable name="bootstrap-surface-xml-color"/>
   <xsl:variable name="bootstrap-surface-cmd-color"/>

@@ -55,7 +55,9 @@
           </xsl:call-template>
         </xsl:variable>
         <xsl:if test="$lqThemeColor = ''">
-          <xsl:call-template name="apply-default-blockquote-border"/>
+          <xsl:if test="not(dita-ot:blockquote-filled())">
+            <xsl:call-template name="apply-default-blockquote-border"/>
+          </xsl:if>
         </xsl:if>
       </xsl:if>
 
@@ -106,7 +108,7 @@
       <xsl:choose>
         <xsl:when test="$isBlockquoteFooter">
           <xsl:attribute name="font-size">10.5pt</xsl:attribute>
-          <xsl:attribute name="color"><xsl:value-of select="$bootstrap-secondary"/></xsl:attribute>
+          <xsl:attribute name="color"><xsl:value-of select="$bootstrap-secondary-subtle-text"/></xsl:attribute>
         </xsl:when>
         <xsl:otherwise>
           <xsl:attribute name="font-size">0.9em</xsl:attribute>
@@ -114,6 +116,14 @@
         </xsl:otherwise>
       </xsl:choose>
       <xsl:attribute name="margin-top">8pt</xsl:attribute>
+      <xsl:if
+        test="$isBlockquoteFooter and dita-ot:blockquote-filled() and not(../*[contains(@class, ' topic/lq ')][1]/@theme)"
+      >
+        <xsl:attribute
+          name="padding-left"
+          select="concat(number(substring-before($bootstrap-blockquote-border-width, 'pt')) + number(substring-before($bootstrap-spacing-3, 'pt')), 'pt')"
+        />
+      </xsl:if>
       <xsl:apply-templates/>
     </fo:block>
   </xsl:template>

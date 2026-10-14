@@ -1192,11 +1192,12 @@
 
   <xsl:template name="glow-color">
     <xsl:param name="theme" select="''"/>
-    <xsl:if test="string($bootstrap-glow-color) != ''">
+    <xsl:param name="alert" select="false()"/>
+    <xsl:if test="string($bootstrap-glow-color) != '' and not($alert and $bootstrap-glow-scope = 'surface')">
       <xsl:variable name="base" select="replace($theme, '-.*$', '')"/>
       <xsl:variable
         name="themed"
-        select="if ($base != '') then $bootstrap-settings/entry[@name = concat('bootstrap-btn-', $base, '-bg')] else ''"
+        select="if ($base != '' and $bootstrap-glow-scope != 'surface') then $bootstrap-settings/entry[@name = concat('bootstrap-btn-', $base, '-bg')] else ''"
       />
       <xsl:value-of select="if (string($themed) != '') then $themed else $bootstrap-glow-color"/>
     </xsl:if>

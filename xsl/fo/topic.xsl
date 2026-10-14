@@ -13,6 +13,12 @@
   version="2.0"
 >
 
+  <xsl:function name="dita-ot:blockquote-filled" as="xs:boolean">
+    <xsl:sequence
+      select="string($bootstrap-surface-bg) != '' or string($bootstrap-surface-image) != '' or string($bootstrap-card-fill) != ''"
+    />
+  </xsl:function>
+
   <xsl:function name="dita-ot:darken" as="xs:string">
     <xsl:param name="hex" as="xs:string"/>
     <xsl:param name="factor" as="xs:double"/>
@@ -276,8 +282,31 @@
         <xsl:call-template name="get-theme-color"/>
       </xsl:variable>
 
-      <xsl:if test="$themeColor = '' and not(parent::*[contains(@class, ' topic/fig ')])">
+      <xsl:if
+        test="$themeColor = '' and (not(parent::*[contains(@class, ' topic/fig ')]) or dita-ot:blockquote-filled())"
+      >
         <xsl:call-template name="apply-default-blockquote-border"/>
+      </xsl:if>
+
+      <xsl:if test="$themeColor = ''">
+        <xsl:variable
+          name="fill"
+          select="string($bootstrap-card-fill) != '' and string($bootstrap-surface-bg) = '' and string($bootstrap-surface-image) = ''"
+        />
+        <xsl:if test="$fill or string($bootstrap-surface-bg) != '' or string($bootstrap-surface-image) != ''">
+          <xsl:if test="$fill">
+            <xsl:attribute name="background-color" select="$bootstrap-card-fill"/>
+          </xsl:if>
+          <xsl:call-template name="bootstrap.surface.image"/>
+          <xsl:call-template name="bootstrap.surface"/>
+          <xsl:attribute name="padding-top" select="$bootstrap-spacing-2"/>
+          <xsl:attribute name="padding-bottom" select="$bootstrap-spacing-2"/>
+          <xsl:attribute name="padding-right" select="$bootstrap-spacing-2"/>
+          <xsl:attribute
+            name="border-left-color"
+            select="if (string($bootstrap-surface-image) != '') then $bootstrap-surface-image-border else if (string($bootstrap-surface-border) != '') then $bootstrap-surface-border else $bootstrap-border-color"
+          />
+        </xsl:if>
       </xsl:if>
 
       <xsl:apply-templates/>
@@ -577,7 +606,7 @@
       <xsl:with-param name="color"><xsl:call-template name="glow-color"><xsl:with-param
             name="theme"
             select="$glow-theme"
-          /></xsl:call-template></xsl:with-param>
+          /><xsl:with-param name="alert" select="true()"/></xsl:call-template></xsl:with-param>
 
     </xsl:call-template>
   </xsl:template>

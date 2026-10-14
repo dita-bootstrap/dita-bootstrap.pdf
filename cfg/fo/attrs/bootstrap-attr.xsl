@@ -28,8 +28,10 @@
     <xsl:param name="node" as="node()"/>
     <xsl:sequence
       select="(string($bootstrap-surface-bg) != '' or string($bootstrap-surface-image) != '') and exists($node/ancestor::*[
-        contains(@class, ' bootstrap-d/card ') or contains(@class, ' bootstrap-d/accordion ') or
-        tokenize(@outputclass, ' ') = ('card', 'accordion', 'list-group') or
+        contains(@class, ' bootstrap-d/card ') or
+        ((contains(@class, ' bootstrap-d/accordion ') or contains(@class, ' bootstrap-d/list-group ') or tokenize(@outputclass, ' ') = ('accordion', 'list-group')) and not(@flush = 'yes' or tokenize(@outputclass, ' ') = ('accordion-flush', 'list-group-flush'))) or
+        tokenize(@outputclass, ' ') = 'card' or
+        (contains(@class, ' topic/lq ') and not(@theme)) or
         contains(@class, ' topic/table ') or contains(@class, ' topic/simpletable ') or
         (not($bootstrap-alert-solid) and (contains(@class, ' topic/note ') or contains(@class, ' bootstrap-d/alert ')))])"
     />

@@ -148,6 +148,13 @@
       <xsl:attribute name="border-width"><xsl:value-of select="$bootstrap-border-width"/></xsl:attribute>
       <xsl:attribute name="border-color"><xsl:value-of select="$bootstrap-border-color"/></xsl:attribute>
       <xsl:attribute name="color"><xsl:value-of select="$color"/></xsl:attribute>
+      <xsl:if
+        test="string($bootstrap-card-fill) != '' and string($bootstrap-surface-bg) = '' and string($bootstrap-surface-image) = ''"
+      >
+        <xsl:attribute name="background-color" select="$bootstrap-card-fill"/>
+        <xsl:attribute name="border-width">1pt</xsl:attribute>
+        <xsl:attribute name="border-color" select="$bootstrap-body-bg"/>
+      </xsl:if>
       <xsl:if test="string($bootstrap-surface-bg) != ''">
         <xsl:variable name="variant-color">
           <xsl:if test="$themeColor != ''">

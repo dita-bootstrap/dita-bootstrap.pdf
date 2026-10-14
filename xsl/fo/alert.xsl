@@ -154,7 +154,7 @@
       <xsl:with-param name="color"><xsl:call-template name="glow-color"><xsl:with-param
             name="theme"
             select="$glow-theme"
-          /></xsl:call-template></xsl:with-param>
+          /><xsl:with-param name="alert" select="true()"/></xsl:call-template></xsl:with-param>
 
     </xsl:call-template>
   </xsl:template>

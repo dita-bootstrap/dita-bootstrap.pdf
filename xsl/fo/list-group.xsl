@@ -41,11 +41,16 @@
             </xsl:otherwise>
          </xsl:choose>
          
-         <xsl:call-template name="bootstrap.surface.image"/>
-         <xsl:variable name="lgTheme"><xsl:call-template name="get-theme-color"/></xsl:variable>
-         <xsl:call-template name="bootstrap.surface">
-           <xsl:with-param name="theme" select="$lgTheme"/>
-         </xsl:call-template>
+         <xsl:if test="not(@flush = 'yes' or tokenize(@outputclass, ' ') = 'list-group-flush')">
+            <xsl:if test="string($bootstrap-card-fill) != ''">
+               <xsl:attribute name="background-color" select="$bootstrap-card-fill"/>
+            </xsl:if>
+            <xsl:call-template name="bootstrap.surface.image"/>
+            <xsl:variable name="lgTheme"><xsl:call-template name="get-theme-color"/></xsl:variable>
+            <xsl:call-template name="bootstrap.surface">
+              <xsl:with-param name="theme" select="$lgTheme"/>
+            </xsl:call-template>
+         </xsl:if>
          <fo:table-column column-width="proportional-column-width(1)"/>
          <fo:table-body>
            <xsl:apply-templates select="*[contains(@class, ' topic/li ')]"/>
@@ -80,7 +85,7 @@
       <fo:table-cell>
         <xsl:attribute name="border-bottom">
           <xsl:value-of
-            select="concat($bootstrap-border-width, ' solid ', if (string($bootstrap-surface-border) != '') then $bootstrap-surface-border else $bootstrap-border-color)"
+            select="concat($bootstrap-border-width, ' solid ', if (string($bootstrap-surface-border) != '' and not(../@flush = 'yes' or tokenize(../@outputclass, ' ') = 'list-group-flush')) then $bootstrap-surface-border else $bootstrap-border-color)"
           />
         </xsl:attribute>
         <!-- Apply text color from item specific class if present -->
