@@ -10,7 +10,8 @@
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:opentopic-func="http://www.idiominc.com/opentopic/exsl/function"
   xmlns:dita-ot="http://dita-ot.sourceforge.net/ns/201007/dita-ot"
-  exclude-result-prefixes="xs opentopic-func dita-ot"
+  xmlns:bs="https://dita-bootstrap.github.io/pdf"
+  exclude-result-prefixes="xs opentopic-func dita-ot bs"
   version="2.0"
 >
 
@@ -91,6 +92,24 @@
                          <xsl:with-param name="reset-indent" select="true()"/>
                       </xsl:call-template>
                    </xsl:when>
+                   <xsl:when test="string($bootstrap-glow-color) != ''">
+                      <xsl:variable name="card-content">
+                         <xsl:call-template name="renderCardInternal"/>
+                      </xsl:variable>
+                      <xsl:variable name="glow-theme">
+                         <xsl:call-template name="get-theme-color"/>
+                      </xsl:variable>
+                      <xsl:call-template name="apply-glow-wrapper">
+                         <xsl:with-param name="inner" select="$card-content"/>
+                         <xsl:with-param name="color">
+                            <xsl:call-template name="glow-color"><xsl:with-param
+                          name="theme"
+                          select="$glow-theme"
+                        /></xsl:call-template>
+                         </xsl:with-param>
+                         <xsl:with-param name="reset-indent" select="true()"/>
+                      </xsl:call-template>
+                   </xsl:when>
                    <xsl:otherwise>
                       <xsl:call-template name="renderCardInternal"/>
                    </xsl:otherwise>
@@ -112,6 +131,11 @@
   <xsl:template name="corner-mask">
     <xsl:param name="corner"/>
     <xsl:param name="radius"/>
+    <xsl:variable name="glow">
+      <xsl:call-template name="glow-color">
+        <xsl:with-param name="theme"><xsl:call-template name="get-theme-color"/></xsl:with-param>
+      </xsl:call-template>
+    </xsl:variable>
     <xsl:variable name="is-top" select="$corner = 'tl' or $corner = 'tr'"/>
     <xsl:variable name="is-left" select="$corner = 'tl' or $corner = 'bl'"/>
     <xsl:variable name="radius-num" select="number(substring-before(concat($radius, 'pt'), 'pt'))"/>
@@ -159,7 +183,7 @@
             <xsl:variable name="edge-x" select="(1 - $cx) + $t * ((2 * $cx) - 1)"/>
             <xsl:variable name="edge-y" select="$oy + $t * (1 - (2 * $oy))"/>
             <svg:path
-              fill="white"
+              fill="{if ($glow != '') then bs:mix-white($glow, $glow-alphas[last()]) else 'white'}"
               d="{concat('M', 1 - $cx, ',', $oy, ' L', $edge-x, ',', $oy, ' L', 1 - $cx, ',', $edge-y, ' Z')}"
             />
           </svg:svg>
@@ -546,9 +570,6 @@
       <xsl:call-template name="processBootstrapSpacing">
           <xsl:with-param name="node" select="."/>
           <xsl:with-param name="prefix" select="'m'"/>
-      </xsl:call-template>
-      <xsl:call-template name="processBootstrapWidth">
-          <xsl:with-param name="node" select="."/>
       </xsl:call-template>
       <xsl:call-template name="processBootstrapBorder">
           <xsl:with-param name="attrValue" select="@border"/>

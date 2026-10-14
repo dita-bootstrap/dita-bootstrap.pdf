@@ -306,6 +306,17 @@
 
   <!-- Note Support (Styled as Bootstrap Alerts) -->
   <xsl:template match="*[contains(@class, ' topic/note ')]" priority="5">
+    <xsl:variable name="glow-theme">
+      <xsl:variable name="gt"><xsl:call-template name="get-theme-color"/></xsl:variable>
+      <xsl:choose>
+        <xsl:when test="$gt != ''"><xsl:value-of select="$gt"/></xsl:when>
+        <xsl:otherwise><xsl:call-template name="getNoteTheme"><xsl:with-param
+              name="type"
+              select="(@type, 'note')[1]"
+            /></xsl:call-template></xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="glow-out">
     <fo:block xsl:use-attribute-sets="section">
       <xsl:call-template name="commonattributes"/>
       <xsl:variable name="explicitThemeColor">
@@ -334,13 +345,13 @@
       <xsl:variable name="isSubtle" select="$themeSuffix = '' or $suffixTokens = 'subtle'"/>
       <xsl:variable name="isBorderOnly" select="$themeSuffix = 'border'"/>
       <xsl:variable
-        name="attrSetName"
-        select="
+          name="attrSetName"
+          select="
         if ($isMuted) then concat('__muted__', $theme)
         else if ($isBorderOnly) then concat('border-', $theme)
         else if ($isSubtle and not($bootstrap-alert-solid)) then concat('__bg__', $theme, '-subtle')
         else concat('__bg__', $theme)"
-      />
+        />
       <xsl:variable name="icon-color-raw">
         <xsl:call-template name="getBootstrapAttrValue">
           <xsl:with-param name="attrSet" select="$attrSetName"/>
@@ -348,14 +359,14 @@
         </xsl:call-template>
       </xsl:variable>
       <xsl:variable
-        name="icon-color-is-white"
-        select="normalize-space(lower-case($icon-color-raw)) = ('#fff', '#ffffff', 'white')"
-      />
+          name="icon-color-is-white"
+          select="normalize-space(lower-case($icon-color-raw)) = ('#fff', '#ffffff', 'white')"
+        />
       <xsl:variable name="icon-color">
         <xsl:choose>
           <xsl:when test="string($bootstrap-surface-image) != ''"><xsl:value-of
-              select="$bootstrap-surface-image-text"
-            /></xsl:when>
+                select="$bootstrap-surface-image-text"
+              /></xsl:when>
           <xsl:when test="string($bootstrap-surface-bg) != '' and not($bootstrap-alert-solid)">
             <xsl:variable name="surface-fg">
               <xsl:call-template name="getBootstrapSetting">
@@ -425,9 +436,9 @@
         <xsl:otherwise>
           <xsl:call-template name="bootstrap.decoration">
               <xsl:with-param
-              name="variant"
-              select="if ($isSubtle and not($bootstrap-alert-solid)) then 'subtle' else ''"
-            />
+                name="variant"
+                select="if ($isSubtle and not($bootstrap-alert-solid)) then 'subtle' else ''"
+              />
               <xsl:with-param name="theme" select="$theme"/>
               <xsl:with-param name="defaultRounded" select="true()"/>
           </xsl:call-template>
@@ -436,8 +447,8 @@
 
       <xsl:if test="not($isBorderOnly)"><xsl:call-template name="bootstrap.surface.image"/></xsl:if>
       <xsl:if
-        test="$isSubtle and not($isBorderOnly) and not($bootstrap-alert-solid) and string($bootstrap-surface-image) = ''"
-      >
+          test="$isSubtle and not($isBorderOnly) and not($bootstrap-alert-solid) and string($bootstrap-surface-image) = ''"
+        >
         <xsl:call-template name="bootstrap.surface">
           <xsl:with-param name="theme" select="$theme"/>
         </xsl:call-template>
@@ -498,20 +509,20 @@
       <fo:inline font-weight="bold" color="{$icon-color}">
         <xsl:variable name="type" select="(@type, 'note')[1]"/>
         <xsl:variable
-          name="explicit-icon"
-          select="(@icon, substring-before(substring-after(@otherprops, 'icon('), ')'))[1]"
-        />
+            name="explicit-icon"
+            select="(@icon, substring-before(substring-after(@otherprops, 'icon('), ')'))[1]"
+          />
 
         <xsl:if
-          test="$BOOTSTRAP_ICONS_INCLUDE = 'yes' and ($explicit-icon != '' or ($type != 'othertype' and $type != 'other'))"
-        >
+            test="$BOOTSTRAP_ICONS_INCLUDE = 'yes' and ($explicit-icon != '' or ($type != 'othertype' and $type != 'other'))"
+          >
           <xsl:variable name="icon-name">
             <xsl:choose>
               <xsl:when test="$explicit-icon != ''">
                 <xsl:variable
-                  name="raw"
-                  select="(tokenize($explicit-icon, ' ')[starts-with(., 'bi-')], tokenize($explicit-icon, ' ')[not(. = ('bi', 'icon')) and not(contains(., '('))])[1]"
-                />
+                    name="raw"
+                    select="(tokenize($explicit-icon, ' ')[starts-with(., 'bi-')], tokenize($explicit-icon, ' ')[not(. = ('bi', 'icon')) and not(contains(., '('))])[1]"
+                  />
                 <xsl:value-of select="if (starts-with($raw, 'bi-')) then $raw else concat('bi-', $raw)"/>
               </xsl:when>
               <xsl:when test="$type = 'tip'">bi-lightbulb</xsl:when>
@@ -560,6 +571,15 @@
 
       <xsl:apply-templates/>
     </fo:block>
+    </xsl:variable>
+    <xsl:call-template name="apply-glow-wrapper">
+      <xsl:with-param name="inner" select="$glow-out"/>
+      <xsl:with-param name="color"><xsl:call-template name="glow-color"><xsl:with-param
+            name="theme"
+            select="$glow-theme"
+          /></xsl:call-template></xsl:with-param>
+
+    </xsl:call-template>
   </xsl:template>
 
   <!-- Override to prevent duplicate ID generation on inline elements in dt/pt -->

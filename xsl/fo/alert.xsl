@@ -18,6 +18,13 @@
     match="*[contains(@class, ' bootstrap-d/alert ') or (exists(tokenize(@outputclass, ' ')[. = 'alert' or starts-with(., 'alert-')]) and (contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')) and not(tokenize(@outputclass, ' ') = ('accordion', 'accordion-flush', 'card', 'carousel', 'drawer', 'offcanvas')))]"
     priority="5"
   >
+    <xsl:variable name="glow-theme">
+      <xsl:variable name="gt"><xsl:call-template name="get-theme-color"/></xsl:variable>
+      <xsl:value-of
+        select="if ($gt != '') then $gt else substring-after(tokenize(@outputclass, ' ')[starts-with(., 'alert-')][1], 'alert-')"
+      />
+    </xsl:variable>
+    <xsl:variable name="glow-out">
     <fo:block xsl:use-attribute-sets="section">
       <xsl:call-template name="commonattributes"/>
       <xsl:variable name="explicitThemeColor">
@@ -62,9 +69,9 @@
         <xsl:otherwise>
           <xsl:call-template name="bootstrap.decoration">
               <xsl:with-param
-              name="variant"
-              select="if ($isSubtle and not($bootstrap-alert-solid)) then 'subtle' else ''"
-            />
+                name="variant"
+                select="if ($isSubtle and not($bootstrap-alert-solid)) then 'subtle' else ''"
+              />
               <xsl:with-param name="theme" select="$theme"/>
               <xsl:with-param name="defaultRounded" select="true()"/>
           </xsl:call-template>
@@ -73,8 +80,8 @@
 
       <xsl:if test="not($isBorderOnly)"><xsl:call-template name="bootstrap.surface.image"/></xsl:if>
       <xsl:if
-        test="$isSubtle and not($isBorderOnly) and not($bootstrap-alert-solid) and string($bootstrap-surface-image) = ''"
-      >
+          test="$isSubtle and not($isBorderOnly) and not($bootstrap-alert-solid) and string($bootstrap-surface-image) = ''"
+        >
         <xsl:call-template name="bootstrap.surface">
           <xsl:with-param name="theme" select="$theme"/>
         </xsl:call-template>
@@ -89,9 +96,9 @@
           </xsl:call-template>
         </xsl:variable>
         <xsl:attribute
-          name="border-left-color"
-          select="bs:darken($image-bar, xs:double($bootstrap-surface-image-bar-factor))"
-        />
+            name="border-left-color"
+            select="bs:darken($image-bar, xs:double($bootstrap-surface-image-bar-factor))"
+          />
       </xsl:if>
 
       <!-- 2. Set default padding (p-3) if not overridden -->
@@ -141,6 +148,15 @@
 
       <xsl:apply-templates/>
     </fo:block>
+    </xsl:variable>
+    <xsl:call-template name="apply-glow-wrapper">
+      <xsl:with-param name="inner" select="$glow-out"/>
+      <xsl:with-param name="color"><xsl:call-template name="glow-color"><xsl:with-param
+            name="theme"
+            select="$glow-theme"
+          /></xsl:call-template></xsl:with-param>
+
+    </xsl:call-template>
   </xsl:template>
 
   <xsl:template

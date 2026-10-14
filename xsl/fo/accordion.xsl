@@ -15,6 +15,10 @@
     match="*[contains(@class, ' bootstrap-d/accordion ') or (contains(@class, ' topic/bodydiv ') and (tokenize(@outputclass, ' ') = ('accordion', 'accordion-flush') or contains(@outputclass, 'accordion')))]"
     priority="5"
   >
+    <xsl:variable name="glow-theme">
+      <xsl:call-template name="get-theme-color"/>
+    </xsl:variable>
+    <xsl:variable name="glow-out">
     <fo:block>
       <xsl:call-template name="commonattributes"/>
       <xsl:call-template name="processBootstrapDirection"/>
@@ -60,6 +64,17 @@
 
                      <xsl:if test="not($is-flush)"><xsl:call-template name="bootstrap.surface.image"/></xsl:if>
                      <xsl:if test="not($is-flush)"><xsl:call-template name="bootstrap.surface"/></xsl:if>
+                     <xsl:if test="not($is-flush) and $glow-theme != ''">
+                        <xsl:attribute name="border-color">
+                           <xsl:call-template name="getBootstrapAttrValue">
+                              <xsl:with-param
+                          name="attrSet"
+                          select="concat('border-', replace($glow-theme, '-.*$', ''))"
+                        />
+                              <xsl:with-param name="attrName" select="'border-color'"/>
+                           </xsl:call-template>
+                        </xsl:attribute>
+                     </xsl:if>
                      <xsl:apply-templates select="*[contains(@class, ' topic/section ')]" mode="accordion"/>
                      <xsl:if test="not($is-flush) and $accordion-radius != ''">
                         <xsl:call-template name="corner-mask">
@@ -77,6 +92,15 @@
          </fo:table-body>
       </fo:table>
     </fo:block>
+    </xsl:variable>
+    <xsl:call-template name="apply-glow-wrapper">
+      <xsl:with-param name="inner" select="$glow-out"/>
+      <xsl:with-param name="color"><xsl:call-template name="glow-color"><xsl:with-param
+            name="theme"
+            select="$glow-theme"
+          /></xsl:call-template></xsl:with-param>
+
+    </xsl:call-template>
   </xsl:template>
 
   <!-- Corner radius for the accordion's outer frame; themes can override (see sketchy) -->
@@ -129,17 +153,20 @@
               >
                   <xsl:attribute name="color" select="$bootstrap-body-color"/>
                </xsl:when>
+               <xsl:when test="string($parent-color) != ''">
+                  <xsl:call-template name="processBootstrapAttrSetReflection">
+                     <xsl:with-param name="attrSet" select="concat('__bg__', $parent-color, '-subtle')"/>
+                  </xsl:call-template>
+                  <xsl:call-template name="card.cap.colors">
+                     <xsl:with-param name="theme" select="replace($parent-color, '-.*$', '')"/>
+                  </xsl:call-template>
+               </xsl:when>
                <xsl:when test="string($bootstrap-surface-image) != ''">
                   <xsl:attribute name="color" select="$bootstrap-surface-image-text"/>
                </xsl:when>
                <xsl:when test="string($bootstrap-surface-bg) != ''">
                   <xsl:attribute name="background-color" select="$bootstrap-surface-header-bg"/>
                   <xsl:attribute name="color" select="$bootstrap-surface-text"/>
-               </xsl:when>
-               <xsl:when test="string($parent-color) != ''">
-                  <xsl:call-template name="processBootstrapAttrSetReflection">
-                     <xsl:with-param name="attrSet" select="concat('__bg__', $parent-color, '-subtle')"/>
-                  </xsl:call-template>
                </xsl:when>
                 <xsl:otherwise>
                   <xsl:attribute name="background-color" select="$bootstrap-accordion-active-bg"/>

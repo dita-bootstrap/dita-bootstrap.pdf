@@ -123,6 +123,7 @@
   <xsl:variable name="bootstrap-surface-header-bg"/>
   <xsl:variable name="bootstrap-surface-text"/>
   <xsl:variable name="bootstrap-surface-heading-color"/>
+  <xsl:variable name="bootstrap-glow-color"/>
   <xsl:variable name="bootstrap-surface-border"/>
   <xsl:variable name="bootstrap-surface-primary-bg"/>
   <xsl:variable name="bootstrap-surface-primary-color"/>

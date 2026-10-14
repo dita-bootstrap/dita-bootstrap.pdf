@@ -8,7 +8,8 @@
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
   xmlns:fox="http://xmlgraphics.apache.org/fop/extensions"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  exclude-result-prefixes="xs"
+  xmlns:bs="https://dita-bootstrap.github.io/pdf"
+  exclude-result-prefixes="xs bs"
   version="2.0"
 >
 
@@ -1173,6 +1174,127 @@
 
   </xsl:template>
 
+  <xsl:function name="bs:mix-white" as="xs:string">
+    <xsl:param name="hex" as="xs:string"/>
+    <xsl:param name="alpha" as="xs:double"/>
+    <xsl:variable name="h" select="lower-case(replace($hex, '^#', ''))"/>
+    <xsl:variable name="digits" select="'0123456789abcdef'"/>
+    <xsl:sequence
+      select="concat('#', string-join(
+        for $i in (0, 2, 4) return
+          let $v := string-length(substring-before($digits, substring($h, $i + 1, 1))) * 16 + string-length(substring-before($digits, substring($h, $i + 2, 1))),
+              $m := xs:integer(round(255 - (255 - $v) * $alpha))
+          return concat(substring($digits, $m idiv 16 + 1, 1), substring($digits, $m mod 16 + 1, 1)), ''))"
+    />
+  </xsl:function>
+
+  <xsl:variable name="glow-alphas" select="(0.15, 0.35)"/>
+
+  <xsl:template name="glow-color">
+    <xsl:param name="theme" select="''"/>
+    <xsl:if test="string($bootstrap-glow-color) != ''">
+      <xsl:variable name="base" select="replace($theme, '-.*$', '')"/>
+      <xsl:variable
+        name="themed"
+        select="if ($base != '') then $bootstrap-settings/entry[@name = concat('bootstrap-btn-', $base, '-bg')] else ''"
+      />
+      <xsl:value-of select="if (string($themed) != '') then $themed else $bootstrap-glow-color"/>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template name="apply-glow-wrapper">
+    <xsl:param name="inner"/>
+    <xsl:param name="color"/>
+    <!-- Set for cards: start/end-indent is relative to the cell edge and the card border sits outside it, so layers widen by indent plus border -->
+    <xsl:param name="reset-indent" select="false()"/>
+    <xsl:choose>
+      <xsl:when test="string($color) = '' or $inner/*[1][self::fo:inline or self::fo:basic-link]">
+        <xsl:copy-of select="$inner"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:variable
+          name="radius"
+          select="number(substring-before(concat(($inner/*[1]/@fox:border-radius, $inner//@fox:border-radius)[1], 'pt'), 'pt'))"
+        />
+        <xsl:variable name="alphas" select="$glow-alphas"/>
+        <xsl:variable name="n" select="count($alphas)"/>
+        <xsl:variable
+          name="margin-top"
+          select="(number(substring-before(concat($inner/*[1]/@margin-top, 'pt'), 'pt')), 0)[. = .][1]"
+        />
+        <xsl:variable
+          name="margin-bottom"
+          select="(number(substring-before(concat($inner/*[1]/@margin-bottom, 'pt'), 'pt')), 0)[. = .][1]"
+        />
+        <fo:block>
+          <xsl:copy-of select="$inner/*[1][self::fo:block]/(@space-before, @space-after)"/>
+          <xsl:attribute name="margin-top" select="concat($margin-top - $n, 'pt')"/>
+          <xsl:attribute name="margin-bottom" select="concat($margin-bottom - $n, 'pt')"/>
+          <xsl:if test="not($reset-indent)">
+            <xsl:attribute name="margin-left" select="concat(-$n, 'pt')"/>
+            <xsl:attribute name="margin-right" select="concat(-$n, 'pt')"/>
+          </xsl:if>
+          <xsl:call-template name="glow-layer">
+            <xsl:with-param name="inner" select="$inner"/>
+            <xsl:with-param name="color" select="$color"/>
+            <xsl:with-param name="alphas" select="$alphas"/>
+            <xsl:with-param name="radius" select="if ($radius = $radius) then $radius + $n else 0"/>
+            <xsl:with-param name="indent" select="$reset-indent"/>
+          </xsl:call-template>
+        </fo:block>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template name="glow-layer">
+    <xsl:param name="inner"/>
+    <xsl:param name="color"/>
+    <xsl:param name="alphas" as="xs:double*"/>
+    <xsl:param name="radius"/>
+    <xsl:param name="indent" select="false()"/>
+    <xsl:choose>
+      <xsl:when test="empty($alphas) and $indent">
+        <fo:block start-indent="0pt" end-indent="0pt">
+          <xsl:apply-templates select="$inner/node()" mode="strip-margin"/>
+        </fo:block>
+      </xsl:when>
+      <xsl:when test="empty($alphas)">
+        <xsl:apply-templates select="$inner/node()" mode="strip-margin"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <fo:block background-color="{bs:mix-white($color, $alphas[1])}">
+          <xsl:choose>
+            <xsl:when test="$indent">
+              <xsl:attribute name="padding" select="'1pt 0'"/>
+              <xsl:variable name="border" select="number(substring-before($bootstrap-border-width, 'pt'))"/>
+              <xsl:attribute
+                name="start-indent"
+                select="concat(-count($alphas) - (if ($border = $border) then $border else 0), 'pt')"
+              />
+              <xsl:attribute
+                name="end-indent"
+                select="concat(-count($alphas) - (if ($border = $border) then $border else 0), 'pt')"
+              />
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:attribute name="padding" select="'1pt'"/>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:if test="$radius &gt; 0">
+            <xsl:attribute name="fox:border-radius" select="concat($radius, 'pt')"/>
+          </xsl:if>
+          <xsl:call-template name="glow-layer">
+            <xsl:with-param name="inner" select="$inner"/>
+            <xsl:with-param name="color" select="$color"/>
+            <xsl:with-param name="alphas" select="subsequence($alphas, 2)"/>
+            <xsl:with-param name="radius" select="$radius - 1"/>
+            <xsl:with-param name="indent" select="$indent"/>
+          </xsl:call-template>
+        </fo:block>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
   <!-- Identity transform to strip margins from the inner shadow block -->
   <xsl:template match="node() | @*" mode="strip-margin">
     <xsl:copy>
@@ -1186,6 +1308,18 @@
     match="fo:block/@margin | fo:block/@margin-top | fo:block/@margin-bottom | fo:block/@margin-left | fo:block/@margin-right | fo:block/@width | fo:block/@inline-progression-dimension"
     mode="strip-margin"
   >
+    <xsl:if test="count(../ancestor::*) &gt; 1">
+      <xsl:copy/>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template match="fo:block/@space-before | fo:block/@space-after" mode="strip-margin">
+    <xsl:if test="count(../ancestor::*) &gt; 0">
+      <xsl:copy/>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template match="fo:block-container/@space-before | fo:block-container/@space-after" mode="strip-margin">
     <xsl:if test="count(../ancestor::*) &gt; 1">
       <xsl:copy/>
     </xsl:if>
@@ -1247,6 +1381,7 @@
       </xsl:call-template>
     </xsl:variable>
 
+    <xsl:variable name="block">
     <xsl:choose>
       <xsl:when test="@frame">
         <fo:block>
@@ -1261,8 +1396,8 @@
           </xsl:if>
           <fo:block>
             <xsl:attribute name="background-color"><xsl:value-of
-                select="$prismjs.card.background.color"
-              /></xsl:attribute>
+                  select="$prismjs.card.background.color"
+                /></xsl:attribute>
             <xsl:apply-templates select="." mode="prismDecoration"/>
             <xsl:choose>
               <xsl:when test="$writing-mode = 'rl' and not(@dir)">
@@ -1306,6 +1441,11 @@
         </fo:block>
       </xsl:otherwise>
     </xsl:choose>
+    </xsl:variable>
+    <xsl:call-template name="apply-glow-wrapper">
+      <xsl:with-param name="inner" select="$block"/>
+      <xsl:with-param name="color" select="$bootstrap-glow-color"/>
+    </xsl:call-template>
   </xsl:template>
 
   <!-- Overrides standard prism processing -->
