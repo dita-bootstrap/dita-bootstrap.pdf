@@ -41,6 +41,11 @@
             </xsl:otherwise>
          </xsl:choose>
          
+         <xsl:call-template name="bootstrap.surface.image"/>
+         <xsl:variable name="lgTheme"><xsl:call-template name="get-theme-color"/></xsl:variable>
+         <xsl:call-template name="bootstrap.surface">
+           <xsl:with-param name="theme" select="$lgTheme"/>
+         </xsl:call-template>
          <fo:table-column column-width="proportional-column-width(1)"/>
          <fo:table-body>
            <xsl:apply-templates select="*[contains(@class, ' topic/li ')]"/>
@@ -74,7 +79,9 @@
       
       <fo:table-cell>
         <xsl:attribute name="border-bottom">
-          <xsl:value-of select="concat($bootstrap-border-width, ' solid ', $bootstrap-border-color)"/>
+          <xsl:value-of
+            select="concat($bootstrap-border-width, ' solid ', if (string($bootstrap-surface-border) != '') then $bootstrap-surface-border else $bootstrap-border-color)"
+          />
         </xsl:attribute>
         <!-- Apply text color from item specific class if present -->
         <xsl:if test="exists($itemTheme)">

@@ -811,6 +811,48 @@
       <xsl:call-template name="bootstrap.decoration"/>
   </xsl:template>
   
+  <xsl:template name="bootstrap.surface">
+    <xsl:param name="theme" select="''"/>
+    <xsl:if test="string($bootstrap-surface-bg) != ''">
+      <xsl:variable name="base" select="replace($theme, '-.*$', '')"/>
+      <xsl:variable name="variant-bg">
+        <xsl:if test="$base != ''">
+          <xsl:call-template name="getBootstrapSetting">
+            <xsl:with-param name="name" select="concat('bootstrap-surface-', $base, '-bg')"/>
+          </xsl:call-template>
+        </xsl:if>
+      </xsl:variable>
+      <xsl:variable name="variant-color">
+        <xsl:if test="$base != ''">
+          <xsl:call-template name="getBootstrapSetting">
+            <xsl:with-param name="name" select="concat('bootstrap-surface-', $base, '-color')"/>
+          </xsl:call-template>
+        </xsl:if>
+      </xsl:variable>
+      <xsl:attribute
+        name="background-color"
+        select="if (string($variant-bg) != '') then $variant-bg else $bootstrap-surface-bg"
+      />
+      <xsl:attribute
+        name="color"
+        select="if (string($variant-color) != '') then $variant-color else $bootstrap-surface-text"
+      />
+      <xsl:if test="$base = ''">
+        <xsl:attribute name="border-color" select="$bootstrap-surface-border"/>
+      </xsl:if>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template name="bootstrap.surface.image">
+    <xsl:if test="string($bootstrap-surface-image) != ''">
+      <xsl:attribute name="background-color" select="$bootstrap-surface-image-color"/>
+      <xsl:attribute name="background-image" select="concat('url(', $bootstrap-surface-image, ')')"/>
+      <xsl:attribute name="background-repeat">repeat-y</xsl:attribute>
+      <xsl:attribute name="border-color" select="$bootstrap-surface-image-border"/>
+      <xsl:attribute name="color" select="$bootstrap-surface-image-text"/>
+    </xsl:if>
+  </xsl:template>
+
   <xsl:template name="bootstrap.decoration">
       <xsl:param name="node" select="."/>
       <xsl:param name="variant" select="''"/>

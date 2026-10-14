@@ -7,6 +7,9 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
   xmlns:fox="http://xmlgraphics.apache.org/fop/extensions"
+  xmlns:bs="https://dita-bootstrap.github.io/pdf"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  exclude-result-prefixes="bs xs"
   version="2.0"
 >
 
@@ -67,6 +70,29 @@
           </xsl:call-template>
         </xsl:otherwise>
       </xsl:choose>
+
+      <xsl:if test="not($isBorderOnly)"><xsl:call-template name="bootstrap.surface.image"/></xsl:if>
+      <xsl:if
+        test="$isSubtle and not($isBorderOnly) and not($bootstrap-alert-solid) and string($bootstrap-surface-image) = ''"
+      >
+        <xsl:call-template name="bootstrap.surface">
+          <xsl:with-param name="theme" select="$theme"/>
+        </xsl:call-template>
+      </xsl:if>
+      <xsl:if test="string($bootstrap-surface-image) != '' and not($isBorderOnly)">
+        <xsl:attribute name="border-left-width" select="$bootstrap-note-border-width"/>
+        <xsl:attribute name="border-left-style">solid</xsl:attribute>
+        <xsl:variable name="image-bar">
+          <xsl:call-template name="getBootstrapAttrValue">
+            <xsl:with-param name="attrSet" select="concat('__bg__', (if ($theme != '') then $theme else 'secondary'))"/>
+            <xsl:with-param name="attrName" select="'background-color'"/>
+          </xsl:call-template>
+        </xsl:variable>
+        <xsl:attribute
+          name="border-left-color"
+          select="bs:darken($image-bar, xs:double($bootstrap-surface-image-bar-factor))"
+        />
+      </xsl:if>
 
       <!-- 2. Set default padding (p-3) if not overridden -->
       <xsl:if test="not(@padding or exists(tokenize(@outputclass, ' ')[starts-with(., 'p-')]))">

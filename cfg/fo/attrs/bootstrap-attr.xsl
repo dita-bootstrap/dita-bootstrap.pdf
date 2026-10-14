@@ -130,13 +130,22 @@
               <xsl:value-of select="$bootstrap-link"/>
             </xsl:when>
             <xsl:when
+              test="string($bootstrap-surface-image) != '' and exists(ancestor::*[contains(@class, ' topic/note ') or contains(@class, ' bootstrap-d/alert ') or tokenize(@outputclass, ' ') = 'alert'])"
+            ><xsl:value-of select="$bootstrap-surface-image-text"/></xsl:when>
+            <xsl:when
               test="$contextSuffix = '' and not($bootstrap-alert-solid) and exists(ancestor::*[contains(@class, ' topic/note ') or contains(@class, ' bootstrap-d/alert ') or tokenize(@outputclass, ' ') = 'alert'])"
             >
-              <xsl:variable name="subtleVar" select="concat('bootstrap-', $contextColor, '-subtle-text')"/>
+              <xsl:variable
+                name="subtleVar"
+                select="if (string($bootstrap-surface-bg) != '') then concat('bootstrap-surface-', $contextColor, '-color') else concat('bootstrap-', $contextColor, '-subtle-text')"
+              />
               <xsl:value-of select="$bootstrap-settings/entry[@name = $subtleVar]"/>
             </xsl:when>
             <xsl:when test="contains($contextSuffix, 'subtle')">
-              <xsl:variable name="subtleVar" select="concat('bootstrap-', $contextColor, '-subtle-text')"/>
+              <xsl:variable
+                name="subtleVar"
+                select="if (string($bootstrap-surface-bg) != '') then concat('bootstrap-surface-', $contextColor, '-color') else concat('bootstrap-', $contextColor, '-subtle-text')"
+              />
               <xsl:value-of select="$bootstrap-settings/entry[@name = $subtleVar]"/>
             </xsl:when>
             <xsl:when test="contains($contextSuffix, 'muted')">

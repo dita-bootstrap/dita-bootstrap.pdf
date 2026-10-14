@@ -58,6 +58,8 @@
                         </xsl:if>
                      </xsl:if>
 
+                     <xsl:if test="not($is-flush)"><xsl:call-template name="bootstrap.surface.image"/></xsl:if>
+                     <xsl:if test="not($is-flush)"><xsl:call-template name="bootstrap.surface"/></xsl:if>
                      <xsl:apply-templates select="*[contains(@class, ' topic/section ')]" mode="accordion"/>
                      <xsl:if test="not($is-flush) and $accordion-radius != ''">
                         <xsl:call-template name="corner-mask">
@@ -102,7 +104,9 @@
     
     <fo:table table-layout="fixed" width="100%">
       <xsl:attribute name="border-bottom">
-        <xsl:value-of select="concat($bootstrap-border-width, ' solid ', $bootstrap-border-color)"/>
+        <xsl:value-of
+          select="concat($bootstrap-border-width, ' solid ', if (string($bootstrap-surface-border) != '') then $bootstrap-surface-border else $bootstrap-border-color)"
+        />
       </xsl:attribute>
       <xsl:if test="position() = last()">
          <xsl:attribute name="border-bottom">none</xsl:attribute>
@@ -118,6 +122,13 @@
           <fo:table-cell padding="10pt 15pt">
             <xsl:call-template name="processBootstrapDirection"/>
             <xsl:choose>
+               <xsl:when test="string($bootstrap-surface-image) != ''">
+                  <xsl:attribute name="color" select="$bootstrap-surface-image-text"/>
+               </xsl:when>
+               <xsl:when test="string($bootstrap-surface-bg) != ''">
+                  <xsl:attribute name="background-color" select="$bootstrap-surface-header-bg"/>
+                  <xsl:attribute name="color" select="$bootstrap-surface-text"/>
+               </xsl:when>
                <xsl:when test="string($parent-color) != ''">
                   <xsl:call-template name="processBootstrapAttrSetReflection">
                      <xsl:with-param name="attrSet" select="concat('__bg__', $parent-color, '-subtle')"/>

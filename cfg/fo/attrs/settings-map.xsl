@@ -35,6 +35,22 @@
     <entry name="bootstrap-accent-border"><xsl:value-of select="$bootstrap-accent-border"/></entry>
     <entry name="bootstrap-inverse-fg"><xsl:value-of select="$bootstrap-inverse-fg"/></entry>
     <entry name="bootstrap-inverse-border"><xsl:value-of select="$bootstrap-inverse-border"/></entry>
+    <entry name="bootstrap-surface-primary-bg"><xsl:value-of select="$bootstrap-surface-primary-bg"/></entry>
+    <entry name="bootstrap-surface-primary-color"><xsl:value-of select="$bootstrap-surface-primary-color"/></entry>
+    <entry name="bootstrap-surface-secondary-bg"><xsl:value-of select="$bootstrap-surface-secondary-bg"/></entry>
+    <entry name="bootstrap-surface-secondary-color"><xsl:value-of select="$bootstrap-surface-secondary-color"/></entry>
+    <entry name="bootstrap-surface-success-bg"><xsl:value-of select="$bootstrap-surface-success-bg"/></entry>
+    <entry name="bootstrap-surface-success-color"><xsl:value-of select="$bootstrap-surface-success-color"/></entry>
+    <entry name="bootstrap-surface-info-bg"><xsl:value-of select="$bootstrap-surface-info-bg"/></entry>
+    <entry name="bootstrap-surface-info-color"><xsl:value-of select="$bootstrap-surface-info-color"/></entry>
+    <entry name="bootstrap-surface-warning-bg"><xsl:value-of select="$bootstrap-surface-warning-bg"/></entry>
+    <entry name="bootstrap-surface-warning-color"><xsl:value-of select="$bootstrap-surface-warning-color"/></entry>
+    <entry name="bootstrap-surface-danger-bg"><xsl:value-of select="$bootstrap-surface-danger-bg"/></entry>
+    <entry name="bootstrap-surface-danger-color"><xsl:value-of select="$bootstrap-surface-danger-color"/></entry>
+    <entry name="bootstrap-surface-accent-bg"><xsl:value-of select="$bootstrap-surface-accent-bg"/></entry>
+    <entry name="bootstrap-surface-accent-color"><xsl:value-of select="$bootstrap-surface-accent-color"/></entry>
+    <entry name="bootstrap-surface-inverse-bg"><xsl:value-of select="$bootstrap-surface-inverse-bg"/></entry>
+    <entry name="bootstrap-surface-inverse-color"><xsl:value-of select="$bootstrap-surface-inverse-color"/></entry>
     <entry name="bootstrap-primary-subtle"><xsl:value-of select="$bootstrap-primary-subtle"/></entry>
     <entry name="bootstrap-primary-subtle-text"><xsl:value-of select="$bootstrap-primary-subtle-text"/></entry>
     <entry name="bootstrap-secondary-subtle"><xsl:value-of select="$bootstrap-secondary-subtle"/></entry>

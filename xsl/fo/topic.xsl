@@ -339,6 +339,17 @@
       />
       <xsl:variable name="icon-color">
         <xsl:choose>
+          <xsl:when test="string($bootstrap-surface-image) != ''"><xsl:value-of
+              select="$bootstrap-surface-image-text"
+            /></xsl:when>
+          <xsl:when test="string($bootstrap-surface-bg) != '' and not($bootstrap-alert-solid)">
+            <xsl:variable name="surface-fg">
+              <xsl:call-template name="getBootstrapSetting">
+                <xsl:with-param name="name" select="concat('bootstrap-surface-', $theme, '-color')"/>
+              </xsl:call-template>
+            </xsl:variable>
+            <xsl:value-of select="if (string($surface-fg) != '') then $surface-fg else $bootstrap-surface-text"/>
+          </xsl:when>
           <xsl:when test="$icon-color-is-white and not($bootstrap-alert-solid)">
             <xsl:call-template name="getBootstrapAttrValue">
               <xsl:with-param name="attrSet" select="concat('__bg__', $theme, '-subtle')"/>
@@ -353,6 +364,21 @@
 
       <xsl:variable name="bar-color">
         <xsl:choose>
+          <xsl:when test="string($bootstrap-surface-bg) != '' and not($bootstrap-alert-solid) and $isSubtle">
+            <xsl:call-template name="getBootstrapAttrValue">
+              <xsl:with-param name="attrSet" select="concat('__bg__', $theme)"/>
+              <xsl:with-param name="attrName" select="'background-color'"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="string($bootstrap-surface-image) != ''">
+            <xsl:variable name="image-bar">
+              <xsl:call-template name="getBootstrapAttrValue">
+                <xsl:with-param name="attrSet" select="concat('__bg__', $theme)"/>
+                <xsl:with-param name="attrName" select="'background-color'"/>
+              </xsl:call-template>
+            </xsl:variable>
+            <xsl:value-of select="bs:darken($image-bar, xs:double($bootstrap-surface-image-bar-factor))"/>
+          </xsl:when>
           <xsl:when test="$bootstrap-alert-solid and $isSubtle">
             <xsl:variable name="solid-bg">
               <xsl:call-template name="getBootstrapAttrValue">
@@ -393,6 +419,15 @@
           </xsl:call-template>
         </xsl:otherwise>
       </xsl:choose>
+
+      <xsl:if test="not($isBorderOnly)"><xsl:call-template name="bootstrap.surface.image"/></xsl:if>
+      <xsl:if
+        test="$isSubtle and not($isBorderOnly) and not($bootstrap-alert-solid) and string($bootstrap-surface-image) = ''"
+      >
+        <xsl:call-template name="bootstrap.surface">
+          <xsl:with-param name="theme" select="$theme"/>
+        </xsl:call-template>
+      </xsl:if>
 
       <xsl:variable name="direction">
         <xsl:choose>

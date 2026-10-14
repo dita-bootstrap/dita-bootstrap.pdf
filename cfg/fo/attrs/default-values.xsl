@@ -114,6 +114,32 @@
   <!-- Component-specific: Notes -->
   <xsl:variable name="bootstrap-note-border-width">6pt</xsl:variable>
   <xsl:variable name="bootstrap-alert-solid" select="false()"/>
+  <xsl:variable name="bootstrap-surface-image"/>
+  <xsl:variable name="bootstrap-surface-image-color"/>
+  <xsl:variable name="bootstrap-surface-image-border"/>
+  <xsl:variable name="bootstrap-surface-image-text"/>
+  <xsl:variable name="bootstrap-surface-image-bar-factor" select="1"/>
+  <xsl:variable name="bootstrap-surface-bg"/>
+  <xsl:variable name="bootstrap-surface-header-bg"/>
+  <xsl:variable name="bootstrap-surface-text"/>
+  <xsl:variable name="bootstrap-surface-border"/>
+  <xsl:variable name="bootstrap-surface-primary-bg"/>
+  <xsl:variable name="bootstrap-surface-primary-color"/>
+  <xsl:variable name="bootstrap-surface-secondary-bg"/>
+  <xsl:variable name="bootstrap-surface-secondary-color"/>
+  <xsl:variable name="bootstrap-surface-success-bg"/>
+  <xsl:variable name="bootstrap-surface-success-color"/>
+  <xsl:variable name="bootstrap-surface-info-bg"/>
+  <xsl:variable name="bootstrap-surface-info-color"/>
+  <xsl:variable name="bootstrap-surface-warning-bg"/>
+  <xsl:variable name="bootstrap-surface-warning-color"/>
+  <xsl:variable name="bootstrap-surface-danger-bg"/>
+  <xsl:variable name="bootstrap-surface-danger-color"/>
+  <xsl:variable name="bootstrap-surface-accent-bg"/>
+  <xsl:variable name="bootstrap-surface-accent-color"/>
+  <xsl:variable name="bootstrap-surface-inverse-bg"/>
+  <xsl:variable name="bootstrap-surface-inverse-color"/>
+
   <xsl:variable name="bootstrap-alert-link-font-weight">bold</xsl:variable>
   <xsl:variable name="bootstrap-link-text-decoration">none</xsl:variable>
   <xsl:variable name="bootstrap-alert-link-text-decoration">underline</xsl:variable>

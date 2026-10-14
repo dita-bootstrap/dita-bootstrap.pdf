@@ -70,6 +70,11 @@
 
     <fo:block text-align="{$textAlign}" margin-bottom="{$bootstrap-spacing-3}">
       <xsl:call-template name="commonattributes"/>
+      <xsl:if test="string($bootstrap-surface-image) != ''">
+        <xsl:call-template name="bootstrap.surface.image"/>
+        <xsl:attribute name="padding">3pt</xsl:attribute>
+        <xsl:attribute name="fox:border-radius" select="$bootstrap-rounded"/>
+      </xsl:if>
       <xsl:for-each select="*[contains(@class, ' topic/li ')]">
         <xsl:call-template name="renderPaginationItem">
           <xsl:with-param name="themeColor" select="$themeColor"/>
@@ -143,6 +148,27 @@
       <xsl:attribute name="border-width"><xsl:value-of select="$bootstrap-border-width"/></xsl:attribute>
       <xsl:attribute name="border-color"><xsl:value-of select="$bootstrap-border-color"/></xsl:attribute>
       <xsl:attribute name="color"><xsl:value-of select="$color"/></xsl:attribute>
+      <xsl:if test="string($bootstrap-surface-bg) != ''">
+        <xsl:variable name="variant-color">
+          <xsl:if test="$themeColor != ''">
+            <xsl:call-template name="getBootstrapSetting">
+              <xsl:with-param name="name" select="concat('bootstrap-surface-', $themeColor, '-color')"/>
+            </xsl:call-template>
+          </xsl:if>
+        </xsl:variable>
+        <xsl:attribute name="background-color" select="$bootstrap-surface-bg"/>
+        <xsl:attribute
+          name="color"
+          select="if (string($variant-color) != '') then $variant-color else $bootstrap-surface-text"
+        />
+        <xsl:attribute name="border-color" select="$bootstrap-surface-border"/>
+      </xsl:if>
+      <xsl:if test="string($bootstrap-surface-image) != ''">
+        <xsl:attribute name="border-color" select="$bootstrap-surface-image-border"/>
+        <xsl:if test="$themeColor = ''">
+          <xsl:attribute name="color" select="$bootstrap-surface-image-text"/>
+        </xsl:if>
+      </xsl:if>
       <xsl:if test="$size = 'small'">
         <xsl:attribute name="font-size">10.5pt</xsl:attribute>
       </xsl:if>

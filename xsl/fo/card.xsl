@@ -197,6 +197,10 @@
         </xsl:if>
         <xsl:attribute name="overflow">hidden</xsl:attribute>
         <xsl:call-template name="bootstrap.decoration"/>
+        <xsl:call-template name="bootstrap.surface.image"/>
+        <xsl:call-template name="bootstrap.surface">
+          <xsl:with-param name="theme" select="$theme"/>
+        </xsl:call-template>
         <xsl:if test="$card-radius != ''">
           <xsl:attribute name="fox:border-radius" select="$card-radius"/>
         </xsl:if>
@@ -238,6 +242,13 @@
                              <xsl:with-param name="attrSet" select="concat('border-', $theme)"/>
                              <xsl:with-param name="attrName" select="'border-color'"/>
                           </xsl:call-template>
+                       </xsl:attribute>
+                    </xsl:when>
+                    <xsl:when test="string($bootstrap-surface-bg) != ''">
+                       <xsl:attribute name="background-color" select="$bootstrap-surface-header-bg"/>
+                       <xsl:attribute name="color" select="$bootstrap-surface-text"/>
+                       <xsl:attribute name="border-bottom">
+                          <xsl:value-of select="concat($bootstrap-border-width, ' solid ', $bootstrap-surface-border)"/>
                        </xsl:attribute>
                     </xsl:when>
                     <xsl:otherwise>
@@ -317,6 +328,13 @@
                              <xsl:with-param name="attrSet" select="concat('border-', $theme)"/>
                              <xsl:with-param name="attrName" select="'border-color'"/>
                           </xsl:call-template>
+                       </xsl:attribute>
+                    </xsl:when>
+                    <xsl:when test="string($bootstrap-surface-bg) != ''">
+                       <xsl:attribute name="background-color" select="$bootstrap-surface-header-bg"/>
+                       <xsl:attribute name="color" select="$bootstrap-surface-text"/>
+                       <xsl:attribute name="border-top">
+                          <xsl:value-of select="concat($bootstrap-border-width, ' solid ', $bootstrap-surface-border)"/>
                        </xsl:attribute>
                     </xsl:when>
                     <xsl:otherwise>
