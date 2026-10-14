@@ -701,6 +701,7 @@
     <xsl:param name="attrValue"/>
     <xsl:if test="$attrValue">
       <xsl:variable name="tokens" select="tokenize(normalize-space($attrValue), ' ')"/>
+      <xsl:variable name="outer" select="."/>
       
       <!-- Pass 1: Background and other utilities -->
       <xsl:for-each select="$tokens">
@@ -750,6 +751,11 @@
                 </xsl:choose>
              </xsl:with-param>
             </xsl:call-template>
+            <xsl:if
+              test="matches($token, '^h[1-6]$') and string($bootstrap-surface-bg) != '' and exists($outer/ancestor::*[contains(@class, ' bootstrap-d/card ')])"
+            >
+              <xsl:attribute name="color" select="$bootstrap-surface-text"/>
+            </xsl:if>
           </xsl:when>
           <!-- Text Align utilities (New) -->
           <xsl:when test="$token = 'text-start'"><xsl:attribute name="text-align">left</xsl:attribute></xsl:when>

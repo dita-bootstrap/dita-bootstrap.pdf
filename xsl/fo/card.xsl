@@ -14,6 +14,20 @@
   version="2.0"
 >
 
+  <xsl:template name="card.cap.colors">
+    <xsl:param name="theme"/>
+    <xsl:if test="string($bootstrap-surface-image) != '' or string($bootstrap-surface-bg) != ''">
+      <xsl:attribute
+        name="background-color"
+        select="$bootstrap-settings/entry[@name = concat('bootstrap-btn-', $theme, '-bg')]"
+      />
+      <xsl:attribute
+        name="color"
+        select="if ($theme = ('primary', 'secondary', 'success', 'info', 'warning', 'danger')) then '#ffffff' else $bootstrap-settings/entry[@name = concat('bootstrap-btn-', $theme, '-color')]"
+      />
+    </xsl:if>
+  </xsl:template>
+
   <xsl:template
     match="*[self::card or contains(@class, ' bootstrap-d/card ') or (tokenize(@outputclass, ' ') = 'card' and (contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')))]"
     priority="5"
@@ -234,16 +248,10 @@
                        <xsl:call-template name="processBootstrapAttrSetReflection">
                           <xsl:with-param name="attrSet" select="concat('__bg__', $theme)"/>
                        </xsl:call-template>
-                       <xsl:if test="string($bootstrap-surface-image) != ''">
-                          <xsl:attribute
-                        name="background-color"
-                        select="$bootstrap-settings/entry[@name = concat('bootstrap-btn-', $theme, '-bg')]"
-                      />
-                          <xsl:attribute
-                        name="color"
-                        select="$bootstrap-settings/entry[@name = concat('bootstrap-btn-', $theme, '-color')]"
-                      />
-                       </xsl:if>
+                       <xsl:call-template name="card.cap.colors"><xsl:with-param
+                        name="theme"
+                        select="$theme"
+                      /></xsl:call-template>
                        <xsl:attribute name="border-bottom">
                           <xsl:value-of select="concat($bootstrap-border-width, ' solid')"/>
                        </xsl:attribute>
@@ -264,7 +272,10 @@
                     </xsl:when>
                     <xsl:when test="string($bootstrap-surface-bg) != ''">
                        <xsl:attribute name="background-color" select="$bootstrap-surface-header-bg"/>
-                       <xsl:attribute name="color" select="$bootstrap-surface-text"/>
+                       <xsl:attribute
+                      name="color"
+                      select="if (string($bootstrap-surface-heading-color) != '') then $bootstrap-surface-heading-color else $bootstrap-surface-text"
+                    />
                        <xsl:attribute name="border-bottom">
                           <xsl:value-of select="concat($bootstrap-border-width, ' solid ', $bootstrap-surface-border)"/>
                        </xsl:attribute>
@@ -338,6 +349,10 @@
                        <xsl:call-template name="processBootstrapAttrSetReflection">
                           <xsl:with-param name="attrSet" select="concat('__bg__', $theme, '-subtle')"/>
                        </xsl:call-template>
+                       <xsl:call-template name="card.cap.colors"><xsl:with-param
+                        name="theme"
+                        select="$theme"
+                      /></xsl:call-template>
                        <xsl:attribute name="border-top">
                           <xsl:value-of select="concat($bootstrap-border-width, ' solid')"/>
                        </xsl:attribute>
@@ -358,7 +373,10 @@
                     </xsl:when>
                     <xsl:when test="string($bootstrap-surface-bg) != ''">
                        <xsl:attribute name="background-color" select="$bootstrap-surface-header-bg"/>
-                       <xsl:attribute name="color" select="$bootstrap-surface-text"/>
+                       <xsl:attribute
+                      name="color"
+                      select="if (string($bootstrap-surface-heading-color) != '') then $bootstrap-surface-heading-color else $bootstrap-surface-text"
+                    />
                        <xsl:attribute name="border-top">
                           <xsl:value-of select="concat($bootstrap-border-width, ' solid ', $bootstrap-surface-border)"/>
                        </xsl:attribute>
@@ -433,12 +451,34 @@
     match="*[self::card or contains(@class, ' bootstrap-d/card ') or (tokenize(@outputclass, ' ') = 'card' and (contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')))]/*[self::title or contains(@class, ' topic/title ')]"
     priority="5"
   >
-    <fo:block
-      font-size="14pt"
-      font-weight="{$bootstrap-heading-font-weight}"
-      color="{if (string($bootstrap-surface-image) != '') then $bootstrap-surface-image-text else $bootstrap-heading-color}"
-      margin-bottom="8pt"
-    >
+    <fo:block font-size="14pt" font-weight="{$bootstrap-heading-font-weight}" margin-bottom="8pt">
+       <xsl:variable name="surface-variant-color">
+          <xsl:if test="string($bootstrap-surface-bg) != '' and ../@theme != ''">
+             <xsl:call-template name="getBootstrapSetting">
+                <xsl:with-param
+              name="name"
+              select="concat('bootstrap-surface-', replace(../@theme, '-.*$', ''), '-color')"
+            />
+             </xsl:call-template>
+          </xsl:if>
+       </xsl:variable>
+       <xsl:attribute name="color">
+          <xsl:choose>
+             <xsl:when test="string($bootstrap-surface-image) != ''"><xsl:value-of
+              select="$bootstrap-surface-image-text"
+            /></xsl:when>
+             <xsl:when test="string($surface-variant-color) != ''"><xsl:value-of
+              select="$surface-variant-color"
+            /></xsl:when>
+             <xsl:when test="string($bootstrap-surface-heading-color) != ''"><xsl:value-of
+              select="$bootstrap-surface-heading-color"
+            /></xsl:when>
+             <xsl:when test="string($bootstrap-surface-bg) != ''"><xsl:value-of
+              select="$bootstrap-surface-text"
+            /></xsl:when>
+             <xsl:otherwise><xsl:value-of select="$bootstrap-heading-color"/></xsl:otherwise>
+          </xsl:choose>
+       </xsl:attribute>
        <xsl:call-template name="processBootstrapDirection"/>
        <xsl:apply-templates/>
     </fo:block>
