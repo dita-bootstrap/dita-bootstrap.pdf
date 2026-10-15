@@ -7,8 +7,60 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
   xmlns:fox="http://xmlgraphics.apache.org/fop/extensions"
+  xmlns:grid="urn:dita-bootstrap:pdf:grid"
+  exclude-result-prefixes="grid"
   version="2.0"
 >
+
+  <xsl:function name="grid:span" as="xs:integer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xsl:param name="cell" as="node()"/>
+    <xsl:variable name="row" select="$cell/parent::*"/>
+    <xsl:variable
+      name="parsed-span"
+      select="(for $t in tokenize($cell/@outputclass, '\s+') return if (matches($t, '^(.*:)?col(-[a-z]+)?-[0-9]+$')) then replace($t, '^.*col(?:-[a-z]+)?-([0-9]+)$', '$1') else ())[1]"
+    />
+    <xsl:variable
+      name="row-cols"
+      select="(for $t in tokenize($row/@outputclass, '\s+') return if (matches($t, '^row-cols-[0-9]+$')) then replace($t, '^row-cols-', '') else ())[1]"
+    />
+    <xsl:variable
+      name="col-count"
+      select="count($row/*[contains(@class, ' bootstrap-d/grid-col ') or exists(tokenize(@outputclass, ' ')[starts-with(., 'col') or contains(., ':col')])])"
+    />
+    <xsl:sequence
+      select="
+      if (not($cell/self::*[contains(@class, ' bootstrap-d/grid-col ') or exists(tokenize(@outputclass, ' ')[starts-with(., 'col') or contains(., ':col')])])) then 12
+      else if ($cell/@colspan) then xs:integer($cell/@colspan)
+      else if (normalize-space($parsed-span)) then xs:integer($parsed-span)
+      else if (normalize-space($row-cols)) then max((1, 12 idiv xs:integer($row-cols)))
+      else max((1, 12 idiv $col-count))"
+    />
+  </xsl:function>
+
+  <!-- Number of leading cells that fit in one 12-column row (at least 1) -->
+  <xsl:function name="grid:row-length" as="xs:integer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xsl:param name="spans" as="xs:integer*"/>
+    <xsl:param name="used" as="xs:integer"/>
+    <xsl:sequence
+      select="
+      if (empty($spans) or ($used gt 0 and $used + $spans[1] gt 12)) then 0
+      else 1 + grid:row-length(subsequence($spans, 2), $used + $spans[1])"
+    />
+  </xsl:function>
+
+  <xsl:template name="grid-rows">
+    <xsl:param name="cells" as="node()*"/>
+    <xsl:if test="exists($cells)">
+      <xsl:variable name="n" select="grid:row-length(for $c in $cells return grid:span($c), 0)"/>
+      <fo:table-row>
+        <xsl:call-template name="processBootstrapDirection"/>
+        <xsl:apply-templates select="subsequence($cells, 1, $n)" mode="grid-row-children"/>
+      </fo:table-row>
+      <xsl:call-template name="grid-rows">
+        <xsl:with-param name="cells" select="subsequence($cells, $n + 1)"/>
+      </xsl:call-template>
+    </xsl:if>
+  </xsl:template>
 
   <!-- Grid Row Handling -->
   <!-- A grid-row is a table of one row with 12 columns. -->
@@ -38,10 +90,9 @@
       <fo:table-column column-width="proportional-column-width(1)"/>
       
       <fo:table-body>
-        <fo:table-row>
-          <xsl:call-template name="processBootstrapDirection"/>
-          <xsl:apply-templates mode="grid-row-children"/>
-        </fo:table-row>
+        <xsl:call-template name="grid-rows">
+          <xsl:with-param name="cells" select="node()[self::* or (self::text() and normalize-space())]"/>
+        </xsl:call-template>
       </fo:table-body>
     </fo:table>
   </xsl:template>
@@ -57,28 +108,7 @@
       <xsl:call-template name="commonattributes"/>
       <xsl:call-template name="processBootstrapDirection"/>
       
-      <!-- Spanning logic: Use @colspan if defined, else parse from outputclass, else assign equally among siblings -->
-      <xsl:variable
-        name="col-count"
-        select="count(../*[contains(@class, ' bootstrap-d/grid-col ') or exists(tokenize(@outputclass, ' ')[starts-with(., 'col') or contains(., ':col')])])"
-      />
-      <xsl:variable
-        name="parsed-span"
-        select="(for $t in tokenize(@outputclass, '\s+') return if (matches($t, '^(.*:)?col(-[a-z]+)?-[0-9]+$')) then replace($t, '^.*col(?:-[a-z]+)?-([0-9]+)$', '$1') else ())[1]"
-      />
-      <xsl:attribute name="number-columns-spanned">
-        <xsl:choose>
-          <xsl:when test="@colspan">
-            <xsl:value-of select="@colspan"/>
-          </xsl:when>
-          <xsl:when test="normalize-space($parsed-span)">
-            <xsl:value-of select="$parsed-span"/>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:value-of select="12 idiv $col-count"/>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:attribute>
+      <xsl:attribute name="number-columns-spanned" select="grid:span(.)"/>
 
       <!-- Standard Bootstrap-like gutter padding -->
       <xsl:attribute name="padding-left">12pt</xsl:attribute>
