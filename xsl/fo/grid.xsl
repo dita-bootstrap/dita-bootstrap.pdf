@@ -12,6 +12,11 @@
   version="2.0"
 >
 
+  <xsl:function name="grid:gutter" as="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xsl:param name="row" as="element()?"/>
+    <xsl:sequence select="if ($row/@gap) then concat(xs:integer($row/@gap) * 3, 'pt') else '12pt'"/>
+  </xsl:function>
+
   <xsl:function name="grid:span" as="xs:integer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xsl:param name="cell" as="node()"/>
     <xsl:variable name="row" select="$cell/parent::*"/>
@@ -68,33 +73,43 @@
     match="*[contains(@class, ' bootstrap-d/grid-row ') or (tokenize(@outputclass, ' ') = 'row' and (contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')))]"
     priority="5"
   >
-    <fo:table table-layout="fixed" width="100%" space-before="10pt" space-after="10pt">
-      <xsl:call-template name="commonattributes"/>
-      <xsl:call-template name="processBootstrapDirection"/>
-      
-      <!-- Table Stacking Trick: Inherit indentation from parent -->
-      <xsl:attribute name="start-indent">inherited-property-value(start-indent)</xsl:attribute>
-      
-      <!-- Define exactly 12 columns as per Bootstrap grid system -->
-      <fo:table-column column-width="proportional-column-width(1)"/>
-      <fo:table-column column-width="proportional-column-width(1)"/>
-      <fo:table-column column-width="proportional-column-width(1)"/>
-      <fo:table-column column-width="proportional-column-width(1)"/>
-      <fo:table-column column-width="proportional-column-width(1)"/>
-      <fo:table-column column-width="proportional-column-width(1)"/>
-      <fo:table-column column-width="proportional-column-width(1)"/>
-      <fo:table-column column-width="proportional-column-width(1)"/>
-      <fo:table-column column-width="proportional-column-width(1)"/>
-      <fo:table-column column-width="proportional-column-width(1)"/>
-      <fo:table-column column-width="proportional-column-width(1)"/>
-      <fo:table-column column-width="proportional-column-width(1)"/>
-      
-      <fo:table-body>
-        <xsl:call-template name="grid-rows">
-          <xsl:with-param name="cells" select="node()[self::* or (self::text() and normalize-space())]"/>
-        </xsl:call-template>
-      </fo:table-body>
-    </fo:table>
+    <fo:block>
+      <xsl:call-template name="processBootstrapSpacing">
+        <xsl:with-param name="attrValue" select="@margin"/>
+        <xsl:with-param name="prefix" select="'m'"/>
+      </xsl:call-template>
+      <xsl:call-template name="processBootstrapSpacing">
+        <xsl:with-param name="attrValue" select="@padding"/>
+        <xsl:with-param name="prefix" select="'p'"/>
+      </xsl:call-template>
+      <fo:table table-layout="fixed" width="100%" space-before="10pt" space-after="10pt">
+        <xsl:call-template name="commonattributes"/>
+        <xsl:call-template name="processBootstrapDirection"/>
+
+        <!-- Table Stacking Trick: Inherit indentation from parent -->
+        <xsl:attribute name="start-indent">inherited-property-value(start-indent)</xsl:attribute>
+
+        <!-- Define exactly 12 columns as per Bootstrap grid system -->
+        <fo:table-column column-width="proportional-column-width(1)"/>
+        <fo:table-column column-width="proportional-column-width(1)"/>
+        <fo:table-column column-width="proportional-column-width(1)"/>
+        <fo:table-column column-width="proportional-column-width(1)"/>
+        <fo:table-column column-width="proportional-column-width(1)"/>
+        <fo:table-column column-width="proportional-column-width(1)"/>
+        <fo:table-column column-width="proportional-column-width(1)"/>
+        <fo:table-column column-width="proportional-column-width(1)"/>
+        <fo:table-column column-width="proportional-column-width(1)"/>
+        <fo:table-column column-width="proportional-column-width(1)"/>
+        <fo:table-column column-width="proportional-column-width(1)"/>
+        <fo:table-column column-width="proportional-column-width(1)"/>
+
+        <fo:table-body>
+          <xsl:call-template name="grid-rows">
+            <xsl:with-param name="cells" select="node()[self::* or (self::text() and normalize-space())]"/>
+          </xsl:call-template>
+        </fo:table-body>
+      </fo:table>
+    </fo:block>
   </xsl:template>
 
   <!-- Grid Column Handling -->
@@ -111,8 +126,8 @@
       <xsl:attribute name="number-columns-spanned" select="grid:span(.)"/>
 
       <!-- Standard Bootstrap-like gutter padding -->
-      <xsl:attribute name="padding-left">12pt</xsl:attribute>
-      <xsl:attribute name="padding-right">12pt</xsl:attribute>
+      <xsl:attribute name="padding-left" select="grid:gutter(parent::*)"/>
+      <xsl:attribute name="padding-right" select="grid:gutter(parent::*)"/>
       <fo:block start-indent="0pt">
         <xsl:call-template name="processBootstrapDirection"/>
         <!-- @padding/@margin (e.g. p-3, mb-2) stack on top of the structural column gutter above -->
@@ -131,7 +146,11 @@
 
   <!-- Fallback: Wrap any other ELEMENTS of a row in a full-width cell -->
   <xsl:template match="*" mode="grid-row-children" priority="1">
-     <fo:table-cell number-columns-spanned="12" padding-left="12pt" padding-right="12pt">
+     <fo:table-cell
+      number-columns-spanned="12"
+      padding-left="{grid:gutter(parent::*)}"
+      padding-right="{grid:gutter(parent::*)}"
+    >
         <fo:block start-indent="0pt">
            <xsl:apply-templates select="."/>
         </fo:block>
@@ -143,7 +162,11 @@
 
   <!-- Wrap non-empty text in a cell if it appears directly in a row -->
   <xsl:template match="text()[normalize-space()]" mode="grid-row-children" priority="1">
-     <fo:table-cell number-columns-spanned="12" padding-left="12pt" padding-right="12pt">
+     <fo:table-cell
+      number-columns-spanned="12"
+      padding-left="{grid:gutter(parent::*)}"
+      padding-right="{grid:gutter(parent::*)}"
+    >
         <fo:block start-indent="0pt">
            <xsl:value-of select="."/>
         </fo:block>
