@@ -118,6 +118,8 @@
   <xsl:variable name="bootstrap-surface-image-color"/>
   <xsl:variable name="bootstrap-surface-image-border"/>
   <xsl:variable name="bootstrap-surface-image-text"/>
+  <xsl:variable name="bootstrap-surface-accordion-header-bg"/>
+  <xsl:variable name="bootstrap-surface-accordion-header-color"/>
   <xsl:variable name="bootstrap-surface-image-bar-factor" select="1"/>
   <xsl:variable name="bootstrap-surface-bg"/>
   <xsl:variable name="bootstrap-surface-header-bg"/>

@@ -166,11 +166,23 @@
                   </xsl:call-template>
                </xsl:when>
                <xsl:when test="string($bootstrap-surface-image) != ''">
-                  <xsl:attribute name="color" select="$bootstrap-surface-image-text"/>
+                  <xsl:if test="string($bootstrap-surface-accordion-header-bg) != ''">
+                     <xsl:attribute name="background-color" select="$bootstrap-surface-accordion-header-bg"/>
+                  </xsl:if>
+                  <xsl:attribute
+                  name="color"
+                  select="($bootstrap-surface-accordion-header-color[. != ''], $bootstrap-surface-image-text)[1]"
+                />
                </xsl:when>
                <xsl:when test="string($bootstrap-surface-bg) != ''">
-                  <xsl:attribute name="background-color" select="$bootstrap-surface-header-bg"/>
-                  <xsl:attribute name="color" select="$bootstrap-surface-text"/>
+                  <xsl:attribute
+                  name="background-color"
+                  select="($bootstrap-surface-accordion-header-bg[. != ''], $bootstrap-surface-header-bg)[1]"
+                />
+                  <xsl:attribute
+                  name="color"
+                  select="($bootstrap-surface-accordion-header-color[. != ''], $bootstrap-surface-text)[1]"
+                />
                </xsl:when>
                 <xsl:otherwise>
                   <xsl:attribute name="background-color" select="$bootstrap-accordion-active-bg"/>
