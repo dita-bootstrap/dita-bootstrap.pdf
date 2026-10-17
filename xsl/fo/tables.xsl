@@ -7,6 +7,7 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:fox="http://xmlgraphics.apache.org/fop/extensions"
   xmlns:dita-ot="http://dita-ot.sourceforge.net/ns/201007/dita-ot"
   exclude-result-prefixes="xs dita-ot"
   version="2.0"
@@ -53,7 +54,7 @@
               select="*[contains(@class, ' topic/title ')]"
               mode="table-caption"
             /></xsl:if>
-          <xsl:apply-templates select="*[contains(@class, ' topic/tgroup ')]"/>
+          <xsl:call-template name="table-groups"/>
           <xsl:if test="not(@caption = 'top')"><xsl:apply-templates
               select="*[contains(@class, ' topic/title ')]"
               mode="table-caption"
@@ -68,11 +69,76 @@
             select="*[contains(@class, ' topic/title ')]"
             mode="table-caption"
           /></xsl:if>
-        <xsl:apply-templates select="*[contains(@class, ' topic/tgroup ')]"/>
+        <xsl:call-template name="table-groups"/>
         <xsl:if test="not(@caption = 'top')"><xsl:apply-templates
             select="*[contains(@class, ' topic/title ')]"
             mode="table-caption"
           /></xsl:if>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <!-- card="yes" / table-card: round the corners and add a border like a card -->
+  <xsl:template name="table-groups">
+    <xsl:choose>
+      <xsl:when test="@card = 'yes' or tokenize(@outputclass, ' ') = 'table-card'">
+        <xsl:variable name="radius">
+          <xsl:call-template name="get-accordion-radius"/>
+        </xsl:variable>
+        <fo:table table-layout="fixed" width="100%">
+          <fo:table-column column-width="proportional-column-width(1)"/>
+          <fo:table-body>
+            <fo:table-row>
+              <fo:table-cell>
+                <fo:block-container position="relative" start-indent="0pt" end-indent="0pt" overflow="hidden">
+                  <xsl:attribute
+                    name="border"
+                    select="concat($bootstrap-border-width, ' solid ', $bootstrap-border-color)"
+                  />
+                  <xsl:if test="string($radius) != ''">
+                    <xsl:attribute name="fox:border-radius" select="string($radius)"/>
+                  </xsl:if>
+                  <xsl:apply-templates select="*[contains(@class, ' topic/tgroup ')]"/>
+                  <xsl:if test="string($radius) != ''">
+                    <xsl:call-template name="corner-mask">
+                      <xsl:with-param name="corner" select="'tl'"/>
+                      <xsl:with-param name="radius" select="string($radius)"/>
+                      <xsl:with-param name="plain" select="true()"/>
+                    </xsl:call-template>
+                    <xsl:call-template name="corner-mask">
+                      <xsl:with-param name="corner" select="'tr'"/>
+                      <xsl:with-param name="radius" select="string($radius)"/>
+                      <xsl:with-param name="plain" select="true()"/>
+                    </xsl:call-template>
+                    <xsl:if test="number(substring-before(concat($bootstrap-border-width, 'pt'), 'pt')) = 0">
+                      <fo:block-container height="0pt" position="relative" overflow="visible">
+                        <xsl:variable
+                          name="bottom"
+                          select="concat('-', substring-before(concat($radius, 'pt'), 'pt'), 'pt')"
+                        />
+                        <xsl:call-template name="corner-mask">
+                          <xsl:with-param name="corner" select="'bl'"/>
+                          <xsl:with-param name="radius" select="string($radius)"/>
+                      <xsl:with-param name="plain" select="true()"/>
+                          <xsl:with-param name="top" select="$bottom"/>
+                        </xsl:call-template>
+                        <xsl:call-template name="corner-mask">
+                          <xsl:with-param name="corner" select="'br'"/>
+                          <xsl:with-param name="radius" select="string($radius)"/>
+                      <xsl:with-param name="plain" select="true()"/>
+                          <xsl:with-param name="top" select="$bottom"/>
+                        </xsl:call-template>
+                      </fo:block-container>
+                    </xsl:if>
+                  </xsl:if>
+                </fo:block-container>
+              </fo:table-cell>
+            </fo:table-row>
+          </fo:table-body>
+        </fo:table>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates select="*[contains(@class, ' topic/tgroup ')]"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -102,6 +168,10 @@
       <xsl:call-template name="bootstrap.decoration">
            <xsl:with-param name="node" select="parent::*"/>
       </xsl:call-template>
+      <xsl:if test="parent::*[@card = 'yes' or tokenize(@outputclass, ' ') = 'table-card']">
+        <xsl:attribute name="space-before">0pt</xsl:attribute>
+        <xsl:attribute name="space-after">0pt</xsl:attribute>
+      </xsl:if>
       <xsl:apply-templates/>
     </fo:table>
   </xsl:template>

@@ -132,10 +132,13 @@
     <xsl:param name="radius"/>
     <xsl:param name="top" select="''"/>
     <xsl:param name="left" select="''"/>
+    <xsl:param name="plain" select="false()"/>
     <xsl:variable name="glow">
-      <xsl:call-template name="glow-color">
-        <xsl:with-param name="theme"><xsl:call-template name="get-theme-color"/></xsl:with-param>
-      </xsl:call-template>
+      <xsl:if test="not($plain)">
+        <xsl:call-template name="glow-color">
+          <xsl:with-param name="theme"><xsl:call-template name="get-theme-color"/></xsl:with-param>
+        </xsl:call-template>
+      </xsl:if>
     </xsl:variable>
     <xsl:variable name="is-top" select="$corner = 'tl' or $corner = 'tr'"/>
     <xsl:variable name="is-left" select="$corner = 'tl' or $corner = 'bl'"/>
