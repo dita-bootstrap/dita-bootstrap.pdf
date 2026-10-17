@@ -35,7 +35,7 @@
     <xsl:sequence
       select="
       if (not($cell/self::*[contains(@class, ' bootstrap-d/grid-col ') or exists(tokenize(@outputclass, ' ')[starts-with(., 'col') or contains(., ':col')])])) then 12
-      else if ($cell/@colspan) then xs:integer($cell/@colspan)
+      else if ($cell/@colspan castable as xs:integer) then xs:integer($cell/@colspan)
       else if (normalize-space($parsed-span)) then xs:integer($parsed-span)
       else if (normalize-space($row-cols)) then max((1, 12 idiv xs:integer($row-cols)))
       else max((1, 12 idiv $col-count))"

@@ -49,16 +49,50 @@
           <xsl:apply-templates
             select="*[not(contains(@class, ' topic/tgroup ')) and not(contains(@class, ' topic/title '))]"
           />
+          <xsl:if test="@caption = 'top'"><xsl:apply-templates
+              select="*[contains(@class, ' topic/title ')]"
+              mode="table-caption"
+            /></xsl:if>
           <xsl:apply-templates select="*[contains(@class, ' topic/tgroup ')]"/>
+          <xsl:if test="not(@caption = 'top')"><xsl:apply-templates
+              select="*[contains(@class, ' topic/title ')]"
+              mode="table-caption"
+            /></xsl:if>
         </fo:block>
       </xsl:when>
       <xsl:otherwise>
         <xsl:apply-templates
           select="*[not(contains(@class, ' topic/tgroup ')) and not(contains(@class, ' topic/title '))]"
         />
+        <xsl:if test="@caption = 'top'"><xsl:apply-templates
+            select="*[contains(@class, ' topic/title ')]"
+            mode="table-caption"
+          /></xsl:if>
         <xsl:apply-templates select="*[contains(@class, ' topic/tgroup ')]"/>
+        <xsl:if test="not(@caption = 'top')"><xsl:apply-templates
+            select="*[contains(@class, ' topic/title ')]"
+            mode="table-caption"
+          /></xsl:if>
       </xsl:otherwise>
     </xsl:choose>
+  </xsl:template>
+
+  <xsl:template match="*[contains(@class, ' topic/table ')]/*[contains(@class, ' topic/title ')]" mode="table-caption">
+    <fo:block xsl:use-attribute-sets="table.title">
+      <xsl:call-template name="commonattributes"/>
+      <xsl:if test="not(../@caption = 'top')">
+        <xsl:attribute name="keep-with-next.within-column">auto</xsl:attribute>
+        <xsl:attribute name="keep-with-previous.within-column">always</xsl:attribute>
+      </xsl:if>
+      <xsl:apply-templates select="." mode="customTitleAnchor"/>
+      <xsl:call-template name="getVariable">
+        <xsl:with-param name="id" select="'Table.title'"/>
+        <xsl:with-param name="params">
+          <number><xsl:apply-templates select="." mode="table.title-number"/></number>
+          <title><xsl:apply-templates/></title>
+        </xsl:with-param>
+      </xsl:call-template>
+    </fo:block>
   </xsl:template>
 
   <xsl:template match="*[contains(@class, ' topic/tgroup ')]" priority="5">
@@ -140,6 +174,13 @@
 
       <xsl:apply-templates/>
     </fo:table-row>
+  </xsl:template>
+
+  <xsl:template match="*[contains(@class, ' topic/tfoot ')]" priority="5">
+    <fo:table-body>
+      <xsl:call-template name="commonattributes"/>
+      <xsl:apply-templates/>
+    </fo:table-body>
   </xsl:template>
 
   <xsl:template match="*[contains(@class, ' topic/tfoot ')]/*[contains(@class, ' topic/row ')]" priority="5">

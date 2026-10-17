@@ -27,7 +27,7 @@
   <xsl:function name="dita-ot:on-surface" as="xs:boolean">
     <xsl:param name="node" as="node()"/>
     <xsl:sequence
-      select="(string($bootstrap-surface-bg) != '' or string($bootstrap-surface-image) != '') and exists($node/ancestor::*[
+      select="(string($bootstrap-surface-bg) != '' or string($bootstrap-surface-image) != '') and not($node/ancestor-or-self::*[contains(@class, ' pr-d/codeblock ')]) and exists($node/ancestor::*[
         contains(@class, ' bootstrap-d/card ') or
         ((contains(@class, ' bootstrap-d/accordion ') or contains(@class, ' bootstrap-d/list-group ') or tokenize(@outputclass, ' ') = ('accordion', 'list-group')) and not(@flush = 'yes' or tokenize(@outputclass, ' ') = ('accordion-flush', 'list-group-flush'))) or
         tokenize(@outputclass, ' ') = 'card' or

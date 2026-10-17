@@ -41,6 +41,99 @@
         </xsl:if>
       </xsl:variable>
 
+      <xsl:variable name="is-small" select="@size = 'small' or tokenize(@outputclass, ' ') = 'accordion-sm'"/>
+      <xsl:variable
+          name="is-gap"
+          select="not($is-flush) and (@gap = 'yes' or tokenize(@outputclass, ' ') = 'accordion-gap')"
+        />
+      <xsl:call-template name="accordion-frames">
+        <xsl:with-param name="items" select="*[contains(@class, ' topic/section ')]"/>
+        <xsl:with-param name="is-flush" select="$is-flush"/>
+        <xsl:with-param name="is-gap" select="$is-gap"/>
+        <xsl:with-param name="accordion-radius" select="string($accordion-radius)"/>
+        <xsl:with-param name="glow-theme" select="string($glow-theme)"/>
+      </xsl:call-template>
+    </fo:block>
+    </xsl:variable>
+    <xsl:choose>
+      <xsl:when
+        test="not(@flush = 'yes' or tokenize(@outputclass, ' ') = 'accordion-flush') and (@gap = 'yes' or tokenize(@outputclass, ' ') = 'accordion-gap')"
+      >
+        <xsl:copy-of select="$glow-out"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:call-template name="apply-glow-wrapper">
+          <xsl:with-param name="inner" select="$glow-out"/>
+          <xsl:with-param name="color">
+            <xsl:if test="not(@flush = 'yes' or tokenize(@outputclass, ' ') = 'accordion-flush')">
+              <xsl:call-template name="glow-color"><xsl:with-param
+                  name="theme"
+                  select="$glow-theme"
+                /></xsl:call-template>
+            </xsl:if>
+          </xsl:with-param>
+        </xsl:call-template>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <!-- Gap mode renders each item as its own framed card, otherwise all items share one frame -->
+  <xsl:template name="accordion-frames">
+    <xsl:param name="items"/>
+    <xsl:param name="is-flush"/>
+    <xsl:param name="is-gap"/>
+    <xsl:param name="accordion-radius"/>
+    <xsl:param name="glow-theme"/>
+    <xsl:choose>
+      <xsl:when test="$is-gap">
+        <xsl:if test="exists($items)">
+          <xsl:variable name="item-out">
+            <fo:block>
+              <xsl:call-template name="accordion-frame">
+                <xsl:with-param name="items" select="$items[1]"/>
+                <xsl:with-param name="is-flush" select="$is-flush"/>
+                <xsl:with-param name="accordion-radius" select="$accordion-radius"/>
+                <xsl:with-param name="glow-theme" select="$glow-theme"/>
+              </xsl:call-template>
+            </fo:block>
+          </xsl:variable>
+          <xsl:call-template name="apply-glow-wrapper">
+            <xsl:with-param name="inner" select="$item-out"/>
+            <xsl:with-param name="color">
+              <xsl:call-template name="glow-color"><xsl:with-param
+                  name="theme"
+                  select="$glow-theme"
+                /></xsl:call-template>
+            </xsl:with-param>
+          </xsl:call-template>
+          <xsl:if test="count($items) gt 1">
+            <fo:block-container height="6pt"><fo:block/></fo:block-container>
+          </xsl:if>
+          <xsl:call-template name="accordion-frames">
+            <xsl:with-param name="items" select="$items[position() gt 1]"/>
+            <xsl:with-param name="is-flush" select="$is-flush"/>
+            <xsl:with-param name="is-gap" select="$is-gap"/>
+            <xsl:with-param name="accordion-radius" select="$accordion-radius"/>
+            <xsl:with-param name="glow-theme" select="$glow-theme"/>
+          </xsl:call-template>
+        </xsl:if>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:call-template name="accordion-frame">
+          <xsl:with-param name="items" select="$items"/>
+          <xsl:with-param name="is-flush" select="$is-flush"/>
+          <xsl:with-param name="accordion-radius" select="$accordion-radius"/>
+          <xsl:with-param name="glow-theme" select="$glow-theme"/>
+        </xsl:call-template>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template name="accordion-frame">
+    <xsl:param name="items"/>
+    <xsl:param name="is-flush"/>
+    <xsl:param name="accordion-radius"/>
+    <xsl:param name="glow-theme"/>
       <!-- table-cell wrapper: gives the masked container correct ancestor-padding inset
            while keeping its own start-indent/end-indent at a literal 0pt (like card.xsl) -->
       <!-- keep-together: fragmenting across a page break drops the border/mask entirely -->
@@ -71,14 +164,14 @@
                         <xsl:attribute name="border-color">
                            <xsl:call-template name="getBootstrapAttrValue">
                               <xsl:with-param
-                          name="attrSet"
-                          select="concat('border-', replace($glow-theme, '-.*$', ''))"
-                        />
+                      name="attrSet"
+                      select="concat('border-', replace($glow-theme, '-.*$', ''))"
+                    />
                               <xsl:with-param name="attrName" select="'border-color'"/>
                            </xsl:call-template>
                         </xsl:attribute>
                      </xsl:if>
-                     <xsl:apply-templates select="*[contains(@class, ' topic/section ')]" mode="accordion"/>
+                     <xsl:apply-templates select="$items" mode="accordion"/>
                      <xsl:if test="not($is-flush) and $accordion-radius != ''">
                         <xsl:call-template name="corner-mask">
                            <xsl:with-param name="corner" select="'tl'"/>
@@ -94,17 +187,6 @@
             </fo:table-row>
          </fo:table-body>
       </fo:table>
-    </fo:block>
-    </xsl:variable>
-    <xsl:call-template name="apply-glow-wrapper">
-      <xsl:with-param name="inner" select="$glow-out"/>
-      <xsl:with-param name="color">
-        <xsl:if test="not(@flush = 'yes' or tokenize(@outputclass, ' ') = 'accordion-flush')">
-          <xsl:call-template name="glow-color"><xsl:with-param name="theme" select="$glow-theme"/></xsl:call-template>
-        </xsl:if>
-      </xsl:with-param>
-
-    </xsl:call-template>
   </xsl:template>
 
   <!-- Corner radius for the accordion's outer frame; themes can override (see sketchy) -->
@@ -131,8 +213,13 @@
     </xsl:variable>
     
     <xsl:variable name="is-flush" select="../@flush = 'yes' or tokenize(../@outputclass, ' ') = 'accordion-flush'"/>
+    <xsl:variable name="is-small" select="../@size = 'small' or tokenize(../@outputclass, ' ') = 'accordion-sm'"/>
+    <xsl:variable name="cell-padding" select="if ($is-small) then '5pt 10pt' else '10pt 15pt'"/>
 
     <fo:table table-layout="fixed" width="100%">
+      <xsl:if test="$is-small">
+        <xsl:attribute name="font-size">90%</xsl:attribute>
+      </xsl:if>
       <xsl:attribute name="border-bottom">
         <xsl:value-of
           select="concat($bootstrap-border-width, ' solid ', if (not($is-flush) and string($bootstrap-surface-border) != '') then $bootstrap-surface-border else $bootstrap-border-color)"
@@ -149,7 +236,7 @@
       <fo:table-body>
         <!-- Accordion Header -->
         <fo:table-row>
-          <fo:table-cell padding="10pt 15pt">
+          <fo:table-cell padding="{$cell-padding}">
             <xsl:call-template name="processBootstrapDirection"/>
             <xsl:choose>
                <xsl:when
@@ -197,7 +284,7 @@
 
         <!-- Accordion Body -->
         <fo:table-row>
-          <fo:table-cell padding="10pt 15pt">
+          <fo:table-cell padding="{$cell-padding}">
             <xsl:call-template name="processBootstrapDirection"/>
             <fo:block>
                <xsl:apply-templates select="node() except *[contains(@class, ' topic/title ')]"/>

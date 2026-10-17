@@ -558,7 +558,7 @@
   <!-- Card Images (Ensure 100% width scaling within the row) -->
   <xsl:template
     match="*[self::card or contains(@class, ' bootstrap-d/card ') or (tokenize(@outputclass, ' ') = 'card' and (contains(@class, ' topic/section ') or contains(@class, ' topic/div ') or contains(@class, ' topic/bodydiv ')))]//*[self::image or contains(@class, ' topic/image ')]"
-    priority="5"
+    priority="6"
   >
     <fo:block text-align="center">
       <xsl:call-template name="processBootstrapDirection"/>
