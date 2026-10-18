@@ -25,6 +25,7 @@
       <param name="args.rellinks" value="none"/>
       <param name="nav-toc" value="collapsible"/>
       <param name="processing-mode" value="strict"/>
+      <param name="bootstrap.css.figure" value="p-3"/>
       <param name="icons.include" value="yes"/>
       <param name="popovers.include" value="yes"/>
       <param name="dark.mode.include" value="yes"/>

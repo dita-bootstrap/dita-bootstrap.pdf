@@ -13,6 +13,7 @@
     <publication transtype="pdf">
       <param name="args.rellinks" value="none"/>
       <param name="processing-mode" value="strict"/>
+      <param name="bootstrap.css.figure" value="p-3"/>
     </publication>
   </deliverable>
 </project>
