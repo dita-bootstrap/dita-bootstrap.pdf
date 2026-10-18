@@ -45,15 +45,18 @@
       element.setAttribute('aria-pressed', 'false');
     });
 
-    btnToActive.classList.add('selected');
-    btnToActive.classList.add('active');
-    btnToActive.setAttribute('aria-pressed', 'true');
+    if (btnToActive) {
+      btnToActive.classList.add('selected');
+      btnToActive.classList.add('active');
+      btnToActive.setAttribute('aria-pressed', 'true');
+    }
 
     document.querySelectorAll('i[data-bs-theme]').forEach(element => {
       element.classList.add('d-none');
     });
-    activeThemeIcon.classList.remove('d-none');
-
+    if (activeThemeIcon) {
+      activeThemeIcon.classList.remove('d-none');
+    }
 
     if (focus) {
       themeSwitcher.focus();
