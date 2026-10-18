@@ -236,11 +236,45 @@
           <xsl:with-param name="side" select="'end'"/>
         </xsl:call-template>
       </xsl:variable>
-      <xsl:if test="number($ancestorStartPad) > 0">
-        <xsl:attribute name="start-indent" select="concat($ancestorStartPad, 'pt + from-parent(start-indent)')"/>
+      <xsl:variable
+        name="inGridCol"
+        select="exists(parent::*[contains(@class, ' bootstrap-d/grid-col ') or exists(tokenize(@outputclass, ' ')[starts-with(., 'col') or contains(., ':col')])])"
+      />
+      <xsl:variable name="ownStartPad" as="xs:double">
+        <xsl:variable name="raw">
+          <xsl:if test="$inGridCol">
+            <xsl:call-template name="get-container-side-padding">
+              <xsl:with-param name="node" select="."/>
+              <xsl:with-param name="side" select="'start'"/>
+            </xsl:call-template>
+          </xsl:if>
+        </xsl:variable>
+        <xsl:variable name="num" select="number(replace(normalize-space($raw), '[^0-9.\-].*$', ''))"/>
+        <xsl:sequence select="if ($num != $num) then 0 else $num"/>
+      </xsl:variable>
+      <xsl:variable name="ownEndPad" as="xs:double">
+        <xsl:variable name="raw">
+          <xsl:if test="$inGridCol">
+            <xsl:call-template name="get-container-side-padding">
+              <xsl:with-param name="node" select="."/>
+              <xsl:with-param name="side" select="'end'"/>
+            </xsl:call-template>
+          </xsl:if>
+        </xsl:variable>
+        <xsl:variable name="num" select="number(replace(normalize-space($raw), '[^0-9.\-].*$', ''))"/>
+        <xsl:sequence select="if ($num != $num) then 0 else $num"/>
+      </xsl:variable>
+      <xsl:if test="number($ancestorStartPad) + $ownStartPad > 0">
+        <xsl:attribute
+          name="start-indent"
+          select="concat(number($ancestorStartPad) + $ownStartPad, 'pt + from-parent(start-indent)')"
+        />
       </xsl:if>
-      <xsl:if test="number($ancestorEndPad) > 0">
-        <xsl:attribute name="end-indent" select="concat($ancestorEndPad, 'pt + from-parent(end-indent)')"/>
+      <xsl:if test="number($ancestorEndPad) + $ownEndPad > 0">
+        <xsl:attribute
+          name="end-indent"
+          select="concat(number($ancestorEndPad) + $ownEndPad, 'pt + from-parent(end-indent)')"
+        />
       </xsl:if>
 
       <xsl:variable name="widthVal">
@@ -541,11 +575,45 @@
           <xsl:with-param name="side" select="'end'"/>
         </xsl:call-template>
       </xsl:variable>
-      <xsl:if test="number($ancestorStartPad) > 0">
-        <xsl:attribute name="start-indent" select="concat($ancestorStartPad, 'pt + from-parent(start-indent)')"/>
+      <xsl:variable
+          name="inGridCol"
+          select="exists(parent::*[contains(@class, ' bootstrap-d/grid-col ') or exists(tokenize(@outputclass, ' ')[starts-with(., 'col') or contains(., ':col')])])"
+        />
+      <xsl:variable name="ownStartPad" as="xs:double">
+        <xsl:variable name="raw">
+          <xsl:if test="$inGridCol">
+            <xsl:call-template name="get-container-side-padding">
+              <xsl:with-param name="node" select="."/>
+              <xsl:with-param name="side" select="'start'"/>
+            </xsl:call-template>
+          </xsl:if>
+        </xsl:variable>
+        <xsl:variable name="num" select="number(replace(normalize-space($raw), '[^0-9.\-].*$', ''))"/>
+        <xsl:sequence select="if ($num != $num) then 0 else $num"/>
+      </xsl:variable>
+      <xsl:variable name="ownEndPad" as="xs:double">
+        <xsl:variable name="raw">
+          <xsl:if test="$inGridCol">
+            <xsl:call-template name="get-container-side-padding">
+              <xsl:with-param name="node" select="."/>
+              <xsl:with-param name="side" select="'end'"/>
+            </xsl:call-template>
+          </xsl:if>
+        </xsl:variable>
+        <xsl:variable name="num" select="number(replace(normalize-space($raw), '[^0-9.\-].*$', ''))"/>
+        <xsl:sequence select="if ($num != $num) then 0 else $num"/>
+      </xsl:variable>
+      <xsl:if test="number($ancestorStartPad) + $ownStartPad > 0">
+        <xsl:attribute
+            name="start-indent"
+            select="concat(number($ancestorStartPad) + $ownStartPad, 'pt + from-parent(start-indent)')"
+          />
       </xsl:if>
-      <xsl:if test="number($ancestorEndPad) > 0">
-        <xsl:attribute name="end-indent" select="concat($ancestorEndPad, 'pt + from-parent(end-indent)')"/>
+      <xsl:if test="number($ancestorEndPad) + $ownEndPad > 0">
+        <xsl:attribute
+            name="end-indent"
+            select="concat(number($ancestorEndPad) + $ownEndPad, 'pt + from-parent(end-indent)')"
+          />
       </xsl:if>
 
       <!-- Ensure the note stays on one page -->

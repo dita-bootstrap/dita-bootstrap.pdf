@@ -242,7 +242,7 @@
             <xsl:attribute name="font-size">11pt</xsl:attribute>
             <xsl:choose>
                <xsl:when test="contains(@outputclass, 'btn-icon')">
-                  <xsl:attribute name="padding">7.5pt 4pt 4.5pt 2pt</xsl:attribute>
+                  <xsl:attribute name="padding">8.9pt 2.8pt 3.1pt 3.2pt</xsl:attribute>
                </xsl:when>
                <xsl:otherwise>
                   <xsl:attribute name="padding">3pt 8pt</xsl:attribute>
