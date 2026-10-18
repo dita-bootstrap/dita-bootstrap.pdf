@@ -93,5 +93,41 @@
         <codeblock><coderef href="code/html/accordion/always-open.xml"/></codeblock>
       </section>
     </tabbed-dialog>
+    <section id="small">
+      <title>Small</title>
+      <p>Set <xmlatt>size="small"</xmlatt> to tighten the padding, border radius and font size.</p>
+    </section>
+<fig>
+      <title>Small</title>
+      <image href="src/accordion/small.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/accordion/small.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/accordion/small.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="gap">
+      <title>Gap</title>
+      <p>Set <xmlatt>gap="yes"</xmlatt> to separate each item into its own rounded card.</p>
+    </section>
+<fig>
+      <title>Gap</title>
+      <image href="src/accordion/gap.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/accordion/gap.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/accordion/gap.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
   </body>
 </topic>

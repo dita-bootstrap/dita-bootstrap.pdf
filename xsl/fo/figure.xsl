@@ -70,6 +70,9 @@
   <!-- Force Scalefit for Images within Figures -->
   <xsl:template match="*[contains(@class, ' topic/fig ')]//*[contains(@class, ' topic/image ')]" priority="5">
     <fo:block text-align="center">
+      <xsl:call-template name="processBootstrapOutputClass">
+        <xsl:with-param name="attrValue" select="@outputclass"/>
+      </xsl:call-template>
       <xsl:variable name="resolved-href">
         <xsl:choose>
           <xsl:when test="@scope = 'external' or opentopic-func:isAbsolute(@href)">
@@ -116,6 +119,9 @@
         </xsl:otherwise>
       </xsl:choose>
       <xsl:attribute name="margin-top">8pt</xsl:attribute>
+      <xsl:call-template name="processBootstrapOutputClass">
+        <xsl:with-param name="attrValue" select="@outputclass"/>
+      </xsl:call-template>
       <xsl:if
         test="$isBlockquoteFooter and dita-ot:blockquote-filled() and not(../*[contains(@class, ' topic/lq ')][1]/@theme)"
       >

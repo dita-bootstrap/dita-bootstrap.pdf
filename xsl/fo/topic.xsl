@@ -110,6 +110,9 @@
           <xsl:if test="$titleColor != ''">
             <xsl:attribute name="color"><xsl:value-of select="$titleColor"/></xsl:attribute>
           </xsl:if>
+          <xsl:call-template name="processBootstrapOutputClass">
+            <xsl:with-param name="attrValue" select="@outputclass"/>
+          </xsl:call-template>
           <xsl:call-template name="commonattributes"/>
           <xsl:apply-templates/>
         </fo:block>
@@ -186,8 +189,22 @@
       <xsl:call-template name="processBootstrapAttrSetReflection">
           <xsl:with-param name="attrSet" select="'lead'"/>
       </xsl:call-template>
+      <xsl:call-template name="processBootstrapOutputClass">
+          <xsl:with-param name="attrValue" select="@outputclass"/>
+      </xsl:call-template>
       <xsl:call-template name="commonattributes"/>
       <xsl:apply-templates/>
+    </fo:block>
+  </xsl:template>
+
+  <xsl:template match="*[contains(@class, ' topic/example ')]" priority="5">
+    <fo:block xsl:use-attribute-sets="example">
+      <xsl:call-template name="bootstrap.decoration"/>
+      <xsl:call-template name="commonattributes"/>
+      <xsl:apply-templates select="*[contains(@class, ' topic/title ')]"/>
+      <fo:block xsl:use-attribute-sets="example__content">
+        <xsl:apply-templates select="node() except (*[contains(@class, ' topic/title ')])"/>
+      </fo:block>
     </fo:block>
   </xsl:template>
 

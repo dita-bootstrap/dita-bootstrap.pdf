@@ -235,5 +235,62 @@
         <codeblock><coderef href="code/html/tables/table-head-colors.xml"/></codeblock>
       </section>
     </tabbed-dialog>
+    <section id="card-like-tables">
+      <title>Card-like tables</title>
+      <p>Set <xmlatt>card="yes"</xmlatt> on a table to round the corners and add a border like a card.</p>
+    </section>
+<fig>
+      <title>Card-like tables</title>
+      <image href="src/tables/card-like-tables.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/tables/card-like-tables.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/tables/card-like-tables.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="table-footer">
+      <title>Footer</title>
+      <p>Use a <xmlelement>tfoot</xmlelement>, or <xmlatt>outputclass="tfoot"</xmlatt> on a <xmlelement
+        >row</xmlelement> of the <xmlelement
+        >tbody</xmlelement>, to render a bold table footer row below the table body.</p>
+    </section>
+<fig>
+      <title>Footer</title>
+      <image href="src/tables/table-footer.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/tables/table-footer.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/tables/table-footer.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
+    <section id="caption">
+      <title>Caption</title>
+      <p>A table <xmlelement>title</xmlelement> renders as the caption, below the table by default. Set <xmlatt
+        >caption="top"</xmlatt> to move it above.</p>
+    </section>
+<fig>
+      <title>Caption</title>
+      <image href="src/tables/caption.png" scalefit="yes"/>
+    </fig>
+    <tabbed-dialog style="pills" margin="t3">
+      <section>
+        <title>Specialization</title>
+        <codeblock><coderef href="code/specialization/tables/caption.xml"/></codeblock>
+      </section>
+      <section>
+        <title><xmlatt>outputclass</xmlatt></title>
+        <codeblock><coderef href="code/html/tables/caption.xml"/></codeblock>
+      </section>
+    </tabbed-dialog>
   </body>
 </topic>

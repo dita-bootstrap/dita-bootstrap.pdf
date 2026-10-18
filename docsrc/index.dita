@@ -514,5 +514,128 @@
         </carousel-item>
       </carousel>
     </section>
+    <section id="bootstrap-component-utility-classes">
+      <title>Bootstrap component utility classes</title>
+      <indexterm><parmname>--bootstrap.css.card</parmname></indexterm>
+      <p>The PDF output for Bootstrap cards can be annotated with common Bootstrap utility classes for
+        <xref href="https://getbootstrap.com/docs/6.0/utilities/borders" format="html" scope="external">borders</xref>,
+        <xref
+          href="https://getbootstrap.com/docs/6.0/utilities/background"
+          format="html"
+          scope="external"
+        >background</xref>,
+        <xref href="https://getbootstrap.com/docs/6.0/utilities/text" format="html" scope="external">text</xref>,
+        <xref href="https://getbootstrap.com/docs/6.0/utilities/spacing" format="html" scope="external">spacing</xref>,
+        etc. using additional command line parameters:</p>
+      <parml otherprops="cols(4)">
+        <plentry>
+          <pt>
+            <parmname>--bootstrap.css&#8203;.card</parmname>
+          </pt>
+          <pd>
+            Common utility classes for Bootstrap <xref href="./card.dita" format="dita">card components</xref>
+          </pd>
+        </plentry>
+      </parml>
+    </section>
+    <section id="dita-element-utility-classes">
+      <title>DITA element utility classes</title>
+      <indexterm><parmname>--bootstrap.css.codeblock</parmname></indexterm>
+      <indexterm><parmname>--bootstrap.css.example</parmname></indexterm>
+      <indexterm><parmname>--bootstrap.css.figure</parmname></indexterm>
+      <indexterm><parmname>--bootstrap.css.figure.caption</parmname></indexterm>
+      <indexterm><parmname>--bootstrap.css.figure.image</parmname></indexterm>
+      <indexterm><parmname>--bootstrap.css.section.title</parmname></indexterm>
+      <indexterm><parmname>--bootstrap.css.shortdesc</parmname></indexterm>
+      <indexterm><parmname>--bootstrap.css.table</parmname></indexterm>
+      <indexterm><parmname>--bootstrap.css.thead</parmname></indexterm>
+      <p>The PDF output for the following DITA elements can be annotated with common Bootstrap utility classes for
+        <xref href="https://getbootstrap.com/docs/6.0/utilities/borders" format="html" scope="external">borders</xref>,
+        <xref
+          href="https://getbootstrap.com/docs/6.0/utilities/background"
+          format="html"
+          scope="external"
+        >background</xref>,
+        <xref href="https://getbootstrap.com/docs/6.0/utilities/text" format="html" scope="external">text</xref>,
+        <xref href="https://getbootstrap.com/docs/6.0/utilities/spacing" format="html" scope="external">spacing</xref>,
+        etc. using additional command line parameters:</p>
+      <parml otherprops="cols(4)">
+        <plentry>
+          <pt>
+            <parmname>--bootstrap.css&#8203;.codeblock</parmname>
+          </pt>
+          <pd>
+            Common Bootstrap utility classes for DITA <xmlelement>codeblock</xmlelement> elements
+          </pd>
+        </plentry>
+        <plentry>
+          <pt>
+            <parmname>--bootstrap.css&#8203;.example</parmname>
+          </pt>
+          <pd>
+            Common Bootstrap utility classes for DITA <xmlelement>example</xmlelement> elements
+          </pd>
+        </plentry>
+        <plentry>
+          <pt>
+            <parmname>--bootstrap.css&#8203;.figure</parmname>
+          </pt>
+          <pd>
+            Common Bootstrap utility classes for DITA <xmlelement>fig</xmlelement> elements
+          </pd>
+        </plentry>
+        <plentry>
+          <pt>
+            <parmname>--bootstrap.css&#8203;.figure.caption</parmname>
+          </pt>
+          <pd>
+            Common Bootstrap utility classes for DITA <xmlelement>title</xmlelement> elements within <xmlelement
+            >fig</xmlelement> elements
+          </pd>
+        </plentry>
+        <plentry>
+          <pt>
+            <parmname>--bootstrap.css&#8203;.figure.image</parmname>
+          </pt>
+          <pd>
+            Common Bootstrap utility classes for DITA <xmlelement>image</xmlelement> elements within <xmlelement
+            >fig</xmlelement> elements
+          </pd>
+        </plentry>
+        <plentry>
+          <pt>
+            <parmname>--bootstrap.css&#8203;.section.title</parmname>
+          </pt>
+          <pd>
+            Common Bootstrap utility classes for DITA <xmlelement>title</xmlelement> elements within <xmlelement
+            >section</xmlelement> elements
+          </pd>
+        </plentry>
+        <plentry>
+          <pt>
+            <parmname>--bootstrap.css&#8203;.shortdesc</parmname>
+          </pt>
+          <pd>
+            Common Bootstrap utility classes for DITA <xmlelement>shortdesc</xmlelement> elements
+          </pd>
+        </plentry>
+        <plentry>
+          <pt>
+            <parmname>--bootstrap.css&#8203;.table</parmname>
+          </pt>
+          <pd>
+            Common Bootstrap utility classes for DITA <xmlelement>table</xmlelement> elements
+          </pd>
+        </plentry>
+        <plentry>
+          <pt>
+            <parmname>--bootstrap.css&#8203;.thead</parmname>
+          </pt>
+          <pd>
+            Common Bootstrap utility classes for DITA <xmlelement>thead</xmlelement> elements
+          </pd>
+        </plentry>
+      </parml>
+    </section>
   </body>
 </topic>

@@ -50,12 +50,12 @@
           <xsl:apply-templates
             select="*[not(contains(@class, ' topic/tgroup ')) and not(contains(@class, ' topic/title '))]"
           />
-          <xsl:if test="@caption = 'top'"><xsl:apply-templates
+          <xsl:if test="@caption = 'top' or tokenize(@outputclass, ' ') = 'caption-top'"><xsl:apply-templates
               select="*[contains(@class, ' topic/title ')]"
               mode="table-caption"
             /></xsl:if>
           <xsl:call-template name="table-groups"/>
-          <xsl:if test="not(@caption = 'top')"><xsl:apply-templates
+          <xsl:if test="not(@caption = 'top' or tokenize(@outputclass, ' ') = 'caption-top')"><xsl:apply-templates
               select="*[contains(@class, ' topic/title ')]"
               mode="table-caption"
             /></xsl:if>
@@ -65,12 +65,12 @@
         <xsl:apply-templates
           select="*[not(contains(@class, ' topic/tgroup ')) and not(contains(@class, ' topic/title '))]"
         />
-        <xsl:if test="@caption = 'top'"><xsl:apply-templates
+        <xsl:if test="@caption = 'top' or tokenize(@outputclass, ' ') = 'caption-top'"><xsl:apply-templates
             select="*[contains(@class, ' topic/title ')]"
             mode="table-caption"
           /></xsl:if>
         <xsl:call-template name="table-groups"/>
-        <xsl:if test="not(@caption = 'top')"><xsl:apply-templates
+        <xsl:if test="not(@caption = 'top' or tokenize(@outputclass, ' ') = 'caption-top')"><xsl:apply-templates
             select="*[contains(@class, ' topic/title ')]"
             mode="table-caption"
           /></xsl:if>
@@ -164,7 +164,7 @@
   <xsl:template match="*[contains(@class, ' topic/table ')]/*[contains(@class, ' topic/title ')]" mode="table-caption">
     <fo:block xsl:use-attribute-sets="table.title">
       <xsl:call-template name="commonattributes"/>
-      <xsl:if test="not(../@caption = 'top')">
+      <xsl:if test="not(../@caption = 'top' or tokenize(../@outputclass, ' ') = 'caption-top')">
         <xsl:attribute name="keep-with-next.within-column">auto</xsl:attribute>
         <xsl:attribute name="keep-with-previous.within-column">always</xsl:attribute>
       </xsl:if>
@@ -220,6 +220,13 @@
   <xsl:template match="*[contains(@class, ' topic/tbody ')]/*[contains(@class, ' topic/row ')]" priority="5">
     <fo:table-row xsl:use-attribute-sets="tbody.row">
       <xsl:call-template name="commonattributes"/>
+      <xsl:if test="tokenize(@outputclass, ' ') = 'tfoot'">
+        <xsl:call-template name="get-attributes">
+          <xsl:with-param name="element" as="element()">
+            <placeholder xsl:use-attribute-sets="tfoot.row"/>
+          </xsl:with-param>
+        </xsl:call-template>
+      </xsl:if>
 
       <xsl:variable name="tbody" select="parent::*"/>
       <xsl:variable name="table" select="ancestor::*[contains(@class, ' topic/table ')][1]"/>
@@ -300,7 +307,7 @@
     />
     <xsl:variable
       name="isFooter"
-      select="parent::*[contains(@class, ' topic/row ')]/parent::*[contains(@class, ' topic/tfoot ')]"
+      select="parent::*[contains(@class, ' topic/row ')]/parent::*[contains(@class, ' topic/tfoot ')] or tokenize(parent::*/@outputclass, ' ') = 'tfoot'"
     />
     <xsl:variable name="table" select="ancestor::*[contains(@class, ' topic/table ')][1]"/>
     <xsl:variable name="tableTheme" select="$table/@theme"/>
@@ -363,6 +370,15 @@
         <xsl:attribute name="border-top-width">2pt</xsl:attribute>
       </xsl:if>
       
+      <xsl:if test="$isFooter">
+        <xsl:attribute name="font-weight">bold</xsl:attribute>
+        <xsl:if test="not(parent::*/preceding-sibling::*[contains(@class, ' topic/row ')])">
+          <xsl:attribute name="border-top-width">2pt</xsl:attribute>
+          <xsl:attribute name="border-top-style">solid</xsl:attribute>
+          <xsl:attribute name="border-top-color" select="$bootstrap-body-color"/>
+        </xsl:if>
+      </xsl:if>
+
       <!-- Entry-specific background overrides -->
       <xsl:choose>
         <!-- Column Striping (applied if cell has no theme color) -->
