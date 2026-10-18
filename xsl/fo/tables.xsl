@@ -130,6 +130,24 @@
                         </xsl:call-template>
                       </fo:block-container>
                     </xsl:if>
+                    <xsl:if test="number(substring-before(concat($bootstrap-border-width, 'pt'), 'pt')) != 0">
+                      <fo:block-container
+                        height="{$radius}"
+                        margin-top="-{substring-before(concat($radius, 'pt'), 'pt')}pt"
+                        position="relative"
+                      >
+                        <xsl:call-template name="corner-mask">
+                          <xsl:with-param name="corner" select="'bl'"/>
+                          <xsl:with-param name="radius" select="string($radius)"/>
+                          <xsl:with-param name="plain" select="true()"/>
+                        </xsl:call-template>
+                        <xsl:call-template name="corner-mask">
+                          <xsl:with-param name="corner" select="'br'"/>
+                          <xsl:with-param name="radius" select="string($radius)"/>
+                          <xsl:with-param name="plain" select="true()"/>
+                        </xsl:call-template>
+                      </fo:block-container>
+                    </xsl:if>
                   </xsl:if>
                 </fo:block-container>
               </fo:table-cell>
