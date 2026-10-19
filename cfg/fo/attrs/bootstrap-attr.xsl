@@ -16,6 +16,37 @@
   <xsl:import href="default-values.xsl"/>
   <xsl:import href="settings-map.xsl"/>
 
+  <xsl:function name="dita-ot:luminance" as="xs:double">
+    <xsl:param name="hex" as="xs:string"/>
+    <xsl:variable name="h" select="lower-case(replace($hex, '^#', ''))"/>
+    <xsl:variable
+      name="full"
+      select="if (string-length($h) = 3) then string-join(for $c in string-to-codepoints($h) return codepoints-to-string(($c, $c)), '') else $h"
+    />
+    <xsl:variable
+      name="ch"
+      select="for $i in (0, 2, 4) return
+        (string-length(substring-before('0123456789abcdef', substring($full, $i + 1, 1))) * 16 + string-length(substring-before('0123456789abcdef', substring($full, $i + 2, 1)))) div 255"
+    />
+    <xsl:variable
+      name="lin"
+      select="for $c in $ch return if ($c le 0.03928) then $c div 12.92 else math:pow(($c + 0.055) div 1.055, 2.4)"
+      xmlns:math="http://www.w3.org/2005/xpath-functions/math"
+    />
+    <xsl:sequence select="0.2126 * $lin[1] + 0.7152 * $lin[2] + 0.0722 * $lin[3]"/>
+  </xsl:function>
+
+  <xsl:function name="dita-ot:readable-on" as="xs:string">
+    <xsl:param name="bg" as="xs:string"/>
+    <xsl:param name="preferred" as="xs:string"/>
+    <xsl:variable name="lb" select="dita-ot:luminance($bg)"/>
+    <xsl:variable name="lp" select="dita-ot:luminance($preferred)"/>
+    <xsl:sequence
+      select="if ((max(($lb, $lp)) + 0.05) div (min(($lb, $lp)) + 0.05) ge 3) then $preferred
+              else if ($lb lt 0.4) then '#ffffff' else '#171a1d'"
+    />
+  </xsl:function>
+
   <xsl:function name="dita-ot:on-solid-alert" as="xs:boolean">
     <xsl:param name="node" as="node()"/>
     <xsl:sequence
@@ -150,7 +181,10 @@
             select="if (contains($contextTheme, '-')) then substring-after($contextTheme, '-') else ''"
           />
           <xsl:choose>
-            <xsl:when test="$contextColor = '' or contains($contextSuffix, 'border')">
+            <xsl:when
+              test="exists(ancestor::*[contains(@class, ' topic/note ') or contains(@class, ' bootstrap-d/alert ') or tokenize(@outputclass, ' ') = 'alert'])"
+            >inherit</xsl:when>
+            <xsl:when test="$contextColor = '' or $contextSuffix = 'border'">
               <xsl:value-of select="$bootstrap-link"/>
             </xsl:when>
             <xsl:when
@@ -218,7 +252,7 @@
   </xsl:attribute-set>
   <xsl:attribute-set name="__bg__secondary">
     <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-secondary"/></xsl:attribute>
-    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-btn-secondary-color"/></xsl:attribute>
+    <xsl:attribute name="color"><xsl:value-of select="$bootstrap-secondary-on-bg"/></xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="__bg__success">
     <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-success"/></xsl:attribute>

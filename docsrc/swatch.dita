@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
+<topic id="swatch">
+  <title>Swatch</title>
+  <shortdesc>A single-page tour of the components that have PDF equivalents, in the style of a Bootswatch theme
+    preview.</shortdesc>
+  <body outputclass="language-markup">
+    <section id="typography">
+      <title>Typography</title>
+      <title outputclass="h1">h1. Heading</title>
+      <title outputclass="h2">h2. Heading</title>
+      <title outputclass="h3">h3. Heading</title>
+      <title outputclass="h4">h4. Heading</title>
+      <title outputclass="h5">h5. Heading</title>
+      <title outputclass="h6">h6. Heading</title>
+      <p outputclass="fw-light fs-lg">This is a lead paragraph. It stands out from regular paragraphs.</p>
+      <p>You can use the mark tag to <ph outputclass="mark">highlight</ph> text, <line-through
+        >deleted text</line-through>,
+        <u>underlined text</u>, <i>italic text</i> and <b>bold text</b>. This is a
+        <xref href="#">default link</xref>.</p>
+    </section>
+
+    <section id="buttons">
+      <title>Buttons</title>
+    </section>
+      <p>Solid</p>
+      <p>
+          <button href="#" theme="primary">Primary</button>
+          <button href="#" theme="secondary">Secondary</button>
+          <button href="#" theme="success">Success</button>
+          <button href="#" theme="danger">Danger</button>
+          <button href="#" theme="warning">Warning</button>
+          <button href="#" theme="info">Info</button>
+          <button href="#" theme="inverse">Inverse</button>
+      </p>
+      <p>Outline</p>
+      <p>
+          <button href="#" theme="primary-outline">Primary</button>
+          <button href="#" theme="secondary-outline">Secondary</button>
+          <button href="#" theme="success-outline">Success</button>
+          <button href="#" theme="danger-outline">Danger</button>
+          <button href="#" theme="warning-outline">Warning</button>
+          <button href="#" theme="info-outline">Info</button>
+          <button href="#" theme="inverse-outline">Inverse</button>
+      </p>
+      <p>Subtle</p>
+      <p>
+          <button href="#" theme="primary-subtle">Primary</button>
+          <button href="#" theme="secondary-subtle">Secondary</button>
+          <button href="#" theme="success-subtle">Success</button>
+          <button href="#" theme="danger-subtle">Danger</button>
+          <button href="#" theme="warning-subtle">Warning</button>
+          <button href="#" theme="info-subtle">Info</button>
+          <button href="#" theme="inverse-subtle">Inverse</button>
+      </p>
+      <p>Text</p>
+      <p>
+          <button href="#" theme="primary-text">Primary</button>
+          <button href="#" theme="secondary-text">Secondary</button>
+          <button href="#" theme="success-text">Success</button>
+          <button href="#" theme="danger-text">Danger</button>
+          <button href="#" theme="warning-text">Warning</button>
+          <button href="#" theme="info-text">Info</button>
+          <button href="#" theme="inverse-text">Inverse</button>
+      </p>
+      <p>Sizes</p>
+      <p>
+        <button href="#" theme="primary" size="large">Large button</button>
+        <button href="#" theme="primary">Default button</button>
+        <button href="#" theme="primary" size="small">Small button</button>
+      </p>
+      <p>Button group</p>
+      <button-group>
+        <button theme="primary" href="#">Left</button>
+        <button theme="primary" href="#">Middle</button>
+        <button theme="primary" href="#">Right</button>
+      </button-group>
+
+    <section id="tables">
+      <title>Tables</title>
+    </section>
+      <table striped="yes" frame="all">
+        <tgroup cols="4">
+          <thead>
+            <row>
+              <entry>Type</entry>
+              <entry>Column heading</entry>
+              <entry>Column heading</entry>
+              <entry>Column heading</entry>
+            </row>
+          </thead>
+          <tbody>
+            <row><entry>Default</entry><entry>Column content</entry><entry>Column content</entry><entry
+            >Column content</entry></row>
+            <row theme="primary"><entry>Primary</entry><entry>Column content</entry><entry>Column content</entry><entry
+            >Column content</entry></row>
+            <row theme="secondary"><entry>Secondary</entry><entry>Column content</entry><entry
+            >Column content</entry><entry>Column content</entry></row>
+            <row theme="success"><entry>Success</entry><entry>Column content</entry><entry>Column content</entry><entry
+            >Column content</entry></row>
+            <row theme="danger"><entry>Danger</entry><entry>Column content</entry><entry>Column content</entry><entry
+            >Column content</entry></row>
+            <row theme="warning"><entry>Warning</entry><entry>Column content</entry><entry>Column content</entry><entry
+            >Column content</entry></row>
+            <row theme="info"><entry>Info</entry><entry>Column content</entry><entry>Column content</entry><entry
+            >Column content</entry></row>
+            <row theme="inverse"><entry>Inverse</entry><entry>Column content</entry><entry>Column content</entry><entry
+            >Column content</entry></row>
+          </tbody>
+        </tgroup>
+      </table>
+
+    <section id="alerts">
+      <title>Alerts</title>
+    </section>
+      <alert theme="primary-subtle-border">
+        <p><b>Primary</b> - change a few things up and try submitting again. <xref href="#">Alert link</xref>.</p>
+      </alert>
+      <alert theme="secondary-subtle-border">
+        <p><b>Secondary</b> - change a few things up and try submitting again. <xref href="#">Alert link</xref>.</p>
+      </alert>
+      <alert theme="success-subtle-border">
+        <p><b>Success</b> - change a few things up and try submitting again. <xref href="#">Alert link</xref>.</p>
+      </alert>
+      <alert theme="danger-subtle-border">
+        <p><b>Danger</b> - change a few things up and try submitting again. <xref href="#">Alert link</xref>.</p>
+      </alert>
+      <alert theme="warning-subtle-border">
+        <p><b>Warning</b> - change a few things up and try submitting again. <xref href="#">Alert link</xref>.</p>
+      </alert>
+      <alert theme="info-subtle-border">
+        <p><b>Info</b> - change a few things up and try submitting again. <xref href="#">Alert link</xref>.</p>
+      </alert>
+      <alert theme="inverse-subtle-border">
+        <p><b>Inverse</b> - change a few things up and try submitting again. <xref href="#">Alert link</xref>.</p>
+      </alert>
+
+    <section id="badges">
+      <title>Badges</title>
+    </section>
+      <p>
+          <badge theme="primary">Primary</badge>
+          <badge theme="secondary">Secondary</badge>
+          <badge theme="success">Success</badge>
+          <badge theme="danger">Danger</badge>
+          <badge theme="warning">Warning</badge>
+          <badge theme="info">Info</badge>
+          <badge theme="inverse">Inverse</badge>
+      </p>
+      <p>
+          <badge theme="primary-subtle">Primary</badge>
+          <badge theme="secondary-subtle">Secondary</badge>
+          <badge theme="success-subtle">Success</badge>
+          <badge theme="danger-subtle">Danger</badge>
+          <badge theme="warning-subtle">Warning</badge>
+          <badge theme="info-subtle">Info</badge>
+          <badge theme="inverse-subtle">Inverse</badge>
+      </p>
+
+    <section id="blockquotes">
+      <title>Blockquotes</title>
+    </section>
+      <fig>
+        <title>Someone famous in <cite>Source Title</cite></title>
+        <lq>
+          <p>A well-known quote, contained in a blockquote element.</p>
+        </lq>
+      </fig>
+
+    <section id="indicators">
+      <title>Indicators</title>
+    </section>
+      <stepper>
+        <stepper-item active="yes">Create account</stepper-item>
+        <stepper-item active="yes">Confirm email</stepper-item>
+        <stepper-item>Update profile</stepper-item>
+        <stepper-item>Finish</stepper-item>
+      </stepper>
+      <pagination>
+        <title>Page navigation example</title>
+        <ol>
+          <li><xref href="#">Previous</xref></li>
+          <li><xref href="#">1</xref></li>
+          <li><xref href="#">2</xref></li>
+          <li><xref href="#">3</xref></li>
+          <li><xref href="#">Next</xref></li>
+        </ol>
+      </pagination>
+
+    <section id="list-groups">
+      <title>List groups</title>
+    </section>
+      <list-group>
+        <li>An item</li>
+        <li>A second item</li>
+        <li>A third item</li>
+        <li>A fourth item</li>
+        <li>And a fifth one</li>
+      </list-group>
+
+    <section id="accordion">
+      <title>Accordion</title>
+    </section>
+      <accordion>
+        <accordion-item id="swatch-accordion1" open="yes">
+          <title>Accordion Item #1</title>
+          <p>This is the first item's accordion body. It is shown by default.</p>
+        </accordion-item>
+        <accordion-item id="swatch-accordion2">
+          <title>Accordion Item #2</title>
+          <p>This is the second item's accordion body.</p>
+        </accordion-item>
+      </accordion>
+
+    <section id="cards">
+      <title>Cards</title>
+    </section>
+      <card>
+        <card-header>Header</card-header>
+        <title>Card title</title>
+        <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <button href="#">Go somewhere</button>
+        <card-footer>2 days ago</card-footer>
+      </card>
+          <card theme="primary">
+            <card-header>Primary</card-header>
+            <p>Some quick example text for the card body.</p>
+          </card>
+          <card theme="secondary">
+            <card-header>Secondary</card-header>
+            <p>Some quick example text for the card body.</p>
+          </card>
+          <card theme="success">
+            <card-header>Success</card-header>
+            <p>Some quick example text for the card body.</p>
+          </card>
+          <card theme="danger">
+            <card-header>Danger</card-header>
+            <p>Some quick example text for the card body.</p>
+          </card>
+          <card theme="warning">
+            <card-header>Warning</card-header>
+            <p>Some quick example text for the card body.</p>
+          </card>
+          <card theme="info">
+            <card-header>Info</card-header>
+            <p>Some quick example text for the card body.</p>
+          </card>
+          <card theme="inverse">
+            <card-header>Inverse</card-header>
+            <p>Some quick example text for the card body.</p>
+          </card>
+      <codeblock outputclass="language-cpp"><coderef
+        href="code/specialization/borders/frame-attribute-support.cpp"
+      /></codeblock>
+  </body>
+</topic>

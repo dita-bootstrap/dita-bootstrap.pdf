@@ -209,7 +209,7 @@
             />
             <svg:path
               fill="{if ($glow != '') then dita-ot:mix-white($glow, $glow-alphas[last()]) else 'white'}"
-              d="{if ($border-num = 0) then $arc else concat('M', 1 - $cx, ',', $oy, ' L', $edge-x, ',', $oy, ' L', 1 - $cx, ',', $edge-y, ' Z')}"
+              d="{if ($border-num = 0 or $radius-num gt 12) then $arc else concat('M', 1 - $cx, ',', $oy, ' L', $edge-x, ',', $oy, ' L', 1 - $cx, ',', $edge-y, ' Z')}"
             />
           </svg:svg>
         </fo:instream-foreign-object>
@@ -222,7 +222,11 @@
         <fo:block-container><xsl:call-template name="bootstrap.decoration"/></fo:block-container>
       </xsl:variable>
       <xsl:variable name="card-radius-raw" select="normalize-space($radius-probe/*/@fox:border-radius)"/>
-      <xsl:variable name="card-radius" select="$card-radius-raw"/>
+      <xsl:variable name="card-radius-first" select="tokenize($card-radius-raw, '\s+')[1]"/>
+      <xsl:variable
+      name="card-radius"
+      select="if (ends-with($card-radius-first, 'px')) then concat(number(substring-before($card-radius-first, 'px')) * 0.75, 'pt') else $card-radius-first"
+    />
 
       <fo:block-container xsl:use-attribute-sets="section" position="relative">
         <xsl:call-template name="commonattributes"/>
@@ -506,13 +510,21 @@
             select="number(substring-before(concat($bootstrap-border-width, 'pt'), 'pt'))"
           />
           <fo:block-container height="{$card-radius}" margin-top="-{$strip-radius-num}pt" position="relative">
+            <xsl:variable name="arc-mask" select="$strip-radius-num gt 12"/>
             <xsl:call-template name="corner-mask">
               <xsl:with-param name="corner" select="'bl'"/>
               <xsl:with-param name="radius" select="$card-radius"/>
+              <xsl:with-param name="top" select="if ($arc-mask) then concat($strip-border-num, 'pt') else ''"/>
+              <xsl:with-param name="left" select="if ($arc-mask) then concat('-', $strip-border-num, 'pt') else ''"/>
             </xsl:call-template>
             <xsl:call-template name="corner-mask">
               <xsl:with-param name="corner" select="'br'"/>
               <xsl:with-param name="radius" select="$card-radius"/>
+              <xsl:with-param name="top" select="if ($arc-mask) then concat($strip-border-num, 'pt') else ''"/>
+              <xsl:with-param
+                name="left"
+                select="if ($arc-mask) then concat('100% - ', $strip-radius-num - $strip-border-num, 'pt') else ''"
+              />
             </xsl:call-template>
           </fo:block-container>
         </xsl:if>

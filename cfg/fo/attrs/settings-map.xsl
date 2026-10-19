@@ -3,7 +3,17 @@
 	This file is part of the DITA Bootstrap PDF plug-in for DITA Open Toolkit.
 	See the accompanying LICENSE file for applicable licenses.
 -->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
+<xsl:stylesheet
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:dita-ot="http://dita-ot.sourceforge.net/ns/201007/dita-ot"
+  exclude-result-prefixes="dita-ot"
+  version="2.0"
+>
+
+  <xsl:variable
+    name="bootstrap-secondary-on-bg"
+    select="dita-ot:readable-on($bootstrap-secondary, $bootstrap-btn-secondary-color)"
+  />
 
   <!-- Bootstrap Settings Map for Reflection -->
   <xsl:variable name="bootstrap-settings">
@@ -90,6 +100,7 @@
     <entry name="bootstrap-btn-primary-bg"><xsl:value-of select="$bootstrap-btn-primary-bg"/></entry>
     <entry name="bootstrap-btn-primary-color"><xsl:value-of select="$bootstrap-btn-primary-color"/></entry>
     <entry name="bootstrap-btn-secondary-bg"><xsl:value-of select="$bootstrap-btn-secondary-bg"/></entry>
+    <entry name="bootstrap-secondary-on-bg"><xsl:value-of select="$bootstrap-secondary-on-bg"/></entry>
     <entry name="bootstrap-btn-secondary-color"><xsl:value-of select="$bootstrap-btn-secondary-color"/></entry>
     <entry name="bootstrap-btn-success-bg"><xsl:value-of select="$bootstrap-btn-success-bg"/></entry>
     <entry name="bootstrap-btn-success-color"><xsl:value-of select="$bootstrap-btn-success-color"/></entry>
