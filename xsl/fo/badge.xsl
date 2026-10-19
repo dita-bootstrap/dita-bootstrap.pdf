@@ -90,7 +90,7 @@
       </xsl:if>
 
       <!-- 3. Badge-specific defaults (weights and alignment) -->
-      <xsl:attribute name="font-weight">bold</xsl:attribute>
+      <xsl:attribute name="font-weight" select="$bootstrap-badge-font-weight"/>
       <xsl:attribute name="vertical-align">baseline</xsl:attribute>
 
       <!-- 4. Default Rounding (tighter badge look) if not overridden -->

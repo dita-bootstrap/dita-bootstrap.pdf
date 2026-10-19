@@ -41,10 +41,7 @@
     <xsl:param name="preferred" as="xs:string"/>
     <xsl:variable name="lb" select="dita-ot:luminance($bg)"/>
     <xsl:variable name="lp" select="dita-ot:luminance($preferred)"/>
-    <xsl:sequence
-      select="if ((max(($lb, $lp)) + 0.05) div (min(($lb, $lp)) + 0.05) ge 3) then $preferred
-              else if ($lb lt 0.4) then '#ffffff' else '#171a1d'"
-    />
+    <xsl:sequence select="if ($lb lt 0.2 and $lp lt 0.2) then '#ffffff' else $preferred"/>
   </xsl:function>
 
   <xsl:function name="dita-ot:on-solid-alert" as="xs:boolean">

@@ -251,6 +251,8 @@
           </xsl:otherwise>
         </xsl:choose>
 
+        <xsl:attribute name="font-weight" select="$bootstrap-btn-font-weight"/>
+
         <!-- Override padding if specified -->
         <xsl:if test="@padding">
           <xsl:call-template name="processBootstrapSpacing">

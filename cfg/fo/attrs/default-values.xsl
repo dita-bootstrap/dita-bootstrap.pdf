@@ -93,6 +93,8 @@
   <xsl:variable name="bootstrap-btn-inverse-color">#ffffff</xsl:variable>
 
   <!-- Component-specific: Badges -->
+  <xsl:variable name="bootstrap-badge-font-weight">700</xsl:variable>
+  <xsl:variable name="bootstrap-btn-font-weight">400</xsl:variable>
   <xsl:variable name="bootstrap-badge-default-bg">#f1f2f3</xsl:variable>
   <xsl:variable name="bootstrap-badge-primary-bg">#0087fe</xsl:variable>
   <xsl:variable name="bootstrap-badge-primary-color">#ffffff</xsl:variable>

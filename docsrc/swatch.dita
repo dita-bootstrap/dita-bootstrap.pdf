@@ -33,16 +33,6 @@
           <button href="#" theme="info">Info</button>
           <button href="#" theme="inverse">Inverse</button>
       </p>
-      <p>Outline</p>
-      <p>
-          <button href="#" theme="primary-outline">Primary</button>
-          <button href="#" theme="secondary-outline">Secondary</button>
-          <button href="#" theme="success-outline">Success</button>
-          <button href="#" theme="danger-outline">Danger</button>
-          <button href="#" theme="warning-outline">Warning</button>
-          <button href="#" theme="info-outline">Info</button>
-          <button href="#" theme="inverse-outline">Inverse</button>
-      </p>
       <p>Subtle</p>
       <p>
           <button href="#" theme="primary-subtle">Primary</button>
@@ -52,6 +42,16 @@
           <button href="#" theme="warning-subtle">Warning</button>
           <button href="#" theme="info-subtle">Info</button>
           <button href="#" theme="inverse-subtle">Inverse</button>
+      </p>
+      <p>Outline</p>
+      <p>
+          <button href="#" theme="primary-outline">Primary</button>
+          <button href="#" theme="secondary-outline">Secondary</button>
+          <button href="#" theme="success-outline">Success</button>
+          <button href="#" theme="danger-outline">Danger</button>
+          <button href="#" theme="warning-outline">Warning</button>
+          <button href="#" theme="info-outline">Info</button>
+          <button href="#" theme="inverse-outline">Inverse</button>
       </p>
       <p>Text</p>
       <p>
