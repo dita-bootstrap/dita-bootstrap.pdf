@@ -131,6 +131,11 @@
     name="bootstrap-btn-rounded-lg"
     select="if (matches($bootstrap-btn-rounded, '^[0-9.]+pt$')) then concat(number(substring-before($bootstrap-btn-rounded, 'pt')) * 1.5, 'pt') else $bootstrap-btn-rounded"
   />
+  <xsl:variable name="bootstrap-card-fill"/>
+  <xsl:variable name="bootstrap-surface-image"/>
+  <xsl:variable name="bootstrap-surface-image-color"/>
+  <xsl:variable name="bootstrap-surface-image-border"/>
+  <xsl:variable name="bootstrap-surface-image-text"/>
   <xsl:variable name="bootstrap-accordion-active-bg" select="$bootstrap-primary-subtle"/>
   <xsl:variable name="bootstrap-accordion-active-color" select="$bootstrap-primary-subtle-text"/>
   <xsl:variable name="bootstrap-heading-color" select="$bootstrap-body-color"/>

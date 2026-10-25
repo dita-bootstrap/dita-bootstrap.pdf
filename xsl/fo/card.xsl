@@ -175,6 +175,7 @@
   </xsl:template>
 
   <xsl:template name="renderCardInternal">
+      <xsl:variable name="flat" select="string($bootstrap-card-fill) != '' or string($bootstrap-surface-image) != ''"/>
       <xsl:variable name="radius-probe">
         <fo:block-container>
           <xsl:call-template name="bootstrap.decoration">
@@ -214,6 +215,13 @@
         <xsl:attribute name="keep-together.within-page">always</xsl:attribute>
         <xsl:call-template name="bootstrap.decoration"/>
         <xsl:attribute name="overflow">hidden</xsl:attribute>
+        <xsl:if test="string($bootstrap-card-fill) != ''">
+          <xsl:attribute name="background-color" select="$bootstrap-card-fill"/>
+        </xsl:if>
+        <xsl:call-template name="bootstrap.surface.image"/>
+        <xsl:if test="$flat and string($bootstrap-surface-image) = ''">
+          <xsl:attribute name="color">inherited-property-value(color)</xsl:attribute>
+        </xsl:if>
         <xsl:if test="$card-radius != ''">
           <xsl:attribute name="fox:border-radius" select="$card-radius"/>
         </xsl:if>
@@ -257,6 +265,21 @@
                           </xsl:call-template>
                        </xsl:attribute>
                     </xsl:when>
+                    <xsl:when test="string($bootstrap-surface-image) != ''">
+                       <xsl:attribute name="border-bottom">
+                          <xsl:value-of
+                        select="concat($bootstrap-border-width, ' solid ', $bootstrap-surface-image-border)"
+                      />
+                       </xsl:attribute>
+                    </xsl:when>
+                    <xsl:when test="$flat">
+                       <xsl:call-template name="processBootstrapAttrSetReflection">
+                          <xsl:with-param name="attrSet" select="'__bg__secondary'"/>
+                       </xsl:call-template>
+                       <xsl:attribute name="border-bottom">
+                          <xsl:value-of select="concat($bootstrap-border-width, ' solid ', $bootstrap-border-color)"/>
+                       </xsl:attribute>
+                    </xsl:when>
                     <xsl:otherwise>
                        <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-light"/></xsl:attribute>
                        <xsl:attribute name="border-bottom">
@@ -289,7 +312,7 @@
             <fo:table-row>
               <fo:table-cell padding="10pt 15pt 0 15pt">
                  <xsl:call-template name="processBootstrapDirection"/>
-                 <xsl:if test="$theme">
+                 <xsl:if test="$theme and not($flat)">
                     <xsl:call-template name="processBootstrapAttrSetReflection">
                        <xsl:with-param name="attrSet" select="concat('__bg__', $theme, '-subtle')"/>
                     </xsl:call-template>
@@ -305,7 +328,7 @@
           <fo:table-row>
             <fo:table-cell padding="10pt 15pt">
                <xsl:call-template name="processBootstrapDirection"/>
-               <xsl:if test="$theme">
+               <xsl:if test="$theme and not($flat)">
                   <xsl:call-template name="processBootstrapAttrSetReflection">
                      <xsl:with-param name="attrSet" select="concat('__bg__', $theme, '-subtle')"/>
                   </xsl:call-template>
@@ -329,10 +352,29 @@
           <xsl:if test="$footer">
             <fo:table-row>
               <fo:table-cell padding="8pt 15pt">
-                 <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-light"/></xsl:attribute>
-                 <xsl:attribute name="border-top">
-                    <xsl:value-of select="concat($bootstrap-border-width, ' solid ', $bootstrap-border-color)"/>
-                 </xsl:attribute>
+                 <xsl:choose>
+                    <xsl:when test="string($bootstrap-surface-image) != ''">
+                       <xsl:attribute name="border-top">
+                          <xsl:value-of
+                        select="concat($bootstrap-border-width, ' solid ', $bootstrap-surface-image-border)"
+                      />
+                       </xsl:attribute>
+                    </xsl:when>
+                    <xsl:when test="$flat">
+                       <xsl:call-template name="processBootstrapAttrSetReflection">
+                          <xsl:with-param name="attrSet" select="'__bg__secondary-subtle'"/>
+                       </xsl:call-template>
+                       <xsl:attribute name="border-top">
+                          <xsl:value-of select="concat($bootstrap-border-width, ' solid ', $bootstrap-border-color)"/>
+                       </xsl:attribute>
+                    </xsl:when>
+                    <xsl:otherwise>
+                       <xsl:attribute name="background-color"><xsl:value-of select="$bootstrap-light"/></xsl:attribute>
+                       <xsl:attribute name="border-top">
+                          <xsl:value-of select="concat($bootstrap-border-width, ' solid ', $bootstrap-border-color)"/>
+                       </xsl:attribute>
+                    </xsl:otherwise>
+                 </xsl:choose>
                  <xsl:call-template name="processBootstrapDirection"/>
                  <fo:block>
                     <xsl:call-template name="processBootstrapDirection"/>

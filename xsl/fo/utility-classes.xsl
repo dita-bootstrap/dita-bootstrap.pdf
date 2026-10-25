@@ -901,6 +901,16 @@
       <xsl:call-template name="bootstrap.decoration"/>
   </xsl:template>
   
+  <xsl:template name="bootstrap.surface.image">
+    <xsl:if test="string($bootstrap-surface-image) != ''">
+      <xsl:attribute name="background-color" select="$bootstrap-surface-image-color"/>
+      <xsl:attribute name="background-image" select="concat('url(', $bootstrap-surface-image, ')')"/>
+      <xsl:attribute name="background-repeat">repeat-y</xsl:attribute>
+      <xsl:attribute name="border-color" select="$bootstrap-surface-image-border"/>
+      <xsl:attribute name="color" select="$bootstrap-surface-image-text"/>
+    </xsl:if>
+  </xsl:template>
+
   <xsl:template name="bootstrap.decoration">
       <xsl:param name="node" select="."/>
       <xsl:param name="variant" select="''"/>
