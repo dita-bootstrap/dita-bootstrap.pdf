@@ -120,6 +120,21 @@
   <xsl:variable name="bootstrap-dita-prussian-blue" select="$bootstrap-primary-subtle-text"/>
   <xsl:variable name="bootstrap-dita-maroon">#800000</xsl:variable>
   <xsl:variable name="bootstrap-dita-violet">#6f42c1</xsl:variable>
+  <xsl:variable name="bootstrap-primary-border" select="$bootstrap-primary"/>
+  <xsl:variable name="bootstrap-secondary-border" select="$bootstrap-secondary"/>
+  <xsl:variable name="bootstrap-success-border" select="$bootstrap-success"/>
+  <xsl:variable name="bootstrap-danger-border" select="$bootstrap-danger"/>
+  <xsl:variable name="bootstrap-warning-border" select="$bootstrap-warning"/>
+  <xsl:variable name="bootstrap-info-border" select="$bootstrap-info"/>
+  <xsl:variable name="bootstrap-btn-rounded" select="$bootstrap-rounded"/>
+  <xsl:variable
+    name="bootstrap-btn-rounded-lg"
+    select="if (matches($bootstrap-btn-rounded, '^[0-9.]+pt$')) then concat(number(substring-before($bootstrap-btn-rounded, 'pt')) * 1.5, 'pt') else $bootstrap-btn-rounded"
+  />
+  <xsl:variable name="bootstrap-accordion-active-bg" select="$bootstrap-primary-subtle"/>
+  <xsl:variable name="bootstrap-accordion-active-color" select="$bootstrap-primary-subtle-text"/>
+  <xsl:variable name="bootstrap-heading-color" select="$bootstrap-body-color"/>
+  <xsl:variable name="bootstrap-heading-font-weight">bold</xsl:variable>
   <xsl:variable name="bootstrap-h1-font-size">28pt</xsl:variable>
   <xsl:variable name="bootstrap-h1-margin-top">12pt</xsl:variable>
   <xsl:variable name="bootstrap-h1-margin-bottom">6pt</xsl:variable>

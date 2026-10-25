@@ -70,10 +70,8 @@
                   </xsl:call-template>
                </xsl:when>
                 <xsl:otherwise>
-                  <!-- Default background matches Bootstrap 5 primary-subtle -->
-                  <xsl:call-template name="processBootstrapAttrSetReflection">
-                    <xsl:with-param name="attrSet" select="'__bg__primary-subtle'"/>
-                  </xsl:call-template>
+                  <xsl:attribute name="background-color" select="$bootstrap-accordion-active-bg"/>
+                  <xsl:attribute name="color" select="$bootstrap-accordion-active-color"/>
                 </xsl:otherwise>
             </xsl:choose>
             <fo:block font-weight="bold">

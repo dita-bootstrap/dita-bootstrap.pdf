@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//DITA Bootstrap//DTD DITA Bootstrap Topic//EN" "bootstrap-topic.dtd">
+<topic id="swatch">
+  <title>Swatch</title>
+  <shortdesc>A single-page tour of the components that have PDF equivalents, in the style of a Bootswatch theme
+    preview.</shortdesc>
+  <body outputclass="language-markup">
+    <section id="typography">
+      <title>Typography</title>
+      <title outputclass="h1">h1. Heading</title>
+      <title outputclass="h2">h2. Heading</title>
+      <title outputclass="h3">h3. Heading</title>
+      <title outputclass="h4">h4. Heading</title>
+      <title outputclass="h5">h5. Heading</title>
+      <title outputclass="h6">h6. Heading</title>
+      <p outputclass="lead">This is a lead paragraph. It stands out from regular paragraphs.</p>
+      <p>You can use the mark tag to <ph outputclass="mark">highlight</ph> text, <line-through
+        >deleted text</line-through>,
+        <u>underlined text</u>, <i>italic text</i> and <b>bold text</b>. This is a
+        <xref href="#">default link</xref>.</p>
+    </section>
+
+    <section id="buttons">
+      <title>Buttons</title>
+    </section>
+      <p>Solid</p>
+      <p>
+        <button href="#" color="primary">Primary</button>
+        <button href="#" color="secondary">Secondary</button>
+        <button href="#" color="success">Success</button>
+        <button href="#" color="danger">Danger</button>
+        <button href="#" color="warning">Warning</button>
+        <button href="#" color="info">Info</button>
+        <button href="#" color="light">Light</button>
+        <button href="#" color="dark">Dark</button>
+      </p>
+      <p>Outline</p>
+      <p>
+        <button href="#" color="primary" outline="yes">Primary</button>
+        <button href="#" color="secondary" outline="yes">Secondary</button>
+        <button href="#" color="success" outline="yes">Success</button>
+        <button href="#" color="danger" outline="yes">Danger</button>
+        <button href="#" color="warning" outline="yes">Warning</button>
+        <button href="#" color="info" outline="yes">Info</button>
+        <button href="#" color="light" outline="yes">Light</button>
+        <button href="#" color="dark" outline="yes">Dark</button>
+      </p>
+      <p>Sizes</p>
+      <p>
+        <button href="#" size="large">Large button</button>
+        <button href="#">Default button</button>
+        <button href="#" size="small">Small button</button>
+      </p>
+      <p>Button group</p>
+      <button-group>
+        <button href="#">Left</button>
+        <button href="#">Middle</button>
+        <button href="#">Right</button>
+      </button-group>
+
+    <section id="tables">
+      <title>Tables</title>
+    </section>
+      <table striped="yes" frame="all">
+        <tgroup cols="4">
+          <thead>
+            <row>
+              <entry>Type</entry>
+              <entry>Column heading</entry>
+              <entry>Column heading</entry>
+              <entry>Column heading</entry>
+            </row>
+          </thead>
+          <tbody>
+            <row><entry>Default</entry><entry>Column content</entry><entry>Column content</entry><entry
+            >Column content</entry></row>
+            <row color="primary"><entry>Primary</entry><entry>Column content</entry><entry>Column content</entry><entry
+            >Column content</entry></row>
+            <row color="secondary"><entry>Secondary</entry><entry>Column content</entry><entry
+            >Column content</entry><entry>Column content</entry></row>
+            <row color="success"><entry>Success</entry><entry>Column content</entry><entry>Column content</entry><entry
+            >Column content</entry></row>
+            <row color="danger"><entry>Danger</entry><entry>Column content</entry><entry>Column content</entry><entry
+            >Column content</entry></row>
+            <row color="warning"><entry>Warning</entry><entry>Column content</entry><entry>Column content</entry><entry
+            >Column content</entry></row>
+            <row color="info"><entry>Info</entry><entry>Column content</entry><entry>Column content</entry><entry
+            >Column content</entry></row>
+            <row color="light"><entry>Light</entry><entry>Column content</entry><entry>Column content</entry><entry
+            >Column content</entry></row>
+            <row color="dark"><entry>Dark</entry><entry>Column content</entry><entry>Column content</entry><entry
+            >Column content</entry></row>
+          </tbody>
+        </tgroup>
+      </table>
+
+    <section id="alerts">
+      <title>Alerts</title>
+    </section>
+      <alert color="primary">
+        <p><b>Primary</b> - change a few things up and try submitting again. <xref href="#">Alert link</xref>.</p>
+      </alert>
+      <alert color="secondary">
+        <p><b>Secondary</b> - change a few things up and try submitting again. <xref href="#">Alert link</xref>.</p>
+      </alert>
+      <alert color="success">
+        <p><b>Success</b> - change a few things up and try submitting again. <xref href="#">Alert link</xref>.</p>
+      </alert>
+      <alert color="danger">
+        <p><b>Danger</b> - change a few things up and try submitting again. <xref href="#">Alert link</xref>.</p>
+      </alert>
+      <alert color="warning">
+        <p><b>Warning</b> - change a few things up and try submitting again. <xref href="#">Alert link</xref>.</p>
+      </alert>
+      <alert color="info">
+        <p><b>Info</b> - change a few things up and try submitting again. <xref href="#">Alert link</xref>.</p>
+      </alert>
+      <alert color="light">
+        <p><b>Light</b> - change a few things up and try submitting again. <xref href="#">Alert link</xref>.</p>
+      </alert>
+      <alert color="dark">
+        <p><b>Dark</b> - change a few things up and try submitting again. <xref href="#">Alert link</xref>.</p>
+      </alert>
+
+    <section id="badges">
+      <title>Badges</title>
+    </section>
+      <p>
+        <badge color="primary">Primary</badge>
+        <badge color="secondary">Secondary</badge>
+        <badge color="success">Success</badge>
+        <badge color="danger">Danger</badge>
+        <badge color="warning">Warning</badge>
+        <badge color="info">Info</badge>
+        <badge color="light">Light</badge>
+        <badge color="dark">Dark</badge>
+      </p>
+
+    <section id="blockquotes">
+      <title>Blockquotes</title>
+    </section>
+      <fig>
+        <title>Someone famous in <cite>Source Title</cite></title>
+        <lq>
+          <p>A well-known quote, contained in a blockquote element.</p>
+        </lq>
+      </fig>
+
+    <section id="pagination">
+      <title>Pagination</title>
+    </section>
+      <pagination>
+        <title>Page navigation example</title>
+        <ol>
+          <li><xref href="#">Previous</xref></li>
+          <li><xref href="#">1</xref></li>
+          <li><xref href="#">2</xref></li>
+          <li><xref href="#">3</xref></li>
+          <li><xref href="#">Next</xref></li>
+        </ol>
+      </pagination>
+
+    <section id="list-groups">
+      <title>List groups</title>
+    </section>
+      <list-group>
+        <li>An item</li>
+        <li>A second item</li>
+        <li>A third item</li>
+        <li>A fourth item</li>
+        <li>And a fifth one</li>
+      </list-group>
+
+    <section id="accordion">
+      <title>Accordion</title>
+    </section>
+      <accordion>
+        <accordion-item id="swatch-accordion1" open="yes">
+          <title>Accordion Item #1</title>
+          <p>This is the first item's accordion body. It is shown by default.</p>
+        </accordion-item>
+        <accordion-item id="swatch-accordion2">
+          <title>Accordion Item #2</title>
+          <p>This is the second item's accordion body.</p>
+        </accordion-item>
+      </accordion>
+
+    <section id="cards">
+      <title>Cards</title>
+    </section>
+      <card>
+        <card-header>Header</card-header>
+        <title>Card title</title>
+        <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <button href="#">Go somewhere</button>
+        <card-footer>2 days ago</card-footer>
+      </card>
+          <card color="primary">
+            <card-header>Primary</card-header>
+            <p>Some quick example text for the card body.</p>
+          </card>
+          <card color="secondary">
+            <card-header>Secondary</card-header>
+            <p>Some quick example text for the card body.</p>
+          </card>
+          <card color="success">
+            <card-header>Success</card-header>
+            <p>Some quick example text for the card body.</p>
+          </card>
+          <card color="danger">
+            <card-header>Danger</card-header>
+            <p>Some quick example text for the card body.</p>
+          </card>
+          <card color="warning">
+            <card-header>Warning</card-header>
+            <p>Some quick example text for the card body.</p>
+          </card>
+          <card color="info">
+            <card-header>Info</card-header>
+            <p>Some quick example text for the card body.</p>
+          </card>
+          <card color="light">
+            <card-header>Light</card-header>
+            <p>Some quick example text for the card body.</p>
+          </card>
+          <card color="dark">
+            <card-header>Dark</card-header>
+            <p>Some quick example text for the card body.</p>
+          </card>
+      <codeblock outputclass="language-cpp"><coderef
+        href="code/specialization/borders/frame-attribute-support.cpp"
+      /></codeblock>
+  </body>
+</topic>

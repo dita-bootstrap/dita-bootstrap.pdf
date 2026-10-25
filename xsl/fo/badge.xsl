@@ -2,6 +2,8 @@
 <xsl:stylesheet
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:fo="http://www.w3.org/1999/XSL/Format"
+  xmlns:fox="http://xmlgraphics.apache.org/fop/extensions"
+  exclude-result-prefixes="fox"
   version="2.0"
 >
 
@@ -39,10 +41,10 @@
       <xsl:attribute name="vertical-align">baseline</xsl:attribute>
       
       <!-- 4. Default Rounding (tighter badge look) if not overridden -->
-      <xsl:if test="not(@rounded or exists(tokenize(@outputclass, ' ')[starts-with(., 'rounded-')]))">
-        <xsl:call-template name="processBootstrapRounded">
-            <xsl:with-param name="attrValue" select="'1'"/>
-        </xsl:call-template>
+      <xsl:if
+        test="number(replace($bootstrap-rounded, '[a-z]+$', '')) != 0 and not(@rounded or exists(tokenize(@outputclass, ' ')[starts-with(., 'rounded-')]))"
+      >
+        <xsl:attribute name="fox:border-radius">9pt</xsl:attribute>
       </xsl:if>
 
       <!-- 5. Content -->

@@ -108,6 +108,14 @@
     <entry name="bootstrap-rounded-circle"><xsl:value-of select="$bootstrap-rounded-circle"/></entry>
     <entry name="bootstrap-rounded-pill"><xsl:value-of select="$bootstrap-rounded-pill"/></entry>
 
+    <entry name="bootstrap-primary-border"><xsl:value-of select="$bootstrap-primary-border"/></entry>
+    <entry name="bootstrap-secondary-border"><xsl:value-of select="$bootstrap-secondary-border"/></entry>
+    <entry name="bootstrap-success-border"><xsl:value-of select="$bootstrap-success-border"/></entry>
+    <entry name="bootstrap-danger-border"><xsl:value-of select="$bootstrap-danger-border"/></entry>
+    <entry name="bootstrap-warning-border"><xsl:value-of select="$bootstrap-warning-border"/></entry>
+    <entry name="bootstrap-info-border"><xsl:value-of select="$bootstrap-info-border"/></entry>
+    <entry name="bootstrap-heading-color"><xsl:value-of select="$bootstrap-heading-color"/></entry>
+    <entry name="bootstrap-heading-font-weight"><xsl:value-of select="$bootstrap-heading-font-weight"/></entry>
     <entry name="bootstrap-h1-font-size"><xsl:value-of select="$bootstrap-h1-font-size"/></entry>
     <entry name="bootstrap-h1-margin-top"><xsl:value-of select="$bootstrap-h1-margin-top"/></entry>
     <entry name="bootstrap-h1-margin-bottom"><xsl:value-of select="$bootstrap-h1-margin-bottom"/></entry>

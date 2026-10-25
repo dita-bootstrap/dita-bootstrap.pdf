@@ -89,6 +89,9 @@
         </xsl:choose>
       </xsl:variable>
       <xsl:choose>
+        <xsl:when
+              test="ancestor::*[contains(@class, ' topic/note ') or contains(@class, ' bootstrap-d/alert ') or tokenize(@outputclass, ' ') = 'alert']"
+            >inherit</xsl:when>
         <xsl:when test="$theme != ''">
           <xsl:variable name="subtleVar" select="concat('bootstrap-', $theme, '-subtle-text')"/>
           <xsl:value-of select="$bootstrap-settings/entry[@name = $subtleVar]"/>
@@ -714,6 +717,25 @@
   </xsl:attribute-set>
 
   <!-- Border Colors -->
+  <!-- Theme border shades (alerts and other subtle surfaces) -->
+  <xsl:attribute-set name="border-theme-primary"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-primary-border"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="border-theme-secondary"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-secondary-border"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="border-theme-success"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-success-border"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="border-theme-danger"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-danger-border"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="border-theme-warning"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-warning-border"
+      /></xsl:attribute></xsl:attribute-set>
+  <xsl:attribute-set name="border-theme-info"><xsl:attribute name="border-color"><xsl:value-of
+        select="$bootstrap-info-border"
+      /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="border-primary"><xsl:attribute name="border-color"><xsl:value-of
         select="$bootstrap-primary"
       /></xsl:attribute></xsl:attribute-set>
@@ -805,44 +827,68 @@
   <!-- Heading utilities (h1-h6 aliases) -->
   <xsl:attribute-set name="h1"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h1-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute
-      name="margin-top"
-    ><xsl:value-of select="$bootstrap-h1-margin-top"/></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
+        select="$bootstrap-heading-font-weight"
+      /></xsl:attribute><xsl:attribute name="color"><xsl:value-of
+        select="$bootstrap-heading-color"
+      /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-h1-margin-top"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
         select="$bootstrap-h1-margin-bottom"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h2"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h2-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute
-      name="margin-top"
-    ><xsl:value-of select="$bootstrap-h2-margin-top"/></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
+        select="$bootstrap-heading-font-weight"
+      /></xsl:attribute><xsl:attribute name="color"><xsl:value-of
+        select="$bootstrap-heading-color"
+      /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-h2-margin-top"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
         select="$bootstrap-h2-margin-bottom"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h3"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h3-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute
-      name="margin-top"
-    ><xsl:value-of select="$bootstrap-h3-margin-top"/></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
+        select="$bootstrap-heading-font-weight"
+      /></xsl:attribute><xsl:attribute name="color"><xsl:value-of
+        select="$bootstrap-heading-color"
+      /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-h3-margin-top"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
         select="$bootstrap-h3-margin-bottom"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h4"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h4-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute
-      name="margin-top"
-    ><xsl:value-of select="$bootstrap-h4-margin-top"/></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
+        select="$bootstrap-heading-font-weight"
+      /></xsl:attribute><xsl:attribute name="color"><xsl:value-of
+        select="$bootstrap-heading-color"
+      /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-h4-margin-top"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
         select="$bootstrap-h4-margin-bottom"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h5"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h5-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute
-      name="margin-top"
-    ><xsl:value-of select="$bootstrap-h5-margin-top"/></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
+        select="$bootstrap-heading-font-weight"
+      /></xsl:attribute><xsl:attribute name="color"><xsl:value-of
+        select="$bootstrap-heading-color"
+      /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-h5-margin-top"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
         select="$bootstrap-h5-margin-bottom"
       /></xsl:attribute></xsl:attribute-set>
   <xsl:attribute-set name="h6"><xsl:attribute name="font-size"><xsl:value-of
         select="$bootstrap-h6-font-size"
-      /></xsl:attribute><xsl:attribute name="font-weight">bold</xsl:attribute><xsl:attribute
-      name="margin-top"
-    ><xsl:value-of select="$bootstrap-h6-margin-top"/></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
+      /></xsl:attribute><xsl:attribute name="font-weight"><xsl:value-of
+        select="$bootstrap-heading-font-weight"
+      /></xsl:attribute><xsl:attribute name="color"><xsl:value-of
+        select="$bootstrap-heading-color"
+      /></xsl:attribute><xsl:attribute name="margin-top"><xsl:value-of
+        select="$bootstrap-h6-margin-top"
+      /></xsl:attribute><xsl:attribute name="margin-bottom"><xsl:value-of
         select="$bootstrap-h6-margin-bottom"
       /></xsl:attribute></xsl:attribute-set>
 

@@ -34,7 +34,12 @@
       <xsl:otherwise>
         <fo:block xsl:use-attribute-sets="section.title">
           <xsl:attribute name="font-size"><xsl:value-of select="$bootstrap-h6-font-size"/></xsl:attribute>
+          <xsl:attribute name="font-weight"><xsl:value-of select="$bootstrap-heading-font-weight"/></xsl:attribute>
+          <xsl:attribute name="color"><xsl:value-of select="$bootstrap-heading-color"/></xsl:attribute>
           <xsl:attribute name="keep-with-next.within-column">always</xsl:attribute>
+          <xsl:call-template name="processBootstrapOutputClass">
+            <xsl:with-param name="attrValue" select="@outputclass"/>
+          </xsl:call-template>
           <xsl:call-template name="commonattributes"/>
           <xsl:apply-templates/>
         </fo:block>
@@ -50,6 +55,9 @@
       </xsl:if>
       <xsl:call-template name="processBootstrapAttrSetReflection">
           <xsl:with-param name="attrSet" select="'lead'"/>
+      </xsl:call-template>
+      <xsl:call-template name="processBootstrapOutputClass">
+          <xsl:with-param name="attrValue" select="@outputclass"/>
       </xsl:call-template>
       <xsl:call-template name="commonattributes"/>
       <xsl:apply-templates/>

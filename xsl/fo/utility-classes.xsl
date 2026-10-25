@@ -222,6 +222,8 @@
   <xsl:template name="processBootstrapBorderColor">
     <xsl:param name="attrValue"/>
     <xsl:param name="theme" select="''"/>
+    <!-- Use the theme border shade instead of its base color -->
+    <xsl:param name="themeBorder" select="false()"/>
     
     <xsl:variable name="resolvedTheme" select="if ($theme != '') then $theme else $attrValue"/>
     
@@ -235,7 +237,10 @@
         <xsl:attribute name="border-width"><xsl:value-of select="$bootstrap-border-width"/></xsl:attribute>
       </xsl:if>
       <xsl:call-template name="processBootstrapAttrSetReflection">
-        <xsl:with-param name="attrSet" select="concat('border-', $resolvedTheme)"/>
+        <xsl:with-param
+          name="attrSet"
+          select="if ($themeBorder and $resolvedTheme = ('primary', 'secondary', 'success', 'danger', 'warning', 'info')) then concat('border-theme-', $resolvedTheme) else concat('border-', $resolvedTheme)"
+        />
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
@@ -624,7 +629,9 @@
   </xsl:template>
 
   <!-- Inline Ph Support (Explicitly excludes syntax tokens to allow PrismJS overrides) -->
-  <xsl:template match="*[contains(@class, ' topic/ph ') and not(contains(@outputclass, 'token'))]">
+  <xsl:template
+    match="*[contains(@class, ' topic/ph ') and not(contains(@outputclass, 'token')) and not(contains(@class, ' hi-d/'))]"
+  >
     <fo:inline>
       <xsl:call-template name="commonattributes"/>
       <xsl:call-template name="bootstrap.decoration"/>
@@ -946,6 +953,7 @@
         <xsl:call-template name="processBootstrapBorderColor">
             <xsl:with-param name="attrValue" select="@bordercolor"/>
             <xsl:with-param name="theme" select="$theme"/>
+            <xsl:with-param name="themeBorder" select="$variant = 'subtle'"/>
         </xsl:call-template>
       </xsl:if>
       <xsl:call-template name="processBootstrapRounded">
@@ -1238,6 +1246,9 @@
     mode="commonattributes"
   >
     <xsl:next-match/>
+    <xsl:if test="contains(@class, ' pr-d/codeblock ')">
+      <xsl:attribute name="keep-together.within-page">always</xsl:attribute>
+    </xsl:if>
     <xsl:if test="$writing-mode = 'rl' and not(@dir)">
       <xsl:attribute name="writing-mode">lr-tb</xsl:attribute>
       <xsl:attribute name="direction">ltr</xsl:attribute>

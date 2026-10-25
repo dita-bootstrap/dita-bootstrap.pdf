@@ -35,8 +35,8 @@ jobs:
             apt-get install -qy --no-install-recommends nodejs libfontconfig1
             nodejs -v
           plugins: |
-            https://github.com/dita-bootstrap/dita-bootstrap.dtd/archive/develop.zip
-            https://github.com/dita-bootstrap/dita-bootstrap.pdf/archive/develop.zip
+            https://github.com/dita-bootstrap/dita-bootstrap.dtd/archive/${{ github.ref_name }}.zip
+            https://github.com/dita-bootstrap/dita-bootstrap.pdf/archive/${{ github.ref_name }}.zip
           project: .github/dita-ot/pdf.xml
 
       - name: Upload PDF
@@ -63,7 +63,7 @@ jobs:
       - name: Git checkout HTML
         uses: actions/checkout@v7
         with:
-          repository: dita-bootstrap/dita-bootstrap.html
+          repository: jason-fox/dita-bootstrap.html
           ref: ${{ github.ref_name }}
           path: html
 
@@ -86,9 +86,9 @@ jobs:
             nodejs -v
           plugins: |
             fox.jason.extend.css
-            https://github.com/dita-bootstrap/dita-bootstrap.dtd/archive/develop.zip
-            https://github.com/dita-bootstrap/dita-bootstrap.html/archive/develop.zip
-            https://github.com/dita-bootstrap/dita-bootstrap.lunr/archive/develop.zip
+            https://github.com/dita-bootstrap/dita-bootstrap.dtd/archive/${{ github.ref_name }}.zip
+            https://github.com/jason-fox/dita-bootstrap.html/archive/${{ github.ref_name }}.zip
+            https://github.com/dita-bootstrap/dita-bootstrap.lunr/archive/${{ github.ref_name }}.zip
             https://github.com/jason-fox/fox.jason.prismjs/archive/master.zip
             fox.jason.favicon
             fox.jason.open-graph

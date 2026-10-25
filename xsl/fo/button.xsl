@@ -212,10 +212,21 @@
           </xsl:call-template>
         </xsl:if>
         
-        <!-- Rounding (Default to '2' (4pt) instead of 'yes' (6pt)) -->
-        <xsl:call-template name="processBootstrapRounded">
-          <xsl:with-param name="attrValue" select="(@rounded, if ($size = 'small') then '1' else '2')[1]"/>
-        </xsl:call-template>
+        <xsl:choose>
+          <xsl:when test="@rounded">
+            <xsl:call-template name="processBootstrapRounded">
+              <xsl:with-param name="attrValue" select="@rounded"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when
+            test="not(normalize-space(if ($size = 'large') then $bootstrap-btn-rounded-lg else $bootstrap-btn-rounded) = ('0', '0pt', '0px', ''))"
+          >
+            <xsl:attribute
+              name="fox:border-radius"
+              select="if ($size = 'large') then $bootstrap-btn-rounded-lg else $bootstrap-btn-rounded"
+            />
+          </xsl:when>
+        </xsl:choose>
         
         <!-- Legacy / Spacing utility support -->
         <xsl:call-template name="processBootstrapSpacing">
