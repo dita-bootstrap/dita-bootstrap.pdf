@@ -240,6 +240,13 @@
 
         <xsl:call-template name="bootstrap.decoration"/>
 
+        <xsl:if test="$is-outline">
+          <xsl:attribute name="background-color">transparent</xsl:attribute>
+          <xsl:call-template name="processBootstrapAttrSetReflection">
+            <xsl:with-param name="attrSet" select="concat('__color__', $theme)"/>
+          </xsl:call-template>
+        </xsl:if>
+
         <!-- Button Group Position Awareness  -->
         <xsl:variable
           name="group"
